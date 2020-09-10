@@ -189,17 +189,18 @@ public class BastShoeTest {
 
     @Test
     public void tenOnePlusUndo() throws Exception {
-        //0
+        //1
         String actual = Level1.BastShoe("1 a");
         String expected = "a";
         Assert.assertThat(actual, is(expected));
-        //1
 
+        //2-11
         for (int i = 0; i < 10; i++) {
             actual = Level1.BastShoe("4");
             expected = "";
             Assert.assertThat(actual, is(expected));
         }
+        //
         for (int i = 0; i < 9; i++) {
             actual = Level1.BastShoe("5");
             expected = "";
@@ -487,6 +488,158 @@ public class BastShoeTest {
         actual = Level1.BastShoe("5");
         expected = "";
         Assert.assertThat(actual, is(expected));
+
+    }
+
+    @Test
+    public void tudaSuda2() throws Exception {
+        //0
+        String actual = Level1.BastShoe("1 a");
+        String expected = "a";
+        Assert.assertThat(actual, is(expected));
+
+        for(int i=0; i<10; i++)
+            actual = Level1.BastShoe("4");
+            expected = "";
+            Assert.assertThat(actual, is(expected));
+
+        for(int i=0; i<9; i++)
+            actual = Level1.BastShoe("5");
+            expected = "";
+            Assert.assertThat(actual, is(expected));
+        //10
+        actual = Level1.BastShoe("5");
+        expected = "a";
+        Assert.assertThat(actual, is(expected));
+
+        //11
+        actual = Level1.BastShoe("5");
+        expected = "a";
+        Assert.assertThat(actual, is(expected));
+
+        actual = Level1.BastShoe("1 b");
+        expected = "ab";
+        Assert.assertThat(actual, is(expected));
+
+        actual = Level1.BastShoe("1 c");
+        expected = "abc";
+        Assert.assertThat(actual, is(expected));
+
+        actual = Level1.BastShoe("1 d");
+        expected = "abcd";
+        Assert.assertThat(actual, is(expected));
+
+        actual = Level1.BastShoe("1 e");
+        expected = "abcde";
+        Assert.assertThat(actual, is(expected));
+
+        //Откат вот сюда
+        actual = Level1.BastShoe("4");
+        expected = "abcd";
+        Assert.assertThat(actual, is(expected));
+
+        //1
+        actual = Level1.BastShoe("4");
+        expected = "abc";
+        Assert.assertThat(actual, is(expected));
+
+        //2
+        actual = Level1.BastShoe("4");
+        expected = "ab";
+        Assert.assertThat(actual, is(expected));
+
+        //3
+        actual = Level1.BastShoe("4");
+        expected = "a";
+        Assert.assertThat(actual, is(expected));
+
+        for(int i=0; i<97; i++)
+            actual = Level1.BastShoe("4");
+        expected = "";
+        Assert.assertThat(actual, is(expected));
+
+        for(int i=0; i<96; i++)
+            actual = Level1.BastShoe("5");
+        expected = "";
+        Assert.assertThat(actual, is(expected));
+
+        //97
+        actual = Level1.BastShoe("5");
+        expected = "a";
+        Assert.assertThat(actual, is(expected));
+
+        //98
+        actual = Level1.BastShoe("5");
+        expected = "ab";
+        Assert.assertThat(actual, is(expected));
+
+        //99
+        actual = Level1.BastShoe("5");
+        expected = "abc";
+        Assert.assertThat(actual, is(expected));
+
+        //100
+        actual = Level1.BastShoe("5");
+        expected = "abcd";
+        Assert.assertThat(actual, is(expected));
+
+        actual = Level1.BastShoe("1 e");
+        expected = "abcde";
+        Assert.assertThat(actual, is(expected));
+
+        actual = Level1.BastShoe("1 f");
+        expected = "abcdef";
+        Assert.assertThat(actual, is(expected));
+
+        actual = Level1.BastShoe("1 g");
+        expected = "abcdefg";
+        Assert.assertThat(actual, is(expected));
+
+        actual = Level1.BastShoe("1 h");
+        expected = "abcdefgh";
+        Assert.assertThat(actual, is(expected));
+
+        //1
+        actual = Level1.BastShoe("4");
+        expected = "abcdefg";
+        Assert.assertThat(actual, is(expected));
+
+        //2
+        actual = Level1.BastShoe("4");
+        expected = "abcdef";
+        Assert.assertThat(actual, is(expected));
+
+        //3
+        actual = Level1.BastShoe("4");
+        expected = "abcde";
+        Assert.assertThat(actual, is(expected));
+
+        //4
+        actual = Level1.BastShoe("4");
+        expected = "abcd";
+        Assert.assertThat(actual, is(expected));
+
+        //5
+        actual = Level1.BastShoe("4");
+        expected = "abc";
+        Assert.assertThat(actual, is(expected));
+
+        //6
+        actual = Level1.BastShoe("4");
+        expected = "ab";
+        Assert.assertThat(actual, is(expected));
+
+        //7
+        actual = Level1.BastShoe("4");
+        expected = "a";
+        Assert.assertThat(actual, is(expected));
+
+        for(int i=0; i<93; i++)
+            actual = Level1.BastShoe("4");
+        expected = "";
+        Assert.assertThat(actual, is(expected));
+
+
 
     }
 }

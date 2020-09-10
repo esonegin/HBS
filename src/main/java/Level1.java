@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class Level1 {
-    //v7
+    //v8
     static Stroka stroka = new Stroka("");
 
     public static String BastShoe(String command) {
@@ -84,15 +84,23 @@ public class Level1 {
             stroka.setValue(stroka.getSpisokAll().get(stroka.getSpisokAll().size() - 2));
             stroka.setSpisokUndo(stroka.getValue());
         }
+
         else if (stroka.getSpisokAll().size() > 1 && stroka.getUndoCount() > 0
-        && stroka.getSpisokAll().size() - 2 - stroka.getUndoCount() >= 0) {
+                && stroka.getSpisokAll().size() - 2 - stroka.getUndoCount() >= 0) {
             stroka.setValue(stroka.getSpisokAll().get(stroka.getSpisokAll().size() - 2 - stroka.getUndoCount()));
+            stroka.setSpisokUndo(stroka.getValue());
+        }
+
+
+        else if (stroka.getSpisokAll().size() > 1 && stroka.getUndoCount() > 0
+                && stroka.getSpisokAll().size() - 2 - stroka.getUndoCount() < 0) {
+            stroka.setValue("");
             stroka.setSpisokUndo(stroka.getValue());
         }
 
         else if (stroka.getSpisokAll().size() > 1 && stroka.getUndoCount() > 0
                 && stroka.getSpisokAll().size() - 2 - stroka.getUndoCount() < 0) {
-            stroka.setValue("");
+            stroka.setValue(stroka.getSpisokAll().get(0));
             stroka.setSpisokUndo(stroka.getValue());
         }
 
