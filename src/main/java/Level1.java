@@ -24,33 +24,30 @@ public class Level1 {
             command5();
         }
 
-        //Если 1 или 2
+
         if (com == 1 || com == 2) {
             result = stroka.getValue(stroka.getHistoryValue(stroka.getNumberTekusheyStroki()));
 
-            //Если Undo
+
         } else if (com == 4) {
             if (stroka.getNumberTekusheyStroki() < 0) {
                 result = stroka.getValue("");
             }
-            //Если номер текущей строки == 0
+
             else if (stroka.getNumberTekusheyStroki() == 0 && stroka.history.size() != stroka.getUndoCount()) {
                 result = stroka.getValue("");
 
             }
-            //Если номер текущей строки положительный, то возвращаем ее
+
             else if (stroka.getNumberTekusheyStroki() > 0) {
                 result = stroka.getValue(stroka.getHistoryValue(stroka.getNumberTekusheyStroki()));
             }
-            //Если номер текущей == 0 (нечего отменять)
 
-
-            //Если Redo
         } else if (com == 5) {
-            //Если номер текущей строки отрицательный или ноль, возвращаем пустую строку
+
             if (stroka.getNumberTekusheyStroki() < 1) {
                 result = stroka.getValue("");
-                //Если номер текущей строки положительный, то возвращаем ее
+
             } else if (stroka.getNumberTekusheyStroki() >= 1) {
                 result = stroka.getValue(stroka.getHistoryValue(stroka.getNumberTekusheyStroki()));
             }
@@ -69,7 +66,6 @@ public class Level1 {
             stroka.setNumberTekusheyStroki(0);
         }
         if (stroka.getPredOperation() == 4 && stroka.history.size() == 0) {
-            //stroka.clearHistory();
             stroka.setNumberTekusheyStroki(0);
         }
 
@@ -140,11 +136,10 @@ public class Level1 {
         stroka.setUndoCount(0);
         stroka.setRedoCount(stroka.getRedoCount() + 1);
 
-        //Если откат не дошел до конца списка истории
+
         if (stroka.getNumberTekusheyStroki() + 1 < stroka.history.size()) {
             stroka.setNumberTekusheyStroki(stroka.getNumberTekusheyStroki() + 1);
 
-            //Если откат дошел до конца списка истории, возвращаем последнее значение из списка
         } else if (stroka.getNumberTekusheyStroki() + 1 >= stroka.history.size()) {
             stroka.setNumberTekusheyStroki(stroka.history.size());
         }
