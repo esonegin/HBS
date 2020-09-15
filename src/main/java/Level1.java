@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 import java.util.*;
 
 public class Level1 {
-    //v8
-    static Stroka stroka = new Stroka("");
+    //v9
+    static Stroka stroka = new Stroka();
 
     public static String BastShoe(String command) {
         int com;
@@ -24,8 +23,37 @@ public class Level1 {
         } else if (com == 5) {
             command5();
         }
-        if (com == 1 || com == 2 || com == 4 || com == 5) {
-            result = stroka.getValue();
+
+        //Если 1 или 2
+        if (com == 1 || com == 2) {
+            result = stroka.getValue(stroka.getHistoryValue(stroka.getNumberTekusheyStroki()));
+
+            //Если Undo
+        } else if (com == 4) {
+            if (stroka.getNumberTekusheyStroki() < 0) {
+                result = stroka.getValue("");
+            }
+            //Если номер текущей строки == 0
+            else if (stroka.getNumberTekusheyStroki() == 0 && stroka.history.size() != stroka.getUndoCount()) {
+                result = stroka.getValue("");
+
+            }
+            //Если номер текущей строки положительный, то возвращаем ее
+            else if (stroka.getNumberTekusheyStroki() > 0) {
+                result = stroka.getValue(stroka.getHistoryValue(stroka.getNumberTekusheyStroki()));
+            }
+            //Если номер текущей == 0 (нечего отменять)
+
+
+            //Если Redo
+        } else if (com == 5) {
+            //Если номер текущей строки отрицательный или ноль, возвращаем пустую строку
+            if (stroka.getNumberTekusheyStroki() < 1) {
+                result = stroka.getValue("");
+                //Если номер текущей строки положительный, то возвращаем ее
+            } else if (stroka.getNumberTekusheyStroki() >= 1) {
+                result = stroka.getValue(stroka.getHistoryValue(stroka.getNumberTekusheyStroki()));
+            }
 
         } else if (com == 3) {
             result = command3(value);
@@ -35,135 +63,117 @@ public class Level1 {
     }
 
     public static void command1(String value) {
-        stroka.setValue(stroka.getValue() + value);
-        if (stroka.getPredoperation() == 4) {
-            stroka.replaceSpisokAll();
-            stroka.setSpisokAll(stroka.getValueOtkat());
-            stroka.setUndoCount(0);
-        }
-        stroka.setPredoperation(1);
-        stroka.setSpisokAll(stroka.getValue());
         stroka.setUndoCount(0);
-        stroka.setRedoCount(0);
+        if (stroka.getPredOperation() == 4 && stroka.history.size() > 0) {
+            stroka.clearHistory();
+            stroka.setNumberTekusheyStroki(0);
+        }
+        if (stroka.getPredOperation() == 4 && stroka.history.size() == 0) {
+            //stroka.clearHistory();
+            stroka.setNumberTekusheyStroki(0);
+        }
+
+        stroka.setNumberTekusheyStroki(stroka.getNumberTekusheyStroki() + 1);
+
+        if (stroka.getNumberTekusheyStroki() == 1) {
+            stroka.setHistoryValue(stroka.getNumberTekusheyStroki(), value);
+
+        } else if (stroka.getNumberTekusheyStroki() > 1) {
+            stroka.setHistoryValue(stroka.getNumberTekusheyStroki(), stroka.getHistoryValue(stroka.getNumberTekusheyStroki() - 1) + value);
+
+        }
+        stroka.setPredOperation(1);
+
     }
 
     public static void command2(String value) {
-        if (stroka.getPredoperation() == 4) {
-            stroka.replaceSpisokAll();
-            stroka.setSpisokAll(stroka.getValueOtkat());
-            stroka.setUndoCount(0);
-        }
-        if (Integer.parseInt(value) > stroka.getValue().length()) {
-            stroka.setValue("");
-        } else {
-            stroka.setValue(stroka.getValue().substring(0, stroka.getValue().length() - Integer.parseInt(value)));
-        }
-        stroka.setPredoperation(2);
-        stroka.setSpisokAll(stroka.getValue());
         stroka.setUndoCount(0);
-        stroka.setRedoCount(0);
+        if (stroka.getPredOperation() == 4) {
+            stroka.clearHistory();
+        }
+        stroka.setNumberTekusheyStroki(stroka.getNumberTekusheyStroki() + 1);
+
+        if (stroka.getNumberTekusheyStroki() < 1) {
+            stroka.setHistoryValue(stroka.getNumberTekusheyStroki(), "");
+        } else if (Integer.parseInt(value) > stroka.getHistoryValue(stroka.getNumberTekusheyStroki() - 1).length()) {
+            stroka.setHistoryValue(stroka.getNumberTekusheyStroki(), "");
+        } else {
+            stroka.setHistoryValue(stroka.getNumberTekusheyStroki(),
+                    stroka.getHistoryValue(stroka.getNumberTekusheyStroki() - 1).substring(0, stroka.getHistoryValue(stroka.getNumberTekusheyStroki() - 1).length() - Integer.parseInt(value)));
+        }
+
+        stroka.setPredOperation(2);
+
     }
 
     public static String command3(String value) {
         String result = "";
-        if (Integer.parseInt(value) < stroka.getValue().length()) {
-            result = (stroka.getValue().substring(Integer.parseInt(value), Integer.parseInt(value) + 1));
-        } else {
-            result = "";
+        if (stroka.getNumberTekusheyStroki() > 1) {
+            if (Integer.parseInt(value) < stroka.getValue(stroka.getHistoryValue(stroka.getNumberTekusheyStroki())).length()) {
+                result = (stroka.getValue(stroka.getHistoryValue(stroka.getNumberTekusheyStroki())).substring(Integer.parseInt(value), Integer.parseInt(value) + 1));
+            } else {
+                result = "";
+            }
+        } else if (stroka.getNumberTekusheyStroki() < 1) {
+            if (Integer.parseInt(value) < stroka.getHistoryValue(1).length()) {
+                result = (stroka.getHistoryValue(1).substring(Integer.parseInt(value), Integer.parseInt(value) + 1));
+            } else {
+                result = "";
+            }
         }
-        stroka.setPredoperation(3);
+        stroka.setPredOperation(3);
         return result;
     }
 
     public static void command4() {
-        stroka.getSpisokAll();
-        if (stroka.getSpisokAll().size() == 1) {
-            stroka.setValue("");
-            stroka.setSpisokUndo(stroka.getValue());
-        } else if (stroka.getSpisokAll().size() > 1 && stroka.getUndoCount() == 0) {
-            stroka.setValue(stroka.getSpisokAll().get(stroka.getSpisokAll().size() - 2));
-            stroka.setSpisokUndo(stroka.getValue());
-        }
-
-        else if (stroka.getSpisokAll().size() > 1 && stroka.getUndoCount() > 0
-                && stroka.getSpisokAll().size() - 2 - stroka.getUndoCount() >= 0) {
-            stroka.setValue(stroka.getSpisokAll().get(stroka.getSpisokAll().size() - 2 - stroka.getUndoCount()));
-            stroka.setSpisokUndo(stroka.getValue());
-        }
-
-
-        else if (stroka.getSpisokAll().size() > 1 && stroka.getUndoCount() > 0
-                && stroka.getSpisokAll().size() - 2 - stroka.getUndoCount() < 0) {
-            stroka.setValue("");
-            stroka.setSpisokUndo(stroka.getValue());
-        }
-
-        else if (stroka.getSpisokAll().size() > 1 && stroka.getUndoCount() > 0
-                && stroka.getSpisokAll().size() - 2 - stroka.getUndoCount() < 0) {
-            stroka.setValue(stroka.getSpisokAll().get(0));
-            stroka.setSpisokUndo(stroka.getValue());
-        }
-
-        stroka.setPredoperation(4);
         stroka.setUndoCount(stroka.getUndoCount() + 1);
-        stroka.setValueOtkat(stroka.getValue());
-        stroka.setRedoCount(0);
+
+
+        stroka.setNumberTekusheyStroki(stroka.getNumberTekusheyStroki() - 1);
+
+
+        stroka.setPredOperation(4);
 
     }
 
     public static void command5() {
-        stroka.getSpisokAll();
-        if (stroka.getSpisokUndo().size() - 2 - stroka.getRedoCount() >= 0) {
-            stroka.setValue(stroka.getSpisokUndo().get(stroka.getSpisokUndo().size() - 2 - stroka.getRedoCount()));
-            stroka.setSpisokRedo(stroka.getValue());
-        } else if (stroka.getSpisokUndo().size() - 2 - stroka.getRedoCount() < 0
-                && stroka.getSpisokAll().size() > 1) {
-            stroka.setValue(stroka.getSpisokAll().get(stroka.getSpisokAll().size() - (stroka.getSpisokUndo().size() - stroka.getSpisokRedo().size())));
-            stroka.setSpisokRedo(stroka.getValue());
-        } else if (stroka.getSpisokUndo().size() - 2 - stroka.getRedoCount() < 0
-                && stroka.getSpisokAll().size() == 1) {
-            stroka.setValue(stroka.getSpisokAll().get(0));
-            stroka.setSpisokRedo(stroka.getValue());
+        stroka.setUndoCount(0);
+        stroka.setRedoCount(stroka.getRedoCount() + 1);
+
+        //Если откат не дошел до конца списка истории
+        if (stroka.getNumberTekusheyStroki() + 1 < stroka.history.size()) {
+            stroka.setNumberTekusheyStroki(stroka.getNumberTekusheyStroki() + 1);
+
+            //Если откат дошел до конца списка истории, возвращаем последнее значение из списка
+        } else if (stroka.getNumberTekusheyStroki() + 1 >= stroka.history.size()) {
+            stroka.setNumberTekusheyStroki(stroka.history.size());
         }
 
-        stroka.setRedoCount(stroka.getRedoCount() + 1);
-        stroka.setPredoperation(5);
-        stroka.setUndoCount(0);
-
+        stroka.setPredOperation(5);
     }
 
     public static class Stroka {
         private String value;
-        private int predoperation;
-        ArrayList<String> spisokAll = new ArrayList<String>();
-        ArrayList<String> spisokUndo = new ArrayList<String>();
-        ArrayList<String> spisokRedo = new ArrayList<String>();
+        private int numberTekusheyStroki;
+        private int predOperation;
+        HashMap<Integer, String> history = new HashMap<>();
         private int undoCount;
         private int redoCount;
-        private String valueOtkat;
 
-        public Stroka(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
+        public String getValue(String value) {
             return value;
         }
 
-        public int getPredoperation() {
-            return predoperation;
+        public int getNumberTekusheyStroki() {
+            return numberTekusheyStroki;
         }
 
-        public ArrayList<String> getSpisokAll() {
-            return spisokAll;
+        public int getPredOperation() {
+            return predOperation;
         }
 
-        public ArrayList<String> getSpisokUndo() {
-            return spisokUndo;
-        }
-
-        public ArrayList<String> getSpisokRedo() {
-            return spisokRedo;
+        public String getHistoryValue(int key) {
+            return history.get(key);
         }
 
         public int getUndoCount() {
@@ -174,28 +184,20 @@ public class Level1 {
             return redoCount;
         }
 
-        public String getValueOtkat() {
-            return valueOtkat;
+        public void setHistoryValue(int key, String value) {
+            history.put(key, value);
         }
 
         public void setValue(String value) {
             this.value = value;
         }
 
-        public void setPredoperation(int predoperation) {
-            this.predoperation = predoperation;
+        public void setPredOperation(int predOperation) {
+            this.predOperation = predOperation;
         }
 
-        public void setSpisokAll(String stroka) {
-            spisokAll.add(stroka);
-        }
-
-        public void setSpisokUndo(String stroka) {
-            spisokUndo.add(stroka);
-        }
-
-        public void setSpisokRedo(String stroka) {
-            spisokRedo.add(stroka);
+        public void setNumberTekusheyStroki(int numberTekusheyStroki) {
+            this.numberTekusheyStroki = numberTekusheyStroki;
         }
 
         public void setUndoCount(int undoCount) {
@@ -206,12 +208,11 @@ public class Level1 {
             this.redoCount = redoCount;
         }
 
-        public void setValueOtkat(String valueOtkat) {
-            this.valueOtkat = valueOtkat;
+        public void clearHistory() {
+            String value = history.get(stroka.getNumberTekusheyStroki());
+            history.clear();
+            history.put(1, value);
         }
 
-        public void replaceSpisokAll() {
-            spisokAll.clear();
-        }
     }
 }
