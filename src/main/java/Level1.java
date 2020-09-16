@@ -30,7 +30,11 @@ public class Level1 {
 
 
         } else if (com == 4) {
-            if (stroka.getNumberTekusheyStroki() < 0) {
+
+            if(stroka.getNumberTekusheyStroki() <= 0 && stroka.history.size() == 2){
+                result = stroka.getValue(stroka.getHistoryValue(1));
+            }
+            else if (stroka.getNumberTekusheyStroki() < 0) {
                 result = stroka.getValue("");
             }
 
@@ -38,10 +42,16 @@ public class Level1 {
                 result = stroka.getValue("");
 
             }
+            else if (stroka.getNumberTekusheyStroki() == 0 && stroka.history.size() == 1) {
+                result = stroka.getValue("");
+
+            }
 
             else if (stroka.getNumberTekusheyStroki() > 0) {
                 result = stroka.getValue(stroka.getHistoryValue(stroka.getNumberTekusheyStroki()));
             }
+
+
 
         } else if (com == 5) {
 
@@ -61,23 +71,29 @@ public class Level1 {
 
     public static void command1(String value) {
         stroka.setUndoCount(0);
+
         if (stroka.getPredOperation() == 4 && stroka.history.size() > 0) {
             stroka.clearHistory();
-            stroka.setNumberTekusheyStroki(0);
+            stroka.setNumberTekusheyStroki(1);
         }
-        if (stroka.getPredOperation() == 4 && stroka.history.size() == 0) {
-            stroka.setNumberTekusheyStroki(0);
+        else if (stroka.getPredOperation() == 4 && stroka.history.size() == 0) {
+            stroka.history.clear();
+            stroka.setNumberTekusheyStroki(1);
         }
 
         stroka.setNumberTekusheyStroki(stroka.getNumberTekusheyStroki() + 1);
 
-        if (stroka.getNumberTekusheyStroki() == 1) {
-            stroka.setHistoryValue(stroka.getNumberTekusheyStroki(), value);
-
-        } else if (stroka.getNumberTekusheyStroki() > 1) {
+        if(stroka.getHistoryValue(stroka.getNumberTekusheyStroki() - 1) != null) {
             stroka.setHistoryValue(stroka.getNumberTekusheyStroki(), stroka.getHistoryValue(stroka.getNumberTekusheyStroki() - 1) + value);
-
         }
+        else if(stroka.getHistoryValue(stroka.getNumberTekusheyStroki() - 1) == null && stroka.history.size() == 0) {
+            stroka.setHistoryValue(stroka.getNumberTekusheyStroki(), value);
+        }
+        else if(stroka.getHistoryValue(stroka.getNumberTekusheyStroki() - 1) == null && stroka.history.size() == 1) {
+            stroka.setHistoryValue(stroka.getNumberTekusheyStroki() + 1, stroka.getHistoryValue(stroka.getNumberTekusheyStroki()) + value);
+            stroka.setNumberTekusheyStroki(stroka.getNumberTekusheyStroki() + 1);
+        }
+
         stroka.setPredOperation(1);
 
     }
@@ -123,11 +139,7 @@ public class Level1 {
 
     public static void command4() {
         stroka.setUndoCount(stroka.getUndoCount() + 1);
-
-
         stroka.setNumberTekusheyStroki(stroka.getNumberTekusheyStroki() - 1);
-
-
         stroka.setPredOperation(4);
 
     }
