@@ -47,7 +47,7 @@ public class Level1 {
             } else if (stroka.getNumberTekusheyStroki() < 0 && stroka.history.size() == 2 && stroka.getUndoCount() >= stroka.history.size()) {
                 result = stroka.getValue("");
             } else if (stroka.getNumberTekusheyStroki() < 0 && stroka.history.size() > 2) {
-                result = stroka.getValue("");
+                result = stroka.getValue(stroka.getHistoryValue(0));
             } else if (stroka.getNumberTekusheyStroki() >= stroka.history.size() - 1 && stroka.history.size() > 0) {
                 result = stroka.getValue(stroka.getHistoryValue(stroka.history.size() - 1 - stroka.getUndoCount()));
                 stroka.setNumberTekusheyStroki(stroka.history.size() - 1 - stroka.getUndoCount());

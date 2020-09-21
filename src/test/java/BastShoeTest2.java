@@ -75,7 +75,7 @@ public class BastShoeTest2 {
         }
 
         actual = Level1.BastShoe("4");
-        expected = "";
+        expected = "abcd";
         Assert.assertThat(actual, is(expected));
     }
 }
