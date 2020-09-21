@@ -3,7 +3,7 @@
 import java.util.*;
 
 public class Level1 {
-    //v12
+    //v13
     static Stroka stroka = new Stroka();
 
     public static String BastShoe(String command) {
@@ -45,7 +45,7 @@ public class Level1 {
                 result = stroka.getValue("");
             } */
 
-            else if (stroka.getNumberTekusheyStroki() < 0 && stroka.history.size() == 2 && stroka.getUndoCount() < stroka.history.size()) {
+            else if (stroka.getNumberTekusheyStroki() <= 0 && stroka.history.size() == 2) {
                 result = stroka.getValue(stroka.getHistoryValue(0));
             }
             else if (stroka.getNumberTekusheyStroki() < 0 && stroka.history.size() == 2 && stroka.getUndoCount() >= stroka.history.size()) {
@@ -86,6 +86,10 @@ public class Level1 {
 
         if (stroka.getPredOperation() == 4) {
             stroka.clearHistory();
+        }
+
+        if (stroka.getPredOperation() == 5 && stroka.getNumberTekusheyStroki() < stroka.history.size() - 1 && stroka.getNumberTekusheyStroki() > -1) {
+            stroka.clearHistoryRedo();
         }
 
         if (stroka.history.size() == 0) {
@@ -230,6 +234,12 @@ public class Level1 {
             }
             stroka.setUndoCount(0);
 
+        }
+        public void clearHistoryRedo(){
+            for(int i = stroka.getNumberTekusheyStroki() + 1; i < stroka.history.size(); i++){
+                stroka.history.remove(i);
+            }
+            stroka.history.size();
         }
 
     }
