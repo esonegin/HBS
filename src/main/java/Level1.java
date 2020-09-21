@@ -3,7 +3,7 @@
 import java.util.*;
 
 public class Level1 {
-    //v11
+    //v12
     static Stroka stroka = new Stroka();
 
     public static String BastShoe(String command) {
