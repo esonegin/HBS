@@ -292,7 +292,7 @@ public class BastShoeTest {
         actual = Level1.BastShoe("4");
         expected = "a";
         Assert.assertThat(actual, is(expected));
-        //14
+        //15
         actual = Level1.BastShoe("4");
         expected = "";
         Assert.assertThat(actual, is(expected));
@@ -328,7 +328,7 @@ public class BastShoeTest {
         expected = "";
         Assert.assertThat(actual, is(expected));
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             actual = Level1.BastShoe("4");
             expected = "";
             Assert.assertThat(actual, is(expected));
@@ -553,12 +553,12 @@ public class BastShoeTest {
         expected = "a";
         Assert.assertThat(actual, is(expected));
 
-        for(int i=0; i<97; i++)
+        for(int i=0; i<7; i++)
             actual = Level1.BastShoe("4");
         expected = "";
         Assert.assertThat(actual, is(expected));
 
-        for(int i=0; i<96; i++)
+        for(int i=0; i<6; i++)
             actual = Level1.BastShoe("5");
         expected = "";
         Assert.assertThat(actual, is(expected));
