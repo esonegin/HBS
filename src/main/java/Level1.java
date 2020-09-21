@@ -215,9 +215,10 @@ public class Level1 {
 
         public void clearHistory() {
 
-            if (stroka.history.size() == 0) {
+            if (stroka.history.size() == 0 || stroka.getNumberTekusheyStroki() < 0) {
                 stroka.history.clear();
                 stroka.setHistoryValue("");
+                setNumberTekusheyStroki(0);
             } else if (stroka.getNumberTekusheyStroki() > -1 && stroka.getNumberTekusheyStroki() < stroka.history.size()) {
                 String value = stroka.getHistoryValue(stroka.getNumberTekusheyStroki());
                 stroka.history.clear();
