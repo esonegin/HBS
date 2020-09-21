@@ -638,9 +638,18 @@ public class BastShoeTest {
             actual = Level1.BastShoe("4");
         expected = "";
         Assert.assertThat(actual, is(expected));
+    }
+    @Test
+    public void vidatZaPredelami() throws Exception {
+        //1
+        String actual = Level1.BastShoe("1 Привет");
+        String expected = "Привет";
+        Assert.assertThat(actual, is(expected));
 
-
-
+        //11
+        actual = Level1.BastShoe("3 6");
+        expected = "";
+        Assert.assertThat(actual, is(expected));
     }
 }
 

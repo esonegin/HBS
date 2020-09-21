@@ -3,7 +3,7 @@
 import java.util.*;
 
 public class Level1 {
-    //v13
+    //v14
     static Stroka stroka = new Stroka();
 
     public static String BastShoe(String command) {
@@ -130,7 +130,7 @@ public class Level1 {
             key = stroka.getNumberTekusheyStroki();
         }
 
-        if (Integer.parseInt(value) > stroka.getHistoryValue(key).length()
+        if (Integer.parseInt(value) >= stroka.getHistoryValue(key).length()
                 || Integer.parseInt(value) < 0) {
             result = "";
         } else {
