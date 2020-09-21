@@ -498,12 +498,12 @@ public class BastShoeTest {
         String expected = "a";
         Assert.assertThat(actual, is(expected));
 
-        for(int i=0; i<10; i++)
+        for(int i=0; i<100; i++)
             actual = Level1.BastShoe("4");
             expected = "";
             Assert.assertThat(actual, is(expected));
 
-        for(int i=0; i<9; i++)
+        for(int i=0; i<99; i++)
             actual = Level1.BastShoe("5");
             expected = "";
             Assert.assertThat(actual, is(expected));
@@ -638,6 +638,47 @@ public class BastShoeTest {
             actual = Level1.BastShoe("4");
         expected = "";
         Assert.assertThat(actual, is(expected));
+
+        for(int i=0; i<92; i++)
+            actual = Level1.BastShoe("5");
+        expected = "";
+        Assert.assertThat(actual, is(expected));
+
+        //93
+        actual = Level1.BastShoe("5");
+        expected = "a";
+        Assert.assertThat(actual, is(expected));
+
+        //94
+        actual = Level1.BastShoe("5");
+        expected = "ab";
+        Assert.assertThat(actual, is(expected));
+
+        //95
+        actual = Level1.BastShoe("5");
+        expected = "abc";
+        Assert.assertThat(actual, is(expected));
+        //96
+        actual = Level1.BastShoe("5");
+        expected = "abcd";
+        Assert.assertThat(actual, is(expected));
+        //97
+        actual = Level1.BastShoe("5");
+        expected = "abcde";
+        Assert.assertThat(actual, is(expected));
+        //98
+        actual = Level1.BastShoe("5");
+        expected = "abcdef";
+        Assert.assertThat(actual, is(expected));
+        //99
+        actual = Level1.BastShoe("5");
+        expected = "abcdefg";
+        Assert.assertThat(actual, is(expected));
+        //100
+        actual = Level1.BastShoe("5");
+        expected = "abcdefgh";
+        Assert.assertThat(actual, is(expected));
+
     }
     @Test
     public void vidatZaPredelami() throws Exception {
@@ -649,6 +690,33 @@ public class BastShoeTest {
         //11
         actual = Level1.BastShoe("3 6");
         expected = "";
+        Assert.assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void undoPlusOdinUndo() throws Exception {
+        //1
+        String actual = Level1.BastShoe("4");
+        String expected = "";
+        Assert.assertThat(actual, is(expected));
+        //1
+        actual = Level1.BastShoe("1 a");
+        expected = "a";
+        Assert.assertThat(actual, is(expected));
+
+        for (int i = 0; i < 10; i++) {
+            actual = Level1.BastShoe("4");
+            expected = "";
+            Assert.assertThat(actual, is(expected));
+        }
+        for (int i = 0; i < 9; i++) {
+            actual = Level1.BastShoe("5");
+            expected = "";
+            Assert.assertThat(actual, is(expected));
+        }
+        //10
+        actual = Level1.BastShoe("5");
+        expected = "a";
         Assert.assertThat(actual, is(expected));
     }
 }
