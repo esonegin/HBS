@@ -32,6 +32,15 @@ public class BiggerGreaterTest {
         String expected = "";
         Assert.assertThat(actual, is(expected));
     }
+
+    @Test
+    public void firstEng2() throws Exception {
+        //1
+        String actual = Level1.BiggerGreater("az");
+        String expected = "za";
+        Assert.assertThat(actual, is(expected));
+    }
+
     @Test
     public void second() throws Exception {
         //1

@@ -2,12 +2,45 @@
 import java.util.*;
 
 public class Level1 {
-     //v2
+     //v3
     public static String BiggerGreater(String input) {
+        mainObject mainObject = new mainObject();
 
-        ArrayList<String> allVariants = allVariants(input);
-        return naimenshee(allVariants);
+        mainObject.setFirstWord(input);
+        mainObject.setAllVariants(allVariants(input));
+        mainObject.setNaimenshee(naimenshee(mainObject.getAllVariants()));
+
+        return mainObject.getNaimenshee();
     }
+
+    public static class mainObject{
+        private static String firstword;
+        ArrayList<String> allVariants = new ArrayList<String>();
+        private String naimenshee;
+
+        public static String getFirstWord() {
+            return firstword;
+        }
+        public void setFirstWord(String firstword) {
+            this.firstword = firstword;
+        }
+
+        public ArrayList<String> getAllVariants() {
+            return allVariants;
+        }
+        public void setAllVariants(ArrayList<String> allVariants) {
+            this.allVariants = allVariants;
+        }
+
+        public String getNaimenshee() {
+            return naimenshee;
+        }
+        public void setNaimenshee(String naimenshee) {
+            this.naimenshee = naimenshee;
+        }
+
+    }
+
 
     //Наименьшее из всех лексикографически больших слов
     public static String naimenshee(ArrayList<String> input) {
@@ -18,7 +51,8 @@ public class Level1 {
         result.addAll(set);
         String results = null;
         Collections.sort(result);
-        if (result.size() <= 1 || result.get(result.size()-1) == input.get(0)) {
+        if (result.size() <= 1
+                || result.get(result.size()-1).equals(mainObject.getFirstWord())) {
             results = "";
         }
         else if (result.size() == 2){
