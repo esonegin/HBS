@@ -2,7 +2,7 @@
 import java.util.*;
 
 public class Level1 {
-     //v1
+     //v2
     public static String BiggerGreater(String input) {
 
         ArrayList<String> allVariants = allVariants(input);
@@ -18,7 +18,7 @@ public class Level1 {
         result.addAll(set);
         String results = null;
         Collections.sort(result);
-        if (result.size() <= 1) {
+        if (result.size() <= 1 || result.get(result.size()-1) == input.get(0)) {
             results = "";
         }
         else if (result.size() == 2){

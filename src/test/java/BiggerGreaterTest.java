@@ -18,10 +18,18 @@ public class BiggerGreaterTest {
     }
 
     @Test
-    public void first() throws Exception {
+    public void firstRus() throws Exception {
         //1
         String actual = Level1.BiggerGreater("ая");
         String expected = "яа";
+        Assert.assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void firstEng() throws Exception {
+        //1
+        String actual = Level1.BiggerGreater("za");
+        String expected = "";
         Assert.assertThat(actual, is(expected));
     }
     @Test
