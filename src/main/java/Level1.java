@@ -2,7 +2,7 @@
 import java.util.*;
 
 public class Level1 {
-     //v3
+    //v4
     public static String BiggerGreater(String input) {
         mainObject mainObject = new mainObject();
 
@@ -13,7 +13,7 @@ public class Level1 {
         return mainObject.getNaimenshee();
     }
 
-    public static class mainObject{
+    public static class mainObject {
         private static String firstword;
         ArrayList<String> allVariants = new ArrayList<String>();
         private String naimenshee;
@@ -21,6 +21,7 @@ public class Level1 {
         public static String getFirstWord() {
             return firstword;
         }
+
         public void setFirstWord(String firstword) {
             this.firstword = firstword;
         }
@@ -28,6 +29,7 @@ public class Level1 {
         public ArrayList<String> getAllVariants() {
             return allVariants;
         }
+
         public void setAllVariants(ArrayList<String> allVariants) {
             this.allVariants = allVariants;
         }
@@ -35,6 +37,7 @@ public class Level1 {
         public String getNaimenshee() {
             return naimenshee;
         }
+
         public void setNaimenshee(String naimenshee) {
             this.naimenshee = naimenshee;
         }
@@ -44,26 +47,21 @@ public class Level1 {
 
     //Наименьшее из всех лексикографически больших слов
     public static String naimenshee(ArrayList<String> input) {
-        Set<String> set = new HashSet<>(input);
-        ArrayList<String> result = new ArrayList<>();
-        input.clear();
-        input.addAll(set);
-        result.addAll(set);
         String results = null;
-        Collections.sort(result);
-        if (result.size() <= 1
-                || result.get(result.size()-1).equals(mainObject.getFirstWord())) {
+        if (input.size() <= 1
+                || input.get(input.size() - 1).equals(mainObject.getFirstWord())) {
             results = "";
-        }
-        else if (result.size() == 2){
-            results = result.get(result.size()-1);
-        }
-        else if (result.size() > 2){
-            results = result.get(result.size()-2);
+        } else if (input.size() == 2) {
+            results = input.get(input.size() - 1);
+        } else if (input.size() > 2) {
+            results = input.get(findKeyFirstWord(input) + 1);
         }
         return results;
     }
 
+    public static int findKeyFirstWord(ArrayList<String> allVAriants) {
+        return (allVAriants.indexOf(mainObject.getFirstWord()));
+    }
 
     public static ArrayList<String> allVariants(String input) {
         java.lang.String[] arr = input.split("");
@@ -85,7 +83,14 @@ public class Level1 {
                 shift--;
             }
         }
-        return allVariants;
+
+        Set<String> set = new HashSet<>(allVariants);
+        ArrayList<String> result = new ArrayList<>();
+        allVariants.clear();
+        allVariants.addAll(set);
+        result.addAll(set);
+        Collections.sort(result);
+        return result;
     }
 
     static int fuctorial(int n) {
