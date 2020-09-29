@@ -1,107 +1,104 @@
 
 import java.util.*;
+import java.util.List;
 
 public class Level1 {
-    //v4
-    public static String BiggerGreater(String input) {
+    //v1
+    static boolean SherlockValidString(String s) {
+        Boolean result = true;
         mainObject mainObject = new mainObject();
+        ArrayList<Integer> kolvolist = podshetKolva(s);
+        Collections.sort(kolvolist);
 
-        mainObject.setFirstWord(input);
-        mainObject.setAllVariants(allVariants(input));
-        mainObject.setNaimenshee(naimenshee(mainObject.getAllVariants()));
+        mainObject.setStroka(s);
+        mainObject.setKolvolist(kolvolist);
+        mainObject.setKolvoraznih(kolvoRaznih(mainObject.getKolvolist()));
 
-        return mainObject.getNaimenshee();
+
+        if (mainObject.getKolvoraznih() == 2
+                && (mainObject.getKolvolist().get(0) > mainObject.getKolvolist().get(1) + 1
+                || mainObject.getKolvolist().get(0) < mainObject.getKolvolist().get(1) - 1)
+                || mainObject.getKolvoraznih() == 2 && mainObject.getStroka().length() % 2 == 0
+                || mainObject.getKolvoraznih() > 2) {
+            result = false;
+        }
+        System.out.println(mainObject.getKolvolist());
+        System.out.println(mainObject.getKolvoraznih());
+
+        return result;
     }
 
     public static class mainObject {
-        private static String firstword;
-        ArrayList<String> allVariants = new ArrayList<String>();
-        private String naimenshee;
+        public String stroka;
+        public ArrayList<Integer> kolvolist;
+        public int kolvoraznih;
 
-        public static String getFirstWord() {
-            return firstword;
+        public void setStroka(String stroka) {
+            this.stroka = stroka;
         }
 
-        public void setFirstWord(String firstword) {
-            this.firstword = firstword;
+        public void setKolvolist(ArrayList<Integer> kolvolist) {
+            this.kolvolist = kolvolist;
         }
 
-        public ArrayList<String> getAllVariants() {
-            return allVariants;
+        public void setKolvoraznih(int kolvoraznih) {
+            this.kolvoraznih = kolvoraznih;
         }
 
-        public void setAllVariants(ArrayList<String> allVariants) {
-            this.allVariants = allVariants;
+        public String getStroka() {
+            return stroka;
         }
 
-        public String getNaimenshee() {
-            return naimenshee;
+        public ArrayList<Integer> getKolvolist() {
+            return kolvolist;
         }
 
-        public void setNaimenshee(String naimenshee) {
-            this.naimenshee = naimenshee;
+        public int getKolvoraznih() {
+            return kolvoraznih;
         }
-
     }
 
+    public static int kolvoRaznih(ArrayList<Integer> kolvo) {
+        int result = 0;
+        Set<Integer> set = new HashSet<>(kolvo);
+        ArrayList<Integer> res = new ArrayList<>();
+        kolvo.clear();
+        kolvo.addAll(set);
+        res.addAll(set);
 
-    //Наименьшее из всех лексикографически больших слов
-    public static String naimenshee(ArrayList<String> input) {
-        String results = null;
-        if (input.size() <= 1
-                || input.get(input.size() - 1).equals(mainObject.getFirstWord())) {
-            results = "";
-        } else if (input.size() == 2) {
-            results = input.get(input.size() - 1);
-        } else if (input.size() > 2) {
-            results = input.get(findKeyFirstWord(input) + 1);
+        return res.size();
+    }
+
+    public static ArrayList<Integer> podshetKolva(String s) {
+        List<String> result = sortList(s);
+        System.out.println(result);
+        String sortresult = "";
+        for (int i = 0; i < result.size(); i++) {
+            sortresult = sortresult + result.get(i);
         }
-        return results;
-    }
-
-    public static int findKeyFirstWord(ArrayList<String> allVAriants) {
-        return (allVAriants.indexOf(mainObject.getFirstWord()));
-    }
-
-    public static ArrayList<String> allVariants(String input) {
-        java.lang.String[] arr = input.split("");
-        ArrayList<java.lang.String> allVariants = new ArrayList<>();
-        int count = fuctorial(arr.length);
-        int max = arr.length - 1;
-        //System.out.println("Вариантов " + count);
-        int shift = max;
-        java.lang.String t;
-        while (count > 0) {
-            t = arr[shift];
-            arr[shift] = arr[shift - 1];
-            arr[shift - 1] = t;
-            allVariants.add(add(arr));
-            count--;
-            if (shift < 2) {
-                shift = max;
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        for (int i = 0; i < sortresult.length(); i++) {
+            char c = sortresult.charAt(i);
+            if (map.containsKey(c)) {
+                int cnt = map.get(c);
+                map.put(c, ++cnt);
             } else {
-                shift--;
+                map.put(c, 1);
             }
         }
 
-        Set<String> set = new HashSet<>(allVariants);
-        ArrayList<String> result = new ArrayList<>();
-        allVariants.clear();
-        allVariants.addAll(set);
-        result.addAll(set);
-        Collections.sort(result);
-        return result;
+        ArrayList<Integer> kolvo = new ArrayList<Integer>();
+        for (Map.Entry<Character, Integer> entry : map.entrySet())
+            kolvo.add(entry.getValue());
+        return kolvo;
     }
 
-    static int fuctorial(int n) {
-        return (n > 0) ? n * fuctorial(n - 1) : 1;
-    }
+    public static List<String> sortList(String s) {
+        String[] list = s.split("");
+        List<String> listOfStrings = new ArrayList<String>();
+        Collections.addAll(listOfStrings, list);
+        Collections.sort(listOfStrings);
 
-    static String add(String[] arr) {
-        String result = "";
-        for (int i = 0; i < arr.length; i++) {
-            result = result + arr[i];
-        }
-        return result;
+        return listOfStrings;
     }
 }
