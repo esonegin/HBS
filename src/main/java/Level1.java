@@ -1,5 +1,5 @@
 public class Level1 {
-    //v1
+    //v2
     static tree derevo = new Level1.tree();
 
     static String[] TreeOfLife(int H, int W, int N, String[] tree) {
@@ -24,7 +24,6 @@ public class Level1 {
                 derevo.setTekusheeSostoyanie(GibelVetok(PoluchenieMatrix(derevo.getTekusheeSostoyanie())));
 
             } else if (derevo.getTekushiyGod() % 2 != 0) {
-                //Прибавляем возраст веткам
                 derevo.setTekusheeSostoyanie(VozrastVetokPlus(derevo.getTekusheeSostoyanie()));
             }
 
@@ -40,6 +39,7 @@ public class Level1 {
         return ZamenaCifrNaPlus(derevo.tekusheeSostoyanie);
     }
 
+    //
     public static void zamenaSimvolovNaCifry() {
         //Заменяем + на 1
         for (int i = 0; i < tree.getTekusheeSostoyanie().length; i++) {
@@ -54,20 +54,20 @@ public class Level1 {
     //Увеличиваем возраст веток
     public static String[] VozrastVetokPlus(String[] tr) {
         for (int i = 0; i < tr.length; i++) {
-                if (tr[i].contains("3")) {
-                    tr[i] = tr[i].replace("3", "4");
-                }
-                if (tr[i].contains("2")) {
-                    tr[i] = tr[i].replace("2", "3");
-                }
-                if (tr[i].contains("1")) {
-                    tr[i] = tr[i].replace("1", "2");
-                }
-                if (tr[i].contains("0")) {
-                    tr[i] = tr[i].replace("0", "1");
-                }
-
+            if (tr[i].contains("3")) {
+                tr[i] = tr[i].replace("3", "4");
             }
+            if (tr[i].contains("2")) {
+                tr[i] = tr[i].replace("2", "3");
+            }
+            if (tr[i].contains("1")) {
+                tr[i] = tr[i].replace("1", "2");
+            }
+            if (tr[i].contains("0")) {
+                tr[i] = tr[i].replace("0", "1");
+            }
+
+        }
 
         return tr;
     }
@@ -117,7 +117,7 @@ public class Level1 {
                     matrix[i + 1][j] = 0;
                 }
                 //Если это не нулева строка, не последняя строка, не нулевой столбец, не последний столбец - меняем пять значений
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i > 0 && i < tree.getVisota() - 1 && j > 0 && j < tree.getShirina()) {
+                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i > 0 && i < tree.getVisota() - 1 && j > 0 && j < tree.getShirina() - 1) {
                     matrix[i][j] = 0;
                     matrix[i - 1][j] = 0;
                     matrix[i][j + 1] = 0;
