@@ -1,5 +1,5 @@
 public class Level1 {
-    //v2
+    //v3
     static tree derevo = new Level1.tree();
 
     static String[] TreeOfLife(int H, int W, int N, String[] tree) {
@@ -28,11 +28,11 @@ public class Level1 {
             }
 
             //Выводим текущий год
-            //System.out.println(derevo.getTekushiyGod());
+            System.out.println(derevo.getTekushiyGod());
             //Выводим финальную матрицу из цифр
-            /*for (int i = 0; i < result.length; i++) {
+            for (int i = 0; i < tree.length; i++) {
                 System.out.println(derevo.tekusheeSostoyanie[i]);
-            }*/
+            }
             derevo.setTekushiyGod(derevo.getTekushiyGod() + 1);
         }
 
@@ -93,35 +93,35 @@ public class Level1 {
                 //Если это нулевая строка и нулевой столбец - меняем три значения
                 if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == 0 && j == 0) {
                     matrix[i][j] = 0;
-                    matrix[i][j + 1] = 0;
-                    matrix[i + 1][j] = 0;
+                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
+                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
                 }
                 //Если это нулевая строка, не первый столбец, не последний столбец - меняем четыре значения
                 if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == 0 && j > 0 && j < tree.getVisota()) {
                     matrix[i][j] = 0;
                     matrix[i][j - 1] = 0;
-                    matrix[i][j + 1] = 0;
-                    matrix[i + 1][j] = 0;
+                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
+                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
                 }
                 //Если это нулевая строка, последний столбец - меняем три значения
                 if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == 0 && j > 0 && j == tree.getShirina() - 1) {
                     matrix[i][j] = 0;
                     matrix[i][j - 1] = 0;
-                    matrix[i + 1][j] = 0;
+                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
                 }
                 //Если это не нулевая строка, не последняя строка, нулевой столбец - меняем четыре значения
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i > 0 && i < tree.getVisota() && j == 0) {
+                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i > 0 && i < tree.getVisota() - 1 && j == 0) {
                     matrix[i][j] = 0;
                     matrix[i - 1][j] = 0;
-                    matrix[i][j + 1] = 0;
-                    matrix[i + 1][j] = 0;
+                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
+                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
                 }
                 //Если это не нулева строка, не последняя строка, не нулевой столбец, не последний столбец - меняем пять значений
                 if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i > 0 && i < tree.getVisota() - 1 && j > 0 && j < tree.getShirina() - 1) {
                     matrix[i][j] = 0;
                     matrix[i - 1][j] = 0;
-                    matrix[i][j + 1] = 0;
-                    matrix[i + 1][j] = 0;
+                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
+                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
                     matrix[i][j - 1] = 0;
                 }
                 //Если это ненулевая строка, последния столбец - меняем три значения
@@ -134,13 +134,14 @@ public class Level1 {
                 if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == tree.getVisota() - 1 && j == 0) {
                     matrix[i][j] = 0;
                     matrix[i - 1][j] = 0;
-                    matrix[i][j + 1] = 0;
+                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
+
                 }
                 //Если это последняя строка, не нулевой столбец - меняем четыре значения
                 if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == tree.getVisota() - 1 && j > 0 && j < tree.getShirina()) {
                     matrix[i][j] = 0;
                     matrix[i - 1][j] = 0;
-                    matrix[i][j + 1] = 0;
+                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
                     matrix[i][j - 1] = 0;
                 }
                 //Если это последняя строка и последний столбец - меняем три значения
