@@ -1,201 +1,219 @@
+import java.util.ArrayList;
+
 public class Level1 {
-    //v3
-    static tree derevo = new Level1.tree();
+    //v1
+    static MatrixObj matrix = new MatrixObj();
+    static String[] Matrix;
 
-    static String[] TreeOfLife(int H, int W, int N, String[] tree) {
-        //Кладем параметры в объект
-        derevo.setVisota(H);
-        derevo.setShirina(W);
-        derevo.setLet(N);
-        derevo.setTekusheeSostoyanie(tree);
-        derevo.setTekushiyGod(0);
-        //Заменяем символы на цифры
-        zamenaSimvolovNaCifry();
+    static void MatrixTurn(String Matrix[], int M, int N, int T) {
+        matrix.setVhodarray(Matrix);
+        matrix.setVisota(M);
+        matrix.setShrina(N);
+        matrix.setKolvoLevels();
+        matrix.setVhodmatrix(matrix.getVhodarray());
+        matrix.setKolvoLevels();
+        ArrayList<String> strokivsehlevels = new ArrayList<String>();
+        String[][] ishodnaya = matrix.getVhodmatrix();
+        
+        //Помещаем перевернутую строку первого уровня в список
+        strokivsehlevels.add(PerestanovkaSimvolovVstroke(strokaIzMatrici(ishodnaya, T), T));
 
-        //Меняем текущее состояние пока не дойдем до заданного возраста
-        while (derevo.getTekushiyGod() <= N) {
-            if (derevo.getTekushiyGod() == 0) {
-                derevo.getTekusheeSostoyanie();
-                //Если год "нечетный"
-            } else if (derevo.getTekushiyGod() % 2 == 0) {
-                //Прибавляем возраст веткам
-                derevo.setTekusheeSostoyanie(VozrastVetokPlus(derevo.getTekusheeSostoyanie()));
-                //Удаляем старые ветки
-                derevo.setTekusheeSostoyanie(GibelVetok(PoluchenieMatrix(derevo.getTekusheeSostoyanie())));
-
-            } else if (derevo.getTekushiyGod() % 2 != 0) {
-                derevo.setTekusheeSostoyanie(VozrastVetokPlus(derevo.getTekusheeSostoyanie()));
-            }
-
-            //Выводим текущий год
-            System.out.println(derevo.getTekushiyGod());
-            //Выводим финальную матрицу из цифр
-            for (int i = 0; i < tree.length; i++) {
-                System.out.println(derevo.tekusheeSostoyanie[i]);
-            }
-            derevo.setTekushiyGod(derevo.getTekushiyGod() + 1);
+        //Помещаем перевернутые строки остальных уровней в список
+        for (int i = 2; i <= matrix.getKolvoLevels(); i++) {
+            strokivsehlevels.add(PerestanovkaSimvolovVstroke(strokaIzMatrici(PoluchenieMatrixPoLevel(i), T), T));
         }
 
-        return ZamenaCifrNaPlus(derevo.tekusheeSostoyanie);
+        for (int j = 0; j < strokivsehlevels.size(); j++) {
+            System.out.println(strokivsehlevels.get(j));
+        }
+
+        for (int k = 1; k <= matrix.getKolvoLevels(); k++) {
+            PoluchenieFinMatrix(strokivsehlevels, k);
+        }
+
+        //Вывод финальной матрицы
+        for (int i = 0; i < M; i++) {  //идём по строкам
+            for (int j = 0; j < N; j++) {//идём по столбцам
+                System.out.print(" " + matrix.getFinmatrix()[i][j] + " "); //вывод элемента
+            }
+            System.out.println();//перенос строки ради визуального сохранения табличной формы
+        }
+        System.out.println("*****");
+
+        for (int i = 0; i < M; i++) {  //идём по строкам
+            for (int j = 0; j < N; j++) {//идём по столбцам
+                Matrix[i] = "";
+            }
+        }
+
+        for (int i = 0; i < M; i++) {  //идём по строкам
+            for (int j = 0; j < N; j++) {//идём по столбцам
+                Matrix[i] = Matrix[i] + matrix.getFinmatrix()[i][j];
+            }
+        }
+
+        for (int i = 0; i < Matrix.length; i++) {
+            System.out.println(Matrix[i]);
+        }
+
+        Level1.Matrix = Matrix;
     }
 
-    //
-    public static void zamenaSimvolovNaCifry() {
-        //Заменяем + на 1
-        for (int i = 0; i < tree.getTekusheeSostoyanie().length; i++) {
-            tree.getTekusheeSostoyanie()[i] = tree.getTekusheeSostoyanie()[i].replace("+", "1");
+    public static String[][] PoluchenieFinMatrix(ArrayList<String> strokivsehlevels, int level) {
+        int M = matrix.getVisota();
+        int N = matrix.getShirina();
+        String[][] finish = new String[M][N];
+
+
+        //Наполняем финальную матрицу
+        for (int i = 0; i < M; i++) {  //идём по строкам
+            for (int j = 0; j < N; j++) {//идём по столбцам
+                if (level == 1) {
+                    //Верхняя горизонталь
+                    if (i == 0) {
+                        finish[i][j] = strokivsehlevels.get(0).substring(j, j + 1);
+                    }
+                    //Левая вертикаль
+                    if (i > 0 && i < M - 1 && j == 0) {
+                        finish[i][j] = strokivsehlevels.get(0).substring(strokivsehlevels.get(0).length() - i, strokivsehlevels.get(0).length() - i + 1);
+                    }
+                    //Правая вертикаль
+                    if (i > 0 && i < M - 1 && j == N - 1) {
+                        finish[i][j] = strokivsehlevels.get(0).substring(N + i - 1, N + i);
+                    }
+                    //Нижняя горизонталь
+                    if (i == M - 1) {
+                        finish[i][j] = strokivsehlevels.get(0).substring((N + M) - 3 + N - j, (N + M) - 3 + N - j + 1);
+                    }
+                    matrix.setFinmatrix(finish);
+                }
+                if (level == 2) {
+                    //Уровень 2 верхняя горизонталь
+                    if (i > 0 && i < M - 1 && j > 0 && j < N - 1) {
+                        matrix.getFinmatrix()[i][j] = strokivsehlevels.get(level - 1).substring(j - 1, j);
+                    }
+                    //Уровень 2 нижняя горизонталь
+                    if (i == M - level && j > 0 && j < N - 1) {
+                        matrix.getFinmatrix()[i][j] = strokivsehlevels.get(level - 1).substring(strokivsehlevels.get(level - 1).length() - j, strokivsehlevels.get(level - 1).length() - j + 1);
+                    }
+                }
+            }
         }
-        //Заменяем . на 0
-        for (int i = 0; i < tree.getTekusheeSostoyanie().length; i++) {
-            tree.getTekusheeSostoyanie()[i] = tree.getTekusheeSostoyanie()[i].replace(".", "0");
-        }
+
+        return matrix.getFinmatrix();
     }
 
-    //Увеличиваем возраст веток
-    public static String[] VozrastVetokPlus(String[] tr) {
-        for (int i = 0; i < tr.length; i++) {
-            if (tr[i].contains("3")) {
-                tr[i] = tr[i].replace("3", "4");
-            }
-            if (tr[i].contains("2")) {
-                tr[i] = tr[i].replace("2", "3");
-            }
-            if (tr[i].contains("1")) {
-                tr[i] = tr[i].replace("1", "2");
-            }
-            if (tr[i].contains("0")) {
-                tr[i] = tr[i].replace("0", "1");
-            }
 
-        }
-
-        return tr;
-    }
-
-    //Получаем матрицу дерева
-    public static int[][] PoluchenieMatrix(String[] derevo) {
-        String[] result = new String[0];
-        int[][] matrix = new int[tree.getVisota()][tree.getShirina()];
-        for (int i = 0; i < tree.getVisota(); i++) {
-            for (int j = 0; j < tree.getShirina(); j++) {
-                matrix[i][j] = Integer.parseInt(derevo[i].split("")[j]);
+    public static String[][] PoluchenieIznachalnoyMatrix(String[] array) {
+        String[][] matrix = new String[MatrixObj.getVisota()][MatrixObj.getShirina()];
+        for (int i = 0; i < MatrixObj.getVisota(); i++) {
+            for (int j = 0; j < MatrixObj.getShirina(); j++) {
+                matrix[i][j] = (array[i].split("")[j]);
             }
         }
-
         return matrix;
     }
 
-    //Заменям клетки с 3 и четыре вокруг на 0
-    public static String[] GibelVetok(int[][] matrix) {
-        String[] result = new String[tree.getVisota()];
-        for (int i = 0; i < tree.getVisota(); i++) {  //идём по строкам
-            for (int j = 0; j < tree.getShirina(); j++) {//идём по столбцам
-                //Если это нулевая строка и нулевой столбец - меняем три значения
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == 0 && j == 0) {
-                    matrix[i][j] = 0;
-                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
-                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
-                }
-                //Если это нулевая строка, не первый столбец, не последний столбец - меняем четыре значения
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == 0 && j > 0 && j < tree.getVisota()) {
-                    matrix[i][j] = 0;
-                    matrix[i][j - 1] = 0;
-                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
-                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
-                }
-                //Если это нулевая строка, последний столбец - меняем три значения
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == 0 && j > 0 && j == tree.getShirina() - 1) {
-                    matrix[i][j] = 0;
-                    matrix[i][j - 1] = 0;
-                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
-                }
-                //Если это не нулевая строка, не последняя строка, нулевой столбец - меняем четыре значения
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i > 0 && i < tree.getVisota() - 1 && j == 0) {
-                    matrix[i][j] = 0;
-                    matrix[i - 1][j] = 0;
-                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
-                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
-                }
-                //Если это не нулева строка, не последняя строка, не нулевой столбец, не последний столбец - меняем пять значений
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i > 0 && i < tree.getVisota() - 1 && j > 0 && j < tree.getShirina() - 1) {
-                    matrix[i][j] = 0;
-                    matrix[i - 1][j] = 0;
-                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
-                    if(matrix[i + 1][j] == 1 || matrix[i + 1][j] == 2) { matrix[i + 1][j] = 0; }
-                    matrix[i][j - 1] = 0;
-                }
-                //Если это ненулевая строка, последния столбец - меняем три значения
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i > 0 && i < tree.getVisota() && j == tree.getShirina() - 1) {
-                    matrix[i][j] = 0;
-                    matrix[i - 1][j] = 0;
-                    matrix[i][j - 1] = 0;
-                }
-                //Если это последняя строка, нулевой столбец - меняем три значения
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == tree.getVisota() - 1 && j == 0) {
-                    matrix[i][j] = 0;
-                    matrix[i - 1][j] = 0;
-                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
-
-                }
-                //Если это последняя строка, не нулевой столбец - меняем четыре значения
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == tree.getVisota() - 1 && j > 0 && j < tree.getShirina()) {
-                    matrix[i][j] = 0;
-                    matrix[i - 1][j] = 0;
-                    if(matrix[i][j + 1] == 1 || matrix[i][j + 1] == 2) { matrix[i][j + 1] = 0; }
-                    matrix[i][j - 1] = 0;
-                }
-                //Если это последняя строка и последний столбец - меняем три значения
-                if ((matrix[i][j] == 3 || matrix[i][j] == 4) && i == tree.getVisota() - 1 && j == tree.getShirina() - 1) {
-                    matrix[i][j] = 0;
-                    matrix[i - 1][j] = 0;
-                    matrix[i][j - 1] = 0;
-                }
+    public static String[][] PoluchenieMatrixPoLevel(int level) {
+        String[][] iznmatrix = matrix.getVhodmatrix();
+        String[][] resultmatrix = new String[matrix.getVisota() - level][matrix.getShirina() - level];
+        for (int i = 0; i < resultmatrix.length; i++) {
+            for (int j = 0; j < resultmatrix[0].length; j++) {
+                resultmatrix[i][j] = iznmatrix[i + 1][j + 1];
             }
         }
+        return resultmatrix;
+    }
 
-        for (int i = 0; i < derevo.getVisota(); ) {  //идём по строкам
-            for (int j = 0; j < derevo.getShirina(); j++) {//идём по столбцам
-                if (result[i] == null) {
-                    result[i] = String.valueOf(matrix[i][j]);
-                } else {
-                    result[i] = result[i] + matrix[i][j];
+    public static String strokaIzMatrici(String[][] matrix, int T) {
+        String gorizverh = "";
+        String gorizniz = "";
+        String vertikalleft = "";
+        String vertikalright = "";
+        String result = "";
+
+        if (matrix.length == 1 && T % 2 == 0) {
+            for (int i = 0; i < 1; i++) {  //идём по строкам
+                for (int j = 0; j < matrix[0].length; j++) {
+                    result = result + matrix[i][j];
+                }
+                StringBuffer res = new StringBuffer(result);
+                res.reverse();
+                result = String.valueOf(res);
+            }
+        }
+        else if (matrix.length == 1 && T % 2 != 0) {
+            for (int i = 0; i < 1; i++) {  //идём по строкам
+                for (int j = 0; j < matrix[0].length; j++) {
+                    result = result + matrix[i][j];
                 }
             }
-            i++;
+        }else {
+            for (int i = 0; i < matrix.length; i++) {  //идём по строкам
+                for (int j = 0; j < matrix[0].length; j++) {//идём по столбцам
+                    if (i == 0) {
+                        gorizverh = gorizverh + matrix[i][j];
+                    }
+                    else if (i > 0 && i < matrix.length - 1 && j == 0) {
+                        vertikalleft = vertikalleft + matrix[i][0];
+                    }
+                    else if (i > 0 && i < matrix.length - 1 && j == matrix[0].length - 1) {
+                        System.out.println("d");
+                        vertikalright = vertikalright + matrix[i][matrix[0].length - 1];
+                    }
+                    else if (i == matrix.length - 1) {
+                        gorizniz = gorizniz + matrix[i][j];
+                    }
+                }
+            }
+
+            StringBuffer buffergor = new StringBuffer(gorizniz);
+            buffergor.reverse();
+            StringBuffer buffervert = new StringBuffer(vertikalleft);
+            buffervert.reverse();
+            result = gorizverh + vertikalright + buffergor + buffervert;
         }
         return result;
     }
 
-    //Заменяем цифры на плюсы и точки для итогового вывода
-    public static String[] ZamenaCifrNaPlus(String[] cifry) {
-        for (int i = 0; i < cifry.length; i++) {
-            if (cifry[i].contains("0")) {
-                cifry[i] = cifry[i].replace("0", ".");
-            }
-            if (cifry[i].contains("1")) {
-                cifry[i] = cifry[i].replace("1", "+");
-            }
-            if (cifry[i].contains("2")) {
-                cifry[i] = cifry[i].replace("2", "+");
-            }
-            if (cifry[i].contains("3")) {
-                cifry[i] = cifry[i].replace("3", "+");
-            }
-            if (cifry[i].contains("3")) {
-                cifry[i] = cifry[i].replace("3", "+");
-            }
+    public static String PerestanovkaSimvolovVstroke(String stroka, int T) {
+        String result = "";
+
+        //Если длина строки == шагу, то возвращаем строку
+        if (T - stroka.length() == 0) {
+            result = stroka;
+        //Если длина строки больше шага
+        } else if (stroka.length() > T) {
+            String perenos = stroka.substring(stroka.length() - T);
+            result = perenos + stroka.substring(0, stroka.length() - T);
+
+        //Если шаг больше длины строки
+        }else if (stroka.length() < T) {
+            String perenos = stroka.substring(stroka.length() - (T - (stroka.length() * (T / stroka.length()))));
+            result = perenos + stroka.substring(0, stroka.length() - (T - stroka.length() * (T / stroka.length())));
         }
-        return cifry;
+        return result;
     }
 
-    public static class tree {
-
+    public static class MatrixObj {
         static int visota;
         static int shirina;
-        int let;
-        static int tekushiyGod;
-        static String[] tekusheeSostoyanie;
-        static int[][] matrix;
+        String[] vhodarray;
+        int tekushiyshag = 0;
+        String[][] vhodmatrix;
+        String strokaIzMatrici;
+        String strokaLevel1;
+        static int kolvolevels;
+        String[][] finmatrix;
+
+
+        public String[][] getFinmatrix() {
+            return finmatrix;
+        }
+
+        public static int getKolvoLevels() {
+            return kolvolevels;
+        }
 
         public static int getVisota() {
             return visota;
@@ -205,44 +223,70 @@ public class Level1 {
             return shirina;
         }
 
-        public int getLet() {
-            return let;
+        public String[] getVhodarray() {
+            return vhodarray;
         }
 
-        public static String[] getTekusheeSostoyanie() {
-            return tekusheeSostoyanie;
+        public int getTekushiyshag() {
+            return tekushiyshag;
         }
 
-        public static int getTekushiyGod() {
-            return tekushiyGod;
+        public String[][] getVhodmatrix() {
+            return vhodmatrix;
         }
 
-        public int[][] getMatrix() {
-            return matrix;
+        public String getStrokaIzMatrici() {
+            return strokaIzMatrici;
+        }
+
+        public String getStrokaLevel1() {
+            return strokaLevel1;
+        }
+
+        public void setFinmatrix(String[][] finmatrix) {
+            this.finmatrix = finmatrix;
         }
 
         public void setVisota(int visota) {
             this.visota = visota;
         }
 
-        public void setShirina(int shirina) {
-            this.shirina = shirina;
+        public void setShrina(int shrina) {
+            this.shirina = shrina;
         }
 
-        public void setLet(int let) {
-            this.let = let;
+        public void setTekushiyshag(int tekushiyshag) {
+            this.tekushiyshag = tekushiyshag;
         }
 
-        public void setTekusheeSostoyanie(String[] tekusheeSostoyanie) {
-            this.tekusheeSostoyanie = tekusheeSostoyanie;
+        public void setVhodarray(String[] vhodarray) {
+            this.vhodarray = vhodarray;
         }
 
-        public static void setTekushiyGod(int tekushiyGod) {
-            tree.tekushiyGod = tekushiyGod;
+        public void setVhodmatrix(String[] vhodmatrix) {
+            this.vhodmatrix = PoluchenieIznachalnoyMatrix(vhodmatrix);
         }
 
-        public void setMatrix(int[][] matrix) {
-            this.matrix = matrix;
+        public void setStrokaIzMatrici(String strokaIzMatrici) {
+            this.strokaIzMatrici = strokaIzMatrici;
         }
+
+        public void setStrokaLevel1(String strokaLevel1) {
+            this.strokaLevel1 = strokaLevel1;
+        }
+
+        public void setKolvoLevels() {
+            if (visota == shirina && visota == 2) {
+                this.kolvolevels = 1;
+            }
+            if (visota == shirina && visota > 2) {
+                this.kolvolevels = visota - 2;
+            }
+            if (visota != shirina) {
+                this.kolvolevels = (Math.min(visota, shirina) - 1);
+            }
+
+        }
+
     }
 }
