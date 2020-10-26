@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Level1 {
-//v1
+//v2
+
     static boolean TransformTransform(int A[], int N) {
-        boolean result = false;
+        boolean result = true;
         if( transformation(A) % 2 == 0){
-            result = true;
+            result = false;
         }
         return result;
     }
