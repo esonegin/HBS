@@ -16,21 +16,21 @@ public class TransformTransformTest {
     public void setUp() {
 
     }
+    @Test
+    public void error2() throws Exception {
+        //1
+        boolean actual = Level1.TransformTransform(new Integer[]{3,2,1}, 3);
+        //res = 58
+        boolean expected = true;
+        Assert.assertThat(actual, is(expected));
+    }
 
     @Test
-    public void ishodnoe1() throws Exception {
+    public void error1() throws Exception {
         //1
-        Level1.TransformTransform(new int[]{1,2,1,7}, 4);
-        boolean actual = Level1.TransformTransform(new int[]{1,2,1,7}, 4);;
+        boolean actual = Level1.TransformTransform(new Integer[]{1,2,1,7,2,4,3,1,5,1,2,1,6,1,2}, 15);;
         boolean expected = false;
         Assert.assertThat(actual, is(expected));
     }
-    @Test
-    public void ishodnoe() throws Exception {
-        //1
-        Level1.TransformTransform(new int[]{1,2,1,7,2,4,3,1,5,1,2,1,6,1,2}, 15);
-        boolean actual = Level1.TransformTransform(new int[]{1,2,1,7,2,4,3,1,5,1,2,1,6,1,2}, 15);;
-        boolean expected = false;
-        Assert.assertThat(actual, is(expected));
-    }
+
 }
