@@ -5,7 +5,7 @@ public class Level1 {
 
     public static void main(String[] args) {
         //Создали объект spisok и положили туда текущее кол-во открытых, закрытых и требуемое кол-во открытых
-        SpisokVsehVariantov spisok = new SpisokVsehVariantov(0, 0, 1);
+        SpisokVsehVariantov spisok = new SpisokVsehVariantov(0, 0, 2);
         formirovanieStroki(spisok);
         System.out.println(spisok.getVariants());
     }
