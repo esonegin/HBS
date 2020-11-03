@@ -38,4 +38,18 @@ public class BalancedParenthesesTest {
         String expected = "((())) (()()) ()()() (())() ()(())";
         Assert.assertThat(actual, is(expected));
     }
+    @Test
+    public void four() throws Exception {
+        //1
+        String actual = Level1.BalancedParentheses(4);
+        String expected = "((())) (()()) ()()() (())() ()(())";
+        Assert.assertThat(actual, is(expected));
+    }
+    @Test
+    public void ten() throws Exception {
+        //1
+        String actual = Level1.BalancedParentheses(5);
+        String expected = "((())) (()()) ()()() (())() ()(())";
+        Assert.assertThat(actual, is(expected));
+    }
 }
