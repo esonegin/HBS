@@ -46,7 +46,7 @@ public class BalancedParenthesesTest {
         Assert.assertThat(actual, is(expected));
     }
     @Test
-    public void ten() throws Exception {
+    public void five() throws Exception {
         //1
         String actual = Level1.BalancedParentheses(5);
         String expected = "((())) (()()) ()()() (())() ()(())";

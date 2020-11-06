@@ -4,49 +4,52 @@ public class Level1 {
 
 
     public static void main(String[] args) {
-        //Создали объект spisok и положили туда текущее кол-во открытых, закрытых и требуемое кол-во открытых
-        SpisokVsehVariantov spisok = new SpisokVsehVariantov(0, 0, 2);
-        formirovanieStroki(spisok);
-        System.out.println(spisok.getVariants());
+
+        BalancedParentheses(3);
+
     }
 
-    //v2
+    //v3
     public static String BalancedParentheses(int N) {
         String result = "";
+        SpisokVsehVariantov spisok = new SpisokVsehVariantov(N, 0, "");
 
+        recurs(spisok);
+        System.out.println(spisok.getVariants());
         return result;
     }
 
-    public static void formirovanieStroki(SpisokVsehVariantov spisok) {
-        while (spisok.closed < spisok.trebmaxopen) {
-            if (spisok.open > spisok.closed) {
-                spisok.setTekushee(spisok.getTekushee() + ")");
-                spisok.setClosed(spisok.getClosed() + 1);
-                formirovanieStroki(spisok);
-            }
-            if (spisok.open < spisok.trebmaxopen) {
-                spisok.setTekushee(spisok.getTekushee() + "(");
-                spisok.setOpen(spisok.getOpen() + 1);
-                formirovanieStroki(spisok);
-            }
-            if (spisok.open == spisok.closed) {
-                spisok.setVariants(spisok.getTekushee());
-            }
+    public static void recurs(SpisokVsehVariantov spisok) {
+        int kolvopen = spisok.getOpen();
+        int kolvoclosed = spisok.getClosed();
+        String tekvar = spisok.getTekushee();
+
+        if (kolvopen == 0 && kolvoclosed == 0) {
+            spisok.setVariants(tekvar);
+        }
+        if (kolvopen > 0) {
+            spisok.setOpen(spisok.getOpen() - 1);
+            spisok.setClosed(spisok.getClosed() + 1);
+            spisok.setTekushee(tekvar + "(");
+
+            recurs(spisok);
+        }
+        if (kolvoclosed > 0) {
+            spisok.setClosed(spisok.getClosed() - 1);
+            spisok.setTekushee(tekvar + ")");
+            recurs(spisok);
         }
     }
-
 
     public static class SpisokVsehVariantov {
         int open;
         int closed;
-        int trebmaxopen;
         String tekushee = "";
         ArrayList<String> variants = new ArrayList<>();
 
-        public SpisokVsehVariantov(int open, int closed, int trebmaxopen) {
+        public SpisokVsehVariantov(int open, int closed, String tekushee) {
             this.open = open;
             this.closed = closed;
-            this.trebmaxopen = trebmaxopen;
             this.tekushee = tekushee;
         }
 
@@ -56,10 +59,6 @@ public class Level1 {
 
         public int getClosed() {
             return closed;
-        }
-
-        public int getTrebmaxopen() {
-            return trebmaxopen;
         }
 
         public String getTekushee() {
@@ -85,5 +84,6 @@ public class Level1 {
         public void setVariants(String stroka) {
             variants.add(stroka);
         }
+
     }
 }
