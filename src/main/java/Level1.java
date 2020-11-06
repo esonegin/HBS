@@ -1,89 +1,55 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Level1 {
 
+    private static ArrayList<String> allvariants = new ArrayList<>();
+
 
     public static void main(String[] args) {
-
-        BalancedParentheses(3);
-
+        System.out.println(BalancedParentheses(3));
     }
 
-    //v3
+    //v4
     public static String BalancedParentheses(int N) {
         String result = "";
-        SpisokVsehVariantov spisok = new SpisokVsehVariantov(N, 0, "");
 
-        recurs(spisok);
-        System.out.println(spisok.getVariants());
-        return result;
+        recurs(N, 0, "");
+
+        for (int i = 0; i < allvariants.size(); i++) {
+            result = result + allvariants.get(i);
+        }
+        return withoutDubl();
     }
 
-    public static void recurs(SpisokVsehVariantov spisok) {
-        int kolvopen = spisok.getOpen();
-        int kolvoclosed = spisok.getClosed();
-        String tekvar = spisok.getTekushee();
+    public static String withoutDubl(){
+        Set<String> set = new HashSet<>(allvariants);
+        String result2 = "";
+        allvariants.clear();
+        allvariants.addAll(set);
+        Iterator iterator = set.iterator();
 
+        while(iterator.hasNext()){
+            String element =(String) iterator.next();
+            result2 = result2 + " " + element;
+        }
+        return result2.trim();
+    }
+
+    public static void recurs(int kolvopen, int kolvoclosed, String tekushee) {
         if (kolvopen == 0 && kolvoclosed == 0) {
-            spisok.setVariants(tekvar);
+            allvariants.add(tekushee);
+        } else {
+            if (kolvopen > 0) {
+                kolvopen = kolvopen - 1;
+                kolvoclosed = kolvoclosed + 1;
+                tekushee = tekushee + "(";
+                recurs(kolvopen, kolvoclosed, tekushee);
+            }
+            if (kolvoclosed > 0) {
+                kolvoclosed = kolvoclosed - 1;
+                tekushee = tekushee + ")";
+                recurs(kolvopen, kolvoclosed, tekushee);
+            }
         }
-        if (kolvopen > 0) {
-            spisok.setOpen(spisok.getOpen() - 1);
-            spisok.setClosed(spisok.getClosed() + 1);
-            spisok.setTekushee(tekvar + "(");
-
-            recurs(spisok);
-        }
-        if (kolvoclosed > 0) {
-            spisok.setClosed(spisok.getClosed() - 1);
-            spisok.setTekushee(tekvar + ")");
-            recurs(spisok);
-        }
-    }
-
-    public static class SpisokVsehVariantov {
-        int open;
-        int closed;
-        String tekushee = "";
-        ArrayList<String> variants = new ArrayList<>();
-
-        public SpisokVsehVariantov(int open, int closed, String tekushee) {
-            this.open = open;
-            this.closed = closed;
-            this.tekushee = tekushee;
-        }
-
-        public int getOpen() {
-            return open;
-        }
-
-        public int getClosed() {
-            return closed;
-        }
-
-        public String getTekushee() {
-            return tekushee;
-        }
-
-        public ArrayList<String> getVariants() {
-            return variants;
-        }
-
-        public void setOpen(int open) {
-            this.open = open;
-        }
-
-        public void setClosed(int closed) {
-            this.closed = closed;
-        }
-
-        public void setTekushee(String tekushee) {
-            this.tekushee = tekushee;
-        }
-
-        public void setVariants(String stroka) {
-            variants.add(stroka);
-        }
-
     }
 }
