@@ -4,12 +4,7 @@ public class Level1 {
 
     private static ArrayList<String> allvariants = new ArrayList<>();
 
-
-    public static void main(String[] args) {
-        System.out.println(BalancedParentheses(3));
-    }
-
-    //v4
+    //v5
     public static String BalancedParentheses(int N) {
         String result = "";
 
