@@ -4,27 +4,44 @@ public class Level1 {
 
     private static ArrayList<String> allvariants = new ArrayList<>();
 
-    //v5
+    //v6
     public static String BalancedParentheses(int N) {
         String result = "";
-
         recurs(N, 0, "");
-
         for (int i = 0; i < allvariants.size(); i++) {
             result = result + allvariants.get(i);
         }
+        allVarWithReverse();
         return withoutDubl();
     }
 
-    public static String withoutDubl(){
+    public static void allVarWithReverse() {
+        int size = allvariants.size();
+        for (int i = 0; i < size; i++) {
+            String[] rev = allvariants.get(i).split("");
+
+            String resrev = "";
+            for (int k = 0; k < rev.length; k++) {
+                if (rev[k].equals("(")) {
+                    resrev = ")" + resrev;
+                }
+                if (rev[k].equals(")")) {
+                    resrev = "(" + resrev;
+                }
+            }
+            allvariants.add(resrev);
+        }
+    }
+
+    public static String withoutDubl() {
         Set<String> set = new HashSet<>(allvariants);
         String result2 = "";
         allvariants.clear();
         allvariants.addAll(set);
         Iterator iterator = set.iterator();
 
-        while(iterator.hasNext()){
-            String element =(String) iterator.next();
+        while (iterator.hasNext()) {
+            String element = (String) iterator.next();
             result2 = result2 + " " + element;
         }
         return result2.trim();
