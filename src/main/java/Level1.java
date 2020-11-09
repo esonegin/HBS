@@ -2,10 +2,11 @@ import java.util.*;
 
 public class Level1 {
 
-    private static ArrayList<String> allvariants = new ArrayList<>();
+    static ArrayList<String> allvariants = new ArrayList<>();
 
-    //v6
+    //v7
     public static String BalancedParentheses(int N) {
+        allvariants.clear();
         String result = "";
         recurs(N, 0, "");
         for (int i = 0; i < allvariants.size(); i++) {

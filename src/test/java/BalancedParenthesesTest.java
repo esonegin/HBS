@@ -27,9 +27,13 @@ public class BalancedParenthesesTest {
     @Test
     public void two() throws Exception {
         //1
-        String actual = Level1.BalancedParentheses(2);
-        String expected = "()() (())";
+        String actual = Level1.BalancedParentheses(1);
+        String expected = "()";
         Assert.assertThat(actual, is(expected));
+        actual = Level1.BalancedParentheses(2);
+        expected = "()() (())";
+        Assert.assertThat(actual, is(expected));
+
     }
     @Test
     public void three() throws Exception {
