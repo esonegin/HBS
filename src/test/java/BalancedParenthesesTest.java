@@ -31,29 +31,44 @@ public class BalancedParenthesesTest {
         String expected = "()";
         Assert.assertThat(actual, is(expected));
         actual = Level1.BalancedParentheses(2);
-        expected = "()() (())";
+        expected = "(()) ()()";
         Assert.assertThat(actual, is(expected));
 
     }
     @Test
     public void three() throws Exception {
         //1
-        String actual = Level1.BalancedParentheses(3);
-        String expected = "((())) (()()) ()()() (())() ()(())";
+        String actual = Level1.BalancedParentheses(1);
+        String expected = "()";
+        Assert.assertThat(actual, is(expected));
+        actual = Level1.BalancedParentheses(2);
+        expected = "(()) ()()";
+        Assert.assertThat(actual, is(expected));
+        actual = Level1.BalancedParentheses(3);
+        expected = "((())) (()()) ()(()) ()()() (())()";
         Assert.assertThat(actual, is(expected));
     }
     @Test
     public void four() throws Exception {
         //1
-        String actual = Level1.BalancedParentheses(4);
-        String expected = "((())) (()()) ()()() (())() ()(())";
+        String actual = Level1.BalancedParentheses(1);
+        String expected = "()";
+        Assert.assertThat(actual, is(expected));
+        actual = Level1.BalancedParentheses(2);
+        expected = "(()) ()()";
+        Assert.assertThat(actual, is(expected));
+        actual = Level1.BalancedParentheses(3);
+        expected = "((())) (()()) ()(()) ()()() (())()";
+        Assert.assertThat(actual, is(expected));
+        actual = Level1.BalancedParentheses(4);
+        expected = "(((()))) ((()())) (()(())) (()()()) ()((())) ()(()()) ()()(()) ()()()() ((())()) ((()))() (()())() (())()()";
         Assert.assertThat(actual, is(expected));
     }
     @Test
     public void five() throws Exception {
         //1
         String actual = Level1.BalancedParentheses(5);
-        String expected = "((())) (()()) ()()() (())() ()(())";
+        String expected = "((((())))) (((()()))) (((())())) (((()))()) (((())))() ((()(()))) ((()()())) ((()())()) ((()()))() ((())(())) ((())()()) ((())())() ((()))(()) ((()))()() (()((()))) (()(()())) (()(())()) (()(()))() (()()(())) (()()()()) (()()())() (()())(()) (()())()() (())((())) (())(()()) (())(())() (())()(()) (())()()() ()(((()))) ()((()())) ()((())()) ()((()))() ()(()(())) ()(()()()) ()(()())() ()(())(()) ()(())()() ()()((())) ()()(()()) ()()(())() ()()()(()) ()()()()()";
         Assert.assertThat(actual, is(expected));
     }
 }

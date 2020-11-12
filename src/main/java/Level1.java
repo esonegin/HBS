@@ -1,68 +1,42 @@
+
 import java.util.*;
+
 
 public class Level1 {
 
-    static ArrayList<String> allvariants = new ArrayList<>();
-
-    //v7
+    //v8
     public static String BalancedParentheses(int N) {
-        allvariants.clear();
         String result = "";
-        recurs(N, 0, "");
-        for (int i = 0; i < allvariants.size(); i++) {
-            result = result + allvariants.get(i);
+        ArrayList <String> resultlist = generateParens(N);
+        for (int i = 0; i < resultlist.size(); i++){
+            result = result + resultlist.get(i) + " ";
         }
-        allVarWithReverse();
-        return withoutDubl();
+        return result.trim();
     }
 
-    public static void allVarWithReverse() {
-        int size = allvariants.size();
-        for (int i = 0; i < size; i++) {
-            String[] rev = allvariants.get(i).split("");
+    public static void addParen(ArrayList<String> list, int leftRem, int rightRem, char[] str, int count) {
+        if (leftRem < 0 || rightRem < leftRem) return;
 
-            String resrev = "";
-            for (int k = 0; k < rev.length; k++) {
-                if (rev[k].equals("(")) {
-                    resrev = ")" + resrev;
-                }
-                if (rev[k].equals(")")) {
-                    resrev = "(" + resrev;
-                }
-            }
-            allvariants.add(resrev);
-        }
-    }
-
-    public static String withoutDubl() {
-        Set<String> set = new HashSet<>(allvariants);
-        String result2 = "";
-        allvariants.clear();
-        allvariants.addAll(set);
-        Iterator iterator = set.iterator();
-
-        while (iterator.hasNext()) {
-            String element = (String) iterator.next();
-            result2 = result2 + " " + element;
-        }
-        return result2.trim();
-    }
-
-    public static void recurs(int kolvopen, int kolvoclosed, String tekushee) {
-        if (kolvopen == 0 && kolvoclosed == 0) {
-            allvariants.add(tekushee);
+        if (leftRem == 0 && rightRem == 0) {
+            String s = String.copyValueOf(str);
+            list.add(s);
         } else {
-            if (kolvopen > 0) {
-                kolvopen = kolvopen - 1;
-                kolvoclosed = kolvoclosed + 1;
-                tekushee = tekushee + "(";
-                recurs(kolvopen, kolvoclosed, tekushee);
+            if (leftRem > 0) {
+                str[count] = '(';
+                addParen(list, leftRem - 1, rightRem, str, count + 1);
             }
-            if (kolvoclosed > 0) {
-                kolvoclosed = kolvoclosed - 1;
-                tekushee = tekushee + ")";
-                recurs(kolvopen, kolvoclosed, tekushee);
+
+            if (rightRem > leftRem) {
+                str[count] = ')';
+                addParen(list, leftRem, rightRem - 1, str, count + 1);
             }
         }
+    }
+
+    public static ArrayList<String> generateParens(int count) {
+        char[] str = new char[count * 2];
+        ArrayList<String> list = new ArrayList<String>();
+        addParen(list, count, count, str, 0);
+        return list;
     }
 }
