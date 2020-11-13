@@ -7,16 +7,28 @@ public class Level1 {
 
     static ArrayList<String> allfirstsort = new ArrayList<String>();
 
-    //v1
+    //v2
     static boolean Football(int F[], int N) {
         allfirstsort.clear();
         boolean result = false;
         String standartsortvar = standartSort(F);
+        String defaultstring = "";
+        for (int i = 0; i < F.length; i++){
+            defaultstring = defaultstring + F[i];
+        }
+
         if (F.length == 0 || F.length == 1) {
             result = true;
         }
-        prmt(F, 0);
-        return sravnenieFirstVar(allfirstsort, standartsortvar);
+        else if (defaultstring.equals(standartsortvar)){
+            result = false;
+        }
+        else{
+            prmt(F, 0);
+            result = sravnenieFirstVar(allfirstsort, standartsortvar);
+        }
+
+        return result;
     }
 
     public static Boolean sravnenieFirstVar(ArrayList<String> list, String standartsort) {

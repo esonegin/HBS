@@ -54,4 +54,11 @@ public class FootballTest {
         expected = true;
         Assert.assertThat(actual, is(expected));
     }
+    @Test
+    public void defaultsort() throws Exception {
+        //1
+        Boolean actual = Level1.Football(new int[]{1, 2, 3}, 3);
+        Boolean expected = false;
+        Assert.assertThat(actual, is(expected));
+    }
 }
