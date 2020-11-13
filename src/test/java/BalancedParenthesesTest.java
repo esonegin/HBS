@@ -19,7 +19,7 @@ public class BalancedParenthesesTest {
     @Test
     public void one() throws Exception {
         //1
-        String actual = Level1.BalancedParentheses(1);
+        String actual = BalancedParentheses.BalancedParentheses(1);
         String expected = "()";
         Assert.assertThat(actual, is(expected));
     }
@@ -27,10 +27,10 @@ public class BalancedParenthesesTest {
     @Test
     public void two() throws Exception {
         //1
-        String actual = Level1.BalancedParentheses(1);
+        String actual = BalancedParentheses.BalancedParentheses(1);
         String expected = "()";
         Assert.assertThat(actual, is(expected));
-        actual = Level1.BalancedParentheses(2);
+        actual = BalancedParentheses.BalancedParentheses(2);
         expected = "(()) ()()";
         Assert.assertThat(actual, is(expected));
 
@@ -38,36 +38,36 @@ public class BalancedParenthesesTest {
     @Test
     public void three() throws Exception {
         //1
-        String actual = Level1.BalancedParentheses(1);
+        String actual = BalancedParentheses.BalancedParentheses(1);
         String expected = "()";
         Assert.assertThat(actual, is(expected));
-        actual = Level1.BalancedParentheses(2);
+        actual = BalancedParentheses.BalancedParentheses(2);
         expected = "(()) ()()";
         Assert.assertThat(actual, is(expected));
-        actual = Level1.BalancedParentheses(3);
+        actual = BalancedParentheses.BalancedParentheses(3);
         expected = "((())) (()()) ()(()) ()()() (())()";
         Assert.assertThat(actual, is(expected));
     }
     @Test
     public void four() throws Exception {
         //1
-        String actual = Level1.BalancedParentheses(1);
+        String actual = BalancedParentheses.BalancedParentheses(1);
         String expected = "()";
         Assert.assertThat(actual, is(expected));
-        actual = Level1.BalancedParentheses(2);
+        actual = BalancedParentheses.BalancedParentheses(2);
         expected = "(()) ()()";
         Assert.assertThat(actual, is(expected));
-        actual = Level1.BalancedParentheses(3);
+        actual = BalancedParentheses.BalancedParentheses(3);
         expected = "((())) (()()) ()(()) ()()() (())()";
         Assert.assertThat(actual, is(expected));
-        actual = Level1.BalancedParentheses(4);
+        actual = BalancedParentheses.BalancedParentheses(4);
         expected = "(((()))) ((()())) (()(())) (()()()) ()((())) ()(()()) ()()(()) ()()()() ((())()) ((()))() (()())() (())()()";
         Assert.assertThat(actual, is(expected));
     }
     @Test
     public void five() throws Exception {
         //1
-        String actual = Level1.BalancedParentheses(5);
+        String actual = BalancedParentheses.BalancedParentheses(5);
         String expected = "((((())))) (((()()))) (((())())) (((()))()) (((())))() ((()(()))) ((()()())) ((()())()) ((()()))() ((())(())) ((())()()) ((())())() ((()))(()) ((()))()() (()((()))) (()(()())) (()(())()) (()(()))() (()()(())) (()()()()) (()()())() (()())(()) (()())()() (())((())) (())(()()) (())(())() (())()(()) (())()()() ()(((()))) ()((()())) ()((())()) ()((()))() ()(()(())) ()(()()()) ()(()())() ()(())(()) ()(())()() ()()((())) ()()(()()) ()()(())() ()()()(()) ()()()()()";
         Assert.assertThat(actual, is(expected));
     }
