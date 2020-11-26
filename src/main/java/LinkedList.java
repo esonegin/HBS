@@ -1,6 +1,6 @@
 import java.util.*;
 
-//v1
+//v2
 public class LinkedList {
 
     public Node head;
@@ -99,8 +99,11 @@ public class LinkedList {
         }
         // если _nodeAfter = null ,
         // добавьте новый элемент первым в списке
-        else if(_nodeAfter == null){
+        else if(_nodeAfter == null && head != null){
             _nodeToInsert.next = find(head.value);
+            this.head = _nodeToInsert;
+        }
+        else if(_nodeAfter == null && head == null){
             this.head = _nodeToInsert;
         }
 

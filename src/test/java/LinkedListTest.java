@@ -316,5 +316,12 @@ public class LinkedListTest {
         Assert.assertThat(actual.find(1).value == 1, is(true));
         Assert.assertThat(actual.find(1).next.value == 2, is(true));
     }
+    @Test
+    public void inserToEmptyList() throws Exception {
+        LinkedList actual = new LinkedList();
+        actual.insertAfter(actual.find(1), new Node(1));
+        Assert.assertThat(actual.find(1).value == 1, is(true));
+        Assert.assertThat(actual.find(1).next == null, is(true));
+    }
 
 }
