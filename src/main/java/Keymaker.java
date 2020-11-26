@@ -1,7 +1,13 @@
 import java.util.ArrayList;
 
 
-public class Level1 {
+public class Keymaker {
+
+    public static void main(String[] args) {
+        for(int i = 0; i < 40; i++){
+            System.out.println(Keymaker(i));
+        }
+    }
 
     //v1
     public static String Keymaker(int k) {
@@ -24,7 +30,7 @@ public class Level1 {
             result = result + doors.get(i);
         }
 
-        System.out.println(result);
+        //System.out.println(result);
         return result;
     }
 
