@@ -27,6 +27,8 @@ public class LinkedListTest {
         list.remove(3);
         Assert.assertThat(list.head.next.next.next == null, is(true));
         Assert.assertNull(list.find(3));
+        Assert.assertThat(list.head.value == 1, is(true));
+        Assert.assertThat(list.head.next.value == 2, is(true));
     }
 
     @Test
@@ -38,10 +40,11 @@ public class LinkedListTest {
         list.addInTail(n2);
         list.addInTail(new Node(3));
         list.addInTail(new Node(4));
-        Assert.assertNotNull(list.find(1));
         list.remove(1);
         Assert.assertThat(list.head.next.next.next == null, is(true));
         Assert.assertNull(list.find(1));
+        Assert.assertThat(list.head.value == 2, is(true));
+        Assert.assertThat(list.head.next.value == 3, is(true));
     }
 
     @Test
@@ -284,6 +287,10 @@ public class LinkedListTest {
         actual.insertAfter(actual.find(2), new Node(3));
         Assert.assertThat(actual.find(3).value == 3, is(true));
         Assert.assertThat(actual.find(3).next.value == 4, is(true));
+        Assert.assertThat(actual.head.value == 1, is(true));
+        Assert.assertThat(actual.head.next.value == 2, is(true));
+        Assert.assertThat(actual.tail.value == 5, is(true));
+        Assert.assertThat(actual.tail.next == null, is(true));
     }
     @Test
     public void insertAfterFirst() throws Exception {
@@ -295,6 +302,10 @@ public class LinkedListTest {
         actual.insertAfter(actual.find(1), new Node(2));
         Assert.assertThat(actual.find(2).value == 2, is(true));
         Assert.assertThat(actual.find(2).next.value == 3, is(true));
+        Assert.assertThat(actual.head.value == 1, is(true));
+        Assert.assertThat(actual.head.next.value == 2, is(true));
+        Assert.assertThat(actual.tail.value == 5, is(true));
+        Assert.assertThat(actual.tail.next == null, is(true));
     }
     @Test
     public void insertAfterFinal() throws Exception {
@@ -306,6 +317,10 @@ public class LinkedListTest {
         actual.insertAfter(actual.find(5), new Node(6));
         Assert.assertThat(actual.find(6).value == 6, is(true));
         Assert.assertThat(actual.find(6).next == null, is(true));
+        Assert.assertThat(actual.head.value == 1, is(true));
+        Assert.assertThat(actual.head.next.value == 2, is(true));
+        Assert.assertThat(actual.tail.value == 6, is(true));
+        Assert.assertThat(actual.tail.next == null, is(true));
     }
     @Test
     public void insertAfterNull() throws Exception {
@@ -315,6 +330,10 @@ public class LinkedListTest {
         actual.insertAfter(actual.find(5), new Node(1));
         Assert.assertThat(actual.find(1).value == 1, is(true));
         Assert.assertThat(actual.find(1).next.value == 2, is(true));
+        Assert.assertThat(actual.head.value == 1, is(true));
+        Assert.assertThat(actual.head.next.value == 2, is(true));
+        Assert.assertThat(actual.tail.value == 3, is(true));
+        Assert.assertThat(actual.tail.next == null, is(true));
     }
     @Test
     public void inserToEmptyList() throws Exception {
@@ -322,6 +341,33 @@ public class LinkedListTest {
         actual.insertAfter(actual.find(1), new Node(1));
         Assert.assertThat(actual.find(1).value == 1, is(true));
         Assert.assertThat(actual.find(1).next == null, is(true));
+        actual.insertAfter(actual.find(1), new Node(2));
+        Assert.assertThat(actual.find(1).value == 1, is(true));
+        Assert.assertThat(actual.find(1).next.value == 2, is(true));
+        Assert.assertThat(actual.find(1).next.next == null, is(true));
+        Assert.assertThat(actual.head.value == 1, is(true));
+        Assert.assertThat(actual.head.next.value == 2, is(true));
+        Assert.assertThat(actual.tail.value == 2, is(true));
+        Assert.assertThat(actual.tail.next == null, is(true));
+
+    }
+    @Test
+    public void insertMulti() throws Exception {
+        LinkedList actual = new LinkedList();
+        actual.addInTail(new Node(1));
+        actual.insertAfter(actual.find(1), new Node(2));
+        actual.insertAfter(actual.find(2), new Node(3));
+        actual.insertAfter(actual.find(3), new Node(4));
+        Assert.assertThat(actual.find(2).value == 2, is(true));
+        Assert.assertThat(actual.find(2).next.value == 3, is(true));
+        Assert.assertThat(actual.find(3).value == 3, is(true));
+        Assert.assertThat(actual.find(3).next.value == 4, is(true));
+        Assert.assertThat(actual.find(4).value == 4, is(true));
+        Assert.assertThat(actual.find(4).next == null, is(true));
+        Assert.assertThat(actual.head.value == 1, is(true));
+        Assert.assertThat(actual.head.next.value == 2, is(true));
+        Assert.assertThat(actual.tail.value == 4, is(true));
+        Assert.assertThat(actual.tail.next == null, is(true));
     }
 
 }
