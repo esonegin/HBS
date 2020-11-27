@@ -1,28 +1,30 @@
 import java.util.*;
 
-//v3
-public class LinkedList {
-
+public class LinkedList2 {
     public Node head;
     public Node tail;
 
-    public LinkedList() {
+    public LinkedList2() {
         head = null;
         tail = null;
     }
 
-    public void addInTail(Node item) {
-        if (this.head == null)
-            this.head = item;
-        else
-            this.tail.next = item;
-        this.tail = item;
+    public void addInTail(Node _item) {
+        if (head == null) {
+            this.head = _item;
+            this.head.next = null;
+            this.head.prev = null;
+        } else {
+            this.tail.next = _item;
+            _item.prev = tail;
+        }
+        this.tail = _item;
     }
 
-    public Node find(int value) {
+    public Node find(int _value) {
         Node node = this.head;
         while (node != null) {
-            if (node.value == value)
+            if (node.value == _value)
                 return node;
             node = node.next;
         }
@@ -30,7 +32,7 @@ public class LinkedList {
     }
 
     public ArrayList<Node> findAll(int _value) {
-        ArrayList<Node> nodes = new ArrayList<>();
+        ArrayList<Node> nodes = new ArrayList<Node>();
         Node node = this.head;
         while (node != null) {
             if (node.value == _value)
@@ -63,6 +65,7 @@ public class LinkedList {
                 node.next.next.value = _value;
             } else if (node.next.value == _value && node.next.next == null) {
                 this.tail.value = node.value;
+                this.tail.prev = node.prev;
                 node.next = null;
             }
             node = node.next;
@@ -94,7 +97,11 @@ public class LinkedList {
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
         if (_nodeAfter != null) {
             _nodeToInsert.next = find(_nodeAfter.value).next;
+            _nodeToInsert.prev = find(_nodeAfter.value);
             find(_nodeAfter.value).next = _nodeToInsert;
+            if(find(_nodeAfter.value).next.next != null) {
+                find(_nodeAfter.value).next.next.prev = _nodeToInsert;
+            }
             if (tail.next != null) {
                 tail = tail.next;
             }
@@ -104,6 +111,7 @@ public class LinkedList {
         else if (_nodeAfter == null && head != null) {
             _nodeToInsert.next = find(head.value);
             this.head = _nodeToInsert;
+            find(head.next.value).prev = head;
         } else if (_nodeAfter == null && head == null) {
             this.head = _nodeToInsert;
             this.tail = _nodeToInsert;
@@ -111,30 +119,14 @@ public class LinkedList {
     }
 }
 
-class Node1 {
+class Node {
     public int value;
-    public Node1 next;
+    public Node next;
+    public Node prev;
 
-    public Node1(int _value) {
+    public Node(int _value) {
         value = _value;
         next = null;
-    }
-
-    class LinkedListExtra {
-
-        public ArrayList<Integer> listsElSum(LinkedList list1, LinkedList list2) {
-            ArrayList<Integer> result = new ArrayList<>();
-            if (list1.count() == list2.count()) {
-                Node node1 = list1.head;
-                Node node2 = list2.head;
-                while (node1 != null) {
-                    result.add(node1.value + node2.value);
-                    node1 = node1.next;
-                }
-            } else {
-                return null;
-            }
-            return result;
-        }
+        prev = null;
     }
 }

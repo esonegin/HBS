@@ -50,10 +50,8 @@ public class LinkedListTest {
     @Test
     public void removeFinalEl() throws Exception {
         LinkedList list = new LinkedList();
-        Node n1 = new Node(1);
-        Node n2 = new Node(2);
-        list.addInTail(n1);
-        list.addInTail(n2);
+        list.addInTail(new Node(1));
+        list.addInTail(new Node(2));
         list.addInTail(new Node(3));
         list.addInTail(new Node(4));
         Assert.assertNotNull(list.find(4));
@@ -311,6 +309,7 @@ public class LinkedListTest {
     public void insertAfterFinal() throws Exception {
         LinkedList actual = new LinkedList();
         actual.addInTail(new Node(1));
+        actual.addInTail(new Node(2));
         actual.addInTail(new Node(3));
         actual.addInTail(new Node(4));
         actual.addInTail(new Node(5));
@@ -349,7 +348,6 @@ public class LinkedListTest {
         Assert.assertThat(actual.head.next.value == 2, is(true));
         Assert.assertThat(actual.tail.value == 2, is(true));
         Assert.assertThat(actual.tail.next == null, is(true));
-
     }
     @Test
     public void insertMulti() throws Exception {
