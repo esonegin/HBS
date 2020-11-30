@@ -5,7 +5,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-
+//v3
 public class LinkedList2Test {
 
     @BeforeClass
@@ -175,48 +175,7 @@ public class LinkedList2Test {
         Assert.assertThat(list.head == null, is(true));
         Assert.assertThat(list.tail == null, is(true));
     }
-    @Test
-    public void removeTwoFirstEl() throws Exception {
-        LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
 
-        Assert.assertThat(list.head.value == 1, is(true));
-        Assert.assertThat(list.head.prev == null, is(true));
-        Assert.assertThat(list.head.next.value == 2, is(true));
-        Assert.assertThat(list.find(2).value == 2, is(true));
-        Assert.assertThat(list.find(2).prev.value == 1, is(true));
-        Assert.assertThat(list.find(2).next == null, is(true));
-        Assert.assertThat(list.tail.value == 2, is(true));
-        Assert.assertThat(list.tail.next == null, is(true));
-        list.remove(1);
-        Assert.assertNull(list.find(1));
-        Assert.assertThat(list.head.value == 2, is(true));
-        Assert.assertThat(list.tail.value == 2, is(true));
-        Assert.assertThat(list.find(2).prev == null, is(true));
-        Assert.assertThat(list.find(2).next == null, is(true));
-    }
-    @Test
-    public void removeTwoSecondEl() throws Exception {
-        LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
-
-        Assert.assertThat(list.head.value == 1, is(true));
-        Assert.assertThat(list.head.prev == null, is(true));
-        Assert.assertThat(list.head.next.value == 2, is(true));
-        Assert.assertThat(list.find(2).value == 2, is(true));
-        Assert.assertThat(list.find(2).prev.value == 1, is(true));
-        Assert.assertThat(list.find(2).next == null, is(true));
-        Assert.assertThat(list.tail.value == 2, is(true));
-        Assert.assertThat(list.tail.next == null, is(true));
-        list.remove(2);
-        Assert.assertNull(list.find(2));
-        Assert.assertThat(list.head.value == 1, is(true));
-        Assert.assertThat(list.tail.value == 1, is(true));
-        Assert.assertThat(list.find(1).prev == null, is(true));
-        Assert.assertThat(list.find(1).next == null, is(true));
-    }
     @Test
     public void removeThreeEqualsEl() throws Exception {
         LinkedList2 list = new LinkedList2();
@@ -488,10 +447,132 @@ public class LinkedList2Test {
         LinkedList2 list = new LinkedList2();
         list.addInTail(new Node(1));
         Assert.assertNotNull(list.find(1));
-        list.remove(2);
-        Assert.assertThat(list.remove(4), is(false));
+        Assert.assertThat(list.remove(2), is(false));
         Assert.assertThat(list.head.value == 1, is(true));
         Assert.assertThat(list.head.prev == null, is(true));
-        Assert.assertNull(list.find(4));
+        Assert.assertNull(list.find(2));
+    }
+
+    @Test
+    public void removeOneOfTwoFirstEl() throws Exception {
+        LinkedList2 list = new LinkedList2();
+        list.addInTail(new Node(1));
+        list.addInTail(new Node(2));
+
+        Assert.assertThat(list.head.value == 1, is(true));
+        Assert.assertThat(list.head.prev == null, is(true));
+        Assert.assertThat(list.head.next.value == 2, is(true));
+        Assert.assertThat(list.find(2).value == 2, is(true));
+        Assert.assertThat(list.find(2).prev.value == 1, is(true));
+        Assert.assertThat(list.find(2).next == null, is(true));
+        Assert.assertThat(list.tail.value == 2, is(true));
+        Assert.assertThat(list.tail.next == null, is(true));
+        list.remove(1);
+        Assert.assertNull(list.find(1));
+        Assert.assertThat(list.head.value == 2, is(true));
+        Assert.assertThat(list.tail.value == 2, is(true));
+        Assert.assertThat(list.tail.prev == null, is(true));
+        Assert.assertThat(list.find(2).prev == null, is(true));
+        Assert.assertThat(list.find(2).next == null, is(true));
+    }
+    @Test
+    public void removeTwoSecondEl() throws Exception {
+        LinkedList2 list = new LinkedList2();
+        list.addInTail(new Node(1));
+        list.addInTail(new Node(2));
+
+        Assert.assertThat(list.head.value == 1, is(true));
+        Assert.assertThat(list.head.prev == null, is(true));
+        Assert.assertThat(list.head.next.value == 2, is(true));
+        Assert.assertThat(list.find(2).value == 2, is(true));
+        Assert.assertThat(list.find(2).prev.value == 1, is(true));
+        Assert.assertThat(list.find(2).next == null, is(true));
+        Assert.assertThat(list.tail.value == 2, is(true));
+        Assert.assertThat(list.tail.next == null, is(true));
+        list.remove(2);
+        Assert.assertNull(list.find(2));
+        Assert.assertThat(list.head.value == 1, is(true));
+        Assert.assertThat(list.tail.value == 1, is(true));
+        Assert.assertThat(list.tail.prev == null, is(true));
+        Assert.assertThat(list.find(1).prev == null, is(true));
+        Assert.assertThat(list.find(1).next == null, is(true));
+    }
+    @Test
+    public void removeThreeEl() throws Exception {
+        LinkedList2 list = new LinkedList2();
+        list.addInTail(new Node(1));
+        list.addInTail(new Node(2));
+        list.addInTail(new Node(3));
+
+        Assert.assertThat(list.head.value == 1, is(true));
+        Assert.assertThat(list.head.prev == null, is(true));
+        Assert.assertThat(list.head.next.value == 2, is(true));
+        Assert.assertThat(list.find(2).value == 2, is(true));
+        Assert.assertThat(list.find(2).prev.value == 1, is(true));
+        Assert.assertThat(list.find(2).next.value == 3, is(true));
+        Assert.assertThat(list.find(3).value == 3, is(true));
+        Assert.assertThat(list.find(3).prev.value == 2, is(true));
+        Assert.assertThat(list.find(3).next == null, is(true));
+        Assert.assertThat(list.tail.value == 3, is(true));
+        Assert.assertThat(list.tail.next == null, is(true));
+        Assert.assertThat(list.tail.prev.value == 2, is(true));
+        list.remove(2);
+        Assert.assertNull(list.find(2));
+        Assert.assertThat(list.head.prev == null, is(true));
+        Assert.assertThat(list.head.value == 1, is(true));
+        Assert.assertThat(list.head.next.value == 3, is(true));
+        Assert.assertThat(list.tail.prev.value == 1, is(true));
+        Assert.assertThat(list.tail.value == 3, is(true));
+        Assert.assertThat(list.tail.next == null, is(true));
+        Assert.assertThat(list.find(1).prev == null, is(true));
+        Assert.assertThat(list.find(1).value == 1, is(true));
+        Assert.assertThat(list.find(1).next.value == 3, is(true));
+        Assert.assertThat(list.find(3).prev.value == 1, is(true));
+        Assert.assertThat(list.find(3).value == 3, is(true));
+        Assert.assertThat(list.find(3).next == null, is(true));
+        list.remove(1);
+        Assert.assertNull(list.find(1));
+        Assert.assertThat(list.head.prev == null, is(true));
+        Assert.assertThat(list.head.value == 3, is(true));
+        Assert.assertThat(list.head.next == null, is(true));
+        Assert.assertThat(list.tail.prev == null, is(true));
+        Assert.assertThat(list.tail.value == 3, is(true));
+        Assert.assertThat(list.tail.next == null, is(true));
+        Assert.assertThat(list.find(3).prev == null, is(true));
+        Assert.assertThat(list.find(3).value == 3, is(true));
+        Assert.assertThat(list.find(3).next == null, is(true));
+        list.remove(3);
+        Assert.assertNull(list.find(3));
+        Assert.assertThat(list.head == null, is(true));
+        Assert.assertThat(list.tail == null, is(true));
+        list.addInTail(new Node(1));
+        list.addInTail(new Node(3));
+        Assert.assertThat(list.head.prev == null, is(true));
+        Assert.assertThat(list.head.value == 1, is(true));
+        Assert.assertThat(list.head.next.value == 3, is(true));
+        Assert.assertThat(list.tail.prev.value == 1, is(true));
+        Assert.assertThat(list.tail.value == 3, is(true));
+        Assert.assertThat(list.tail.next == null, is(true));
+        Assert.assertThat(list.find(1).prev == null, is(true));
+        Assert.assertThat(list.find(1).value == 1, is(true));
+        Assert.assertThat(list.find(1).next.value == 3, is(true));
+        Assert.assertThat(list.find(3).prev.value == 1, is(true));
+        Assert.assertThat(list.find(3).value == 3, is(true));
+        Assert.assertThat(list.find(3).next == null, is(true));
+        list.remove(3);
+        Assert.assertNull(list.find(3));
+        Assert.assertThat(list.head.prev == null, is(true));
+        Assert.assertThat(list.head.value == 1, is(true));
+        Assert.assertThat(list.head.next == null, is(true));
+        Assert.assertThat(list.tail.prev == null, is(true));
+        Assert.assertThat(list.tail.value == 1, is(true));
+        Assert.assertThat(list.tail.next == null, is(true));
+        Assert.assertThat(list.find(1).prev == null, is(true));
+        Assert.assertThat(list.find(1).value == 1, is(true));
+        Assert.assertThat(list.find(1).next == null, is(true));
+        list.remove(1);
+        Assert.assertThat(list.head == null, is(true));
+        Assert.assertThat(list.tail == null, is(true));
+        Assert.assertThat(list.remove(1), is(false));
     }
 }

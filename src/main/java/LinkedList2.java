@@ -56,8 +56,17 @@ public class LinkedList2 {
         }
         //Если спиcок не пустой
         while (node != null) {
+            if(head.next.next == null && head.value == _value){
+                head.value = node.next.value;
+                node.next.prev = null;
+                node.next = node.next.next;
+                tail.value = head.value;
+                tail.prev = null;
+                break;
+            }
             if (head.value == _value) {
                 head.value = node.next.value;
+                node.next.prev = null;
                 node.next = node.next.next;
                 break;
             } else if (node.next.value == _value && node.next.next != null) {
