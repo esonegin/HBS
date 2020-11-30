@@ -1,28 +1,34 @@
-import java.util.*;
+public class LinkedList2Extra {
+    private NodeExtra head;
+    private NodeExtra tail;
 
-public class LinkedList2 {
-    public Node head;
-    public Node tail;
+    public LinkedList2Extra() {
+        setHead(null);
+        setTail(null);
 
-    public LinkedList2() {
-        head = null;
-        tail = null;
     }
 
-    public void addInTail(Node _item) {
-        if (head == null) {
-            this.head = _item;
-            this.head.next = null;
-            this.head.prev = null;
-        } else {
-            this.tail.next = _item;
-            _item.prev = tail;
+
+    public void addNode(int value) {
+        if (getHead() == null) {
+            setHead(new NodeExtra(value));
+            setTail(new NodeExtra(value));
+            getHead().next = null;
+            getHead().prev = null;
+            getTail().next = null;
+            getTail().prev = null;
         }
-        this.tail = _item;
+        else if(getHead() != null){
+            NodeExtra add = new NodeExtra(value);
+            add.prev = getHead();
+            add.next = null;
+            setTail(add);
+            getHead().next = getTail();
+        }
     }
 
-    public Node find(int _value) {
-        Node node = this.head;
+    public NodeExtra find(int _value) {
+        NodeExtra node = this.head;
         while (node != null) {
             if (node.value == _value)
                 return node;
@@ -31,7 +37,7 @@ public class LinkedList2 {
         return null;
     }
 
-    public ArrayList<Node> findAll(int _value) {
+    /*public ArrayList<Node> findAll(int _value) {
         ArrayList<Node> nodes = new ArrayList<Node>();
         Node node = this.head;
         while (node != null) {
@@ -45,7 +51,7 @@ public class LinkedList2 {
     public boolean remove(int _value) {
         Node node = this.head;
         //Если список пустой
-        if (node == null || find(_value) == null) {
+        if (node == null) {
             return false;
         }
         //Если один элемент
@@ -93,40 +99,33 @@ public class LinkedList2 {
         }
         return count;
     }
+}*/
 
-    public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
-        if (_nodeAfter != null) {
-            _nodeToInsert.next = find(_nodeAfter.value).next;
-            _nodeToInsert.prev = find(_nodeAfter.value);
-            find(_nodeAfter.value).next = _nodeToInsert;
-            if(find(_nodeAfter.value).next.next != null) {
-                find(_nodeAfter.value).next.next.prev = _nodeToInsert;
-            }
-            if (tail.next != null) {
-                tail = tail.next;
-            }
-        }
-        // если _nodeAfter = null ,
-        // добавьте новый элемент первым в списке
-        else if (_nodeAfter == null && head != null) {
-            _nodeToInsert.next = find(head.value);
-            this.head = _nodeToInsert;
-            find(head.next.value).prev = head;
-        } else if (_nodeAfter == null && head == null) {
-            this.head = _nodeToInsert;
-            this.tail = _nodeToInsert;
+    static class NodeExtra {
+        public int value;
+        public NodeExtra next;
+        public NodeExtra prev;
+
+        public NodeExtra(int val) {
+            value = val;
+            next = null;
+            prev = null;
         }
     }
-}
 
-class Node {
-    public int value;
-    public Node next;
-    public Node prev;
+    public NodeExtra getHead() {
+        return head;
+    }
 
-    public Node(int _value) {
-        value = _value;
-        next = null;
-        prev = null;
+    public NodeExtra getTail() {
+        return tail;
+    }
+
+    public void setHead(NodeExtra head) {
+        this.head = head;
+    }
+
+    public void setTail(NodeExtra tail) {
+        this.tail = tail;
     }
 }
