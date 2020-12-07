@@ -83,9 +83,13 @@ public class DynArrayTest {
             dynArray.insert(i, i);
             Assert.assertThat(dynArray.capacity, is(32));
         }
-        for (int i = 32; i < 48; i++) {
+        for (int i = 32; i < 64; i++) {
             dynArray.insert(i, i);
-            Assert.assertThat(dynArray.capacity, is(48));
+            Assert.assertThat(dynArray.capacity, is(64));
+        }
+        for (int i = 64; i < 128; i++) {
+            dynArray.insert(i, i);
+            Assert.assertThat(dynArray.capacity, is(128));
         }
 
     }
@@ -208,7 +212,19 @@ public class DynArrayTest {
         }
         dynArray.append(21);
         Assert.assertThat(dynArray.capacity, is(42));
+    }
 
-
+    @Test
+    public void insertRashir() throws Exception {
+        DynArray<Integer> dynArray = new DynArray<Integer>(Integer.class);
+        for (int i = 0; i < dynArray.capacity; i++) {
+            dynArray.insert(i, i);
+        }
+        for (int i = 0; i < 16; i++) {
+            dynArray.insert(0, i+10);
+            Assert.assertThat(dynArray.capacity, is(32));
+        }
+        dynArray.insert(0, 1);
+        Assert.assertThat(dynArray.capacity, is(64));
     }
 }

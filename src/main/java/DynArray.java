@@ -1,6 +1,6 @@
 import java.lang.reflect.Array;
 
-//v1
+//v2
 public class DynArray<T> {
     public T[] array; //указатель на блок памяти нужной ёмкости
     public int count; //текущее количество элементов в массиве
@@ -85,7 +85,7 @@ public class DynArray<T> {
             }
             array[index] = itm;
         } else {
-            makeArray(capacity + 16);
+            makeArray(capacity * 2);
             for (int i = count; i > index; i--) {
                 array[i] = array[i - 1];
             }
