@@ -127,10 +127,16 @@ public class DynArrayTest {
         Assert.assertThat(dynArray.capacity, is(32));
         dynArray.remove(15);
         Assert.assertThat(dynArray.capacity, is(21));
-        for (int i = 14; i >= 0; i--) {
+        for (int i = 14; i > 9; i--) {
+            dynArray.remove(i);
+            Assert.assertThat(dynArray.capacity, is(21));
+        }
+        for (int i = 9; i > 0; i--) {
             dynArray.remove(i);
             Assert.assertThat(dynArray.capacity, is(16));
         }
+        dynArray.remove(0);
+        Assert.assertThat(dynArray.capacity, is(16));
     }
 
     @Test()
@@ -228,7 +234,7 @@ public class DynArrayTest {
     }
 
     @Test
-    public void removeWithoutSuzh() throws Exception {
+    public void removeWithoutSuzh16_0() throws Exception {
         DynArray<Integer> dynArray = new DynArray<Integer>(Integer.class);
         for (int i = 0; i < 16; i++) {
             dynArray.insert(i, i);
@@ -266,6 +272,46 @@ public class DynArrayTest {
             Assert.assertEquals("По данному индексу нет значения", thrown.getMessage());
         }
     }
+    @Test
+    public void removeWithoutSuzh32_16() throws Exception {
+        DynArray<Integer> dynArray = new DynArray<Integer>(Integer.class);
+        for (int i = 0; i < 16; i++) {
+            dynArray.insert(i, i);
+            Assert.assertThat(dynArray.capacity, is(16));
+        }
+        for (int i = 16; i < 32; i++) {
+            dynArray.insert(i, i);
+            Assert.assertThat(dynArray.capacity, is(32));
+        }
+        dynArray.remove(31);
+        try {
+            dynArray.getItem(31);
+            Assert.fail("Ожидается IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException thrown) {
+            Assert.assertEquals("По данному индексу нет значения", thrown.getMessage());
+        }
+        Assert.assertThat(dynArray.getItem(30), is(30));
+        Assert.assertThat(dynArray.capacity, is(32));
+        Assert.assertThat(dynArray.count, is(31));
+        for(int i = 0; i < dynArray.capacity / 2 - 1; i++) {
+            dynArray.remove(0);
+            Assert.assertThat(dynArray.capacity, is(32));
+        }
+        dynArray.remove(0);
+        Assert.assertThat(dynArray.capacity, is(21));
+
+        dynArray.remove(14);
+        try {
+            dynArray.getItem(14);
+            Assert.fail("Ожидается IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException thrown) {
+            Assert.assertEquals("По данному индексу нет значения", thrown.getMessage());
+        }
+        Assert.assertThat(dynArray.getItem(13), is(29));
+        Assert.assertThat(dynArray.capacity, is(21));
+        Assert.assertThat(dynArray.count, is(14));
+
+    }
 
     @Test
     public void removeSzhatieTestUdalenieSNachala() throws Exception {
@@ -291,8 +337,12 @@ public class DynArrayTest {
         } catch (IndexOutOfBoundsException thrown) {
             Assert.assertEquals("По данному индексу нет значения", thrown.getMessage());
         }
-        for (int i = 14; i >= 0; i--) {
-            dynArray.remove(i);
+        for (int i = 14; i > 9; i--) {
+            dynArray.remove(0);
+            Assert.assertThat(dynArray.capacity, is(21));
+        }
+        for (int i = 9; i > 0; i--) {
+            dynArray.remove(0);
             Assert.assertThat(dynArray.capacity, is(16));
         }
     }
