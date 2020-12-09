@@ -250,7 +250,7 @@ public class DynArrayTest {
         Assert.assertThat(dynArray.getItem(14), is(14));
         Assert.assertThat(dynArray.capacity, is(16));
         Assert.assertThat(dynArray.count, is(15));
-        for(int i = 14; i > 0; i--) {
+        for (int i = 14; i > 0; i--) {
             dynArray.remove(0);
             Assert.assertThat(dynArray.capacity, is(16));
             Assert.assertThat(dynArray.count, is(i));
@@ -272,6 +272,7 @@ public class DynArrayTest {
             Assert.assertEquals("По данному индексу нет значения", thrown.getMessage());
         }
     }
+
     @Test
     public void removeWithoutSuzh32_16() throws Exception {
         DynArray<Integer> dynArray = new DynArray<Integer>(Integer.class);
@@ -293,7 +294,8 @@ public class DynArrayTest {
         Assert.assertThat(dynArray.getItem(30), is(30));
         Assert.assertThat(dynArray.capacity, is(32));
         Assert.assertThat(dynArray.count, is(31));
-        for(int i = 0; i < dynArray.capacity / 2 - 1; i++) {
+
+        for (int i = 0; i < dynArray.capacity / 2 - 1; i++) {
             dynArray.remove(0);
             Assert.assertThat(dynArray.capacity, is(32));
         }
@@ -310,6 +312,14 @@ public class DynArrayTest {
         Assert.assertThat(dynArray.getItem(13), is(29));
         Assert.assertThat(dynArray.capacity, is(21));
         Assert.assertThat(dynArray.count, is(14));
+        for (int i = 14; dynArray.count > 10; i--) {
+            dynArray.remove(0);
+            Assert.assertThat(dynArray.capacity, is(21));
+        }
+        for (int i = 9; dynArray.count > 0; i--) {
+            dynArray.remove(0);
+            Assert.assertThat(dynArray.capacity, is(16));
+        }
 
     }
 
@@ -345,5 +355,47 @@ public class DynArrayTest {
             dynArray.remove(0);
             Assert.assertThat(dynArray.capacity, is(16));
         }
+    }
+
+    @Test
+    public void removeWithoutSuzh2048() throws Exception {
+        DynArray<Integer> dynArray = new DynArray<Integer>(Integer.class);
+        for (int i = 0; i < 2048; i++) {
+            dynArray.insert(i, i);
+        }
+        Assert.assertThat(dynArray.capacity, is(2048));
+        for (int i = 0; i < 1024; i++) {
+            dynArray.remove(0);
+            Assert.assertThat(dynArray.capacity, is(2048));
+        }
+        dynArray.remove(0);
+        Assert.assertThat(dynArray.capacity, is(1365));
+        for (int i = 1022; i >= 682; i--) {
+            dynArray.remove(i);
+            Assert.assertThat(dynArray.capacity, is(1365));
+        }
+        dynArray.remove(681);
+        Assert.assertThat(dynArray.capacity, is(910));
+
+    }
+    @Test
+    public void appendWithoutRashir2048() throws Exception {
+        DynArray<Integer> dynArray = new DynArray<Integer>(Integer.class);
+        for (int i = 0; i < 2048; i++) {
+            dynArray.insert(i, i);
+        }
+        Assert.assertThat(dynArray.capacity, is(2048));
+        Assert.assertThat(dynArray.getItem(2047), is(2047));
+        dynArray.append(2048);
+        Assert.assertThat(dynArray.getItem(2048), is(2048));
+        Assert.assertThat(dynArray.capacity, is(4096));
+        for(int i = 2049; i < 4096; i++){
+            dynArray.append(i);
+            Assert.assertThat(dynArray.capacity, is(4096));
+        }
+        dynArray.append(4096);
+        Assert.assertThat(dynArray.getItem(4096), is(4096));
+        Assert.assertThat(dynArray.capacity, is(8192));
+
     }
 }
