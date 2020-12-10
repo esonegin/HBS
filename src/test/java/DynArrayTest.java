@@ -376,8 +376,8 @@ public class DynArrayTest {
         }
         dynArray.remove(681);
         Assert.assertThat(dynArray.capacity, is(910));
-
     }
+
     @Test
     public void appendWithoutRashir2048() throws Exception {
         DynArray<Integer> dynArray = new DynArray<Integer>(Integer.class);
@@ -389,7 +389,7 @@ public class DynArrayTest {
         dynArray.append(2048);
         Assert.assertThat(dynArray.getItem(2048), is(2048));
         Assert.assertThat(dynArray.capacity, is(4096));
-        for(int i = 2049; i < 4096; i++){
+        for (int i = 2049; i < 4096; i++) {
             dynArray.append(i);
             Assert.assertThat(dynArray.capacity, is(4096));
         }
@@ -397,5 +397,36 @@ public class DynArrayTest {
         Assert.assertThat(dynArray.getItem(4096), is(4096));
         Assert.assertThat(dynArray.capacity, is(8192));
 
+    }
+
+    @Test
+    public void removeInsertDebug() throws Exception {
+        DynArray<Integer> dynArray = new DynArray<Integer>(Integer.class);
+        for (int i = 0; i < 2048; i++) {
+            dynArray.insert(i, i);
+        }
+        for (int i = 0; i < 1000; i++) {
+            dynArray.remove(0);
+        }
+        Assert.assertThat(dynArray.capacity, is(2048));
+        Assert.assertThat(dynArray.count, is(1048));
+
+        try {
+            dynArray.insert(1050, 1050);
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println("Данный индекс вне массива");
+        }
+        dynArray.remove(1047);
+        Assert.assertThat(dynArray.capacity, is(2048));
+        Assert.assertThat(dynArray.count, is(1047));
+        try {
+            dynArray.remove(1047);
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println("Данный индекс вне массива");
+        }
+        Assert.assertThat(dynArray.capacity, is(2048));
+        Assert.assertThat(dynArray.count, is(1047));
     }
 }

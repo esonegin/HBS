@@ -1,6 +1,6 @@
 import java.lang.reflect.Array;
 
-//v5
+//v6
 public class DynArray<T> {
     public T[] array; //указатель на блок памяти нужной ёмкости
     public int count; //текущее количество элементов в массиве
@@ -75,10 +75,12 @@ public class DynArray<T> {
     }
 
     public void insert(T itm, int index) throws IndexOutOfBoundsException {
-        count += 1;
+
         if (index > count || index < 0) {
             throw new IndexOutOfBoundsException("Данный индекс вне массива");
         }
+
+        count += 1;
         if (count - 1 < capacity) {
             for (int i = count - 1; i > index; i--) {
                 array[i] = array[i - 1];
@@ -117,10 +119,11 @@ public class DynArray<T> {
             //
         } else {
             for (int i = index; i < count; i++)
-                if(i + 1 < count) {
+                if (i + 1 < count) {
                     array[i] = array[i + 1];
+                } else {
+                    array[i] = null;
                 }
-            else{array[i] = null;}
         }
         array[count - 1] = null;
         count -= 1;
