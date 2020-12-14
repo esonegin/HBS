@@ -1,14 +1,11 @@
-
 import java.util.*;
 
-//v1
 public class Stack<T> {
-    public ArrayList<T> array;
-    Class clazz;
+
+    ArrayList<T> array;
 
     public Stack(Class clz) {
-        // инициализация внутреннего хранилища стека
-        clazz = clz; // нужен для безопасного приведения типов
+
         array = new ArrayList<>();
     }
 
@@ -24,7 +21,7 @@ public class Stack<T> {
         } else {
             result = null;
         }
-        return result;  // если стек пустой
+        return result;
     }
 
     public void push(Object val) {
@@ -43,12 +40,11 @@ public class Stack<T> {
 
     public T peek() {
         T result;
-        // ваш код
         if (array.size() > 0) {
             result = array.get(0);
         } else {
             result = null;
         }
-        return result; // если стек пустой
+        return result;
     }
 }
