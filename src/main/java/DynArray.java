@@ -75,11 +75,9 @@ public class DynArray<T> {
     }
 
     public void insert(T itm, int index) throws IndexOutOfBoundsException {
-
         if (index > count || index < 0) {
             throw new IndexOutOfBoundsException("Данный индекс вне массива");
         }
-
         count += 1;
         if (count - 1 < capacity) {
             for (int i = count - 1; i > index; i--) {
@@ -106,7 +104,6 @@ public class DynArray<T> {
             makeArray((int) (capacity / 1.5));
             for (int i = index; i < count; i++)
                 array[i] = array[i + 1];
-
             //Если заполняемость буфера меньше 50% и размер буфера после уменьшения меньше 16 - устанавливаем минимум - 16
         } else if (count - 1 < capacity / 2 && capacity / 2 < 16) {
             makeArray(16);

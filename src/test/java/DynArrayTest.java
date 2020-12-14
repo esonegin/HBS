@@ -422,8 +422,9 @@ public class DynArrayTest {
         Assert.assertThat(dynArray.count, is(1047));
         try {
             dynArray.remove(1047);
+            Assert.fail("Ожидается IndexOutOfBoundsException");
         }
-        catch (IndexOutOfBoundsException e){
+        catch (IndexOutOfBoundsException thrown){
             System.out.println("Данный индекс вне массива");
         }
         Assert.assertThat(dynArray.capacity, is(2048));
