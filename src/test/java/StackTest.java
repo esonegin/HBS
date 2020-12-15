@@ -1,3 +1,4 @@
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -21,7 +22,7 @@ public class StackTest {
     @Test
     public <T> void firstvar() throws Exception {
         //1
-        Stack<T> arrayList = new Stack<T>(Integer.class);
+        Stack<T> arrayList = new Stack<T>();
         arrayList.push((T) "1");
         arrayList.push(2);
         arrayList.push(3.14);
@@ -37,7 +38,7 @@ public class StackTest {
     @Test
     public <T> void popPeekTest() throws Exception {
         //1
-        Stack<T> arrayList = new Stack<T>(Integer.class);
+        Stack<T> arrayList = new Stack<T>();
         arrayList.push((T) "1");
         arrayList.push(2);
         arrayList.push(3.14);
@@ -53,13 +54,13 @@ public class StackTest {
     @Test
     public <T> void popPeekEmptyTest() throws Exception {
         //1
-        Stack<T> arrayList = new Stack<T>(Integer.class);
+        Stack<T> arrayList = new Stack<T>();
         Assert.assertThat(arrayList.pop() == null, is(true));
         Assert.assertThat(arrayList.peek() == null, is(true));
     }
     @Test
     public <T> void dvaPop() throws Exception {
-        Stack<T> arrayList = new Stack<T>(Integer.class);
+        Stack<T> arrayList = new Stack<T>();
         arrayList.push((T) "1");
         arrayList.push(2);
         arrayList.push(3.14);
@@ -70,4 +71,14 @@ public class StackTest {
         Assert.assertThat(arrayList.size(), is(0));
 
     }
+    @Test
+    public <T> void defult() throws Exception {
+        Stack<T> arrayList = new Stack<T>();
+
+        arrayList.push(1);
+        arrayList.push((T) "2");
+        System.out.println(arrayList.size());
+        System.out.println(arrayList.size());
+    }
+
 }

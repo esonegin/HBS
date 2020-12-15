@@ -1,11 +1,11 @@
 import java.util.*;
 
+//v3
 public class Stack<T> {
 
     ArrayList<T> array;
 
-    public Stack(Class clz) {
-
+    public Stack() {
         array = new ArrayList<>();
     }
 
