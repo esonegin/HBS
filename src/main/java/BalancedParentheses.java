@@ -7,13 +7,16 @@ public class BalancedParentheses {
     //v8
     public static String BalancedParentheses(int N) {
         String result = "";
+        //Создае список - передаем в метод создания количество открывающих скобок
         ArrayList <String> resultlist = generateParens(N);
+
         for (int i = 0; i < resultlist.size(); i++){
             result = result + resultlist.get(i) + " ";
         }
         return result.trim();
     }
 
+    //Передаем список
     public static void addParen(ArrayList<String> list, int leftRem, int rightRem, char[] str, int count) {
         if (leftRem < 0 || rightRem < leftRem) return;
 
@@ -34,7 +37,9 @@ public class BalancedParentheses {
     }
 
     public static ArrayList<String> generateParens(int count) {
+        //Создаем массив символов длинной = кол-открытых скобок умноженому на 2
         char[] str = new char[count * 2];
+        //Создаем список
         ArrayList<String> list = new ArrayList<String>();
         addParen(list, count, count, str, 0);
         return list;

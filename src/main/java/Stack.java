@@ -47,4 +47,29 @@ public class Stack<T> {
         }
         return result;
     }
+
+    public Boolean brackets(String stroka, Stack<T> arrayList) {
+        Boolean result = true;
+        int count = 0;
+
+        for (int i = 0; i < stroka.length(); i++) {
+            array.add((T) stroka.split("")[i]);
+        }
+
+        while (arrayList.size() > 0) {
+            if (count == -1) {
+                break;
+            } else if (arrayList.peek().equals("(")) {
+                count += 1;
+
+            } else if (arrayList.peek().equals(")")) {
+                count -= 1;
+            }
+            arrayList.pop();
+        }
+        if (count != 0 || count < 0) {
+            result = false;
+        }
+        return result;
+    }
 }
