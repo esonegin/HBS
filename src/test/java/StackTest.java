@@ -87,14 +87,20 @@ public class StackTest {
 
     @Test
     public <T> void brackets() throws Exception {
+
         Stack<T> arrayList = new Stack<T>();
-        Assert.assertThat(arrayList.brackets("((()))", arrayList), is(true));
-        Assert.assertThat(arrayList.brackets("()((())())", arrayList), is(true));
-        Assert.assertThat(arrayList.brackets("(()())()()", arrayList), is(true));
-        Assert.assertThat(arrayList.brackets("((()(())))", arrayList), is(true));
-        Assert.assertThat(arrayList.brackets("())(", arrayList), is(false));
-        Assert.assertThat(arrayList.brackets("))((", arrayList), is(false));
-        Assert.assertThat(arrayList.brackets("((())", arrayList), is(false));
+
+        Assert.assertThat(arrayList.brackets(")"), is(false));
+        Assert.assertThat(arrayList.brackets("("), is(false));
+        Assert.assertThat(arrayList.brackets(")("), is(false));
+        Assert.assertThat(arrayList.brackets("()"), is(true));
+        Assert.assertThat(arrayList.brackets("((()))"), is(true));
+        Assert.assertThat(arrayList.brackets("()((())())"), is(true));
+        Assert.assertThat(arrayList.brackets("(()())()()"), is(true));
+        Assert.assertThat(arrayList.brackets("((()(())))"), is(true));
+        Assert.assertThat(arrayList.brackets("())("), is(false));
+        Assert.assertThat(arrayList.brackets("))(("), is(false));
+        Assert.assertThat(arrayList.brackets("((())"), is(false));
 
     }
 }

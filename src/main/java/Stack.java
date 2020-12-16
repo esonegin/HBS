@@ -48,28 +48,23 @@ public class Stack<T> {
         return result;
     }
 
-    public Boolean brackets(String stroka, Stack<T> arrayList) {
-        Boolean result = true;
-        int count = 0;
-
+    public Boolean brackets(String stroka) {
+        array.clear();
         for (int i = 0; i < stroka.length(); i++) {
-            array.add((T) stroka.split("")[i]);
-        }
-
-        while (arrayList.size() > 0) {
-            if (count == -1) {
-                break;
-            } else if (arrayList.peek().equals("(")) {
-                count += 1;
-
-            } else if (arrayList.peek().equals(")")) {
-                count -= 1;
+            if(stroka.split("")[0].equals(")") && array.size() == 0){
+                return false;
             }
-            arrayList.pop();
+            else if(stroka.split("")[i].equals(")") && array.size() != 0){
+                array.remove(array.size() - 1);
+            }
+            else if(stroka.split("")[i].equals("(")) {
+                array.add((T) stroka.split("")[array.size()]);
+            }
         }
-        if (count != 0 || count < 0) {
-            result = false;
+
+        if (array.size() == 0 && stroka.length() > 1) {
+            return true;
         }
-        return result;
+        else {return  false;}
     }
 }
