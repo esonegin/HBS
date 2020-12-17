@@ -78,18 +78,13 @@ public class StackTest {
     @Test
     public <T> void defult() throws Exception {
         Stack<T> arrayList = new Stack<T>();
-
         arrayList.push(1);
         arrayList.push((T) "2");
-        System.out.println(arrayList.size());
-        System.out.println(arrayList.size());
     }
 
     @Test
     public <T> void brackets() throws Exception {
-
         Stack<T> arrayList = new Stack<T>();
-
         Assert.assertThat(arrayList.brackets(")"), is(false));
         Assert.assertThat(arrayList.brackets("("), is(false));
         Assert.assertThat(arrayList.brackets(")("), is(false));
@@ -101,6 +96,30 @@ public class StackTest {
         Assert.assertThat(arrayList.brackets("())("), is(false));
         Assert.assertThat(arrayList.brackets("))(("), is(false));
         Assert.assertThat(arrayList.brackets("((())"), is(false));
+    }
 
+    @Test
+    public <T> void postfix3() throws Exception {
+        Stack<T> arrayList1 = new Stack<T>();
+        arrayList1.push("=");
+        arrayList1.push("*");
+        arrayList1.push(3);
+        arrayList1.push("+");
+        arrayList1.push(2);
+        arrayList1.push(1);
+        Assert.assertThat(arrayList1.postfix(arrayList1), is(9));
+    }
+    @Test
+    public <T> void postfix2() throws Exception {
+        Stack<T> arrayList1 = new Stack<T>();
+        arrayList1.push("=");
+        arrayList1.push("+");
+        arrayList1.push(9);
+        arrayList1.push("*");
+        arrayList1.push(5);
+        arrayList1.push("+");
+        arrayList1.push(2);
+        arrayList1.push(8);
+        Assert.assertThat(arrayList1.postfix(arrayList1), is(59));
     }
 }
