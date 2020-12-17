@@ -51,36 +51,40 @@ public class Stack<T> {
     public Boolean brackets(String stroka) {
         array.clear();
         for (int i = 0; i < stroka.length(); i++) {
-            if(stroka.charAt(i) == '(') {
+            if (stroka.charAt(i) == '(') {
                 array.add((T) "(");
                 continue;
-            }
-            else if(array.size() == 0){
+            } else if (array.size() == 0) {
                 return false;
-            }
-            else {
+            } else {
                 array.remove(array.size() - 1);
             }
         }
         if (array.size() == 0) {
             return true;
+        } else {
+            return false;
         }
-        else {return  false;}
     }
 
-    public Integer postfix (Stack<T> arrayList1){
+    public Integer postfix(Stack<T> arrayList1) {
         Stack<T> arrayList2 = new Stack<T>();
-        for(int i = 0; arrayList1.size() > 0; i++) {
+        for (int i = 0; arrayList1.size() > 0; i++) {
             if (arrayList1.peek() instanceof Integer) {
                 arrayList2.push(arrayList1.pop());
             } else if (arrayList1.peek() == "+") {
                 arrayList2.push((Integer) arrayList2.pop() + (Integer) arrayList2.pop());
                 arrayList1.pop();
+            } else if (arrayList1.peek() == "-") {
+                arrayList2.push((Integer) arrayList2.pop() - (Integer) arrayList2.pop());
+                arrayList1.pop();
             } else if (arrayList1.peek() == "*") {
                 arrayList2.push((Integer) arrayList2.pop() * (Integer) arrayList2.pop());
                 arrayList1.pop();
-            }
-            else if (arrayList1.peek() == "=") {
+            } else if (arrayList1.peek() == "/") {
+                arrayList2.push((Integer) arrayList2.pop() / (Integer) arrayList2.pop());
+                arrayList1.pop();
+            } else if (arrayList1.peek() == "=") {
                 break;
             }
         }

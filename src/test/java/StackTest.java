@@ -122,4 +122,17 @@ public class StackTest {
         arrayList1.push(8);
         Assert.assertThat(arrayList1.postfix(arrayList1), is(59));
     }
+    @Test
+    public <T> void postfixUmn() throws Exception {
+        Stack<T> arrayList1 = new Stack<T>();
+        arrayList1.push("=");
+        arrayList1.push("+");
+        arrayList1.push(3);
+        arrayList1.push("*");
+        arrayList1.push(2);
+        arrayList1.push("/");
+        arrayList1.push(8);
+        arrayList1.push(2);
+        Assert.assertThat(arrayList1.postfix(arrayList1), is(11));
+    }
 }
