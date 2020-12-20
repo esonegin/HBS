@@ -22,7 +22,103 @@ public class QueueTest {
     @Test
     public <T> void firstvar() throws Exception {
         //1
-        Stack<T> arrayList = new Stack<T>();
+        Queue<T> queue = new Queue<T>();
+        queue.enqueue(1);
+        Assert.assertThat(queue.size(), is(1));
+        Assert.assertThat(queue.array.get(0), is(1));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.enqueue(2);
+        Assert.assertThat(queue.size(), is(2));
+        Assert.assertThat(queue.array.get(0), is(2));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.enqueue(3);
+        Assert.assertThat(queue.size(), is(3));
+        Assert.assertThat(queue.array.get(0), is(3));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(2));
+        Assert.assertThat(queue.array.get(0), is(3));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(2));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(1));
+        Assert.assertThat(queue.array.get(0), is(3));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(3));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(0));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(0));
+        queue.enqueue(1);
+        Assert.assertThat(queue.size(), is(1));
+        Assert.assertThat(queue.array.get(0), is(1));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.enqueue(2);
+        Assert.assertThat(queue.size(), is(2));
+        Assert.assertThat(queue.array.get(0), is(2));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.enqueue(3);
+        Assert.assertThat(queue.size(), is(3));
+        Assert.assertThat(queue.array.get(0), is(3));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(2));
+        Assert.assertThat(queue.array.get(0), is(3));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(2));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(1));
+        Assert.assertThat(queue.array.get(0), is(3));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(3));
+    }
+
+    @Test
+    public <T> void secondvar() throws Exception {
+        //1
+        Queue<T> queue = new Queue<T>();
+        queue.enqueue(1);
+        Assert.assertThat(queue.size(), is(1));
+        Assert.assertThat(queue.array.get(0), is(1));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.enqueue("2");
+        Assert.assertThat(queue.size(), is(2));
+        Assert.assertThat(queue.array.get(0), is("2"));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.enqueue(3.14);
+        Assert.assertThat(queue.size(), is(3));
+        Assert.assertThat(queue.array.get(0), is(3.14));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(2));
+        Assert.assertThat(queue.array.get(0), is(3.14));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is("2"));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(1));
+        Assert.assertThat(queue.array.get(0), is(3.14));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(3.14));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(0));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(0));
+        queue.enqueue(1);
+        Assert.assertThat(queue.size(), is(1));
+        Assert.assertThat(queue.array.get(0), is(1));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.enqueue("2");
+        Assert.assertThat(queue.size(), is(2));
+        Assert.assertThat(queue.array.get(0), is("2"));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.enqueue(3.14);
+        Assert.assertThat(queue.size(), is(3));
+        Assert.assertThat(queue.array.get(0), is(3.14));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(1));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(2));
+        Assert.assertThat(queue.array.get(0), is(3.14));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is("2"));
+        queue.dequeue();
+        Assert.assertThat(queue.size(), is(1));
+        Assert.assertThat(queue.array.get(0), is(3.14));
+        Assert.assertThat(queue.array.get(queue.array.size() - 1), is(3.14));
+
 
     }
 }

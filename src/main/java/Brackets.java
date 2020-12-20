@@ -12,10 +12,6 @@ public class Brackets {
                 stack.pop();
             }
         }
-        if (stack.size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (stack.size() == 0);
     }
 }
