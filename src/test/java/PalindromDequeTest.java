@@ -36,5 +36,6 @@ public class PalindromDequeTest {
         Assert.assertThat(stroka.PalindromDeque("312"), is(false));
         Assert.assertThat(stroka.PalindromDeque("213"), is(false));
         Assert.assertThat(stroka.PalindromDeque("A"), is(true));
+        Assert.assertThat(stroka.PalindromDeque(""), is(true));
     }
 }
