@@ -10,6 +10,7 @@ public class Queue<T> {
         array = new ArrayList<>();
     }
 
+
     public void enqueue(Object item)
     {
         // вставка в хвост

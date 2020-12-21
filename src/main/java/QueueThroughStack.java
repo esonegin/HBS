@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class QueueThroughStack<T> {
 
@@ -11,10 +10,12 @@ public class QueueThroughStack<T> {
 
     }
 
+    //Добавление элемента в очередь
     public void enqueue(Object item) {
         stack1.push((T) item);
     }
 
+    //Удаление элемента из очереди
     public T dequeue() {
         stack2 = new Stack<T>();
         while (stack1.size() > 1) {
