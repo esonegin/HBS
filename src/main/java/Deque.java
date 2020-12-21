@@ -3,7 +3,6 @@ import java.util.*;
 public class Deque<T> {
     QueueThroughStack<T> deque;
 
-
     public Deque() {
         // инициализация внутреннего хранилища
         deque = new QueueThroughStack<>();
