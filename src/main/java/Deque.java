@@ -1,14 +1,14 @@
 import java.util.*;
 
 public class Deque<T> {
+
     QueueThroughStack<T> deque;
 
     public Deque() {
-        // инициализация внутреннего хранилища
         deque = new QueueThroughStack<>();
     }
 
-    public void addFront(Object item) {
+    public void addFront(T item) {
         QueueThroughStack<T> deque2 = new QueueThroughStack<T>();
         deque2.enqueue(item);
         while (deque.stack1.size() > 0) {
@@ -18,8 +18,7 @@ public class Deque<T> {
 
     }
 
-    public void addTail(Object item) {
-        // добавление в хвост
+    public void addTail(T item) {
         deque.enqueue(item);
     }
 
@@ -32,6 +31,6 @@ public class Deque<T> {
     }
 
     public int size() {
-        return deque.size(); // размер очереди
+        return deque.size();
     }
 }

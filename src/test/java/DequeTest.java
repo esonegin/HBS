@@ -21,7 +21,7 @@ public class DequeTest {
 
     @Test
     public <T> void firstAddTail() throws Exception {
-        Deque<T> deque = new Deque<T>();
+        Deque<Integer> deque = new Deque<>();
         //Добавление в хвост первое
         deque.addTail(1);
         Assert.assertThat(deque.size(), is(1));
@@ -79,7 +79,7 @@ public class DequeTest {
     public <T> void firstAddFront() throws Exception {
 
         //1
-        Deque<T> deque = new Deque<T>();
+        Deque<Integer> deque = new Deque<>();
 
         //Добавление в хвост первое
         deque.addTail(1);
@@ -103,7 +103,7 @@ public class DequeTest {
     @Test
     public <T> void manyValue() throws Exception {
 
-        Deque<T> deque = new Deque<T>();
+        Deque<Integer> deque = new Deque<>();
 
         for(int i = 0; i < 100; i++){
             deque.addFront(i);
