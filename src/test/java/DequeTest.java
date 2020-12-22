@@ -123,4 +123,27 @@ public class DequeTest {
         Assert.assertThat(deque.size(), is(0));
 
     }
+
+    @Test
+    public <T> void removeEmtyDeque() throws Exception {
+        Deque<Integer> deque = new Deque<>();
+
+        //Удаление с хвоста первое
+        for(int i = 0; i < 100; i++) {
+            //Удаление с хвоста пустой очереди
+            Assert.assertThat(deque.removeTail() == null, is(true));
+            Assert.assertThat(deque.removeTail() == null, is(true));
+            Assert.assertThat(deque.size(), is(0));
+        }
+
+        for(int i = 0; i < 100; i++) {
+            //Удаление с головы пустой очереди
+            Assert.assertThat(deque.removeFront() == null, is(true));
+            Assert.assertThat(deque.removeFront() == null, is(true));
+            Assert.assertThat(deque.size(), is(0));
+        }
+
+    }
 }
+
+
