@@ -37,12 +37,12 @@ public class Deque<T> {
 
 class QueueThroughStack1<T> {
 
-    Stack<T> stack1;
-    Stack<T> stack2;
+    Stack1<T> stack1;
+    Stack1<T> stack2;
 
     public QueueThroughStack1() {
         // инициализация внутреннего хранилища очереди
-        stack1 = new Stack<T>();
+        stack1 = new Stack1<T>();
 
     }
 
@@ -53,7 +53,7 @@ class QueueThroughStack1<T> {
 
     //Удаление элемента из очереди
     public T dequeue() {
-        stack2 = new Stack<T>();
+        stack2 = new Stack1<T>();
         while (stack1.size() > 1) {
             if (stack2.size() == 0) {
                 stack2.push(stack1.pop());
@@ -71,5 +71,53 @@ class QueueThroughStack1<T> {
     public int size() {
         // размер очереди
         return stack1.size();
+    }
+}
+
+class Stack1<T> {
+
+    ArrayList<T> array;
+
+    public Stack1() {
+        array = new ArrayList<>();
+    }
+
+    public int size() {
+        return array.size();
+    }
+
+    public T pop() {
+        T result;
+        if (array.size() > 0) {
+            result = array.get(0);
+            array.remove(result);
+        } else {
+            result = null;
+        }
+        return result;
+    }
+
+    public void push(Object val) {
+        //
+        if (array.size() == 0) {
+            array.add((T) val);
+        } else {
+            array.add((T) val);
+            int j = array.size();
+            for (int i = 1; i < j; i++) {
+                array.set(array.size() - i, array.get(array.size() - i - 1));
+            }
+            array.set(0, (T) val);
+        }
+    }
+
+    public T peek() {
+        T result;
+        if (array.size() > 0) {
+            result = array.get(0);
+        } else {
+            result = null;
+        }
+        return result;
     }
 }

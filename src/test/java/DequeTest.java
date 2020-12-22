@@ -75,6 +75,7 @@ public class DequeTest {
         Assert.assertThat(deque.size(), is(0));
 
     }
+
     @Test
     public <T> void firstAddFront() throws Exception {
 
@@ -105,19 +106,23 @@ public class DequeTest {
 
         Deque<Integer> deque = new Deque<>();
 
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             deque.addFront(i);
         }
         Assert.assertThat(deque.size(), is(100));
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             deque.addTail(i);
         }
         Assert.assertThat(deque.size(), is(200));
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             deque.removeTail();
         }
         Assert.assertThat(deque.size(), is(100));
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 99; i++) {
+            deque.removeFront();
+        }
+        Assert.assertThat(deque.size(), is(1));
+        for (int i = 0; i < 99; i++) {
             deque.removeFront();
         }
         Assert.assertThat(deque.size(), is(0));
@@ -129,20 +134,31 @@ public class DequeTest {
         Deque<Integer> deque = new Deque<>();
 
         //Удаление с хвоста первое
-        for(int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             //Удаление с хвоста пустой очереди
             Assert.assertThat(deque.removeTail() == null, is(true));
             Assert.assertThat(deque.removeTail() == null, is(true));
             Assert.assertThat(deque.size(), is(0));
         }
 
-        for(int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             //Удаление с головы пустой очереди
             Assert.assertThat(deque.removeFront() == null, is(true));
             Assert.assertThat(deque.removeFront() == null, is(true));
             Assert.assertThat(deque.size(), is(0));
         }
 
+    }
+
+    @Test
+    public void easyRemoveFront() {
+        Deque<Integer> qu = new Deque<Integer>();
+        qu.removeFront();
+    }
+    @Test
+    public void easyRemoveTail() {
+        Deque<Integer> qu = new Deque<Integer>();
+        qu.removeTail();
     }
 }
 
