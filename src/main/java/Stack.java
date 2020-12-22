@@ -24,17 +24,16 @@ public class Stack<T> {
         return result;
     }
 
-    public void push(Object val) {
-        //
+    public void push(T val) {
         if (array.size() == 0) {
-            array.add((T) val);
+            array.add(val);
         } else {
-            array.add((T) val);
+            array.add(val);
             int j = array.size();
             for (int i = 1; i < j; i++) {
                 array.set(array.size() - i, array.get(array.size() - i - 1));
             }
-            array.set(0, (T) val);
+            array.set(0, val);
         }
     }
 
@@ -47,4 +46,5 @@ public class Stack<T> {
         }
         return result;
     }
+
 }

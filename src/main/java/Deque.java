@@ -9,13 +9,12 @@ public class Deque<T> {
     }
 
     public void addFront(T item) {
-        QueueThroughStack1<T> deque2 = new QueueThroughStack1<T>();
+        QueueThroughStack1<T> deque2 = new QueueThroughStack1<>();
         deque2.enqueue(item);
         while (deque.stack1.size() > 0) {
             deque2.stack1.push(deque.dequeue());
         }
         deque = deque2;
-
     }
 
     public void addTail(T item) {
@@ -42,18 +41,18 @@ class QueueThroughStack1<T> {
 
     public QueueThroughStack1() {
         // инициализация внутреннего хранилища очереди
-        stack1 = new Stack1<T>();
+        stack1 = new Stack1<>();
 
     }
 
     //Добавление элемента в очередь
-    public void enqueue(Object item) {
-        stack1.push((T) item);
+    public void enqueue(T item) {
+        stack1.push(item);
     }
 
     //Удаление элемента из очереди
     public T dequeue() {
-        stack2 = new Stack1<T>();
+        stack2 = new Stack1<>();
         while (stack1.size() > 1) {
             if (stack2.size() == 0) {
                 stack2.push(stack1.pop());
@@ -97,27 +96,17 @@ class Stack1<T> {
         return result;
     }
 
-    public void push(Object val) {
+    public void push(T val) {
         //
         if (array.size() == 0) {
-            array.add((T) val);
+            array.add(val);
         } else {
-            array.add((T) val);
+            array.add(val);
             int j = array.size();
             for (int i = 1; i < j; i++) {
                 array.set(array.size() - i, array.get(array.size() - i - 1));
             }
-            array.set(0, (T) val);
+            array.set(0, val);
         }
-    }
-
-    public T peek() {
-        T result;
-        if (array.size() > 0) {
-            result = array.get(0);
-        } else {
-            result = null;
-        }
-        return result;
     }
 }

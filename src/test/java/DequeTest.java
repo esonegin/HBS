@@ -20,7 +20,7 @@ public class DequeTest {
     }
 
     @Test
-    public <T> void firstAddTail() throws Exception {
+    public void firstAddTail() {
         Deque<Integer> deque = new Deque<>();
         //Добавление в хвост первое
         deque.addTail(1);
@@ -77,7 +77,7 @@ public class DequeTest {
     }
 
     @Test
-    public <T> void firstAddFront() throws Exception {
+    public void firstAddFront() {
 
         //1
         Deque<Integer> deque = new Deque<>();
@@ -102,35 +102,20 @@ public class DequeTest {
     }
 
     @Test
-    public <T> void manyValue() throws Exception {
+    public void manyValue() {
 
         Deque<Integer> deque = new Deque<>();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 500; i++) {
             deque.addFront(i);
         }
-        Assert.assertThat(deque.size(), is(100));
-        for (int i = 0; i < 100; i++) {
-            deque.addTail(i);
-        }
-        Assert.assertThat(deque.size(), is(200));
-        for (int i = 0; i < 100; i++) {
-            deque.removeTail();
-        }
-        Assert.assertThat(deque.size(), is(100));
-        for (int i = 0; i < 99; i++) {
-            deque.removeFront();
-        }
-        Assert.assertThat(deque.size(), is(1));
-        for (int i = 0; i < 99; i++) {
-            deque.removeFront();
-        }
-        Assert.assertThat(deque.size(), is(0));
+        Assert.assertThat(deque.size(), is(500));
+
 
     }
 
     @Test
-    public <T> void removeEmtyDeque() throws Exception {
+    public void removeEmptyDeque() {
         Deque<Integer> deque = new Deque<>();
 
         //Удаление с хвоста первое
@@ -152,12 +137,12 @@ public class DequeTest {
 
     @Test
     public void easyRemoveFront() {
-        Deque<Integer> qu = new Deque<Integer>();
+        Deque<Integer> qu = new Deque<>();
         qu.removeFront();
     }
     @Test
     public void easyRemoveTail() {
-        Deque<Integer> qu = new Deque<Integer>();
+        Deque<Integer> qu = new Deque<>();
         qu.removeTail();
     }
 }
