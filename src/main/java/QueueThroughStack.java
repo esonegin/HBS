@@ -11,8 +11,8 @@ public class QueueThroughStack<T> {
     }
 
     //Добавление элемента в очередь
-    public void enqueue(Object item) {
-        stack1.push((T) item);
+    public void enqueue(T item) {
+        stack1.push(item);
     }
 
     //Удаление элемента из очереди

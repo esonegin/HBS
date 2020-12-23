@@ -21,7 +21,7 @@ public class QueueThroughStackTest {
     @Test
     public <T> void firstvar() throws Exception {
         //1
-        QueueThroughStack<T> queue = new QueueThroughStack<T>();
+        QueueThroughStack<Integer> queue = new QueueThroughStack<>();
         queue.enqueue(1);
         Assert.assertThat(queue.size(), is(1));
         Assert.assertThat(queue.stack1.array.get(0), is(1));
@@ -59,7 +59,7 @@ public class QueueThroughStackTest {
 
     @Test
     public <T> void threeValue() throws Exception {
-        QueueThroughStack<T> queue = new QueueThroughStack<T>();
+        QueueThroughStack<Integer> queue = new QueueThroughStack<>();
         queue.enqueue(1);
         Assert.assertThat(queue.size(), is(1));
         Assert.assertThat(queue.stack1.array.get(0), is(1));
