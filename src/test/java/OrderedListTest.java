@@ -742,4 +742,100 @@ public class OrderedListTest {
         list.add(1);
         System.out.println(list.getAll());
     }
+
+    @Test
+    public void addAfter() {
+        OrderedList listfalse = new OrderedList(false);
+        OrderedList listtrue = new OrderedList(true);
+        listfalse.add(1);
+        listfalse.add(0);
+        listfalse.add(2);
+        listfalse.add(0);
+        listfalse.add(2);
+        listfalse.add(1);
+        Assert.assertThat(listfalse.tail.value, is(0));
+        Assert.assertThat(listfalse.tail.next.value, is(0));
+        Assert.assertThat(listfalse.tail.next.next.value, is(1));
+        Assert.assertThat(listfalse.tail.next.next.next.value, is(1));
+        Assert.assertThat(listfalse.tail.next.next.next.next.value, is(2));
+        Assert.assertThat(listfalse.tail.next.next.next.next.next.value, is(2));
+        Assert.assertThat(listfalse.head.value, is(2));
+        Assert.assertThat(listfalse.head.prev.value, is(2));
+        Assert.assertThat(listfalse.head.prev.prev.value, is(1));
+        Assert.assertThat(listfalse.head.prev.prev.prev.value, is(1));
+        Assert.assertThat(listfalse.head.prev.prev.prev.prev.value, is(0));
+        Assert.assertThat(listfalse.head.prev.prev.prev.prev.prev.value, is(0));
+
+        listtrue.add(1);
+        listtrue.add(0);
+        listtrue.add(2);
+        listtrue.add(0);
+        listtrue.add(2);
+        listtrue.add(1);
+        Assert.assertThat(listtrue.tail.value, is(2));
+        Assert.assertThat(listtrue.tail.next.value, is(2));
+        Assert.assertThat(listtrue.tail.next.next.value, is(1));
+        Assert.assertThat(listtrue.tail.next.next.next.value, is(1));
+        Assert.assertThat(listtrue.tail.next.next.next.next.value, is(0));
+        Assert.assertThat(listtrue.tail.next.next.next.next.next.value, is(0));
+        Assert.assertThat(listtrue.head.value, is(0));
+        Assert.assertThat(listtrue.head.prev.value, is(0));
+        Assert.assertThat(listtrue.head.prev.prev.value, is(1));
+        Assert.assertThat(listtrue.head.prev.prev.prev.value, is(1));
+        Assert.assertThat(listtrue.head.prev.prev.prev.prev.value, is(2));
+        Assert.assertThat(listtrue.head.prev.prev.prev.prev.prev.value, is(2));
+    }
+    @Test
+    public void addAfter2() {
+        OrderedList listfalse = new OrderedList(false);
+        OrderedList listtrue = new OrderedList(true);
+        listfalse.add(0);
+        listfalse.add(2);
+        listfalse.add(1);
+        listfalse.add(1);
+        listfalse.add(2);
+        listfalse.add(1);
+        listfalse.add(0);
+
+        Assert.assertThat(listfalse.count(), is(7));
+        Assert.assertThat(listfalse.tail.value, is(0));
+        Assert.assertThat(listfalse.tail.next.value, is(0));
+        Assert.assertThat(listfalse.tail.next.next.value, is(1));
+        Assert.assertThat(listfalse.tail.next.next.next.value, is(1));
+        Assert.assertThat(listfalse.tail.next.next.next.next.value, is(1));
+        Assert.assertThat(listfalse.tail.next.next.next.next.next.value, is(2));
+        Assert.assertThat(listfalse.tail.next.next.next.next.next.next.value, is(2));
+        Assert.assertThat(listfalse.head.value, is(2));
+        Assert.assertThat(listfalse.head.prev.value, is(2));
+        Assert.assertThat(listfalse.head.prev.prev.value, is(1));
+        Assert.assertThat(listfalse.head.prev.prev.prev.value, is(1));
+        Assert.assertThat(listfalse.head.prev.prev.prev.prev.value, is(1));
+        Assert.assertThat(listfalse.head.prev.prev.prev.prev.prev.value, is(0));
+        Assert.assertThat(listfalse.head.prev.prev.prev.prev.prev.prev.value, is(0));
+
+        listtrue.add(0);
+        listtrue.add(2);
+        listtrue.add(1);
+        listtrue.add(1);
+        listtrue.add(2);
+        listtrue.add(1);
+        listtrue.add(0);
+
+        Assert.assertThat(listtrue.count(), is(7));
+        Assert.assertThat(listtrue.tail.value, is(2));
+        Assert.assertThat(listtrue.tail.next.value, is(2));
+        Assert.assertThat(listtrue.tail.next.next.value, is(1));
+        Assert.assertThat(listtrue.tail.next.next.next.value, is(1));
+        Assert.assertThat(listtrue.tail.next.next.next.next.value, is(1));
+        Assert.assertThat(listtrue.tail.next.next.next.next.next.value, is(0));
+        Assert.assertThat(listtrue.tail.next.next.next.next.next.next.value, is(0));
+        Assert.assertThat(listtrue.head.value, is(0));
+        Assert.assertThat(listtrue.head.prev.value, is(0));
+        Assert.assertThat(listtrue.head.prev.prev.value, is(1));
+        Assert.assertThat(listtrue.head.prev.prev.prev.value, is(1));
+        Assert.assertThat(listtrue.head.prev.prev.prev.prev.value, is(1));
+        Assert.assertThat(listtrue.head.prev.prev.prev.prev.prev.value, is(2));
+        Assert.assertThat(listtrue.head.prev.prev.prev.prev.prev.prev.value, is(2));
+
+    }
 }
