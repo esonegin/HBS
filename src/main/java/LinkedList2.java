@@ -1,15 +1,15 @@
 import java.util.*;
 
 public class LinkedList2 {
-    public Node head;
-    public Node tail;
+    public Node0 head;
+    public Node0 tail;
 
     public LinkedList2() {
         head = null;
         tail = null;
     }
 
-    public void addInTail(Node _item) {
+    public void addInTail(Node0 _item) {
         if (head == null) {
             this.head = _item;
             this.head.next = null;
@@ -21,63 +21,63 @@ public class LinkedList2 {
         this.tail = _item;
     }
 
-    public Node find(int _value) {
-        Node node = this.head;
-        while (node != null) {
-            if (node.value == _value)
-                return node;
-            node = node.next;
+    public Node0 find(int _value) {
+        Node0 Node0 = this.head;
+        while (Node0 != null) {
+            if (Node0.value == _value)
+                return Node0;
+            Node0 = Node0.next;
         }
         return null;
     }
 
-    public ArrayList<Node> findAll(int _value) {
-        ArrayList<Node> nodes = new ArrayList<Node>();
-        Node node = this.head;
-        while (node != null) {
-            if (node.value == _value)
-                nodes.add(node);
-            node = node.next;
+    public ArrayList<Node0> findAll(int _value) {
+        ArrayList<Node0> Node0s = new ArrayList<Node0>();
+        Node0 Node0 = this.head;
+        while (Node0 != null) {
+            if (Node0.value == _value)
+                Node0s.add(Node0);
+            Node0 = Node0.next;
         }
-        return nodes;
+        return Node0s;
     }
 
     public boolean remove(int _value) {
-        Node node = this.head;
+        Node0 Node0 = this.head;
         //Если список пустой
-        if (node == null || find(_value) == null) {
+        if (Node0 == null || find(_value) == null) {
             return false;
         }
         //Если один элемент
-        if (node.value == _value && node.next == null) {
-            node = null;
+        if (Node0.value == _value && Node0.next == null) {
+            Node0 = null;
             this.head = null;
             this.tail = null;
         }
         //Если спиcок не пустой
-        while (node != null) {
+        while (Node0 != null) {
             if(head.next.next == null && head.value == _value){
-                head.value = node.next.value;
-                node.next.prev = null;
-                node.next = node.next.next;
+                head.value = Node0.next.value;
+                Node0.next.prev = null;
+                Node0.next = Node0.next.next;
                 tail.value = head.value;
                 tail.prev = null;
                 break;
             }
             if (head.value == _value) {
-                head.value = node.next.value;
-                node.next.prev = null;
-                node.next = node.next.next;
+                head.value = Node0.next.value;
+                Node0.next.prev = null;
+                Node0.next = Node0.next.next;
                 break;
-            } else if (node.next.value == _value && node.next.next != null) {
-                node.next.value = node.next.next.value;
-                node.next.next.value = _value;
-            } else if (node.next.value == _value && node.next.next == null) {
-                this.tail.value = node.value;
-                this.tail.prev = node.prev;
-                node.next = null;
+            } else if (Node0.next.value == _value && Node0.next.next != null) {
+                Node0.next.value = Node0.next.next.value;
+                Node0.next.next.value = _value;
+            } else if (Node0.next.value == _value && Node0.next.next == null) {
+                this.tail.value = Node0.value;
+                this.tail.prev = Node0.prev;
+                Node0.next = null;
             }
-            node = node.next;
+            Node0 = Node0.next;
         }
         return true;
     }
@@ -95,45 +95,45 @@ public class LinkedList2 {
 
     public int count() {
         int count = 0;
-        Node node = this.head;
-        while (node != null) {
+        Node0 Node0 = this.head;
+        while (Node0 != null) {
             count++;
-            node = node.next;
+            Node0 = Node0.next;
         }
         return count;
     }
 
-    public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
-        if (_nodeAfter != null) {
-            _nodeToInsert.next = find(_nodeAfter.value).next;
-            _nodeToInsert.prev = find(_nodeAfter.value);
-            find(_nodeAfter.value).next = _nodeToInsert;
-            if(find(_nodeAfter.value).next.next != null) {
-                find(_nodeAfter.value).next.next.prev = _nodeToInsert;
+    public void insertAfter(Node0 _Node0After, Node0 _Node0ToInsert) {
+        if (_Node0After != null) {
+            _Node0ToInsert.next = find(_Node0After.value).next;
+            _Node0ToInsert.prev = find(_Node0After.value);
+            find(_Node0After.value).next = _Node0ToInsert;
+            if(find(_Node0After.value).next.next != null) {
+                find(_Node0After.value).next.next.prev = _Node0ToInsert;
             }
             if (tail.next != null) {
                 tail = tail.next;
             }
         }
-        // если _nodeAfter = null ,
+        // если _Node0After = null ,
         // добавьте новый элемент первым в списке
-        else if (_nodeAfter == null && head != null) {
-            _nodeToInsert.next = find(head.value);
-            this.head = _nodeToInsert;
+        else if (_Node0After == null && head != null) {
+            _Node0ToInsert.next = find(head.value);
+            this.head = _Node0ToInsert;
             find(head.next.value).prev = head;
-        } else if (_nodeAfter == null && head == null) {
-            this.head = _nodeToInsert;
-            this.tail = _nodeToInsert;
+        } else if (_Node0After == null && head == null) {
+            this.head = _Node0ToInsert;
+            this.tail = _Node0ToInsert;
         }
     }
 }
 
-class Node {
+class Node0 {
     public int value;
-    public Node next;
-    public Node prev;
+    public Node0 next;
+    public Node0 prev;
 
-    public Node(int _value) {
+    public Node0(int _value) {
         value = _value;
         next = null;
         prev = null;

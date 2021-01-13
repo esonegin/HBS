@@ -19,9 +19,9 @@ public class LinkedList2Test {
     @Test
     public void searchEl() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(3));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(3));
         Assert.assertThat(list.find(1).value == 1, is(true));
         Assert.assertThat(list.find(1).next.value == 2, is(true));
         Assert.assertThat(list.find(1).prev == null, is(true));
@@ -44,11 +44,11 @@ public class LinkedList2Test {
     @Test
     public void findAllBetwen() throws Exception {
         LinkedList2 act = new LinkedList2();
-        act.addInTail(new Node(1));
-        act.addInTail(new Node(2));
-        act.addInTail(new Node(2));
-        act.addInTail(new Node(2));
-        act.addInTail(new Node(3));
+        act.addInTail(new Node0(1));
+        act.addInTail(new Node0(2));
+        act.addInTail(new Node0(2));
+        act.addInTail(new Node0(2));
+        act.addInTail(new Node0(3));
         Assert.assertThat(act.findAll(2).size() == 3, is(true));
         for (int i = 0; i < 3; i++) {
             Assert.assertThat(act.findAll(2).get(i).value == 2, is(true));
@@ -67,11 +67,11 @@ public class LinkedList2Test {
     @Test
     public void findAllStart() throws Exception {
         LinkedList2 act = new LinkedList2();
-        act.addInTail(new Node(1));
-        act.addInTail(new Node(1));
-        act.addInTail(new Node(2));
-        act.addInTail(new Node(2));
-        act.addInTail(new Node(3));
+        act.addInTail(new Node0(1));
+        act.addInTail(new Node0(1));
+        act.addInTail(new Node0(2));
+        act.addInTail(new Node0(2));
+        act.addInTail(new Node0(3));
         Assert.assertThat(act.findAll(1).get(0).value == 1, is(true));
         Assert.assertThat(act.findAll(1).get(0).prev == null, is(true));
         Assert.assertThat(act.findAll(1).get(0).next.value == 1, is(true));
@@ -84,11 +84,11 @@ public class LinkedList2Test {
     @Test
     public void findAllFin() throws Exception {
         LinkedList2 act = new LinkedList2();
-        act.addInTail(new Node(1));
-        act.addInTail(new Node(1));
-        act.addInTail(new Node(2));
-        act.addInTail(new Node(2));
-        act.addInTail(new Node(3));
+        act.addInTail(new Node0(1));
+        act.addInTail(new Node0(1));
+        act.addInTail(new Node0(2));
+        act.addInTail(new Node0(2));
+        act.addInTail(new Node0(3));
         Assert.assertThat(act.findAll(3).size() == 1, is(true));
         Assert.assertThat(act.findAll(3).get(0).value == 3, is(true));
         Assert.assertThat(act.findAll(3).get(0).prev.value == 2, is(true));
@@ -99,21 +99,21 @@ public class LinkedList2Test {
     @Test
     public void findAllEmpty() throws Exception {
         LinkedList2 actual = new LinkedList2();
-        actual.addInTail(new Node(1));
-        actual.addInTail(new Node(1));
-        actual.addInTail(new Node(2));
-        actual.addInTail(new Node(2));
-        actual.addInTail(new Node(3));
+        actual.addInTail(new Node0(1));
+        actual.addInTail(new Node0(1));
+        actual.addInTail(new Node0(2));
+        actual.addInTail(new Node0(2));
+        actual.addInTail(new Node0(3));
         Assert.assertThat(actual.findAll(7).size() == 0, is(true));
     }
 
     @Test
     public void removeMiddleEl() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(3));
-        list.addInTail(new Node(4));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(3));
+        list.addInTail(new Node0(4));
         list.remove(3);
         Assert.assertThat(list.head.next.next.next == null, is(true));
         Assert.assertNull(list.find(3));
@@ -125,10 +125,10 @@ public class LinkedList2Test {
     @Test
     public void removeFirstEl() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(3));
-        list.addInTail(new Node(4));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(3));
+        list.addInTail(new Node0(4));
         list.remove(1);
         Assert.assertThat(list.head.next.next.next == null, is(true));
         Assert.assertNull(list.find(1));
@@ -141,10 +141,10 @@ public class LinkedList2Test {
     @Test
     public void removeFinalEl() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(3));
-        list.addInTail(new Node(4));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(3));
+        list.addInTail(new Node0(4));
         Assert.assertNotNull(list.find(4));
         list.remove(4);
         Assert.assertThat(list.head.next.next.next == null, is(true));
@@ -164,7 +164,7 @@ public class LinkedList2Test {
     @Test
     public void removeOneEl() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
+        list.addInTail(new Node0(1));
         Assert.assertNotNull(list.find(1));
         Assert.assertThat(list.head.value == 1, is(true));
         Assert.assertThat(list.head.prev == null, is(true));
@@ -179,9 +179,9 @@ public class LinkedList2Test {
     @Test
     public void removeThreeEqualsEl() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(1));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(1));
         Assert.assertNotNull(list.find(1));
         list.remove(1);
         Assert.assertThat(list.head.value == 1, is(true));
@@ -194,7 +194,7 @@ public class LinkedList2Test {
     public void removeBigListEl() throws Exception {
         LinkedList2 list = new LinkedList2();
         for (int i = 1; i < 100; i++) {
-            list.addInTail(new Node(i));
+            list.addInTail(new Node0(i));
         }
         Assert.assertNotNull(list.find(77));
         list.remove(77);
@@ -212,7 +212,7 @@ public class LinkedList2Test {
     public void removeMultiEl() throws Exception {
         LinkedList2 list = new LinkedList2();
         for (int i = 1; i < 6; i++) {
-            list.addInTail(new Node(i));
+            list.addInTail(new Node0(i));
         }
         list.remove(2);
         list.remove(3);
@@ -231,7 +231,7 @@ public class LinkedList2Test {
     public void removeBigListMultiEl() throws Exception {
         LinkedList2 list = new LinkedList2();
         for (int i = 1; i < 100; i++) {
-            list.addInTail(new Node(i));
+            list.addInTail(new Node0(i));
         }
         for (int i = 2; i < 99; i++) {
             list.remove(i);
@@ -245,12 +245,12 @@ public class LinkedList2Test {
     @Test
     public void removAllElBetwen() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(3));
-        list.addInTail(new Node(3));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(3));
+        list.addInTail(new Node0(3));
         list.removeAll(2);
         Assert.assertThat(list.head.value == 1, is(true));
         Assert.assertThat(list.head.prev == null, is(true));
@@ -263,11 +263,11 @@ public class LinkedList2Test {
     @Test
     public void removAllElStartPos() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(3));
-        list.addInTail(new Node(3));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(3));
+        list.addInTail(new Node0(3));
         list.removeAll(2);
         Assert.assertThat(list.head.value == 3, is(true));
         Assert.assertThat(list.head.prev == null, is(true));
@@ -289,7 +289,7 @@ public class LinkedList2Test {
     public void clearDefault() throws Exception {
         LinkedList2 list = new LinkedList2();
         for (int i = 1; i < 5; i++) {
-            list.addInTail(new Node(i));
+            list.addInTail(new Node0(i));
         }
         list.clear();
         Assert.assertThat(list.head == null, is(true));
@@ -299,7 +299,7 @@ public class LinkedList2Test {
     public void clearBigList() throws Exception {
         LinkedList2 list = new LinkedList2();
         for (int i = 1; i < 100; i++) {
-            list.addInTail(new Node(i));
+            list.addInTail(new Node0(i));
         }
         list.clear();
         Assert.assertThat(list.head == null, is(true));
@@ -318,7 +318,7 @@ public class LinkedList2Test {
     public void count100() throws Exception {
         LinkedList2 actual = new LinkedList2();
         for (int i = 0; i < 100; i++) {
-            actual.addInTail(new Node(i));
+            actual.addInTail(new Node0(i));
         }
         Assert.assertThat(actual.count() == 100, is(true));
     }
@@ -331,11 +331,11 @@ public class LinkedList2Test {
     @Test
     public void insertAfterBetwen() throws Exception {
         LinkedList2 actual = new LinkedList2();
-        actual.addInTail(new Node(1));
-        actual.addInTail(new Node(2));
-        actual.addInTail(new Node(4));
-        actual.addInTail(new Node(5));
-        actual.insertAfter(actual.find(2), new Node(3));
+        actual.addInTail(new Node0(1));
+        actual.addInTail(new Node0(2));
+        actual.addInTail(new Node0(4));
+        actual.addInTail(new Node0(5));
+        actual.insertAfter(actual.find(2), new Node0(3));
         Assert.assertThat(actual.find(3).value == 3, is(true));
         Assert.assertThat(actual.find(3).next.value == 4, is(true));
         Assert.assertThat(actual.find(3).prev.value == 2, is(true));
@@ -349,11 +349,11 @@ public class LinkedList2Test {
     @Test
     public void insertAfterFirst() throws Exception {
         LinkedList2 actual = new LinkedList2();
-        actual.addInTail(new Node(1));
-        actual.addInTail(new Node(3));
-        actual.addInTail(new Node(4));
-        actual.addInTail(new Node(5));
-        actual.insertAfter(actual.find(1), new Node(2));
+        actual.addInTail(new Node0(1));
+        actual.addInTail(new Node0(3));
+        actual.addInTail(new Node0(4));
+        actual.addInTail(new Node0(5));
+        actual.insertAfter(actual.find(1), new Node0(2));
         Assert.assertThat(actual.find(2).value == 2, is(true));
         Assert.assertThat(actual.find(2).next.value == 3, is(true));
         Assert.assertThat(actual.find(2).prev.value == 1, is(true));
@@ -368,12 +368,12 @@ public class LinkedList2Test {
     @Test
     public void insertAfterFinal() throws Exception {
         LinkedList2 actual = new LinkedList2();
-        actual.addInTail(new Node(1));
-        actual.addInTail(new Node(2));
-        actual.addInTail(new Node(3));
-        actual.addInTail(new Node(4));
-        actual.addInTail(new Node(5));
-        actual.insertAfter(actual.find(5), new Node(6));
+        actual.addInTail(new Node0(1));
+        actual.addInTail(new Node0(2));
+        actual.addInTail(new Node0(3));
+        actual.addInTail(new Node0(4));
+        actual.addInTail(new Node0(5));
+        actual.insertAfter(actual.find(5), new Node0(6));
         Assert.assertThat(actual.find(6).value == 6, is(true));
         Assert.assertThat(actual.find(6).next == null, is(true));
         Assert.assertThat(actual.find(6).prev.value == 5, is(true));
@@ -388,9 +388,9 @@ public class LinkedList2Test {
     @Test
     public void insertAfterNull() throws Exception {
         LinkedList2 actual = new LinkedList2();
-        actual.addInTail(new Node(2));
-        actual.addInTail(new Node(3));
-        actual.insertAfter(actual.find(5), new Node(1));
+        actual.addInTail(new Node0(2));
+        actual.addInTail(new Node0(3));
+        actual.insertAfter(actual.find(5), new Node0(1));
         Assert.assertThat(actual.find(1).value == 1, is(true));
         Assert.assertThat(actual.find(1).next.value == 2, is(true));
         Assert.assertThat(actual.find(1).prev == null, is(true));
@@ -403,11 +403,11 @@ public class LinkedList2Test {
     @Test
     public void inserToEmptyList() throws Exception {
         LinkedList2 actual = new LinkedList2();
-        actual.insertAfter(actual.find(1), new Node(1));
+        actual.insertAfter(actual.find(1), new Node0(1));
         Assert.assertThat(actual.find(1).value == 1, is(true));
         Assert.assertThat(actual.find(1).next == null, is(true));
         Assert.assertThat(actual.find(1).prev == null, is(true));
-        actual.insertAfter(actual.find(1), new Node(2));
+        actual.insertAfter(actual.find(1), new Node0(2));
         Assert.assertThat(actual.find(1).value == 1, is(true));
         Assert.assertThat(actual.find(1).next.value == 2, is(true));
         Assert.assertThat(actual.find(2).prev.value == 1, is(true));
@@ -420,10 +420,10 @@ public class LinkedList2Test {
     @Test
     public void insertMulti() throws Exception {
         LinkedList2 actual = new LinkedList2();
-        actual.addInTail(new Node(1));
-        actual.insertAfter(actual.find(1), new Node(2));
-        actual.insertAfter(actual.find(2), new Node(3));
-        actual.insertAfter(actual.find(3), new Node(4));
+        actual.addInTail(new Node0(1));
+        actual.insertAfter(actual.find(1), new Node0(2));
+        actual.insertAfter(actual.find(2), new Node0(3));
+        actual.insertAfter(actual.find(3), new Node0(4));
         Assert.assertThat(actual.find(1).value == 1, is(true));
         Assert.assertThat(actual.find(1).prev == null, is(true));
         Assert.assertThat(actual.find(1).next.value == 2, is(true));
@@ -445,7 +445,7 @@ public class LinkedList2Test {
     @Test
     public void removeUncorrect() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
+        list.addInTail(new Node0(1));
         Assert.assertNotNull(list.find(1));
         Assert.assertThat(list.remove(2), is(false));
         Assert.assertThat(list.head.value == 1, is(true));
@@ -456,8 +456,8 @@ public class LinkedList2Test {
     @Test
     public void removeOneOfTwoFirstEl() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(2));
 
         Assert.assertThat(list.head.value == 1, is(true));
         Assert.assertThat(list.head.prev == null, is(true));
@@ -478,8 +478,8 @@ public class LinkedList2Test {
     @Test
     public void removeTwoSecondEl() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(2));
 
         Assert.assertThat(list.head.value == 1, is(true));
         Assert.assertThat(list.head.prev == null, is(true));
@@ -500,9 +500,9 @@ public class LinkedList2Test {
     @Test
     public void removeThreeEl() throws Exception {
         LinkedList2 list = new LinkedList2();
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(3));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(2));
+        list.addInTail(new Node0(3));
 
         Assert.assertThat(list.head.value == 1, is(true));
         Assert.assertThat(list.head.prev == null, is(true));
@@ -545,8 +545,8 @@ public class LinkedList2Test {
         Assert.assertNull(list.find(3));
         Assert.assertThat(list.head == null, is(true));
         Assert.assertThat(list.tail == null, is(true));
-        list.addInTail(new Node(1));
-        list.addInTail(new Node(3));
+        list.addInTail(new Node0(1));
+        list.addInTail(new Node0(3));
         Assert.assertThat(list.head.prev == null, is(true));
         Assert.assertThat(list.head.value == 1, is(true));
         Assert.assertThat(list.head.next.value == 3, is(true));

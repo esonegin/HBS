@@ -1,10 +1,10 @@
 import java.util.*;
 
-class Node0<T> extends LinkedList2 {
+class Node<T>  {
     public T value;
-    public Node0<T> next, prev;
+    public Node<T> next, prev;
 
-    public Node0(T val) {
+    public Node(T val) {
         value = val;
         next = null;
         prev = null;
@@ -12,7 +12,7 @@ class Node0<T> extends LinkedList2 {
 }
 
 public class OrderedList<T> {
-    public Node0<T> head, tail;
+    public Node<T> head, tail;
     private boolean _ascending;
 
     public OrderedList(boolean asc) {
@@ -37,7 +37,7 @@ public class OrderedList<T> {
         // автоматическая вставка value
         // в нужную позицию
 
-        Node0<T> _nodeToInsert = new Node0<>(value);
+        Node<T> _nodeToInsert = new Node<>(value);
 
         //Если список пустой
         if (tail == null && head == null) {
@@ -81,7 +81,7 @@ public class OrderedList<T> {
 
         }//Если список не пустой и значение меньше хвоста, но больше головы
         else {
-            Node0<T> node = this.tail;
+            Node<T> node = this.tail;
             //Проходим по списку и ищем узлы больше-меньше
             while (node != null) {
                 //Если вставляемый узел больше текущего и меньше следующего или равен текущему и список по возрастанию (false)
@@ -110,8 +110,8 @@ public class OrderedList<T> {
     }
 
 
-    public Node0<T> find(T val) {
-        Node0 node = this.head;
+    public Node<T> find(T val) {
+        Node node = this.head;
         while (node != null) {
             if (compare(val, tail.value) == 1 || compare(val, head.value) == -1) {
                 return null;
@@ -124,7 +124,7 @@ public class OrderedList<T> {
     }
 
     public void delete(T val) {
-        Node0 node = tail;
+        Node node = tail;
         //Если список пустой
         //Если один элемент
         if (tail.value.equals(val) && tail.next == null && tail.prev == null) {
@@ -177,7 +177,7 @@ public class OrderedList<T> {
 
     public int count() {
         int count = 0;
-        Node0 node = this.tail;
+        Node node = this.tail;
         while (node != null) {
             count++;
             node = node.next;
@@ -185,14 +185,14 @@ public class OrderedList<T> {
         return count;
     }
 
-    ArrayList<Node0<T>> getAll() // выдать все элементы упорядоченного
+    ArrayList<Node<T>> getAll() // выдать все элементы упорядоченного
     // списка в виде стандартного списка
     {
-        ArrayList<Node0<T>> r = new ArrayList<Node0<T>>();
-        Node0<T> Node0 = head;
-        while (Node0 != null) {
-            r.add(Node0);
-            Node0 = Node0.prev;
+        ArrayList<Node<T>> r = new ArrayList<Node<T>>();
+        Node<T> Node = head;
+        while (Node != null) {
+            r.add(Node);
+            Node = Node.prev;
         }
         return r;
     }
