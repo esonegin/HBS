@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Node<T>  {
+class Node<T> {
     public T value;
     public Node<T> next, prev;
 
@@ -46,57 +46,35 @@ public class OrderedList<T> {
             this.head.prev = null;
             this.tail = _nodeToInsert;
 
-        } //Если значение не найдено, список не пустой, значение равно хвосту или больше и список по убыванию (true)
+        }
         // - вставляем в хвост
-        else if (head != null && (compare(_nodeToInsert.value, tail.value) == 0
+        else if ((head != null && (compare(_nodeToInsert.value, tail.value) == 0
+                || compare(_nodeToInsert.value, tail.value) == -1) && !_ascending) || head != null && (compare(_nodeToInsert.value, tail.value) == 0
                 || compare(_nodeToInsert.value, tail.value) == 1) && _ascending) {
-            this.tail.prev = _nodeToInsert;
-            _nodeToInsert.next = tail;
-            this.tail = _nodeToInsert;
+            _nodeToInsert.prev = tail;
+            tail.next = _nodeToInsert;
+            tail = _nodeToInsert;
 
-        }//Если значение не найдено, список не пустой, значение равно голове или больше и список по возрастанию (false)
+        }
         // - вставляем в голову
-        else if (head != null && (compare(_nodeToInsert.value, head.value) == 0
-                || compare(_nodeToInsert.value, head.value) == 1) && !_ascending) {
-            this.head.next = _nodeToInsert;
-            _nodeToInsert.prev = head;
-            this.head = _nodeToInsert;
-
-
-        }//Если значение не найдено, список не пустой, значение равно голове или меньше и список по убыванию (true)
-        // - вставляем в голову
-        else if (head != null && (compare(_nodeToInsert.value, head.value) == 0
+        else if ((head != null && (compare(_nodeToInsert.value, head.value) == 0
+                || compare(_nodeToInsert.value, head.value) == 1) && !_ascending) || head != null && (compare(_nodeToInsert.value, head.value) == 0
                 || compare(_nodeToInsert.value, head.value) == -1) && _ascending) {
-            this.head.next = _nodeToInsert;
-            this.head.next.prev = this.head;
-            this.head = _nodeToInsert;
+            _nodeToInsert.next = head;
+            head.prev = _nodeToInsert;
+            head = _nodeToInsert;
 
-        }//Если значение не найдено, список не пустой, значение равно хвосту или меньше и список по возрастанию (false)
-        // - вставляем в хвост
-        else if (head != null && (compare(_nodeToInsert.value, head.value) == 0
-                || compare(_nodeToInsert.value, tail.value) == -1) && !_ascending) {
-            this.tail.prev = _nodeToInsert;
-            _nodeToInsert.next = tail;
-            this.tail = _nodeToInsert;
 
-        }//Если список не пустой и значение меньше хвоста, но больше головы
+        }
+        //Если список не пустой и значение больше хвоста, но меньше головы
         else {
-            Node<T> node = this.tail;
-            //Проходим по списку и ищем узлы больше-меньше
+            Node<T> node = this.head;
             while (node != null) {
-                //Если вставляемый узел больше текущего и меньше следующего или равен текущему и список по возрастанию (false)
-                if (!_ascending && ((compare(node.value, _nodeToInsert.value) == -1
-                        && compare(node.next.value, _nodeToInsert.value) == 1))
-                        || compare(node.value, _nodeToInsert.value) == 0) {
-                    node.next.prev = _nodeToInsert;
-                    _nodeToInsert.next = node.next;
-                    node.next = _nodeToInsert;
-                    _nodeToInsert.prev = node;
-                    break;
-
-                    //Если вставляемый узел больше текущего и меньше следующего или равен текущему и список по возрастанию (false)
-                } else if (_ascending && ((compare(_nodeToInsert.value, node.value) == -1
-                        && compare(node.next.value, _nodeToInsert.value) == -1))
+                //Если вставляемый узел меньше текущего и больше следующего или равен текущему и список по возрастанию (false)
+                if ((!_ascending && ((compare(_nodeToInsert.value, node.value) == -1
+                        && compare(_nodeToInsert.value, node.next.value) == 1))
+                        || compare(node.value, _nodeToInsert.value) == 0) || _ascending && ((compare(_nodeToInsert.value, node.value) == 1
+                        && compare(_nodeToInsert.value, node.next.value) == -1))
                         || compare(node.value, _nodeToInsert.value) == 0) {
                     node.next.prev = _nodeToInsert;
                     _nodeToInsert.next = node.next;
@@ -111,20 +89,20 @@ public class OrderedList<T> {
 
 
     public Node<T> find(T val) {
-        Node node = this.head;
+        Node<T> node = this.head;
         while (node != null) {
             if (compare(val, tail.value) == 1 || compare(val, head.value) == -1) {
                 return null;
             }
             if (node.value == val)
                 return node;
-            node = node.prev;
+            node = node.next;
         }
         return null;
     }
 
     public void delete(T val) {
-        Node node = tail;
+        Node<T> node = head;
         //Если список пустой
         //Если один элемент
         if (tail.value.equals(val) && tail.next == null && tail.prev == null) {
@@ -132,17 +110,17 @@ public class OrderedList<T> {
             this.tail = null;
         }
         //Если список из двух значений и удаляется хвост
-        else if (tail.value.equals(val) && tail.prev == null && tail.next.next == null) {
-            this.tail = this.head;
-            this.head.prev = null;
-            this.tail.next = null;
+        else if (tail.value.equals(val) && tail.prev.prev == null) {
+            tail = head;
+            head.next = null;
+            tail.prev = null;
 
         }
         //Если список из двух значений и удаляется голова
-        else if (head.value.equals(val) && head.next == null && head.prev.prev == null) {
-            this.head = this.tail;
-            this.head.prev = null;
-            this.tail.next = null;
+        else if (head.value.equals(val) && head.next.next == null) {
+            head = tail;
+            head.prev = null;
+            tail.next = null;
 
             //Если спиcок не пустой и больше двух элемента
         } else if (node.next.next != null) {
@@ -153,15 +131,15 @@ public class OrderedList<T> {
                     node.next.prev = node.next.prev.prev;
                 }
                 //Если удаляется голова
-                else if (node.value.equals(val) && node.next == null) {
-                    this.head = node.prev;
-                    this.head.next = null;
+                else if (node.value.equals(val) && node.prev == null) {
+                    head = node.next;
+                    head.prev = null;
                     break;
                 }
                 //Если удаляется хвост
-                else if (node.value.equals(val) && node.prev == null) {
-                    this.tail = node.next;
-                    this.tail.prev = null;
+                else if (node.value.equals(val) && node.next == null) {
+                    tail = node.prev;
+                    tail.next = null;
                     break;
                 }
                 node = node.next;
@@ -177,7 +155,7 @@ public class OrderedList<T> {
 
     public int count() {
         int count = 0;
-        Node node = this.tail;
+        Node<T> node = this.head;
         while (node != null) {
             count++;
             node = node.next;
@@ -189,7 +167,7 @@ public class OrderedList<T> {
     // списка в виде стандартного списка
     {
         ArrayList<Node<T>> r = new ArrayList<Node<T>>();
-        Node<T> Node = head;
+        Node<T> Node = tail;
         while (Node != null) {
             r.add(Node);
             Node = Node.prev;
