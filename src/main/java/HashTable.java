@@ -14,7 +14,7 @@ public class HashTable {
         // всегда возвращает корректный индекс слота
         int result = 0;
         for (int i = 0; i < slots.length; i++) {
-            if (slots[i] == value) {
+            if (slots[i].equals(value)) {
                 result = i;
             }
         }
@@ -59,7 +59,7 @@ public class HashTable {
         // находит индекс слота со значением, или -1
         int result = -1;
         for (int i = 0; i < slots.length; i++) {
-            if (slots[i] == value) {
+            if (slots[i].equals(value)) {
                 result = i;
             }
         }
