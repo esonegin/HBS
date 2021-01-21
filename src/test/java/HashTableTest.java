@@ -19,83 +19,166 @@ public class HashTableTest {
 
 
     @Test
-    public void hashFunTest() {
-        HashTable hashtable = new HashTable(5, 3);
-        hashtable.size = 5;
-        hashtable.put("1");
-        hashtable.put("2");
-        hashtable.put("3");
-        hashtable.put("4");
-        hashtable.put("5");
+    public void hashFunLength4Step2Test() {
+        HashTable hashtable = new HashTable(4, 2);
+
+
         Assert.assertThat(hashtable.hashFun("1"), is(0));
-        Assert.assertThat(hashtable.hashFun("2"), is(3));
-        Assert.assertThat(hashtable.hashFun("3"), is(1));
-        Assert.assertThat(hashtable.hashFun("4"), is(4));
-        Assert.assertThat(hashtable.hashFun("5"), is(2));
+        Assert.assertThat(hashtable.put("1"), is(0));
+        Assert.assertThat(hashtable.hashFun("2"), is(2));
+        Assert.assertThat(hashtable.put("2"), is(2));
 
-    }
+        Assert.assertThat(hashtable.hashFun("3"), is(0));
+        Assert.assertThat(hashtable.seekSlot("3"), is(1));
+        Assert.assertThat(hashtable.put("3"), is(1));
 
-    @Test
-    public void seekSlotTest() {
-        HashTable hashtable = new HashTable(7, 3);
-        hashtable.size = 5;
-        hashtable.put("1");
-        Assert.assertThat(hashtable.seekSlot("2"), is(3));
-        hashtable.put("2");
-        Assert.assertThat(hashtable.seekSlot("3"), is(6));
-        hashtable.put("3");
-        Assert.assertThat(hashtable.seekSlot("4"), is(2));
+        Assert.assertThat(hashtable.hashFun("4"), is(3));
+        Assert.assertThat(hashtable.put("4"), is(3));
 
-    }
-
-    @Test
-    public void putTest() {
-
-        HashTable hashtable = new HashTable(5, 3);
-        hashtable.size = 5;
-        hashtable.put("1");
-        hashtable.put("2");
-        hashtable.put("3");
-        hashtable.put("4");
-        hashtable.put("5");
-
-        Assert.assertThat(hashtable.slots[0], is("1"));
-        Assert.assertThat(hashtable.slots[3], is("2"));
-        Assert.assertThat(hashtable.slots[1], is("3"));
-        Assert.assertThat(hashtable.slots[4], is("4"));
-        Assert.assertThat(hashtable.slots[2], is("5"));
-        for (int i = 0; i < hashtable.slots.length; i++) {
-            System.out.println(hashtable.slots[i]);
-        }
+        Assert.assertThat(hashtable.hashFun("5"), is(1));
+        Assert.assertThat(hashtable.seekSlot("5"), is(-1));
         Assert.assertThat(hashtable.put("5"), is(-1));
 
     }
-
     @Test
-    public void findTest() {
+    public void hashFunLength5Step2Test() {
+        HashTable hashtable = new HashTable(5, 2);
 
-        HashTable hashtable = new HashTable(5, 3);
-        hashtable.size = 5;
-        hashtable.put("1");
-        hashtable.put("2");
-        hashtable.put("3");
-        hashtable.put("4");
-        hashtable.put("5");
-        Assert.assertThat(hashtable.find("1"), is(0));
-        Assert.assertThat(hashtable.find("2"), is(3));
-        Assert.assertThat(hashtable.find("3"), is(1));
-        Assert.assertThat(hashtable.find("4"), is(4));
-        Assert.assertThat(hashtable.find("5"), is(2));
+        Assert.assertThat(hashtable.hashFun("1"), is(0));
+        Assert.assertThat(hashtable.put("1"), is(0));
+        Assert.assertThat(hashtable.hashFun("2"), is(2));
+        Assert.assertThat(hashtable.put("2"), is(2));
+        Assert.assertThat(hashtable.hashFun("3"), is(4));
+        Assert.assertThat(hashtable.put("3"), is(4));
+        Assert.assertThat(hashtable.hashFun("4"), is(1));
+        Assert.assertThat(hashtable.put("4"), is(1));
+        Assert.assertThat(hashtable.hashFun("5"), is(3));
+        Assert.assertThat(hashtable.put("5"), is(3));
+
+        Assert.assertThat(hashtable.hashFun("6"), is(0));
+        Assert.assertThat(hashtable.seekSlot("6"), is(-1));
+        Assert.assertThat(hashtable.put("6"), is(-1));
     }
 
     @Test
-    public void seekSecTest() {
+    public void hashFunLength5Step1Test() {
+        HashTable hashtable = new HashTable(5, 1);
 
-        HashTable hashtable = new HashTable(10, 5);
-        hashtable.size = 5;
-        hashtable.put("1");
-        System.out.println(hashtable.seekSlot("2"));
-        hashtable.put("2");
+        Assert.assertThat(hashtable.hashFun("1"), is(0));
+        Assert.assertThat(hashtable.put("1"), is(0));
+        Assert.assertThat(hashtable.hashFun("2"), is(1));
+        Assert.assertThat(hashtable.put("2"), is(1));
+        Assert.assertThat(hashtable.hashFun("3"), is(2));
+        Assert.assertThat(hashtable.put("3"), is(2));
+        Assert.assertThat(hashtable.hashFun("4"), is(3));
+        Assert.assertThat(hashtable.put("4"), is(3));
+        Assert.assertThat(hashtable.hashFun("5"), is(4));
+        Assert.assertThat(hashtable.put("5"), is(4));
+
+        Assert.assertThat(hashtable.hashFun("6"), is(0));
+        Assert.assertThat(hashtable.seekSlot("6"), is(-1));
+        Assert.assertThat(hashtable.put("6"), is(-1));
+        Assert.assertThat(hashtable.hashFun("7"), is(0));
+        Assert.assertThat(hashtable.seekSlot("7"), is(-1));
+        Assert.assertThat(hashtable.put("7"), is(-1));
+    }
+
+    @Test
+    public void hashFunLength17Step3Test() {
+        HashTable hashtable = new HashTable(17, 3);
+
+        Assert.assertThat(hashtable.hashFun("1"), is(0));
+        Assert.assertThat(hashtable.put("1"), is(0));
+        Assert.assertThat(hashtable.find("1"), is(0));
+
+        Assert.assertThat(hashtable.hashFun("2"), is(3));
+        Assert.assertThat(hashtable.put("2"), is(3));
+        Assert.assertThat(hashtable.find("1"), is(0));
+        Assert.assertThat(hashtable.find("2"), is(3));
+
+        Assert.assertThat(hashtable.hashFun("3"), is(6));
+        Assert.assertThat(hashtable.put("3"), is(6));
+        Assert.assertThat(hashtable.find("1"), is(0));
+        Assert.assertThat(hashtable.find("2"), is(3));
+        Assert.assertThat(hashtable.find("3"), is(6));
+
+        Assert.assertThat(hashtable.hashFun("4"), is(9));
+        Assert.assertThat(hashtable.put("4"), is(9));
+        Assert.assertThat(hashtable.find("1"), is(0));
+        Assert.assertThat(hashtable.find("2"), is(3));
+        Assert.assertThat(hashtable.find("3"), is(6));
+        Assert.assertThat(hashtable.find("4"), is(9));
+
+
+        Assert.assertThat(hashtable.hashFun("5"), is(12));
+        Assert.assertThat(hashtable.put("5"), is(12));
+        Assert.assertThat(hashtable.find("1"), is(0));
+        Assert.assertThat(hashtable.find("2"), is(3));
+        Assert.assertThat(hashtable.find("3"), is(6));
+        Assert.assertThat(hashtable.find("4"), is(9));
+        Assert.assertThat(hashtable.find("5"), is(12));
+
+        Assert.assertThat(hashtable.hashFun("6"), is(15));
+        Assert.assertThat(hashtable.put("6"), is(15));
+        Assert.assertThat(hashtable.find("1"), is(0));
+        Assert.assertThat(hashtable.find("2"), is(3));
+        Assert.assertThat(hashtable.find("3"), is(6));
+        Assert.assertThat(hashtable.find("4"), is(9));
+        Assert.assertThat(hashtable.find("5"), is(12));
+        Assert.assertThat(hashtable.find("6"), is(15));
+
+        Assert.assertThat(hashtable.hashFun("7"), is(1));
+        Assert.assertThat(hashtable.put("7"), is(1));
+        Assert.assertThat(hashtable.find("1"), is(0));
+        Assert.assertThat(hashtable.find("2"), is(3));
+        Assert.assertThat(hashtable.find("3"), is(6));
+        Assert.assertThat(hashtable.find("4"), is(9));
+        Assert.assertThat(hashtable.find("5"), is(12));
+        Assert.assertThat(hashtable.find("6"), is(15));
+        Assert.assertThat(hashtable.find("7"), is(1));
+
+        Assert.assertThat(hashtable.hashFun("8"), is(4));
+        Assert.assertThat(hashtable.put("8"), is(4));
+
+        Assert.assertThat(hashtable.hashFun("9"), is(7));
+        Assert.assertThat(hashtable.put("9"), is(7));
+
+        Assert.assertThat(hashtable.hashFun("10"), is(10));
+        Assert.assertThat(hashtable.put("10"), is(10));
+
+        Assert.assertThat(hashtable.hashFun("11"), is(13));
+        Assert.assertThat(hashtable.put("11"), is(13));
+
+        Assert.assertThat(hashtable.hashFun("12"), is(16));
+        Assert.assertThat(hashtable.put("12"), is(16));
+
+        Assert.assertThat(hashtable.hashFun("13"), is(2));
+        Assert.assertThat(hashtable.put("13"), is(2));
+
+        Assert.assertThat(hashtable.hashFun("14"), is(5));
+        Assert.assertThat(hashtable.put("14"), is(5));
+
+        Assert.assertThat(hashtable.hashFun("15"), is(8));
+        Assert.assertThat(hashtable.put("15"), is(8));
+
+        Assert.assertThat(hashtable.hashFun("16"), is(11));
+        Assert.assertThat(hashtable.put("16"), is(11));
+
+        Assert.assertThat(hashtable.hashFun("17"), is(14));
+        Assert.assertThat(hashtable.put("17"), is(14));
+
+        Assert.assertThat(hashtable.hashFun("18"), is(0));
+        Assert.assertThat(hashtable.seekSlot("18"), is(-1));
+        Assert.assertThat(hashtable.put("18"), is(-1));
+        Assert.assertThat(hashtable.find("1"), is(0));
+        Assert.assertThat(hashtable.find("2"), is(3));
+        Assert.assertThat(hashtable.find("3"), is(6));
+        Assert.assertThat(hashtable.find("4"), is(9));
+        Assert.assertThat(hashtable.find("5"), is(12));
+        Assert.assertThat(hashtable.find("6"), is(15));
+        Assert.assertThat(hashtable.find("7"), is(1));
+        Assert.assertThat(hashtable.find("18"), is(-1));
+
 
 
 
