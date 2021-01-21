@@ -91,6 +91,11 @@ public class NativeDictionaryTest {
         Assert.assertThat(dict.get("4"), is("fourth"));
         Assert.assertThat(dict.get("5"), is("fifth"));
         Assert.assertThat(dict.get("6"), is("seventh"));
-
+    }
+    @Test
+    public void emptyIsGetIsKeyTest() {
+        NativeDictionary dict = new NativeDictionary(5, String.class);
+        Assert.assertThat(dict.get("1") == null, is(true));
+        Assert.assertThat(dict.isKey("1"), is(false));
     }
 }

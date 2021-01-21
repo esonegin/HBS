@@ -28,7 +28,7 @@ class NativeDictionary<T> {
         // возвращает true если ключ имеется,
         // иначе false
         for (int i = 0; i < slots.length; i++) {
-            if (slots[i].equals(key)) {
+            if (slots[i] == (key)) {
                 return true;
             }
         }
