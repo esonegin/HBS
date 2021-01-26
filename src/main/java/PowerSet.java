@@ -3,8 +3,8 @@ public class PowerSet {
     public String[] slots;
     public int prevslot;
 
-    public PowerSet(int sz) {
-        size = sz;
+    public PowerSet() {
+        size = 20000;
         slots = new String[size];
         prevslot = -1;
     }
@@ -74,7 +74,7 @@ public class PowerSet {
     }
 
     public PowerSet intersection(PowerSet set2) {
-        PowerSet result = new PowerSet(20000);
+        PowerSet result = new PowerSet();
         if (set2.size >= slots.length) {
             for (String val : slots) {
                 for (int j = 0; j < set2.size; j++) {
@@ -96,19 +96,23 @@ public class PowerSet {
     }
 
     public PowerSet union(PowerSet set2) {
-        PowerSet result = new PowerSet(size + set2.size);
+        PowerSet result = new PowerSet();
         for (int i = 0; i < set2.size; i++) {
-            result.put(set2.slots[i]);
+            if (set2.slots[i] != null) {
+                result.put(set2.slots[i]);
+            }
         }
         for (String val : slots) {
-            result.put(val);
+            if (val != null) {
+                result.put(val);
+            }
         }
 
         return result;
     }
 
     public PowerSet difference(PowerSet set2) {
-        PowerSet result = new PowerSet(size);
+        PowerSet result = new PowerSet();
         for (String val : slots) {
             if (val != null && !set2.get(val)) {
                 result.put(val);

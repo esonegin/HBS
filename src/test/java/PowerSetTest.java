@@ -20,115 +20,21 @@ public class PowerSetTest {
 
     @Test
     public void defaultPutCycleTest() {
-        PowerSet powerset = new PowerSet(5);
-        powerset.put("1");
-        Assert.assertThat(powerset.slots[0], is("1"));
-        powerset.put("1");
-        Assert.assertThat(powerset.slots[0], is("1"));
-        Assert.assertThat(powerset.slots[1] == null, is(true));
-        powerset.put("2");
-        Assert.assertThat(powerset.slots[0], is("1"));
-        Assert.assertThat(powerset.slots[1], is("2"));
+        PowerSet powerset = new PowerSet();
+        for(int i = 0; i < powerset.size; i++){
+            powerset.put("value:" + i);
+        }
+        powerset.put("value:" + 20000);
 
-        powerset.put("3");
-        Assert.assertThat(powerset.slots[0], is("1"));
-        Assert.assertThat(powerset.slots[1], is("2"));
-        Assert.assertThat(powerset.slots[2], is("3"));
-
-        powerset.put("4");
-        Assert.assertThat(powerset.slots[0], is("1"));
-        Assert.assertThat(powerset.slots[1], is("2"));
-        Assert.assertThat(powerset.slots[2], is("3"));
-        Assert.assertThat(powerset.slots[3], is("4"));
-
-        powerset.put("5");
-        Assert.assertThat(powerset.slots[0], is("1"));
-        Assert.assertThat(powerset.slots[1], is("2"));
-        Assert.assertThat(powerset.slots[2], is("3"));
-        Assert.assertThat(powerset.slots[3], is("4"));
-        Assert.assertThat(powerset.slots[4], is("5"));
-
-        powerset.put("6");
-        Assert.assertThat(powerset.slots[0], is("6"));
-        Assert.assertThat(powerset.slots[1], is("2"));
-        Assert.assertThat(powerset.slots[2], is("3"));
-        Assert.assertThat(powerset.slots[3], is("4"));
-        Assert.assertThat(powerset.slots[4], is("5"));
-
-        powerset.put("7");
-        Assert.assertThat(powerset.slots[0], is("6"));
-        Assert.assertThat(powerset.slots[1], is("7"));
-        Assert.assertThat(powerset.slots[2], is("3"));
-        Assert.assertThat(powerset.slots[3], is("4"));
-        Assert.assertThat(powerset.slots[4], is("5"));
-
-        powerset.put("8");
-        Assert.assertThat(powerset.slots[0], is("6"));
-        Assert.assertThat(powerset.slots[1], is("7"));
-        Assert.assertThat(powerset.slots[2], is("8"));
-        Assert.assertThat(powerset.slots[3], is("4"));
-        Assert.assertThat(powerset.slots[4], is("5"));
-
-        powerset.put("9");
-        Assert.assertThat(powerset.slots[0], is("6"));
-        Assert.assertThat(powerset.slots[1], is("7"));
-        Assert.assertThat(powerset.slots[2], is("8"));
-        Assert.assertThat(powerset.slots[3], is("9"));
-        Assert.assertThat(powerset.slots[4], is("5"));
-
-        powerset.put("10");
-        Assert.assertThat(powerset.slots[0], is("6"));
-        Assert.assertThat(powerset.slots[1], is("7"));
-        Assert.assertThat(powerset.slots[2], is("8"));
-        Assert.assertThat(powerset.slots[3], is("9"));
-        Assert.assertThat(powerset.slots[4], is("10"));
-
-        powerset.put("11");
-        Assert.assertThat(powerset.slots[0], is("11"));
-        Assert.assertThat(powerset.slots[1], is("7"));
-        Assert.assertThat(powerset.slots[2], is("8"));
-        Assert.assertThat(powerset.slots[3], is("9"));
-        Assert.assertThat(powerset.slots[4], is("10"));
-
-        powerset.put("12");
-        Assert.assertThat(powerset.slots[0], is("11"));
-        Assert.assertThat(powerset.slots[1], is("12"));
-        Assert.assertThat(powerset.slots[2], is("8"));
-        Assert.assertThat(powerset.slots[3], is("9"));
-        Assert.assertThat(powerset.slots[4], is("10"));
-
-        powerset.put("13");
-        Assert.assertThat(powerset.slots[0], is("11"));
-        Assert.assertThat(powerset.slots[1], is("12"));
-        Assert.assertThat(powerset.slots[2], is("13"));
-        Assert.assertThat(powerset.slots[3], is("9"));
-        Assert.assertThat(powerset.slots[4], is("10"));
-
-        powerset.put("14");
-        Assert.assertThat(powerset.slots[0], is("11"));
-        Assert.assertThat(powerset.slots[1], is("12"));
-        Assert.assertThat(powerset.slots[2], is("13"));
-        Assert.assertThat(powerset.slots[3], is("14"));
-        Assert.assertThat(powerset.slots[4], is("10"));
-
-        powerset.put("15");
-        Assert.assertThat(powerset.slots[0], is("11"));
-        Assert.assertThat(powerset.slots[1], is("12"));
-        Assert.assertThat(powerset.slots[2], is("13"));
-        Assert.assertThat(powerset.slots[3], is("14"));
-        Assert.assertThat(powerset.slots[4], is("15"));
-
-        powerset.put("16");
-        Assert.assertThat(powerset.slots[0], is("16"));
-        Assert.assertThat(powerset.slots[1], is("12"));
-        Assert.assertThat(powerset.slots[2], is("13"));
-        Assert.assertThat(powerset.slots[3], is("14"));
-        Assert.assertThat(powerset.slots[4], is("15"));
+        Assert.assertThat(powerset.slots[0], is("value:20000"));
+        for(int i = 1; i < powerset.size; i++){
+            Assert.assertThat(powerset.slots[i], is("value:" + i));
+        }
     }
 
     @Test
     public void defaultPutDoubleTest() {
-        PowerSet powerset = new PowerSet(20000);
+        PowerSet powerset = new PowerSet();
 
         for (int i = 0; i < powerset.slots.length; i++) {
             powerset.put("value: " + i);
@@ -147,7 +53,7 @@ public class PowerSetTest {
 
     @Test
     public void defaultRePutTest() {
-        PowerSet powerset = new PowerSet(20000);
+        PowerSet powerset = new PowerSet();
 
         for (int i = 0; i < powerset.slots.length; i++) {
             powerset.put("value: " + i);
@@ -168,7 +74,7 @@ public class PowerSetTest {
 
     @Test
     public void defaultGetTest() {
-        PowerSet powerset = new PowerSet(20000);
+        PowerSet powerset = new PowerSet();
         //Assert.assertThat(powerset.get("value:0"), is(false));
         for (int i = 0; i < powerset.slots.length; i++) {
             powerset.put("value:" + i);
@@ -180,7 +86,7 @@ public class PowerSetTest {
 
     @Test
     public void defaultRemoveTest() {
-        PowerSet powerset = new PowerSet(20000);
+        PowerSet powerset = new PowerSet();
         //Assert.assertThat(powerset.get("value:0"), is(false));
         for (int i = 0; i < powerset.slots.length; i++) {
             powerset.put("value:" + i);
@@ -229,8 +135,8 @@ public class PowerSetTest {
 
     @Test
     public void defaultIntersectionTest() {
-        PowerSet powerset1 = new PowerSet(2);
-        PowerSet powerset2 = new PowerSet(5);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
         powerset1.put("4");
         powerset1.put("5");
 
@@ -251,8 +157,8 @@ public class PowerSetTest {
 
     @Test
     public void defaultIntersection2Test() {
-        PowerSet powerset1 = new PowerSet(5);
-        PowerSet powerset2 = new PowerSet(2);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         powerset1.put("1");
         powerset1.put("4");
@@ -273,8 +179,8 @@ public class PowerSetTest {
 
     @Test
     public void defaultIntersectionBigDataTest() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         for (int i = 0; i < powerset1.slots.length; i++) {
             powerset1.put("value:" + i);
@@ -293,8 +199,8 @@ public class PowerSetTest {
 
     @Test
     public void emptyIntersectionBigDataTest() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         powerset1.put("1");
         powerset1.put("4");
@@ -314,8 +220,8 @@ public class PowerSetTest {
 
     @Test
     public void defaultUnionTest() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         powerset1.put("1");
         powerset1.put("2");
@@ -334,8 +240,8 @@ public class PowerSetTest {
 
     @Test
     public void defaultUnion2Test() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         powerset1.put("1");
         powerset1.put("2");
@@ -354,8 +260,8 @@ public class PowerSetTest {
 
     @Test
     public void bigDataUnionTest() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         for (int i = 0; i < powerset1.size; i++) {
             powerset1.put("value:" + i);
@@ -377,8 +283,8 @@ public class PowerSetTest {
 
     @Test
     public void firstEmptyUnionTest() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         for (int i = 0; i < powerset2.size; i++) {
             powerset2.put("value:" + i);
@@ -396,8 +302,8 @@ public class PowerSetTest {
 
     @Test
     public void secondEmptyUnionTest() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         for (int i = 0; i < powerset1.size; i++) {
             powerset1.put("value:" + i);
@@ -414,8 +320,8 @@ public class PowerSetTest {
 
         @Test
     public void defaultDifferenceTest() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         powerset1.put("1");
         powerset1.put("2");
@@ -442,8 +348,8 @@ public class PowerSetTest {
 
     @Test
     public void bigDataDifferenceTest() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
 
         for (int i = 0; i < powerset1.size; i++) {
             powerset1.put("value:" + i);
@@ -467,10 +373,10 @@ public class PowerSetTest {
 
     @Test
     public void isSubsetDefaultTest() {
-        PowerSet powerset1 = new PowerSet(20000);
-        PowerSet powerset2 = new PowerSet(20000);
-        PowerSet powerset3 = new PowerSet(20000);
-        PowerSet powerset4 = new PowerSet(20000);
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
+        PowerSet powerset3 = new PowerSet();
+        PowerSet powerset4 = new PowerSet();
 
         powerset1.put("1");
         powerset1.put("2");
