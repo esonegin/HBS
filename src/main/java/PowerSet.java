@@ -3,17 +3,13 @@ public class PowerSet {
     public String[] slots;
     public int prevslot;
 
-
     public PowerSet(int sz) {
         size = sz;
         slots = new String[size];
         prevslot = -1;
-        // ваша реализация хранилища
-
     }
 
     public int size() {
-        // количество элементов в множестве
         int result = 0;
         for (int i = 0; i < size; i++) {
             if (slots[i] != null) {
@@ -23,9 +19,7 @@ public class PowerSet {
         return result;
     }
 
-
     public void put(String value) {
-        // всегда срабатывает
         boolean doublecheck = doubleCheck(value);
         for (int i = 0; i < slots.length; i++) {
             if (slots[i] == null && doublecheck) {
@@ -42,14 +36,12 @@ public class PowerSet {
             } else if (slots[slots.length - 1] != null && doublecheck && prevslot != -1 && prevslot >= slots.length - 1) {
                 prevslot = 0;
                 slots[prevslot] = value;
-                //prevslot++;
                 break;
             }
         }
     }
 
     public boolean doubleCheck(String value) {
-        // всегда срабатывает
         for (String val : slots) {
             if (val == value) {
                 return false;
@@ -59,8 +51,6 @@ public class PowerSet {
     }
 
     public boolean get(String value) {
-        // возвращает true если value имеется в множестве,
-        // иначе false
         boolean result = false;
         for (String val : slots) {
             if (val != null && val.equals(value)) {
@@ -72,8 +62,6 @@ public class PowerSet {
     }
 
     public boolean remove(String value) {
-        // возвращает true если value удалено
-        // иначе false
         boolean result = false;
         for (int i = 0; i < slots.length; i++) {
             if (slots[i] != null && slots[i].equals(value)) {
@@ -86,8 +74,6 @@ public class PowerSet {
     }
 
     public PowerSet intersection(PowerSet set2) {
-        // пересечение текущего множества и set2
-        //int resultlen = 0;
         PowerSet result = new PowerSet(20000);
         if (set2.size >= slots.length) {
             for (String val : slots) {
@@ -110,7 +96,6 @@ public class PowerSet {
     }
 
     public PowerSet union(PowerSet set2) {
-        // объединение текущего множества и set2
         PowerSet result = new PowerSet(size + set2.size);
         for (int i = 0; i < set2.size; i++) {
             result.put(set2.slots[i]);
@@ -123,7 +108,6 @@ public class PowerSet {
     }
 
     public PowerSet difference(PowerSet set2) {
-        // разница текущего множества и set2
         PowerSet result = new PowerSet(size);
         for (String val : slots) {
             if (val != null && !set2.get(val)) {
@@ -134,9 +118,6 @@ public class PowerSet {
     }
 
     public boolean isSubset(PowerSet set2) {
-        // возвращает true, если set2 есть
-        // подмножество текущего множества,
-        // иначе false
         int j = 0;
         for (int i = 0; i < set2.size; i++) {
             if (set2.get(slots[i])) {
