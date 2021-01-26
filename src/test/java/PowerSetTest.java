@@ -318,6 +318,91 @@ public class PowerSetTest {
         }
     }
 
+    @Test
+    public void doubleAllEmptyUnionTest() {
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
+
+        powerset1.put("1");
+        powerset1.put("2");
+        powerset1.put("3");
+
+        powerset2.put("1");
+        powerset2.put("2");
+        powerset2.put("3");
+
+        PowerSet powerset3 = powerset1.union(powerset2);
+        Assert.assertThat(powerset3.get("1"), is(true));
+        Assert.assertThat(powerset3.get("2"), is(true));
+        Assert.assertThat(powerset3.get("3"), is(true));
+        Assert.assertThat(powerset3.slots[0], is("1"));
+        Assert.assertThat(powerset3.slots[1], is("2"));
+        Assert.assertThat(powerset3.slots[2], is("3"));
+        Assert.assertThat(powerset3.slots[3] == null, is(true));
+    }
+
+    @Test
+    public void doubleNotAllEmptyUnionTest() {
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
+
+        powerset1.put("1");
+        powerset1.put("2");
+        powerset1.put("3");
+
+        powerset2.put("1");
+        powerset2.put("2");
+        powerset2.put("3");
+        powerset2.put("657");
+        powerset2.put("342");
+
+        PowerSet powerset3 = powerset1.union(powerset2);
+        Assert.assertThat(powerset3.get("1"), is(true));
+        Assert.assertThat(powerset3.get("2"), is(true));
+        Assert.assertThat(powerset3.get("3"), is(true));
+        Assert.assertThat(powerset3.get("657"), is(true));
+        Assert.assertThat(powerset3.get("342"), is(true));
+        Assert.assertThat(powerset3.slots[0], is("1"));
+        Assert.assertThat(powerset3.slots[1], is("2"));
+        Assert.assertThat(powerset3.slots[2], is("3"));
+        Assert.assertThat(powerset3.slots[3], is("657"));
+        Assert.assertThat(powerset3.slots[4], is("342"));
+        Assert.assertThat(powerset3.slots[5] == null, is(true));
+    }
+    @Test
+    public void notDoubleAllEmptyUnionTest() {
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
+
+        powerset1.put("345");
+        powerset1.put("67");
+        powerset1.put("89");
+
+        powerset2.put("12");
+        powerset2.put("23");
+        powerset2.put("34");
+        powerset2.put("45");
+        powerset2.put("56");
+
+        PowerSet powerset3 = powerset1.union(powerset2);
+        Assert.assertThat(powerset3.get("345"), is(true));
+        Assert.assertThat(powerset3.get("67"), is(true));
+        Assert.assertThat(powerset3.get("89"), is(true));
+        Assert.assertThat(powerset3.get("12"), is(true));
+        Assert.assertThat(powerset3.get("23"), is(true));
+        Assert.assertThat(powerset3.get("34"), is(true));
+        Assert.assertThat(powerset3.get("45"), is(true));
+        Assert.assertThat(powerset3.get("56"), is(true));
+        Assert.assertThat(powerset3.slots[0], is("12"));
+        Assert.assertThat(powerset3.slots[1], is("23"));
+        Assert.assertThat(powerset3.slots[2], is("34"));
+        Assert.assertThat(powerset3.slots[3], is("45"));
+        Assert.assertThat(powerset3.slots[4], is("56"));
+        Assert.assertThat(powerset3.slots[5], is("345"));
+        Assert.assertThat(powerset3.slots[6], is("67"));
+        Assert.assertThat(powerset3.slots[7], is("89"));
+    }
+
         @Test
     public void defaultDifferenceTest() {
         PowerSet powerset1 = new PowerSet();

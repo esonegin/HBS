@@ -107,7 +107,6 @@ public class PowerSet {
                 result.put(val);
             }
         }
-
         return result;
     }
 
