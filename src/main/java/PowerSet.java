@@ -43,7 +43,7 @@ public class PowerSet {
 
     public boolean doubleCheck(String value) {
         for (String val : slots) {
-            if (val == value) {
+            if (val != null && val.equals(value)) {
                 return false;
             }
         }
@@ -83,7 +83,7 @@ public class PowerSet {
                     }
                 }
             }
-        } else if (set2.size < slots.length) {
+        } else {
             for (int i = 0; i < set2.size; i++) {
                 for (String val : slots) {
                     if (set2.slots[i] != null && set2.slots[i].equals(val)) {
@@ -97,16 +97,17 @@ public class PowerSet {
 
     public PowerSet union(PowerSet set2) {
         PowerSet result = new PowerSet();
-        for (int i = 0; i < set2.size; i++) {
-            if (set2.slots[i] != null) {
-                result.put(set2.slots[i]);
-            }
-        }
         for (String val : slots) {
             if (val != null) {
                 result.put(val);
             }
         }
+        for (int i = 0; i < set2.size; i++) {
+            if (set2.slots[i] != null) {
+                result.put(set2.slots[i]);
+            }
+        }
+
         return result;
     }
 
@@ -127,9 +128,6 @@ public class PowerSet {
                 j++;
             }
         }
-        if (j == set2.size()) {
-            return true;
-        }
-        return false;
+        return j == set2.size();
     }
 }

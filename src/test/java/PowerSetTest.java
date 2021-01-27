@@ -266,8 +266,9 @@ public class PowerSetTest {
         for (int i = 0; i < powerset1.size; i++) {
             powerset1.put("value:" + i);
         }
-        for (int i = 20000; i < powerset2.size * 2; i++) {
-            powerset2.put("value:" + i);
+        for (int i = 0, k = 20000; i < powerset2.size; i++) {
+            powerset2.put("value:" + k);
+            k++;
         }
 
         Assert.assertThat(powerset1.slots[0], is("value:0"));
@@ -276,8 +277,9 @@ public class PowerSetTest {
         Assert.assertThat(powerset2.slots[19999], is("value:39999"));
 
         PowerSet powerset3 = powerset1.union(powerset2);
-        for (int i = 0; i < powerset3.size - 1; i++) {
-            Assert.assertThat(powerset3.get("value:" + i), is(true));
+        for (int i = 0, k = 20000; i < powerset3.size - 1; i++) {
+            Assert.assertThat(powerset3.get("value:" + k), is(true));
+            k++;
         }
     }
 
@@ -393,14 +395,14 @@ public class PowerSetTest {
         Assert.assertThat(powerset3.get("34"), is(true));
         Assert.assertThat(powerset3.get("45"), is(true));
         Assert.assertThat(powerset3.get("56"), is(true));
-        Assert.assertThat(powerset3.slots[0], is("12"));
-        Assert.assertThat(powerset3.slots[1], is("23"));
-        Assert.assertThat(powerset3.slots[2], is("34"));
-        Assert.assertThat(powerset3.slots[3], is("45"));
-        Assert.assertThat(powerset3.slots[4], is("56"));
-        Assert.assertThat(powerset3.slots[5], is("345"));
-        Assert.assertThat(powerset3.slots[6], is("67"));
-        Assert.assertThat(powerset3.slots[7], is("89"));
+        Assert.assertThat(powerset3.slots[0], is("345"));
+        Assert.assertThat(powerset3.slots[1], is("67"));
+        Assert.assertThat(powerset3.slots[2], is("89"));
+        Assert.assertThat(powerset3.slots[3], is("12"));
+        Assert.assertThat(powerset3.slots[4], is("23"));
+        Assert.assertThat(powerset3.slots[5], is("34"));
+        Assert.assertThat(powerset3.slots[6], is("45"));
+        Assert.assertThat(powerset3.slots[7], is("56"));
     }
 
         @Test
@@ -484,5 +486,29 @@ public class PowerSetTest {
         Assert.assertThat(powerset1.isSubset(powerset2), is(true));
         Assert.assertThat(powerset1.isSubset(powerset3), is(false));
         Assert.assertThat(powerset1.isSubset(powerset4), is(false));
+    }
+
+    @Test
+    public void errUnionTest() {
+        PowerSet powerset1 = new PowerSet();
+        PowerSet powerset2 = new PowerSet();
+
+        for(int i = 1; i < 11; i++){
+            powerset1.put("value:" + i);
+        }
+        for(int i = 5; i < 16; i++){
+            powerset2.put("value:" + i);
+        }
+        Assert.assertThat(powerset1.size(), is(10));
+        Assert.assertThat(powerset2.size(), is(11));
+
+        PowerSet powerset3 = powerset1.union(powerset2);
+        for(int i = 0, k = 1; i < 15; i++){
+            Assert.assertThat(powerset3.slots[i], is("value:" + k));
+            k++;
+        }
+        Assert.assertThat(powerset1.size(), is(10));
+        Assert.assertThat(powerset2.size(), is(11));
+        Assert.assertThat(powerset3.size(), is(15));
     }
 }
