@@ -1,7 +1,6 @@
 public class BloomFilter {
     public int filter_len;
     public byte[] spisok;
-    int prevhash1;
 
     public BloomFilter(int f_len) {
         filter_len = f_len;
@@ -15,7 +14,7 @@ public class BloomFilter {
         int result = 0;
         for (int i = 0; i < str1.length(); i++) {
             int code = (int) str1.charAt(i);
-            result = ((result * 17) + code) % 32;
+            result = (result + code) * 17 % 32;
         }
         return result;
     }
@@ -26,7 +25,7 @@ public class BloomFilter {
         int result = 0;
         for (int i = 0; i < str1.length(); i++) {
             int code = (int) str1.charAt(i);
-            result = ((result * 223) + code) % 32;
+            result = (result + code) * 223 % 32;
         }
         return result;
     }
@@ -37,12 +36,21 @@ public class BloomFilter {
         // добавляем строку str1 в фильтр
     }
 
+    public boolean find(String str1, byte[] spisok) {
+        boolean result = false;
+        if (hash1(str1) == 1 && hash2(str1) == 1) {
+            result = true;
+        }
+        return result;
+    }
+
     public boolean isValue(String str1) {
         // проверка, имеется ли строка str1 в фильтре
-        if(spisok[hash1(str1)] == 1 && spisok[hash2(str1)] == 1){
-            return true;
+        for(int i = 0; i < spisok.length - 1; i++) {
+            if (spisok[hash1(str1)] == 1 && spisok[hash2(str1)] == 1) {
+                return true;
+            }
         }
-
         return false;
     }
 }
