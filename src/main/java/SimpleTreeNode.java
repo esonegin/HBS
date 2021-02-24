@@ -62,15 +62,23 @@ class SimpleTree<T> {
     }
 
     public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent) {
+        //Список узлов OriginalNode
         List<SimpleTreeNode<T>> alloriginalnode = FindNodesByValue(OriginalNode.NodeValue);
-        for (SimpleTreeNode<T> tSimpleTreeNode : alloriginalnode) {
-            for (int j = 0; j < tSimpleTreeNode.Parent.Children.size(); j++) {
-                if (tSimpleTreeNode.Parent.Children.get(j) == OriginalNode) {
-                    tSimpleTreeNode.Parent.Children.remove(j);
+
+        //Проходим по списку с OriginalNode
+        for (SimpleTreeNode<T> SimpleTreeNode : alloriginalnode) {
+
+            //Вставить в номер перемещаемого ребенка null
+            //Проходим по списку детей родителя перемещаемого узла узла
+            for (int j = 0; j < SimpleTreeNode.Parent.Children.size(); j++) {
+                if (SimpleTreeNode.Parent.Children.get(j).NodeValue == OriginalNode.NodeValue) {
+                    SimpleTreeNode.Parent.Children.remove(j);
                 }
             }
-            tSimpleTreeNode.Parent = NewParent;
-            NewParent.Children.add(tSimpleTreeNode);
+            //Присвоить перемещаемым детям нового родителя
+            SimpleTreeNode.Parent = NewParent;
+            //Присвоить родителю перемещаемых детей
+            NewParent.Children.add(SimpleTreeNode);
         }
 
     }
