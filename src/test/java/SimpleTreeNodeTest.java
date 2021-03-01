@@ -476,6 +476,23 @@ public class SimpleTreeNodeTest {
         Assert.assertThat(allnode.get(5).NodeValue, is("n2"));
         Assert.assertThat(allnode.get(6).NodeValue, is("n21"));
 
+        tree.DeleteNode( ((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0).Children.get(0));
+        tree.DeleteNode( ((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0));
+        tree.DeleteNode((SimpleTreeNode) tree.Root.Children.get(1));
+        tree.DeleteNode(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1));
+        tree.DeleteNode(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0));
+        tree.DeleteNode(((SimpleTreeNode<?>) tree.Root.Children.get(0)));
+        tree.DeleteNode(((SimpleTreeNode<?>) tree.Root));
+        allnode = tree.GetAllNodes();
+        Assert.assertThat(allnode.size(), is(0));
+        //Assert.assertThat(allnode.get(0).NodeValue, is(0));
+        //Assert.assertThat(allnode.get(1).NodeValue, is("n1"));
+        //Assert.assertThat(allnode.get(2).NodeValue, is("n12"));
+        //Assert.assertThat(allnode.get(3).NodeValue, is("n13"));
+        //Assert.assertThat(allnode.get(2).NodeValue, is("n12"));
+        //Assert.assertThat(allnode.get(5).NodeValue, is("n2"));
+        //Assert.assertThat(allnode.get(6).NodeValue, is("n21"));
+
     }
     @Test
     public void allNodesErrorTest() {
