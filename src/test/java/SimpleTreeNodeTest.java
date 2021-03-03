@@ -429,67 +429,33 @@ public class SimpleTreeNodeTest {
     }
     @Test
     public void errorTest() {
-        SimpleTreeNode node = new SimpleTreeNode(0, null);
-        SimpleTree tree = new SimpleTree(node);
-        tree.AddChild(tree.Root, new SimpleTreeNode("n1", tree.Root));
-        tree.AddChild(tree.Root, new SimpleTreeNode("n2", tree.Root));
-        tree.AddChild(tree.Root, new SimpleTreeNode("n3", tree.Root));
+        SimpleTreeNode<Integer> root = new SimpleTreeNode<Integer>(0, null);
+        SimpleTree<Integer> tree = new SimpleTree<Integer>(root);
 
-        tree.AddChild((SimpleTreeNode)tree.FindNodesByValue("n1").get(0),
-                new SimpleTreeNode("n12", (SimpleTreeNode)tree.FindNodesByValue("n1").get(0)));
+        SimpleTreeNode<Integer> n1 = new SimpleTreeNode<Integer>(1, root);
+        tree.AddChild(root, n1);
+        SimpleTreeNode<Integer> n2 = new SimpleTreeNode<Integer>(2, root);
+        tree.AddChild(root, n2);
+        SimpleTreeNode<Integer> n3 = new SimpleTreeNode<Integer>(3, root);
+        tree.AddChild(root, n3);
 
-        tree.AddChild((SimpleTreeNode)tree.FindNodesByValue("n1").get(0),
-                new SimpleTreeNode("n13", (SimpleTreeNode)tree.FindNodesByValue("n1").get(0)));
+        SimpleTreeNode<Integer> n12 = new SimpleTreeNode<Integer>(2, null);
+        tree.AddChild(n1, n12);
 
-        //Assert.assertThat(tree.Count(), is(6));
-        List<SimpleTreeNode> allnode = tree.GetAllNodes();
-        Assert.assertThat(allnode.size(), is(6));
+        SimpleTreeNode<Integer> n13 = new SimpleTreeNode<Integer>(3, null);
+        tree.AddChild(n1, n13);
 
-        tree.MoveNode((SimpleTreeNode)tree.FindNodesByValue("n2").get(0), (SimpleTreeNode)tree.FindNodesByValue("n3").get(0));
+        SimpleTreeNode<Integer> n21 = new SimpleTreeNode<Integer>(4, null);
+        tree.AddChild(n2, n21);
 
-        Assert.assertThat(tree.Root.Children.size(), is(2));
-        allnode = tree.GetAllNodes();
-        Assert.assertThat(allnode.size(), is(6));
-        Assert.assertThat(allnode.get(0).NodeValue, is(0));
-        Assert.assertThat(allnode.get(1).NodeValue, is("n1"));
-        Assert.assertThat(allnode.get(2).NodeValue, is("n3"));
-        Assert.assertThat(allnode.get(3).NodeValue, is("n12"));
-        Assert.assertThat(allnode.get(4).NodeValue, is("n13"));
-
-        allnode = tree.GetAllNodes();
-        Assert.assertThat(allnode.size(), is(6));
-        Assert.assertThat(allnode.get(0).NodeValue, is(0));
-        Assert.assertThat(allnode.get(1).NodeValue, is("n1"));
-        Assert.assertThat(allnode.get(2).NodeValue, is("n3"));
-        Assert.assertThat(allnode.get(3).NodeValue, is("n12"));
-        Assert.assertThat(allnode.get(4).NodeValue, is("n13"));
-        Assert.assertThat(allnode.get(5).NodeValue, is("n2"));
-
-
-        tree.AddChild((SimpleTreeNode)tree.FindNodesByValue("n2").get(0),
-                new SimpleTreeNode("n21", (SimpleTreeNode)tree.FindNodesByValue("n2").get(0)));
-
-        allnode = tree.GetAllNodes();
+        List<SimpleTreeNode<Integer>> allnode = tree.GetAllNodes();
         Assert.assertThat(allnode.size(), is(7));
-        Assert.assertThat(allnode.get(0).NodeValue, is(0));
-        Assert.assertThat(allnode.get(1).NodeValue, is("n1"));
-        Assert.assertThat(allnode.get(2).NodeValue, is("n3"));
-        Assert.assertThat(allnode.get(3).NodeValue, is("n12"));
-        Assert.assertThat(allnode.get(4).NodeValue, is("n13"));
-        Assert.assertThat(allnode.get(5).NodeValue, is("n2"));
-        Assert.assertThat(allnode.get(6).NodeValue, is("n21"));
 
-        tree.DeleteNode((SimpleTreeNode)tree.FindNodesByValue("n21").get(0));
-
+        tree.DeleteNode(n21);
         allnode = tree.GetAllNodes();
         Assert.assertThat(allnode.size(), is(6));
-        Assert.assertThat(allnode.get(0).NodeValue, is(0));
-        Assert.assertThat(allnode.get(1).NodeValue, is("n1"));
-        Assert.assertThat(allnode.get(2).NodeValue, is("n3"));
-        Assert.assertThat(allnode.get(3).NodeValue, is("n12"));
-        Assert.assertThat(allnode.get(4).NodeValue, is("n13"));
-        Assert.assertThat(allnode.get(5).NodeValue, is("n2"));
-        Assert.assertThat(tree.FindNodesByValue("n21").size(), is(0));
+        Assert.assertThat(tree.FindNodesByValue(4).size(), is(0));
+
 
     }
     @Test

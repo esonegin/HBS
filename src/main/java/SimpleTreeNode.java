@@ -18,23 +18,30 @@ class SimpleTree<T> {
     public SimpleTree(SimpleTreeNode<T> root) {
         Root = root;
     }
+
     public List<SimpleTreeNode<T>> allnodes = new ArrayList<>();
 
     public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild) {
         if (ParentNode == Root) {
             Root.Children.add(NewChild);
         } else {
+            NewChild.Parent = ParentNode;
             ParentNode.Children.add(NewChild);
         }
     }
 
     public void DeleteNode(SimpleTreeNode<T> NodeToDelete) {
-        for (int i = 0; i < NodeToDelete.Children.size(); i++) {
+        // ваш код удаления существующего узла NodeToDelete
+
+        //Дочерним узлам удаляемого проставляем в родители родителя удаляемого
+        //Добавляем дочерние удаляемого в дочерние к родителю удаляемого
+        for(int i = 0; i < NodeToDelete.Children.size(); i++) {
             NodeToDelete.Children.get(i).Parent = NodeToDelete.Parent;
             NodeToDelete.Parent.Children.add(NodeToDelete.Children.get(i));
         }
-        for (int i = 0; i < NodeToDelete.Parent.Children.size(); i++) {
-            if (NodeToDelete.Parent.Children.get(i) == NodeToDelete) {
+        //Удаляем удаляемое
+        for(int i = 0; i < NodeToDelete.Parent.Children.size(); i++){
+            if(NodeToDelete.Parent.Children.get(i) == NodeToDelete){
                 NodeToDelete.Parent.Children.remove(i);
             }
         }
@@ -48,7 +55,7 @@ class SimpleTree<T> {
         result.add(Root);
 
         //Собираем спиок детей ;
-        for(int i = 0; i < result.size(); i++){
+        for (int i = 0; i < result.size(); i++) {
             result.addAll(GetChildren(result.get(i)));
         }
 
