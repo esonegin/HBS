@@ -61,8 +61,10 @@ class BST<T> {
 
         }
 
-        assert teknod.Node != null;
-        if (teknod.Node.NodeKey == key
+        if(teknod.Node == null){
+            teknod = null;
+        }
+        else if (teknod.Node.NodeKey == key
                 || (teknod.Node.LeftChild != null && teknod.Node.LeftChild.NodeKey == key)
                 || (teknod.Node.RightChild != null && teknod.Node.RightChild.NodeKey == key)) {
             teknod.NodeHasKey = true;
@@ -81,7 +83,12 @@ class BST<T> {
         BSTNode node = new BSTNode(key, val, null);
         BSTFind<T> predfind = FindNodeByKey(key);
 
-        if (predfind.ToLeft && !predfind.NodeHasKey) {
+        if(predfind == null){
+            node.NodeKey = key;
+            node.NodeValue = val;
+            Root = node;
+        }
+        else if (predfind.ToLeft && !predfind.NodeHasKey) {
             predfind.Node.LeftChild = node;
             node.Parent = predfind.Node;
             return true;
