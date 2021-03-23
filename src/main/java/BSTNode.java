@@ -22,6 +22,7 @@ class BSTFind<T> {
     public BSTNode<T> Node;
     public boolean NodeHasKey;
     public boolean ToLeft;
+
     public BSTFind() {
         Node = null;
     }
@@ -38,49 +39,42 @@ class BST<T> {
         BSTFind<T> teknod = new BSTFind<>();
         teknod.Node = Root;
         while (teknod.Node != null) {
-            if(teknod.Node.NodeKey == key){
+            if (teknod.Node.NodeKey == key) {
                 break;
-            }
-            else if(teknod.Node.LeftChild != null &&teknod.Node.LeftChild.NodeKey == key){
+            } else if (teknod.Node.LeftChild != null && teknod.Node.LeftChild.NodeKey == key) {
                 teknod.Node = teknod.Node.LeftChild;
                 break;
-            }
-            else if(teknod.Node.RightChild != null && teknod.Node.RightChild.NodeKey == key){
+            } else if (teknod.Node.RightChild != null && teknod.Node.RightChild.NodeKey == key) {
                 teknod.Node = teknod.Node.RightChild;
                 break;
-            }
-            else if(teknod.Node.LeftChild == null && teknod.Node.RightChild == null){
+            } else if (teknod.Node.LeftChild == null && teknod.Node.RightChild == null) {
                 break;
-            }
-            else if(teknod.Node.LeftChild == null){
+            } else if (teknod.Node.LeftChild == null) {
                 break;
-            }
-            else if(teknod.Node.RightChild == null){
+            } else if (teknod.Node.RightChild == null) {
                 break;
-            }
-            else if(key < teknod.Node.NodeKey){
+            } else if (key < teknod.Node.NodeKey) {
                 teknod.Node = teknod.Node.LeftChild;
-            }
-            else {
+            } else {
                 teknod.Node = teknod.Node.RightChild;
             }
 
         }
 
-            assert teknod.Node != null;
-            if (teknod.Node.NodeKey == key
-                    || (teknod.Node.LeftChild != null && teknod.Node.LeftChild.NodeKey == key)
-                    || (teknod.Node.RightChild != null && teknod.Node.RightChild.NodeKey == key)) {
-                teknod.NodeHasKey = true;
-            } else if (teknod.Node.LeftChild == null) {
-                teknod.NodeHasKey = false;
-                teknod.ToLeft = true;
-            } else {
-                teknod.NodeHasKey = false;
-                teknod.ToLeft = false;
-            }
+        assert teknod.Node != null;
+        if (teknod.Node.NodeKey == key
+                || (teknod.Node.LeftChild != null && teknod.Node.LeftChild.NodeKey == key)
+                || (teknod.Node.RightChild != null && teknod.Node.RightChild.NodeKey == key)) {
+            teknod.NodeHasKey = true;
+        } else if (teknod.Node.LeftChild == null) {
+            teknod.NodeHasKey = false;
+            teknod.ToLeft = true;
+        } else {
+            teknod.NodeHasKey = false;
+            teknod.ToLeft = false;
+        }
 
-            return teknod;
+        return teknod;
     }
 
     public boolean AddKeyValue(int key, T val) {
@@ -95,7 +89,7 @@ class BST<T> {
             predfind.Node.RightChild = node;
             node.Parent = predfind.Node;
             return true;
-        }else if (!predfind.ToLeft && !predfind.NodeHasKey && predfind.Node.LeftChild.NodeKey > key) {
+        } else if (!predfind.ToLeft && !predfind.NodeHasKey && predfind.Node.LeftChild.NodeKey > key) {
             predfind.Node.RightChild = predfind.Node.LeftChild;
             predfind.Node.LeftChild = node;
             node.Parent = predfind.Node;
@@ -105,13 +99,12 @@ class BST<T> {
     }
 
     public BSTNode<T> FinMinMax(BSTNode<T> FromNode, boolean FindMax) {
-        if(!FindMax) {
+        if (!FindMax) {
             while (FromNode.LeftChild != null) {
                 FromNode = FromNode.LeftChild;
             }
             return FromNode;
-        }
-        else{
+        } else {
             while (FromNode.RightChild != null) {
                 FromNode = FromNode.RightChild;
             }
@@ -121,60 +114,55 @@ class BST<T> {
 
     public boolean DeleteNodeByKey(int key) {
         BSTFind<T> delnode = FindNodeByKey(key);
-        if(delnode.NodeHasKey){
-        if(delnode.Node.LeftChild == null && delnode.Node.RightChild == null
-                && delnode.Node.Parent.LeftChild != null && delnode.Node.Parent.LeftChild.NodeKey == delnode.Node.NodeKey){
-            FindNodeByKey(delnode.Node.Parent.NodeKey).Node.LeftChild = null;
-            delnode.Node = null;
-        }
+        if (delnode.NodeHasKey) {
+            if (delnode.Node.Parent == null) {
+                FindNodeByKey(key).Node = null;
+                Root = null;
+                delnode.Node = null;
 
-        else if(delnode.Node.LeftChild == null && delnode.Node.RightChild == null
-                && delnode.Node.Parent.RightChild != null && delnode.Node.Parent.RightChild.NodeKey == delnode.Node.NodeKey){
-            FindNodeByKey(delnode.Node.Parent.NodeKey).Node.RightChild = null;
-            delnode.Node = null;
-        }
+            } else if (delnode.Node.LeftChild == null && delnode.Node.RightChild == null
+                    && delnode.Node.Parent.LeftChild != null && delnode.Node.Parent.LeftChild.NodeKey == delnode.Node.NodeKey) {
+                FindNodeByKey(delnode.Node.Parent.NodeKey).Node.LeftChild = null;
+                delnode.Node = null;
+            } else if (delnode.Node.LeftChild == null && delnode.Node.RightChild == null
+                    && delnode.Node.Parent.RightChild != null && delnode.Node.Parent.RightChild.NodeKey == delnode.Node.NodeKey) {
+                FindNodeByKey(delnode.Node.Parent.NodeKey).Node.RightChild = null;
+                delnode.Node = null;
+            } else if (delnode.Node.RightChild == null) {
+                delnode.Node = delnode.Node.LeftChild;
+                assert delnode.Node != null;
+                delnode.Node.LeftChild = null;
+            } else {
+                BSTNode<T> changenode = delnode.Node.RightChild;
 
-        else if(delnode.Node.RightChild == null){
-            delnode.Node = delnode.Node.LeftChild;
-            assert delnode.Node != null;
-            delnode.Node.LeftChild = null;
-        }
+                while (changenode.LeftChild != null) {
+                    changenode = changenode.LeftChild;
+                }
 
-        else {
-            BSTNode<T> changenode = delnode.Node.RightChild;
+                if (changenode.Parent.RightChild == changenode) {
+                    delnode.Node.RightChild = null;
+                    changenode.Parent = delnode.Node.Parent;
+                    changenode.LeftChild = delnode.Node.LeftChild;
+                    changenode.RightChild = delnode.Node.RightChild;
+                    delnode.Node = changenode;
 
-            while (changenode.LeftChild != null) {
-                changenode = changenode.LeftChild;
+                } else if (changenode.Parent.LeftChild == changenode) {
+                    changenode.Parent.LeftChild = null;
+                    changenode.Parent = delnode.Node.Parent;
+                    changenode.LeftChild = delnode.Node.LeftChild;
+                    changenode.RightChild = delnode.Node.RightChild;
+                    delnode.Node = changenode;
+
+                }
             }
 
-            if (changenode.Parent.RightChild == changenode) {
-                delnode.Node.RightChild = null;
-                changenode.Parent = delnode.Node.Parent;
-                changenode.LeftChild = delnode.Node.LeftChild;
-                changenode.RightChild = delnode.Node.RightChild;
-                delnode.Node = changenode;
-
+            if (delnode.Node == null) {
+                return true;
+            } else if (FindNodeByKey(delnode.Node.Parent.NodeKey).Node.LeftChild.NodeKey == key) {
+                FindNodeByKey(delnode.Node.Parent.NodeKey).Node.LeftChild = delnode.Node;
+            } else if (FindNodeByKey(delnode.Node.Parent.NodeKey).Node.RightChild.NodeKey == key) {
+                FindNodeByKey(delnode.Node.Parent.NodeKey).Node.RightChild = delnode.Node;
             }
-            else if (changenode.Parent.LeftChild == changenode) {
-                changenode.Parent.LeftChild = null;
-                changenode.Parent = delnode.Node.Parent;
-                changenode.LeftChild = delnode.Node.LeftChild;
-                changenode.RightChild = delnode.Node.RightChild;
-                delnode.Node = changenode;
-
-            }
-        }
-
-        if(delnode.Node == null){
-            return true;
-        }
-
-        else if (FindNodeByKey(delnode.Node.Parent.NodeKey).Node.LeftChild.NodeKey  == key){
-            FindNodeByKey(delnode.Node.Parent.NodeKey).Node.LeftChild = delnode.Node;
-        }
-        else if(FindNodeByKey(delnode.Node.Parent.NodeKey).Node.RightChild.NodeKey  == key){
-            FindNodeByKey(delnode.Node.Parent.NodeKey).Node.RightChild = delnode.Node;
-        }
 
             return true;
         }
@@ -183,9 +171,14 @@ class BST<T> {
 
     public int Count() {
         List<BSTNode<T>> result = new ArrayList<>();
-        result.add(Root);
-        for (int i = 0; i < result.size(); i++) {
-            result.addAll(GetChildren(result.get(i)));
+        if(Root == null){
+            return 0;
+        }
+        else {
+            result.add(Root);
+            for (int i = 0; i < result.size(); i++) {
+                result.addAll(GetChildren(result.get(i)));
+            }
         }
         return result.size();
     }
@@ -193,10 +186,10 @@ class BST<T> {
     public List<BSTNode<T>> GetChildren(BSTNode<T> parent) {
 
         List<BSTNode<T>> rootchildren = new ArrayList<>();
-        if(parent.LeftChild != null){
+        if (parent.LeftChild != null) {
             rootchildren.add(parent.LeftChild);
         }
-        if(parent.RightChild != null){
+        if (parent.RightChild != null) {
             rootchildren.add(parent.RightChild);
         }
         return rootchildren;

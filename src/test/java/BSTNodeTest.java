@@ -588,4 +588,27 @@ public class BSTNodeTest {
         Assert.assertThat(tree.Count(), is(11));
 
     }
+
+    @Test
+    public void deleteAllTest() {
+
+        BSTNode root = new BSTNode(8, 8, null);
+        BST tree = new BST(root);
+
+        Assert.assertThat(tree.Count(), is(1));
+
+        tree.AddKeyValue(12, 12);
+        Assert.assertThat(tree.Count(), is(2));
+        tree.AddKeyValue(4, 4);
+        Assert.assertThat(tree.Count(), is(3));
+
+        Assert.assertThat(tree.DeleteNodeByKey(12), is(true));
+        Assert.assertThat(tree.Count(), is(2));
+
+        Assert.assertThat(tree.DeleteNodeByKey(4), is(true));
+        Assert.assertThat(tree.Count(), is(1));
+
+        Assert.assertThat(tree.DeleteNodeByKey(8), is(true));
+        Assert.assertThat(tree.Count(), is(0));
+    }
 }
