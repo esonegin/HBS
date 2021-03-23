@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 class BSTNode<T> {
-    public int NodeKey; // ключ узла
-    public T NodeValue; // значение в узле
-    public BSTNode<T> Parent; // родитель или null для корня
-    public BSTNode<T> LeftChild; // левый потомок
-    public BSTNode<T> RightChild; // правый потомок
+    public int NodeKey;
+    public T NodeValue;
+    public BSTNode<T> Parent;
+    public BSTNode<T> LeftChild;
+    public BSTNode<T> RightChild;
 
 
     public BSTNode(int key, T val, BSTNode<T> parent) {
@@ -18,37 +18,25 @@ class BSTNode<T> {
     }
 }
 
-// промежуточный результат поиска
 class BSTFind<T> {
-    // null если в дереве вообще нету узлов
     public BSTNode<T> Node;
-
-    // true если узел найден
     public boolean NodeHasKey;
-
-    // true, если родительскому узлу надо добавить новый левым
     public boolean ToLeft;
-
     public BSTFind() {
         Node = null;
     }
 }
 
 class BST<T> {
-    BSTNode<T> Root; // корень дерева, или null
+    BSTNode<T> Root;
 
     public BST(BSTNode<T> node) {
         Root = node;
     }
 
     public BSTFind<T> FindNodeByKey(int key) {
-
-        // ищем в дереве узел и сопутствующую информацию по ключу
-        //Создаем узел с промежуточным реузльтатом поиска
         BSTFind<T> teknod = new BSTFind<>();
         teknod.Node = Root;
-
-        //Ищем подходящий узел
         while (teknod.Node != null) {
             if(teknod.Node.NodeKey == key){
                 break;
@@ -96,11 +84,7 @@ class BST<T> {
     }
 
     public boolean AddKeyValue(int key, T val) {
-        // добавляем ключ-значение в дерево
-        //Создаем узел с парметрами переданными в метод
         BSTNode node = new BSTNode(key, val, null);
-
-        //Ищем узел и получаем промежуточный параметр с параметрами
         BSTFind<T> predfind = FindNodeByKey(key);
 
         if (predfind.ToLeft && !predfind.NodeHasKey) {
@@ -117,12 +101,10 @@ class BST<T> {
             node.Parent = predfind.Node;
             return true;
         }
-        return false; // если ключ уже есть
+        return false;
     }
 
     public BSTNode<T> FinMinMax(BSTNode<T> FromNode, boolean FindMax) {
-        // ищем максимальный/минимальный ключ в поддереве
-
         if(!FindMax) {
             while (FromNode.LeftChild != null) {
                 FromNode = FromNode.LeftChild;
@@ -138,12 +120,8 @@ class BST<T> {
     }
 
     public boolean DeleteNodeByKey(int key) {
-        // удаляем узел по ключу
-
         BSTFind<T> delnode = FindNodeByKey(key);
-
         if(delnode.NodeHasKey){
-        //Если лист, то удаляем его
         if(delnode.Node.LeftChild == null && delnode.Node.RightChild == null
                 && delnode.Node.Parent.LeftChild != null && delnode.Node.Parent.LeftChild.NodeKey == delnode.Node.NodeKey){
             FindNodeByKey(delnode.Node.Parent.NodeKey).Node.LeftChild = null;
@@ -156,14 +134,12 @@ class BST<T> {
             delnode.Node = null;
         }
 
-        //Если нет правого потомка, то вставляем вместо узла левого потомка и удаляем потомка
         else if(delnode.Node.RightChild == null){
             delnode.Node = delnode.Node.LeftChild;
             assert delnode.Node != null;
             delnode.Node.LeftChild = null;
         }
 
-        //Если есть правый потомок - переходим к нему
         else {
             BSTNode<T> changenode = delnode.Node.RightChild;
 
@@ -202,20 +178,16 @@ class BST<T> {
 
             return true;
         }
-        return false; // если узел не найден
+        return false;
     }
 
     public int Count() {
         List<BSTNode<T>> result = new ArrayList<>();
-
-        //Добавляем корень
         result.add(Root);
-        //Собираем спиок детей ;
         for (int i = 0; i < result.size(); i++) {
             result.addAll(GetChildren(result.get(i)));
         }
-
-        return result.size(); // количество узлов в дереве
+        return result.size();
     }
 
     public List<BSTNode<T>> GetChildren(BSTNode<T> parent) {
