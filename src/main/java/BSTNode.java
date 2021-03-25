@@ -87,6 +87,7 @@ class BST<T> {
             node.NodeKey = key;
             node.NodeValue = val;
             Root = node;
+            return true;
         }
         else if (predfind.ToLeft && !predfind.NodeHasKey) {
             predfind.Node.LeftChild = node;

@@ -618,28 +618,34 @@ public class BSTNodeTest {
         BSTNode root = new BSTNode(8, 8, null);
         BST tree = new BST(root);
 
+        Assert.assertThat(tree.AddKeyValue(8, 8), is(false));
         Assert.assertThat(tree.Count(), is(1));
 
         tree.AddKeyValue(12, 12);
         Assert.assertThat(tree.Count(), is(2));
+        Assert.assertThat(tree.AddKeyValue(8, 8), is(false));
+        Assert.assertThat(tree.AddKeyValue(12, 12), is(false));
 
         for(int i = 0; i < 1000; i++){
+            Assert.assertThat(tree.AddKeyValue(8, 8), is(false));
             Assert.assertThat(tree.AddKeyValue(12, 12), is(false));
         }
         Assert.assertThat(tree.Count(), is(2));
 
         tree.AddKeyValue(4, 4);
         Assert.assertThat(tree.Count(), is(3));
+        Assert.assertThat(tree.AddKeyValue(8, 8), is(false));
+        Assert.assertThat(tree.AddKeyValue(12, 12), is(false));
+        Assert.assertThat(tree.AddKeyValue(4, 4), is(false));
 
         for(int i = 0; i < 1000; i++){
+            Assert.assertThat(tree.Count(), is(3));
+            Assert.assertThat(tree.AddKeyValue(8, 8), is(false));
             Assert.assertThat(tree.AddKeyValue(12, 12), is(false));
-        }
-        Assert.assertThat(tree.Count(), is(3));
-
-        for(int i = 0; i < 1000; i++){
             Assert.assertThat(tree.AddKeyValue(4, 4), is(false));
         }
         Assert.assertThat(tree.Count(), is(3));
+
 
         Assert.assertThat(tree.DeleteNodeByKey(12), is(true));
         Assert.assertThat(tree.Count(), is(2));
@@ -650,7 +656,9 @@ public class BSTNodeTest {
         Assert.assertThat(tree.DeleteNodeByKey(8), is(true));
         Assert.assertThat(tree.Count(), is(0));
 
-        tree.AddKeyValue(8, 8);
+        Assert.assertThat(tree.AddKeyValue(8, 8), is(true));
+        Assert.assertThat(tree.Count(), is(1));
+
         Assert.assertThat(tree.FindNodeByKey(8).Node.NodeKey, is(8));
         Assert.assertThat(tree.FindNodeByKey(8).Node.NodeValue, is(8));
         Assert.assertThat(tree.FindNodeByKey(8).NodeHasKey, is(true));
@@ -660,6 +668,8 @@ public class BSTNodeTest {
         Assert.assertThat(tree.Count(), is(1));
 
         tree.AddKeyValue(8, 8);
+        Assert.assertThat(tree.AddKeyValue(8, 8), is(false));
+        Assert.assertThat(tree.Count(), is(1));
         Assert.assertThat(tree.FindNodeByKey(8).Node.NodeKey, is(8));
         Assert.assertThat(tree.FindNodeByKey(8).Node.NodeValue, is(8));
         Assert.assertThat(tree.FindNodeByKey(8).NodeHasKey, is(true));
