@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
+
 
 class BSTNode<T> {
     public int NodeKey;
@@ -33,7 +33,6 @@ class BST<T> {
     BSTNode<T> Root;
     BSTNode<T> teknode;
     List<BSTNode<T>> allnodes = new ArrayList<>();
-    Stack<BSTNode<T>> stack = new Stack();
 
     public BST(BSTNode<T> node) {
         Root = node;
@@ -85,7 +84,7 @@ class BST<T> {
     }
 
     public boolean AddKeyValue(int key, T val) {
-        BSTNode node = new BSTNode(key, val, null);
+        BSTNode<T> node = new BSTNode<>(key, val, null);
         BSTFind<T> predfind = FindNodeByKey(key);
 
         if (predfind == null) {
@@ -216,22 +215,35 @@ class BST<T> {
     }
 
     public List<BSTNode<T>> DeepAllNodes(int order) {
-        stack.clear();
         allnodes.clear();
-        //stack.push(Root);
-        //allnodes.add(Root);
-        if(order == 0){
+        if (order == 0) {
             InOrder(teknode);
+        } else if (order == 1) {
+            PostOrder(teknode);
+        } else if (order == 2) {
+            PreOrder(teknode);
         }
         return allnodes;
     }
 
-    public BSTNode<T> InOrder(BSTNode<T> teknode) {
-
-        if(teknode == null) return null;
+    public void InOrder(BSTNode<T> teknode) {
+        if (teknode == null) return;
         InOrder(teknode.LeftChild);
         allnodes.add(teknode);
-        InOrder(teknode.LeftChild);
-        return teknode;
+        InOrder(teknode.RightChild);
+    }
+
+    public void PostOrder(BSTNode<T> teknode) {
+        if (teknode == null) return;
+        PostOrder(teknode.LeftChild);
+        PostOrder(teknode.RightChild);
+        allnodes.add(teknode);
+    }
+
+    public void PreOrder(BSTNode<T> teknode) {
+        if (teknode == null) return;
+        allnodes.add(teknode);
+        PreOrder(teknode.LeftChild);
+        PreOrder(teknode.RightChild);
     }
 }

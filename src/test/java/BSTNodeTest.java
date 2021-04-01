@@ -682,7 +682,7 @@ public class BSTNodeTest {
     }
 
     @Test
-    public void defaultWideAllNodesTest() {
+    public void defaultDeepAllNodesTest() {
 
         BSTNode root = new BSTNode(8, 8, null);
         BST tree = new BST(root);
@@ -711,9 +711,9 @@ public class BSTNodeTest {
     }
 
     @Test
-    public void default2WideAllNodesTest() {
+    public void default2DeepAllNodesTest() {
 
-        BSTNode root = new BSTNode(1, 1, null);
+        BSTNode root = new BSTNode(8, 8, null);
         BST tree = new BST(root);
 
         tree.AddKeyValue(12, 12);
@@ -721,10 +721,55 @@ public class BSTNodeTest {
         tree.AddKeyValue(5, 5);
         tree.AddKeyValue(6, 6);
 
-        Assert.assertThat(tree.FindNodeByKey(1).Node.NodeKey, is(1));
-        Assert.assertThat(tree.FindNodeByKey(1).Node.LeftChild.NodeKey, is(9));
-        Assert.assertThat(tree.FindNodeByKey(1).Node.RightChild.NodeKey, is(12));
+        Assert.assertThat(tree.FindNodeByKey(8).Node.NodeKey, is(8));
+        Assert.assertThat(tree.FindNodeByKey(8).Node.LeftChild.NodeKey, is(9));
+        Assert.assertThat(tree.FindNodeByKey(8).Node.RightChild.NodeKey, is(12));
         Assert.assertThat(tree.FindNodeByKey(9).Node.LeftChild.NodeKey, is(5));
         Assert.assertThat(tree.FindNodeByKey(9).Node.RightChild.NodeKey, is(6));
+
+        List<BSTNode> allnodes = tree.DeepAllNodes(0);
+
+        Assert.assertThat(allnodes.get(0).NodeKey, is(5));
+        Assert.assertThat(allnodes.get(1).NodeKey, is(9));
+        Assert.assertThat(allnodes.get(2).NodeKey, is(6));
+        Assert.assertThat(allnodes.get(3).NodeKey, is(8));
+        Assert.assertThat(allnodes.get(4).NodeKey, is(12));
+
+        allnodes = tree.DeepAllNodes(1);
+
+        Assert.assertThat(allnodes.get(0).NodeKey, is(5));
+        Assert.assertThat(allnodes.get(1).NodeKey, is(6));
+        Assert.assertThat(allnodes.get(2).NodeKey, is(9));
+        Assert.assertThat(allnodes.get(3).NodeKey, is(12));
+        Assert.assertThat(allnodes.get(4).NodeKey, is(8));
+
+        allnodes = tree.DeepAllNodes(2);
+
+        Assert.assertThat(allnodes.get(0).NodeKey, is(8));
+        Assert.assertThat(allnodes.get(1).NodeKey, is(9));
+        Assert.assertThat(allnodes.get(2).NodeKey, is(5));
+        Assert.assertThat(allnodes.get(3).NodeKey, is(6));
+        Assert.assertThat(allnodes.get(4).NodeKey, is(12));
+
+    }
+
+    @Test
+    public void default2WideAllNodesTest() {
+        BSTNode root = new BSTNode(8, 8, null);
+        BST tree = new BST(root);
+
+        tree.AddKeyValue(12, 12);
+        tree.AddKeyValue(9, 9);
+        tree.AddKeyValue(5, 5);
+        tree.AddKeyValue(6, 6);
+
+        List<BSTNode> allnodes = tree.WideAllNodes();
+
+        Assert.assertThat(allnodes.get(0).NodeKey, is(8));
+        Assert.assertThat(allnodes.get(1).NodeKey, is(9));
+        Assert.assertThat(allnodes.get(2).NodeKey, is(12));
+        Assert.assertThat(allnodes.get(3).NodeKey, is(5));
+        Assert.assertThat(allnodes.get(4).NodeKey, is(6));
+
     }
 }
