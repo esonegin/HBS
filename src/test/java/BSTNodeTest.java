@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 
 
@@ -626,7 +628,7 @@ public class BSTNodeTest {
         Assert.assertThat(tree.AddKeyValue(8, 8), is(false));
         Assert.assertThat(tree.AddKeyValue(12, 12), is(false));
 
-        for(int i = 0; i < 1000; i++){
+        for (int i = 0; i < 1000; i++) {
             Assert.assertThat(tree.AddKeyValue(8, 8), is(false));
             Assert.assertThat(tree.AddKeyValue(12, 12), is(false));
         }
@@ -638,7 +640,7 @@ public class BSTNodeTest {
         Assert.assertThat(tree.AddKeyValue(12, 12), is(false));
         Assert.assertThat(tree.AddKeyValue(4, 4), is(false));
 
-        for(int i = 0; i < 1000; i++){
+        for (int i = 0; i < 1000; i++) {
             Assert.assertThat(tree.Count(), is(3));
             Assert.assertThat(tree.AddKeyValue(8, 8), is(false));
             Assert.assertThat(tree.AddKeyValue(12, 12), is(false));
@@ -677,5 +679,52 @@ public class BSTNodeTest {
         Assert.assertThat(tree.FindNodeByKey(8).Node.LeftChild == null, is(true));
         Assert.assertThat(tree.FindNodeByKey(8).Node.RightChild == null, is(true));
         Assert.assertThat(tree.Count(), is(1));
+    }
+
+    @Test
+    public void defaultWideAllNodesTest() {
+
+        BSTNode root = new BSTNode(8, 8, null);
+        BST tree = new BST(root);
+
+        tree.AddKeyValue(12, 12);
+        tree.AddKeyValue(4, 4);
+        tree.AddKeyValue(6, 6);
+        tree.AddKeyValue(2, 2);
+        tree.AddKeyValue(14, 14);
+        tree.AddKeyValue(10, 10);
+        tree.AddKeyValue(1, 1);
+        tree.AddKeyValue(3, 3);
+        tree.AddKeyValue(5, 5);
+        tree.AddKeyValue(7, 7);
+        tree.AddKeyValue(15, 15);
+        tree.AddKeyValue(13, 13);
+        tree.AddKeyValue(11, 11);
+        tree.AddKeyValue(9, 9);
+
+
+        List<BSTNode> allnodes = tree.DeepAllNodes(0);
+
+        for (int i = 0; i < allnodes.size(); i++) {
+            System.out.println(allnodes.get(i).NodeKey);
+        }
+    }
+
+    @Test
+    public void default2WideAllNodesTest() {
+
+        BSTNode root = new BSTNode(1, 1, null);
+        BST tree = new BST(root);
+
+        tree.AddKeyValue(12, 12);
+        tree.AddKeyValue(9, 9);
+        tree.AddKeyValue(5, 5);
+        tree.AddKeyValue(6, 6);
+
+        Assert.assertThat(tree.FindNodeByKey(1).Node.NodeKey, is(1));
+        Assert.assertThat(tree.FindNodeByKey(1).Node.LeftChild.NodeKey, is(9));
+        Assert.assertThat(tree.FindNodeByKey(1).Node.RightChild.NodeKey, is(12));
+        Assert.assertThat(tree.FindNodeByKey(9).Node.LeftChild.NodeKey, is(5));
+        Assert.assertThat(tree.FindNodeByKey(9).Node.RightChild.NodeKey, is(6));
     }
 }
