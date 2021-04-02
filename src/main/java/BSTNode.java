@@ -32,7 +32,7 @@ class BSTFind<T> {
 class BST<T> {
     BSTNode<T> Root;
     BSTNode<T> teknode;
-    List<BSTNode<T>> allnodes = new ArrayList<>();
+    ArrayList<BSTNode> allnodes = new ArrayList<BSTNode>();
 
     public BST(BSTNode<T> node) {
         Root = node;
@@ -205,8 +205,8 @@ class BST<T> {
         return rootchildren;
     }
 
-    public List<BSTNode<T>> WideAllNodes() {
-        List<BSTNode<T>> allnodes = new ArrayList<>();
+    public ArrayList<BSTNode> WideAllNodes() {
+        ArrayList<BSTNode> allnodes = new ArrayList<>();
         allnodes.add(Root);
         for (int i = 0; i < allnodes.size(); i++) {
             allnodes.addAll(GetChildren(allnodes.get(i)));
@@ -214,7 +214,7 @@ class BST<T> {
         return allnodes;
     }
 
-    public List<BSTNode<T>> DeepAllNodes(int order) {
+    public ArrayList<BSTNode> DeepAllNodes(int order) {
         allnodes.clear();
         if (order == 0) {
             InOrder(teknode);

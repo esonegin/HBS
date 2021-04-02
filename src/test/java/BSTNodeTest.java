@@ -4,7 +4,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 import static org.hamcrest.CoreMatchers.is;
 
@@ -703,7 +704,7 @@ public class BSTNodeTest {
         tree.AddKeyValue(9, 9);
 
 
-        List<BSTNode> allnodes = tree.DeepAllNodes(0);
+        ArrayList<BSTNode> allnodes = tree.DeepAllNodes(0);
 
         for (int i = 0; i < allnodes.size(); i++) {
             System.out.println(allnodes.get(i).NodeKey);
@@ -727,7 +728,7 @@ public class BSTNodeTest {
         Assert.assertThat(tree.FindNodeByKey(9).Node.LeftChild.NodeKey, is(5));
         Assert.assertThat(tree.FindNodeByKey(9).Node.RightChild.NodeKey, is(6));
 
-        List<BSTNode> allnodes = tree.DeepAllNodes(0);
+        ArrayList<BSTNode> allnodes = tree.DeepAllNodes(0);
 
         Assert.assertThat(allnodes.get(0).NodeKey, is(5));
         Assert.assertThat(allnodes.get(1).NodeKey, is(9));
@@ -763,7 +764,7 @@ public class BSTNodeTest {
         tree.AddKeyValue(5, 5);
         tree.AddKeyValue(6, 6);
 
-        List<BSTNode> allnodes = tree.WideAllNodes();
+        ArrayList<BSTNode> allnodes = tree.WideAllNodes();
 
         Assert.assertThat(allnodes.get(0).NodeKey, is(8));
         Assert.assertThat(allnodes.get(1).NodeKey, is(9));
