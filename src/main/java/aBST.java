@@ -15,6 +15,9 @@ class aBST {
 
     public Integer FindKeyIndex(int key) {
         int teknode = 0;
+        if(Tree[0] == null){
+            return 0;
+        }
         while (Tree[teknode] != null) {
             if (Tree[teknode] == key) {
                 break;

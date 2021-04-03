@@ -128,7 +128,7 @@ public class aBSTTest {
     @Test
     public void acceptFindTest() {
         aBST tree = new aBST(3);
-        Assert.assertThat(tree.FindKeyIndex(8), is(-0));
+        Assert.assertThat(tree.FindKeyIndex(8), is(0));
         tree.AddKey(8);
         Assert.assertThat(tree.Tree[0], is(8));
         Assert.assertThat(tree.FindKeyIndex(8), is(0));
