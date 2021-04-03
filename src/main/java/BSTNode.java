@@ -32,7 +32,7 @@ class BSTFind<T> {
 class BST<T> {
     BSTNode<T> Root;
     BSTNode<T> teknode;
-    ArrayList<BSTNode> allnodes = new ArrayList<BSTNode>();
+    ArrayList<BSTNode> allnodes = new ArrayList<>();
 
     public BST(BSTNode<T> node) {
         Root = node;

@@ -49,8 +49,6 @@ class SimpleTree<T> {
 
     public List<SimpleTreeNode<T>> GetAllNodes() {
         List<SimpleTreeNode<T>> result = new ArrayList<>();
-
-
         //Добавляем корень
         result.add(Root);
 
