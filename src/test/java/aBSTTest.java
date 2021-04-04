@@ -20,7 +20,7 @@ public class aBSTTest {
 
     @Test
     public void defaultAddTest() {
-        aBST tree = new aBST(4);
+        aBST tree = new aBST(3);
 
         tree.AddKey(8);
         tree.AddKey(4);
@@ -62,7 +62,7 @@ public class aBSTTest {
 
     @Test
     public void defaultFindTest() {
-        aBST tree = new aBST(4);
+        aBST tree = new aBST(3);
 
         tree.AddKey(8);
         tree.AddKey(4);
@@ -99,7 +99,7 @@ public class aBSTTest {
 
     @Test
     public void nullFindTest() {
-        aBST tree = new aBST(4);
+        aBST tree = new aBST(3);
 
         tree.AddKey(8);
         tree.AddKey(4);
@@ -127,7 +127,7 @@ public class aBSTTest {
 
     @Test
     public void acceptFindTest() {
-        aBST tree = new aBST(3);
+        aBST tree = new aBST(2);
         Assert.assertThat(tree.FindKeyIndex(8), is(0));
         tree.AddKey(8);
         Assert.assertThat(tree.Tree[0], is(8));
@@ -205,5 +205,20 @@ public class aBSTTest {
         Assert.assertThat(tree.FindKeyIndex(14), is(6));
 
         Assert.assertThat(tree.FindKeyIndex(1) == null, is(true));
+    }
+
+    @Test
+    public void depthTest() {
+        aBST tree0 = new aBST(0);
+        Assert.assertThat(tree0.Tree.length, is(1));
+
+        aBST tree1 = new aBST(1);
+        Assert.assertThat(tree1.Tree.length, is(3));
+
+        aBST tree2 = new aBST(2);
+        Assert.assertThat(tree2.Tree.length, is(7));
+
+        aBST tree3 = new aBST(3);
+        Assert.assertThat(tree3.Tree.length, is(15));
     }
 }

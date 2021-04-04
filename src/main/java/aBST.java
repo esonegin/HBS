@@ -5,7 +5,7 @@ class aBST {
 
     public aBST(int depth) {
         int tree_size = 1;
-        for (int i = 1; i <= depth; i++) {
+        for (int i = 1; i <= depth + 1; i++) {
             tree_size = tree_size * 2;
         }
         tree_size = tree_size - 1;
@@ -51,6 +51,10 @@ class aBST {
 
     public int AddKey(int key) {
         Integer predfind = FindKeyIndex(key);
+        if(predfind == 0 && Tree[0] == null){
+            Tree[0] = key;
+            return 0;
+        }
         if (predfind < 0) {
             Tree[predfind * (-1)] = key;
             return predfind * (-1);
