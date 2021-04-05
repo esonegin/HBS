@@ -297,20 +297,20 @@ public class aBSTTest {
         Assert.assertThat(tree.FindKeyIndex(75), is(2));
 
         for(int i = 0; i < 1000; i++){
-            Assert.assertThat(tree.FindKeyIndex(37), is(-3));
+            Assert.assertThat(tree.FindKeyIndex(37), is(-4));
         }
         for(int i = 0; i < 1000; i++){
-            Assert.assertThat(tree.AddKey(37), is(3));
+            Assert.assertThat(tree.AddKey(37), is(4));
         }
         for(int i = 0; i < 1000; i++){
-            Assert.assertThat(tree.FindKeyIndex(37), is(3));
+            Assert.assertThat(tree.FindKeyIndex(37), is(4));
         }
 
         Assert.assertThat(tree.Tree[0], is(50));
         Assert.assertThat(tree.Tree[1], is(25));
         Assert.assertThat(tree.Tree[2], is(75));
-        Assert.assertThat(tree.Tree[3], is(37));
-        Assert.assertThat(tree.Tree[4] == null, is(true));
+        Assert.assertThat(tree.Tree[4], is(37));
+        Assert.assertThat(tree.Tree[3] == null, is(true));
         Assert.assertThat(tree.Tree[5] == null, is(true));
         Assert.assertThat(tree.Tree[6] == null, is(true));
 
@@ -323,6 +323,15 @@ public class aBSTTest {
         Assert.assertThat(tree.AddKey(50), is(0));
         Assert.assertThat(tree.AddKey(25), is(1));
         Assert.assertThat(tree.AddKey(75), is(2));
-        Assert.assertThat(tree.AddKey(37), is(3));
+        Assert.assertThat(tree.AddKey(37), is(4));
+        Assert.assertThat(tree.AddKey(31), is(9));
+
+        Assert.assertThat(tree.AddKey(62), is(5));
+        Assert.assertThat(tree.AddKey(84), is(6));
+
+
+        Assert.assertThat(tree.AddKey(43), is(10));
+        Assert.assertThat(tree.AddKey(55), is(11));
+        Assert.assertThat(tree.AddKey(92), is(14));
     }
 }
