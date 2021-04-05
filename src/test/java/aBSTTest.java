@@ -315,4 +315,14 @@ public class aBSTTest {
         Assert.assertThat(tree.Tree[6] == null, is(true));
 
     }
+    @Test
+    public void error2Test() {
+        aBST tree = new aBST(3);
+        Assert.assertThat(tree.Tree.length, is(15));
+
+        Assert.assertThat(tree.AddKey(50), is(0));
+        Assert.assertThat(tree.AddKey(25), is(1));
+        Assert.assertThat(tree.AddKey(75), is(2));
+        Assert.assertThat(tree.AddKey(37), is(3));
+    }
 }
