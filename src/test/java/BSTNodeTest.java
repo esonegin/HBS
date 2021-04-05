@@ -773,4 +773,16 @@ public class BSTNodeTest {
         Assert.assertThat(allnodes.get(4).NodeKey, is(6));
 
     }
+
+    @Test
+    public void dopTest() {
+        BSTNode root = new BSTNode(50, 50, null);
+        BST tree = new BST(root);
+        tree.AddKeyValue(50, 50);
+        tree.AddKeyValue(25, 25);
+        tree.AddKeyValue(75, 75);
+        tree.AddKeyValue(37, 37);
+        tree.Root.NodeKey = 1;
+    }
+
 }

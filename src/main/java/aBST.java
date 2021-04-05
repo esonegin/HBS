@@ -14,8 +14,9 @@ class aBST {
     }
 
     public Integer FindKeyIndex(int key) {
+
         int teknode = 0;
-        if(Tree[0] == null){
+        if (Tree[0] == null) {
             return 0;
         }
         while (Tree[teknode] != null) {
@@ -37,7 +38,8 @@ class aBST {
             } else if (Tree[2 * teknode + 2] == null) {
                 teknode = 2 * teknode + 2;
                 break;
-            } else if (key < Tree[teknode]) {
+
+            }  else if (key < Tree[teknode]) {
                 teknode = 2 * teknode + 1;
             } else {
                 teknode = 2 * teknode + 2;
@@ -51,7 +53,11 @@ class aBST {
 
     public int AddKey(int key) {
         Integer predfind = FindKeyIndex(key);
-        if(predfind == 0 && Tree[0] == null){
+
+        if(predfind == null){
+            return -1;
+        }
+        if (predfind == 0 && Tree[0] == null) {
             Tree[0] = key;
             return 0;
         }
@@ -59,8 +65,11 @@ class aBST {
             Tree[predfind * (-1)] = key;
             return predfind * (-1);
         }
-        if (Tree[predfind] != null && Tree[predfind] == key) {
+        if (Tree[predfind] != null && Tree[predfind] != key) {
             return -1;
+        }
+        if(Tree[predfind] != null && Tree[predfind] == key ){
+            return predfind;
         }
         Tree[predfind] = key;
         return predfind;
