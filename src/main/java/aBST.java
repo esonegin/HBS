@@ -19,39 +19,38 @@ class aBST {
         if (Tree[0] == null) {
             return 0;
         }
-        while (Tree[teknode] != null) {
+        while (Tree[teknode] != null && 2 * teknode + 1 < Tree.length) {
             if (Tree[teknode] == key) {
                 break;
-            } else if (teknode + 1 == Tree.length || 2 * teknode + 1 == Tree.length) {
-                return null;
-            } else if (Tree[2 * teknode + 1] != null && Tree[2 * teknode + 1] == key) {
+            }
+            if(key < Tree[teknode] && Tree[2 * teknode + 1] == null){
                 teknode = 2 * teknode + 1;
                 break;
-            } else if (Tree[2 * teknode + 2] != null && Tree[2 * teknode + 2] == key) {
-                teknode = 2 * teknode + 2;
-                break;
-            } else if (Tree[2 * teknode + 1] == null && Tree[2 * teknode + 2] != null) {
-                teknode = 2 * teknode + 2;
-            }else if (Tree[2 * teknode + 1] == null && Tree[2 * teknode + 2] == null && key < Tree[teknode]) {
+            }
+            if(key < Tree[teknode] && Tree[2 * teknode + 1] != null){
                 teknode = 2 * teknode + 1;
-                break;
-            } else if (Tree[2 * teknode + 1] == null && Tree[2 * teknode + 2] == null && key > Tree[teknode]) {
+                continue;
+            }
+            if(key < Tree[teknode] && Tree[2 * teknode + 1] != 0 && key < Tree[2 * teknode + 1]){
+                teknode = Tree[2 * teknode + 1];
+            }
+            if(key > Tree[teknode] && Tree[2 * teknode + 2] == null){
                 teknode = 2 * teknode + 2;
                 break;
-            } else if (Tree[2 * teknode + 1] == null) {
-                break;
-            } else if (Tree[2 * teknode + 2] == null) {
+            }
+            if(key > Tree[teknode] && Tree[2 * teknode + 2] != null){
                 teknode = 2 * teknode + 2;
-                break;
-
-            } else if (key < Tree[teknode]) {
-                teknode = 2 * teknode + 1;
-            } else {
-                teknode = 2 * teknode + 2;
+                continue;
+            }
+            if(key > Tree[teknode] && Tree[2 * teknode + 2] != 0 && key > Tree[2 * teknode + 2]){
+                Tree[2 * teknode + 2] = key;
             }
         }
         if (Tree[teknode] == null) {
             return -teknode;
+        }
+        if (Tree[teknode] != null && Tree[teknode] != key) {
+            return null;
         }
         return teknode;
     }

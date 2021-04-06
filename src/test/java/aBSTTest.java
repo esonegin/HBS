@@ -320,18 +320,59 @@ public class aBSTTest {
         aBST tree = new aBST(3);
         Assert.assertThat(tree.Tree.length, is(15));
 
+        Assert.assertThat(tree.FindKeyIndex(50), is(0));
         Assert.assertThat(tree.AddKey(50), is(0));
+        Assert.assertThat(tree.FindKeyIndex(50), is(0));
+
+        Assert.assertThat(tree.FindKeyIndex(25), is(-1));
         Assert.assertThat(tree.AddKey(25), is(1));
+        Assert.assertThat(tree.FindKeyIndex(25), is(1));
+
+        Assert.assertThat(tree.FindKeyIndex(75), is(-2));
         Assert.assertThat(tree.AddKey(75), is(2));
+        Assert.assertThat(tree.FindKeyIndex(75), is(2));
+
+        Assert.assertThat(tree.FindKeyIndex(37), is(-4));
         Assert.assertThat(tree.AddKey(37), is(4));
+        Assert.assertThat(tree.FindKeyIndex(37), is(4));
+
+        Assert.assertThat(tree.FindKeyIndex(31), is(-9));
         Assert.assertThat(tree.AddKey(31), is(9));
+        Assert.assertThat(tree.FindKeyIndex(31), is(9));
 
+        Assert.assertThat(tree.FindKeyIndex(62), is(-5));
         Assert.assertThat(tree.AddKey(62), is(5));
+        Assert.assertThat(tree.FindKeyIndex(62), is(5));
+
+        Assert.assertThat(tree.FindKeyIndex(84), is(-6));
         Assert.assertThat(tree.AddKey(84), is(6));
+        Assert.assertThat(tree.FindKeyIndex(84), is(6));
 
-
+        Assert.assertThat(tree.FindKeyIndex(43), is(-10));
         Assert.assertThat(tree.AddKey(43), is(10));
+        Assert.assertThat(tree.FindKeyIndex(43), is(10));
+
+        Assert.assertThat(tree.FindKeyIndex(55), is(-11));
         Assert.assertThat(tree.AddKey(55), is(11));
+        Assert.assertThat(tree.FindKeyIndex(55), is(11));
+
+        Assert.assertThat(tree.FindKeyIndex(92), is(-14));
         Assert.assertThat(tree.AddKey(92), is(14));
+        Assert.assertThat(tree.FindKeyIndex(92), is(14));
+
+        Assert.assertThat(tree.FindKeyIndex(26) == null, is(true));
+        Assert.assertThat(tree.AddKey(26), is(-1));
+
+        Assert.assertThat(tree.FindKeyIndex(41) == null, is(true));
+        Assert.assertThat(tree.AddKey(41), is(-1));
+
+        Assert.assertThat(tree.FindKeyIndex(13), is(-3));
+        Assert.assertThat(tree.AddKey(13), is(3));
+        Assert.assertThat(tree.FindKeyIndex(13), is(3));
+
+        Assert.assertThat(tree.FindKeyIndex(65), is(-12));
+        Assert.assertThat(tree.AddKey(65), is(12));
+        Assert.assertThat(tree.FindKeyIndex(65), is(12));
+
     }
 }
