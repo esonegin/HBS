@@ -23,6 +23,7 @@ public class AlgorithmsDataStructures2Test {
         AlgorithmsDataStructures2 tree = new AlgorithmsDataStructures2();
         int[] array = new int[]{12, 8, 4, 6, 2, 14, 10};
 
+
         for (int i = 0; i < array.length; i++) {
             System.out.println(tree.GenerateBBSTArray(array)[i]);
         }
