@@ -1,40 +1,57 @@
 import java.util.*;
 
-
 public class AlgorithmsDataStructures2 {
+    private static ArrayList<Integer> result;
 
     public static int[] GenerateBBSTArray(int[] a) {
-
-        int[] result = new int[a.length];
+        result = new ArrayList(a.length);
         Arrays.sort(a);
-
-        result[0] = centralElement(a);
-
-        for (int i = 1; i < 2; i++) {
-            result[i] = centralElement(leftPiece(a));
-            result[i + i] = centralElement(rightPiece(a));
+        BinaryTree tree = new BinaryTree();
+        int n = a.length;
+        Node root = tree.sortedArrayToBST(a, 0, n - 1);
+        tree.preOrder(root);
+        int[] res = new int[result.size()];
+        for (int i = 0; i < result.size(); i++) {
+            res[i] = result.get(i);
         }
 
-
-        result[2 * (2 * 0 + 1) + 1] = centralElement(leftPiece(leftPiece(a)));
-        result[2 * (2 * 0 + 1) + 2] = centralElement(rightPiece(leftPiece(a)));
-
-        result[2 * (2 * 0 + 2) + 1] = centralElement(leftPiece(rightPiece(a)));
-        result[2 * (2 * 0 + 2) + 2] = centralElement(rightPiece(rightPiece(a)));
-
-        return result;
+        return res;
     }
 
-    public static int[] leftPiece(int[] a) {
-        return Arrays.copyOfRange(a, 0, a.length / 2);
+    static class Node {
+
+        int data;
+        Node left, right;
+
+        Node(int d) {
+            data = d;
+            left = right = null;
+        }
     }
 
-    public static int[] rightPiece(int[] a) {
-        return Arrays.copyOfRange(a, a.length / 2, a.length);
-    }
+    static class BinaryTree {
 
-    public static int centralElement(int[] array) {
-        return array[array.length / 2];
-    }
+        //static Node root;
 
+        Node sortedArrayToBST(int[] arr, int start, int end) {
+            if (start > end) {
+                return null;
+            }
+            int mid = (start + end) / 2;
+            Node node = new Node(arr[mid]);
+            node.left = sortedArrayToBST(arr, start, mid - 1);
+            node.right = sortedArrayToBST(arr, mid + 1, end);
+
+            return node;
+        }
+
+        void preOrder(Node node) {
+            if (node == null) {
+                return;
+            }
+            result.add(node.data);
+            preOrder(node.left);
+            preOrder(node.right);
+        }
+    }
 }
