@@ -1,21 +1,36 @@
 import java.util.*;
 
 public class AlgorithmsDataStructures2 {
-    private static ArrayList<Integer> result;
 
     public static int[] GenerateBBSTArray(int[] a) {
-        result = new ArrayList(a.length);
         Arrays.sort(a);
+
         BinaryTree tree = new BinaryTree();
         int n = a.length;
         Node root = tree.sortedArrayToBST(a, 0, n - 1);
-        tree.preOrder(root);
-        int[] res = new int[result.size()];
-        for (int i = 0; i < result.size(); i++) {
-            res[i] = result.get(i);
+        ArrayList<Node> allnodes = new ArrayList<>();
+        allnodes.add(root);
+        for (int i = 0; i < allnodes.size(); i++) {
+            allnodes.addAll(GetChildren(allnodes.get(i)));
+        }
+        int[] res = new int[allnodes.size()];
+        for (int i = 0; i < allnodes.size(); i++) {
+            res[i] = allnodes.get(i).data;
         }
 
         return res;
+    }
+
+    public static List<Node> GetChildren(Node parent) {
+
+        List<Node> rootchildren = new ArrayList<>();
+        if (parent.left != null) {
+            rootchildren.add(parent.left);
+        }
+        if (parent.right != null) {
+            rootchildren.add(parent.right);
+        }
+        return rootchildren;
     }
 
     static class Node {
@@ -42,16 +57,8 @@ public class AlgorithmsDataStructures2 {
             node.left = sortedArrayToBST(arr, start, mid - 1);
             node.right = sortedArrayToBST(arr, mid + 1, end);
 
-            return node;
-        }
 
-        void preOrder(Node node) {
-            if (node == null) {
-                return;
-            }
-            result.add(node.data);
-            preOrder(node.left);
-            preOrder(node.right);
+            return node;
         }
     }
 }
