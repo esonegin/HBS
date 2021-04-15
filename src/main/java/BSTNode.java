@@ -1,6 +1,6 @@
 
 import java.util.*;
-//v1
+//v2
 class BSTNode {
     public int NodeKey; // ключ узла
     public BSTNode Parent; // родитель или null для корня
@@ -48,7 +48,7 @@ class BalancedBST {
     }
 
     int getLevel(BSTNode node, int data) {
-        return getLevelUtil(node, data, 1);
+        return getLevelUtil(node, data, 0);
     }
 
     int getLevelUtil(BSTNode node, int data, int level) {

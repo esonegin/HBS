@@ -32,13 +32,13 @@ public class BSTNode2Test {
         Assert.assertThat(tree.Root.RightChild.LeftChild.NodeKey, is(10));
         Assert.assertThat(tree.Root.RightChild.RightChild.NodeKey, is(14));
 
-        Assert.assertThat(tree.Root.Level, is(1));
-        Assert.assertThat(tree.Root.LeftChild.Level, is(2));
-        Assert.assertThat(tree.Root.RightChild.Level, is(2));
-        Assert.assertThat(tree.Root.LeftChild.LeftChild.Level, is(3));
-        Assert.assertThat(tree.Root.LeftChild.RightChild.Level, is(3));
-        Assert.assertThat(tree.Root.RightChild.LeftChild.Level, is(3));
-        Assert.assertThat(tree.Root.RightChild.RightChild.Level, is(3));
+        Assert.assertThat(tree.Root.Level, is(0));
+        Assert.assertThat(tree.Root.LeftChild.Level, is(1));
+        Assert.assertThat(tree.Root.RightChild.Level, is(1));
+        Assert.assertThat(tree.Root.LeftChild.LeftChild.Level, is(2));
+        Assert.assertThat(tree.Root.LeftChild.RightChild.Level, is(2));
+        Assert.assertThat(tree.Root.RightChild.LeftChild.Level, is(2));
+        Assert.assertThat(tree.Root.RightChild.RightChild.Level, is(2));
 
         Assert.assertThat(tree.IsBalanced(tree.Root), is(true));
 
@@ -53,13 +53,13 @@ public class BSTNode2Test {
         Assert.assertThat(tree.Root.NodeKey, is(50));
         Assert.assertThat(tree.IsBalanced(tree.Root), is(true));
 
-        Assert.assertThat(tree.Root.Level, is(1));
-        Assert.assertThat(tree.Root.LeftChild.Level, is(2));
-        Assert.assertThat(tree.Root.RightChild.Level, is(2));
-        Assert.assertThat(tree.Root.LeftChild.LeftChild.Level, is(3));
-        Assert.assertThat(tree.Root.LeftChild.RightChild.Level, is(3));
-        Assert.assertThat(tree.Root.RightChild.LeftChild.Level, is(3));
-        Assert.assertThat(tree.Root.RightChild.RightChild.Level, is(3));
+        Assert.assertThat(tree.Root.Level, is(0));
+        Assert.assertThat(tree.Root.LeftChild.Level, is(1));
+        Assert.assertThat(tree.Root.RightChild.Level, is(1));
+        Assert.assertThat(tree.Root.LeftChild.LeftChild.Level, is(2));
+        Assert.assertThat(tree.Root.LeftChild.RightChild.Level, is(2));
+        Assert.assertThat(tree.Root.RightChild.LeftChild.Level, is(2));
+        Assert.assertThat(tree.Root.RightChild.RightChild.Level, is(2));
 
 
     }
