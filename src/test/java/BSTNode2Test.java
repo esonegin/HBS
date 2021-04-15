@@ -24,7 +24,6 @@ public class BSTNode2Test {
         BalancedBST tree = new BalancedBST();
         tree.GenerateTree(array);
 
-
         Assert.assertThat(tree.Root.NodeKey, is(8));
         Assert.assertThat(tree.Root.LeftChild.NodeKey, is(4));
         Assert.assertThat(tree.Root.RightChild.NodeKey, is(12));
@@ -53,6 +52,14 @@ public class BSTNode2Test {
 
         Assert.assertThat(tree.Root.NodeKey, is(50));
         Assert.assertThat(tree.IsBalanced(tree.Root), is(true));
+
+        Assert.assertThat(tree.Root.Level, is(1));
+        Assert.assertThat(tree.Root.LeftChild.Level, is(2));
+        Assert.assertThat(tree.Root.RightChild.Level, is(2));
+        Assert.assertThat(tree.Root.LeftChild.LeftChild.Level, is(3));
+        Assert.assertThat(tree.Root.LeftChild.RightChild.Level, is(3));
+        Assert.assertThat(tree.Root.RightChild.LeftChild.Level, is(3));
+        Assert.assertThat(tree.Root.RightChild.RightChild.Level, is(3));
 
 
     }
