@@ -1,6 +1,6 @@
 
 import java.util.*;
-//v2
+//v1
 class BSTNode {
     public int NodeKey; // ключ узла
     public BSTNode Parent; // родитель или null для корня
