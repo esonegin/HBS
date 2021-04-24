@@ -35,6 +35,73 @@ public class HeapTest {
     }
 
     @Test
+    public void errorAddTest() {
+
+        int[] array = {12, 8, 4};
+        Heap heap = new Heap();
+        heap.MakeHeap(array, 2);
+
+        Assert.assertThat(heap.HeapArray[0], is(12));
+        Assert.assertThat(heap.HeapArray[1], is(8));
+        Assert.assertThat(heap.HeapArray[2], is(4));
+        Assert.assertThat(heap.HeapArray[3], is(0));
+        Assert.assertThat(heap.HeapArray[4], is(0));
+        Assert.assertThat(heap.HeapArray[5], is(0));
+        Assert.assertThat(heap.HeapArray[6], is(0));
+
+    }
+
+    @Test
+    public void randAddTest() {
+
+        int[] array = {8, 4, 12};
+        Heap heap = new Heap();
+        heap.MakeHeap(array, 2);
+
+        Assert.assertThat(heap.HeapArray[0], is(12));
+        Assert.assertThat(heap.HeapArray[1], is(8));
+        Assert.assertThat(heap.HeapArray[2], is(4));
+        Assert.assertThat(heap.HeapArray[3], is(0));
+        Assert.assertThat(heap.HeapArray[4], is(0));
+        Assert.assertThat(heap.HeapArray[5], is(0));
+        Assert.assertThat(heap.HeapArray[6], is(0));
+
+    }
+
+    @Test
+    public void overDepthAddTest() {
+
+        int[] array = {8, 4, 12, 43, 2};
+        Heap heap = new Heap();
+        heap.MakeHeap(array, 1);
+
+        Assert.assertThat(heap.HeapArray[0], is(43));
+        Assert.assertThat(heap.HeapArray[1], is(8));
+        Assert.assertThat(heap.HeapArray[2], is(4));
+        Assert.assertThat(heap.HeapArray[3], is(0));
+        Assert.assertThat(heap.HeapArray[4], is(0));
+        Assert.assertThat(heap.HeapArray[5], is(0));
+        Assert.assertThat(heap.HeapArray[6], is(0));
+    }
+
+    @Test
+    public void over2DepthAddTest() {
+
+        int[] array = {8, 4, 12, 43, 2};
+        Heap heap = new Heap();
+        heap.MakeHeap(array, 2);
+
+        Assert.assertThat(heap.HeapArray[0], is(43));
+        Assert.assertThat(heap.HeapArray[1], is(12));
+        Assert.assertThat(heap.HeapArray[2], is(8));
+        Assert.assertThat(heap.HeapArray[3], is(4));
+        Assert.assertThat(heap.HeapArray[4], is(2));
+        Assert.assertThat(heap.HeapArray[5], is(0));
+        Assert.assertThat(heap.HeapArray[6], is(0));
+
+    }
+
+    @Test
     public void addOverTest() {
         
         Heap heap = new Heap();

@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Heap {
     public int[] HeapArray; // хранит неотрицательные числа-ключи
 
@@ -7,14 +9,17 @@ class Heap {
 
     public void MakeHeap(int[] a, int depth) {
         int tree_size = 1;
+        //Вычисляем размер массива
         for (int i = 1; i <= depth + 1; i++) {
             tree_size = tree_size * 2;
         }
         tree_size = tree_size - 1;
         HeapArray = new int[tree_size];
-        for (int i = 0; i < tree_size; i++) HeapArray[i] = 0;
-        HeapArray[0] = getMaxOnArray(a);
-        delMax(a, getMaxOnArray(a));
+
+        for (int i = 0; i < tree_size; i++)
+            //HeapArray[i] = 0;
+            HeapArray[0] = getMaxOnArray(a);
+            delMax(a, getMaxOnArray(a));
 
         for (int j : a) {
             Add(j);
@@ -28,14 +33,14 @@ class Heap {
         int max = HeapArray[0];
         int index = 0;
         if (HeapArray[0] != 0) {
-        for(int i = HeapArray.length - 1; i != 0; i--){
-            if(HeapArray[i] != 0){
-                index = i;
-                break;
+            for (int i = HeapArray.length - 1; i != 0; i--) {
+                if (HeapArray[i] != 0) {
+                    index = i;
+                    break;
+                }
             }
-        }
-        HeapArray[0] = HeapArray[index];
-        HeapArray[index] = 0;
+            HeapArray[0] = HeapArray[index];
+            HeapArray[index] = 0;
             downNode();
             return max;
         }
