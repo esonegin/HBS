@@ -233,4 +233,18 @@ public class HeapTest {
         Assert.assertThat(heap.HeapArray[6], is(0));
 
     }
+
+    @Test
+    public void errorDefTest() {
+
+        int[] array = {110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9};
+        Heap heap = new Heap();
+        heap.MakeHeap(array, 3);
+
+        Assert.assertThat(heap.HeapArray[0], is(110));
+        Assert.assertThat(heap.HeapArray[1], is(90));
+        Assert.assertThat(heap.HeapArray[2], is(40));
+        Assert.assertThat(heap.HeapArray[3], is(70));
+
+    }
 }
