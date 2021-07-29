@@ -1,27 +1,33 @@
 public class SelectionSort {
-
-    public static void main(String[] args) {
-       int[] res = selectionSort(new int[]{10, 1, 8, 7, 6, 3, 4, 3, 2, 9});
-       for(int i = 0; i < res.length; i++){
-           System.out.println(res[i]);
-       }
-    }
+    //Переменная для отсечения отсортированных элементов
+    static int k = 0;
 
     public static int[] selectionSort(int[] array) {
-        int min;
-        int k = 0;
-        for(int i = 0; i < array.length - 2; i++){
-            if(array[i] < array[i + 1]){
-                min = array[i];
-                array[i] = array[i + 1];
-            }
-            else{
-                min = array[i + 1];
-                array[i + 1] = array[i];
-            }
-            array[k] = min;
-            k++;
+        for (int i = k; i < array.length; i++) {
+            changeAndOtsechenie(array, linerIndexMinSearch(array, k));
         }
+        //Обнуляем переменную для отсечения
+        k = 0;
+        return array;
+    }
+
+    //Ищем линейно индекс минимального значения
+    public static int linerIndexMinSearch(int[] array, int k) {
+        int result = array.length - 1;
+        for (int i = array.length - 1; i > k; i--) {
+            if (array[i - 1] < array[result]) {
+                result = i - 1;
+            }
+        }
+        return result;
+    }
+
+    //Меняем найденый элемент с крайним левым и отсекаем его (если уже левое то только отсекаем)
+    public static int[] changeAndOtsechenie(int[] array, int indexmin) {
+        int change = array[k];
+        array[k] = array[indexmin];
+        array[indexmin] = change;
+        k++;
         return array;
     }
 }
