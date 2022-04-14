@@ -2,12 +2,14 @@ import java.util.*;
 
 class Heap {
     public int[] HeapArray;
+    int size;
 
     public Heap() {
         HeapArray = null;
     }
 
     public void MakeHeap(int[] a, int depth) {
+        size = a.length;
         int tree_size = a.length;
         HeapArray = new int[tree_size];
         Arrays.fill(HeapArray, -1);
@@ -19,10 +21,17 @@ class Heap {
 
     public boolean Add(int key) {
         int freeindex = -2;
-        for (int i = 0; i < HeapArray.length; i++) {
-            if (HeapArray[i] == -1) {
-                freeindex = i;
-                break;
+        if (HeapArray.length < size) {
+            freeindex = HeapArray.length;
+            int[] result = new int[HeapArray.length + 1];
+            System.arraycopy(HeapArray, 0, result, 0, HeapArray.length);
+            HeapArray = result;
+        } else {
+            for (int i = 0; i < HeapArray.length; i++) {
+                if (HeapArray[i] == -1) {
+                    freeindex = i;
+                    break;
+                }
             }
         }
         if (freeindex == -2) {
@@ -59,7 +68,8 @@ class Heap {
             System.arraycopy(HeapArray, 0, result, 0, result.length);
             HeapArray = result;
         }
-        if (largerchild[0] >= HeapArray.length) {
+
+        if (HeapArray.length <= 1 || largerchild[0] >= HeapArray.length) {
             return;
         }
         HeapArray[index] = largerchild[1];

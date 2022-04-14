@@ -55,7 +55,6 @@ public class HeapTest {
     }
 
 
-
     @Test
     public void everyStepUpAddTest() {
         int[] array = {1, 2, 3, 4, 5, 6, 7};
@@ -182,7 +181,7 @@ public class HeapTest {
     @Test
     public void editError() {
 
-        int[] array = {110, 90,40, 70,80, 30,10, 20,50, 60,65, 31,29, 11,9};
+        int[] array = {110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9};
         Heap heap = new Heap();
         heap.MakeHeap(array, 3);
         Assert.assertThat(heap.HeapArray.length, is(15));
@@ -219,6 +218,93 @@ public class HeapTest {
         Assert.assertThat(heap.HeapArray[11], is(30));
         Assert.assertThat(heap.HeapArray[12], is(29));
         Assert.assertThat(heap.HeapArray[13], is(10));
+
+    }
+
+    @Test
+    public void addAfterGetMaxAllAndReverseTest() {
+        int[] array = {7, 6, 5, 4, 3, 2, 1};
+        Heap heap = new Heap();
+        heap.MakeHeap(array, 3);
+        Assert.assertThat(heap.HeapArray[0], is(7));
+        Assert.assertThat(heap.HeapArray[1], is(6));
+        Assert.assertThat(heap.HeapArray[2], is(5));
+        Assert.assertThat(heap.HeapArray[3], is(4));
+        Assert.assertThat(heap.HeapArray[4], is(3));
+        Assert.assertThat(heap.HeapArray[5], is(2));
+        Assert.assertThat(heap.HeapArray[6], is(1));
+        Assert.assertThat(heap.GetMax(), is(7));
+        Assert.assertThat(heap.HeapArray[0], is(6));
+        Assert.assertThat(heap.HeapArray[1], is(4));
+        Assert.assertThat(heap.HeapArray[2], is(5));
+        Assert.assertThat(heap.HeapArray[3], is(1));
+        Assert.assertThat(heap.HeapArray[4], is(3));
+        Assert.assertThat(heap.HeapArray[5], is(2));
+        heap.Add(7);
+        Assert.assertThat(heap.HeapArray[0], is(7));
+        Assert.assertThat(heap.HeapArray[1], is(4));
+        Assert.assertThat(heap.HeapArray[2], is(6));
+        Assert.assertThat(heap.HeapArray[3], is(1));
+        Assert.assertThat(heap.HeapArray[4], is(3));
+        Assert.assertThat(heap.HeapArray[5], is(2));
+        Assert.assertThat(heap.HeapArray[6], is(5));
+        Assert.assertThat(heap.GetMax(), is(7));
+        Assert.assertThat(heap.HeapArray[0], is(6));
+        Assert.assertThat(heap.HeapArray[1], is(4));
+        Assert.assertThat(heap.HeapArray[2], is(5));
+        Assert.assertThat(heap.HeapArray[3], is(1));
+        Assert.assertThat(heap.HeapArray[4], is(3));
+        Assert.assertThat(heap.HeapArray[5], is(2));
+        Assert.assertThat(heap.GetMax(), is(6));
+        Assert.assertThat(heap.HeapArray[0], is(5));
+        Assert.assertThat(heap.HeapArray[1], is(4));
+        Assert.assertThat(heap.HeapArray[2], is(2));
+        Assert.assertThat(heap.HeapArray[3], is(1));
+        Assert.assertThat(heap.HeapArray[4], is(3));
+        Assert.assertThat(heap.GetMax(), is(5));
+        Assert.assertThat(heap.HeapArray[0], is(4));
+        Assert.assertThat(heap.HeapArray[1], is(3));
+        Assert.assertThat(heap.HeapArray[2], is(2));
+        Assert.assertThat(heap.HeapArray[3], is(1));
+        Assert.assertThat(heap.GetMax(), is(4));
+        Assert.assertThat(heap.HeapArray[0], is(3));
+        Assert.assertThat(heap.HeapArray[1], is(1));
+        Assert.assertThat(heap.HeapArray[2], is(2));
+        Assert.assertThat(heap.GetMax(), is(3));
+        Assert.assertThat(heap.HeapArray[0], is(2));
+        Assert.assertThat(heap.HeapArray[1], is(1));
+        Assert.assertThat(heap.GetMax(), is(2));
+        Assert.assertThat(heap.HeapArray[0], is(1));
+        Assert.assertThat(heap.GetMax(), is(1));
+        Assert.assertThat(heap.HeapArray.length, is(0));
+
+        // {7, 6, 5, 4, 3, 2, 1};
+        heap.Add(1);
+        Assert.assertThat(heap.HeapArray[0], is(1));
+        Assert.assertThat(heap.HeapArray.length, is(1));
+        heap.Add(2);
+        Assert.assertThat(heap.HeapArray[0], is(2));
+        Assert.assertThat(heap.HeapArray[1], is(1));
+        Assert.assertThat(heap.HeapArray.length, is(2));
+        heap.Add(3);
+        Assert.assertThat(heap.HeapArray[0], is(3));
+        Assert.assertThat(heap.HeapArray[1], is(1));
+        Assert.assertThat(heap.HeapArray[2], is(2));
+        Assert.assertThat(heap.HeapArray.length, is(3));
+        heap.Add(4);
+        Assert.assertThat(heap.HeapArray[0], is(4));
+        Assert.assertThat(heap.HeapArray[1], is(3));
+        Assert.assertThat(heap.HeapArray[2], is(2));
+        Assert.assertThat(heap.HeapArray[3], is(1));
+        Assert.assertThat(heap.HeapArray.length, is(4));
+        heap.Add(5);
+        Assert.assertThat(heap.HeapArray[0], is(5));
+        Assert.assertThat(heap.HeapArray[1], is(4));
+        Assert.assertThat(heap.HeapArray[2], is(2));
+        Assert.assertThat(heap.HeapArray[3], is(1));
+        Assert.assertThat(heap.HeapArray[4], is(3));
+        Assert.assertThat(heap.HeapArray.length, is(5));
+
 
     }
 }
