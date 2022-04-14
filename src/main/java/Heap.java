@@ -1,56 +1,42 @@
 import java.util.*;
 
 class Heap {
-    public int[] HeapArray; // хранит неотрицательные числа-ключи
+    public int[] HeapArray;
 
     public Heap() {
         HeapArray = null;
     }
 
     public void MakeHeap(int[] a, int depth) {
-        //Определяем размер итогового массива согласно заданной глубине
         int tree_size = (int) (Math.pow(2, depth) - 1);
-        //Заполняем массив отрицательными числами
         HeapArray = new int[tree_size];
         Arrays.fill(HeapArray, -1);
-        //Добавляем значение в кучу и перестраиваем
         for (int i = 0; i < HeapArray.length && i < a.length; i++) {
             Add(a[i]);
         }
-        //Удаляем отрицательные числа и формируем итоговый массив
         DeleteNegativeValue();
     }
 
-
     public boolean Add(int key) {
-
-        // добавляем новый элемент key в кучу и перестраиваем её
         int freeindex = -2;
-        //Ищем свободный элемент
         for (int i = 0; i < HeapArray.length; i++) {
             if (HeapArray[i] == -1) {
                 freeindex = i;
                 break;
             }
         }
-        // если куча вся заполнена возвращаем false
         if (freeindex == -2) {
             return false;
         }
-
-        //Если свободен корень, кладем значение в корень
         if (freeindex == 0) {
             HeapArray[0] = key;
             return true;
         }
-        //Ищем индексы родителя
         int[] parrent = FindParrent(freeindex);
-        //Если индекс свободен и родитель больше значения, кладем в индекс
         if (parrent[1] >= key) {
             HeapArray[freeindex] = key;
             return true;
         }
-        //Если индекс свободен и родитель меньше значения, ищем подходящий индекс
         UpNode(freeindex, key);
         return true;
     }
@@ -59,14 +45,13 @@ class Heap {
     public int GetMax() {
         int max = HeapArray[0];
         if (HeapArray[0] == -1) {
-            return -1; // если куча пуста
+            return -1;
         }
         HeapArray[0] = HeapArray[HeapArray.length - 1];
         DownNode(0, HeapArray[0]);
         return max;
     }
 
-    //Опускаем, пока значение не будет больше потомка
     public void DownNode(int index, int key) {
         int[] largerchild = FindLargerChild(index);
         if (index == 0) {
