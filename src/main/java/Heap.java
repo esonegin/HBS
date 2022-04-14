@@ -8,7 +8,7 @@ class Heap {
     }
 
     public void MakeHeap(int[] a, int depth) {
-        int tree_size = (int) (Math.pow(2, depth) - 1);
+        int tree_size = a.length;
         HeapArray = new int[tree_size];
         Arrays.fill(HeapArray, -1);
         for (int i = 0; i < HeapArray.length && i < a.length; i++) {
