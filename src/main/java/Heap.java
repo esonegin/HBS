@@ -8,67 +8,51 @@ class Heap {
     }
 
     public void MakeHeap(int[] a, int depth) {
-        int tree_size = 1;
-        //Вычисляем размер массива
-        for (int i = 1; i <= depth + 1; i++) {
-            tree_size = tree_size * 2;
-        }
-        tree_size = tree_size - 1;
+        //Определяем размер итогового массива согласно заданной глубине
+        int tree_size = (int) (Math.pow(2, depth) - 1);
+        //Заполняем массив отрицательными числами
         HeapArray = new int[tree_size];
         Arrays.fill(HeapArray, -1);
+        //Добавляем значение в кучу и перестраиваем
         for (int i = 0; i < HeapArray.length && i < a.length; i++) {
             Add(a[i]);
         }
-        List<Integer> prom = new ArrayList<>();
-        for (int j : HeapArray) {
-            if (j != -1) {
-                prom.add(j);
-            }
-        }
-        int[] result = new int[prom.size()];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = prom.get(i);
-        }
-        HeapArray = result;
-        // создаём массив кучи HeapArray из заданного
-        // размер массива выбираем на основе глубины depth
-        // ...
+        //Удаляем отрицательные числа и формируем итоговый массив
+        DeleteNegativeValue();
     }
 
 
     public boolean Add(int key) {
-        int parrent = 0;
+
         // добавляем новый элемент key в кучу и перестраиваем её
+        int freeindex = -2;
+        //Ищем свободный элемент
         for (int i = 0; i < HeapArray.length; i++) {
-            if (i != 0 && i % 2 == 0) {
-                parrent = HeapArray[i / 2 - 1];
-            } else if (i != 0) {
-                parrent = HeapArray[i / 2];
-            }
-            //Если свободен корень, кладем значение в корень
-            if (i == 0 && HeapArray[0] == -1) {
-                HeapArray[0] = key;
+            if (HeapArray[i] == -1) {
+                freeindex = i;
                 break;
             }
-            //Если индекс свободен и родитель больше значения, кладем в индекс
-            if (HeapArray[i] == -1 && parrent >= key) {
-                HeapArray[i] = key;
-                break;
-            }
-            //Если индекс свободен и родитель меньше значения, ищем подходящий индекс
-            if (HeapArray[i] == -1 && parrent <= key) {
-                int[] rotate = UpNode(i, key);
-
-                int p = HeapArray[rotate[0]];
-                HeapArray[rotate[0]] = key;
-                HeapArray[i] = HeapArray[rotate[1]];
-                HeapArray[rotate[1]] = p;
-                break;
-            }
-
-
         }
-        return false; // если куча вся заполнена
+        // если куча вся заполнена возвращаем false
+        if (freeindex == -2) {
+            return false;
+        }
+
+        //Если свободен корень, кладем значение в корень
+        if (freeindex == 0) {
+            HeapArray[0] = key;
+            return true;
+        }
+        //Ищем индексы родителя
+        int[] parrent = FindParrent(freeindex);
+        //Если индекс свободен и родитель больше значения, кладем в индекс
+        if (parrent[1] >= key) {
+            HeapArray[freeindex] = key;
+            return true;
+        }
+        //Если индекс свободен и родитель меньше значения, ищем подходящий индекс
+        UpNode(freeindex, key);
+        return true;
     }
 
 
@@ -79,7 +63,6 @@ class Heap {
         }
         HeapArray[0] = HeapArray[HeapArray.length - 1];
         DownNode(0, HeapArray[0]);
-
         return max;
     }
 
@@ -91,30 +74,44 @@ class Heap {
             System.arraycopy(HeapArray, 0, result, 0, result.length);
             HeapArray = result;
         }
+        if (largerchild[0] >= HeapArray.length) {
+            return;
+        }
         HeapArray[index] = largerchild[1];
         HeapArray[largerchild[0]] = key;
-        while (FindLargerChild(largerchild[0]) != null) {
+        while (FindLargerChild(largerchild[0]) != null && FindLargerChild(largerchild[0])[1] != key) {
             DownNode(largerchild[0], key);
         }
     }
 
-    public int[] UpNode(int index, int key) {
-        int parrent = 0;
-        int[] result = new int[2];
-        result[0] = index;
-        while (HeapArray[parrent] < key) {
-            if (result[0] != 0 && result[0] % 2 == 0) {
-                parrent = Math.round(result[0] / 2 - 1);
-            } else if (result[0] != 0) {
-                parrent = Math.round(result[0] / 2);
-            }
-            result[1] = result[0];
-            result[0] = parrent;
-            if (result[0] == 0) {
-                break;
-            }
+    public void UpNode(int index, int key) {
+        if (index == 0) {
+            return;
         }
-        return result;
+        while (index != 0 && FindParrent(index)[1] < key) {
+            int p = FindParrent(index)[1];
+            HeapArray[FindParrent(index)[0]] = key;
+            HeapArray[index] = p;
+            index = FindParrent(index)[0];
+        }
+
+    }
+
+    public int[] FindParrent(int index) {
+        if (index == 0) {
+            return null;
+        }
+        int[] parrent = new int[2];
+        if (index == 1) {
+            parrent[1] = HeapArray[0];
+        }
+        if (index % 2 == 0) {
+            parrent[0] = index / 2 - 1;
+        } else {
+            parrent[0] = index / 2;
+        }
+        parrent[1] = HeapArray[parrent[0]];
+        return parrent;
     }
 
     public int[] FindLargerChild(int index) {
@@ -144,5 +141,19 @@ class Heap {
             }
         }
         return largerchild;
+    }
+
+    public void DeleteNegativeValue() {
+        List<Integer> prom = new ArrayList<>();
+        for (int j : HeapArray) {
+            if (j != -1) {
+                prom.add(j);
+            }
+        }
+        int[] result = new int[prom.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = prom.get(i);
+        }
+        HeapArray = result;
     }
 }
