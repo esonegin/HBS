@@ -20,9 +20,6 @@ class SimpleGraph {
     }
 
     public void AddVertex(int value) {
-        // ваш код добавления новой вершины
-        // с значением value
-        // в незанятую позицию vertex
         Vertex newvertex = new Vertex(value);
         for (int i = 0; i < vertex.length; i++) {
             if (vertex[i] == null) {
@@ -33,37 +30,50 @@ class SimpleGraph {
 
     }
 
-    // здесь и далее, параметры v -- индекс вершины
-    // в списке  vertex
     public void RemoveVertex(int v) {
-        // ваш код удаления вершины со всеми её рёбрами
-        for (Vertex vertex : vertex) {
-            if (vertex.Value == v) {
-                vertex.Value = -1;
+        if (v > max_vertex) {
+            return;
+        } else {
+            while (v < max_vertex - 1) {
+                for (int i = 0; i < max_vertex; ++i) {
+                    m_adjacency[i][v] = m_adjacency[i][v + 1];
+                }
+                if (max_vertex >= 0) {
+                    System.arraycopy(m_adjacency[v + 1], 0, m_adjacency[v], 0, max_vertex);
+                }
+                v++;
             }
+            max_vertex--;
         }
-        int[][] result = new int[m_adjacency.length - 1][v - 1];
 
-
+        int[][] result = new int[max_vertex][max_vertex];
+        for (int i = 0; i < max_vertex; ++i) {
+            System.arraycopy(m_adjacency[i], 0, result[i], 0, max_vertex);
+        }
+        m_adjacency = result;
     }
 
+
     public boolean IsEdge(int v1, int v2) {
-        // true если есть ребро между вершинами v1 и v2
-        if (m_adjacency[v1 - 1][v2 - 1] == 1) {
-            return true;
+        if (v1 >= max_vertex || v2 > max_vertex) {
+            return false;
         }
-        return false;
+        return m_adjacency[v1][v2] == 1;
     }
 
     public void AddEdge(int v1, int v2) {
-        // добавление ребра между вершинами v1 и v2
-        m_adjacency[v1 - 1][v2 - 1] = 1;
-        m_adjacency[v2 - 1][v1 - 1] = 1;
+        if (v1 >= max_vertex || v2 > max_vertex) {
+            return;
+        }
+        m_adjacency[v1][v2] = 1;
+        m_adjacency[v2][v1] = 1;
     }
 
     public void RemoveEdge(int v1, int v2) {
-        // удаление ребра между вершинами v1 и v2
-        m_adjacency[v1 - 1][v2 - 1] = 0;
-        m_adjacency[v2 - 1][v1 - 1] = 0;
+        if (v1 >= max_vertex || v2 > max_vertex) {
+            return;
+        }
+        m_adjacency[v1][v2] = 0;
+        m_adjacency[v2][v1] = 0;
     }
 }
