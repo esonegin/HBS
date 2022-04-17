@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -32,15 +33,15 @@ public class SimpleTreeNodeTest {
         Assert.assertThat(tree.Root.Children.size(), is(0));
 
         //Добавляем значение к корню
-        tree.AddChild(tree.Root, new SimpleTreeNode(2, (SimpleTreeNode)tree.FindNodesByValue(1).get(0)));
+        tree.AddChild(tree.Root, new SimpleTreeNode(2, (SimpleTreeNode) tree.FindNodesByValue(1).get(0)));
 
         //Добавляем значение к корню
-        tree.AddChild(tree.Root, new SimpleTreeNode(3, (SimpleTreeNode)tree.FindNodesByValue(1).get(0)));
+        tree.AddChild(tree.Root, new SimpleTreeNode(3, (SimpleTreeNode) tree.FindNodesByValue(1).get(0)));
 
         //Добавляем первое значение к ветви 2
-        tree.AddChild((SimpleTreeNode)tree.FindNodesByValue(2).get(0), new SimpleTreeNode(4, (SimpleTreeNode)tree.FindNodesByValue(2).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(2).get(0), new SimpleTreeNode(4, (SimpleTreeNode) tree.FindNodesByValue(2).get(0)));
         //Добавляем первое значение к ветви 3
-        tree.AddChild((SimpleTreeNode)tree.FindNodesByValue(3).get(0), new SimpleTreeNode(5, (SimpleTreeNode)tree.FindNodesByValue(3).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(3).get(0), new SimpleTreeNode(5, (SimpleTreeNode) tree.FindNodesByValue(3).get(0)));
 
 
         Assert.assertThat(tree.Root.Children.size(), is(2));
@@ -55,9 +56,9 @@ public class SimpleTreeNodeTest {
 
 
         //Добавляем второе значение к ветви 2
-        tree.AddChild((SimpleTreeNode)tree.FindNodesByValue(2).get(0), new SimpleTreeNode(6, (SimpleTreeNode)tree.FindNodesByValue(2).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(2).get(0), new SimpleTreeNode(6, (SimpleTreeNode) tree.FindNodesByValue(2).get(0)));
         //Добавляем второе значение к ветви 3
-        tree.AddChild((SimpleTreeNode)tree.FindNodesByValue(3).get(0), new SimpleTreeNode(7, (SimpleTreeNode)tree.FindNodesByValue(3).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(3).get(0), new SimpleTreeNode(7, (SimpleTreeNode) tree.FindNodesByValue(3).get(0)));
 
         Assert.assertThat(tree.Root.Children.size(), is(2));
         Assert.assertThat(((SimpleTreeNode) tree.Root.Children.get(0)).NodeValue, is(2));
@@ -427,6 +428,7 @@ public class SimpleTreeNodeTest {
 
 
     }
+
     @Test
     public void errorTest() {
         SimpleTreeNode<Integer> root = new SimpleTreeNode<Integer>(0, null);
@@ -458,6 +460,7 @@ public class SimpleTreeNodeTest {
 
 
     }
+
     @Test
     public void allNodesErrorTest() {
         SimpleTreeNode node = new SimpleTreeNode(0, null);
@@ -478,5 +481,114 @@ public class SimpleTreeNodeTest {
         Assert.assertThat(allnode.size(), is(1));
         Assert.assertThat(allnode.get(0).NodeValue, is(0));
 
+    }
+
+    @Test
+    public void defaultEvenTreesTest() {
+        //Создаем корневой узел
+        SimpleTreeNode node = new SimpleTreeNode(1, null);
+        //Создаем дерево с корневым узлом
+        SimpleTree tree = new SimpleTree(node);
+        tree.AddChild(tree.Root, new SimpleTreeNode(2, (SimpleTreeNode) tree.FindNodesByValue(1).get(0)));
+        tree.AddChild(tree.Root, new SimpleTreeNode(3, (SimpleTreeNode) tree.FindNodesByValue(1).get(0)));
+        tree.AddChild(tree.Root, new SimpleTreeNode(6, (SimpleTreeNode) tree.FindNodesByValue(1).get(0)));
+        //Добавляем первое значение к ветви 2
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(2).get(0), new SimpleTreeNode(5, (SimpleTreeNode) tree.FindNodesByValue(2).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(2).get(0), new SimpleTreeNode(7, (SimpleTreeNode) tree.FindNodesByValue(2).get(0)));
+        //Добавляем первое значение к ветви 3
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(3).get(0), new SimpleTreeNode(4, (SimpleTreeNode) tree.FindNodesByValue(3).get(0)));
+        //Добавляем первое значение к ветви 6
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(6).get(0), new SimpleTreeNode(8, (SimpleTreeNode) tree.FindNodesByValue(6).get(0)));
+        //Добавляем первое значение к ветви 8
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(8).get(0), new SimpleTreeNode(9, (SimpleTreeNode) tree.FindNodesByValue(8).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(8).get(0), new SimpleTreeNode(10, (SimpleTreeNode) tree.FindNodesByValue(8).get(0)));
+
+        Assert.assertThat(((SimpleTreeNode) tree.Root.Children.get(0)).NodeValue, is(2));
+        Assert.assertThat(((SimpleTreeNode) tree.Root.Children.get(1)).NodeValue, is(3));
+
+        ArrayList expected = new ArrayList<>();
+        expected.add(1);
+        expected.add(6);
+        expected.add(1);
+        expected.add(3);
+        Assert.assertThat(tree.EvenTrees(), is(expected));
+    }
+
+    @Test
+    public void nullEvenTreesTest() {
+
+        //Создаем корневой узел
+        SimpleTreeNode node = new SimpleTreeNode(0, null);
+        //Создаем дерево с корневым узлом
+        SimpleTree tree = new SimpleTree(node);
+        tree.AddChild(tree.Root, new SimpleTreeNode(1, (SimpleTreeNode) tree.FindNodesByValue(0).get(0)));
+        tree.AddChild(tree.Root, new SimpleTreeNode(2, (SimpleTreeNode) tree.FindNodesByValue(0).get(0)));
+        //Добавляем первое значение к ветви 1
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(1).get(0), new SimpleTreeNode(3, (SimpleTreeNode) tree.FindNodesByValue(1).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(1).get(0), new SimpleTreeNode(4, (SimpleTreeNode) tree.FindNodesByValue(1).get(0)));
+        //Добавляем первое значение к ветви 2
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(2).get(0), new SimpleTreeNode(5, (SimpleTreeNode) tree.FindNodesByValue(2).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(2).get(0), new SimpleTreeNode(6, (SimpleTreeNode) tree.FindNodesByValue(2).get(0)));
+        Assert.assertThat(tree.EvenTrees().size(), is(0));
+        //Добавляем первое значение к ветви 4
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(3).get(0), new SimpleTreeNode(7, (SimpleTreeNode) tree.FindNodesByValue(3).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(3).get(0), new SimpleTreeNode(8, (SimpleTreeNode) tree.FindNodesByValue(3).get(0)));
+        //Добавляем первое значение к ветви 4
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(4).get(0), new SimpleTreeNode(9, (SimpleTreeNode) tree.FindNodesByValue(4).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(4).get(0), new SimpleTreeNode(10, (SimpleTreeNode) tree.FindNodesByValue(4).get(0)));
+        //Добавляем первое значение к ветви 5
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(5).get(0), new SimpleTreeNode(11, (SimpleTreeNode) tree.FindNodesByValue(5).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(5).get(0), new SimpleTreeNode(12, (SimpleTreeNode) tree.FindNodesByValue(5).get(0)));
+        //Добавляем первое значение к ветви 6
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(6).get(0), new SimpleTreeNode(13, (SimpleTreeNode) tree.FindNodesByValue(6).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(6).get(0), new SimpleTreeNode(14, (SimpleTreeNode) tree.FindNodesByValue(6).get(0)));
+        Assert.assertThat(tree.EvenTrees().size(), is(0));
+    }
+
+    @Test
+    public void rootInEvenTreesTest() {
+
+        //Создаем корневой узел
+        SimpleTreeNode node = new SimpleTreeNode(0, null);
+        //Создаем дерево с корневым узлом
+        SimpleTree tree = new SimpleTree(node);
+        tree.AddChild(tree.Root, new SimpleTreeNode(1, (SimpleTreeNode) tree.FindNodesByValue(0).get(0)));
+        tree.AddChild(tree.Root, new SimpleTreeNode(2, (SimpleTreeNode) tree.FindNodesByValue(0).get(0)));
+        //Добавляем первое значение к ветви 1
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(1).get(0), new SimpleTreeNode(3, (SimpleTreeNode) tree.FindNodesByValue(1).get(0)));
+
+        //Добавляем первое значение к ветви 2
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(2).get(0), new SimpleTreeNode(4, (SimpleTreeNode) tree.FindNodesByValue(2).get(0)));
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(2).get(0), new SimpleTreeNode(5, (SimpleTreeNode) tree.FindNodesByValue(2).get(0)));
+        Assert.assertThat(tree.EvenTrees().size(), is(2));
+
+        ArrayList expected = new ArrayList<>();
+        expected.add(0);
+        expected.add(1);
+        Assert.assertThat(tree.EvenTrees(), is(expected));
+    }
+
+    @Test
+    public void oneEdgeInEvenTreesTest() {
+        //Создаем корневой узел
+        SimpleTreeNode node = new SimpleTreeNode(0, null);
+        //Создаем дерево с корневым узлом
+        SimpleTree tree = new SimpleTree(node);
+        tree.AddChild(tree.Root, new SimpleTreeNode(1, (SimpleTreeNode) tree.FindNodesByValue(0).get(0)));
+        //Добавляем первое значение к ветви 1
+        tree.AddChild((SimpleTreeNode) tree.FindNodesByValue(1).get(0), new SimpleTreeNode(2, (SimpleTreeNode) tree.FindNodesByValue(1).get(0)));
+        ArrayList expected = new ArrayList<>();
+        expected.add(0);
+        expected.add(1);
+        Assert.assertThat(tree.EvenTrees(), is(expected));
+    }
+
+    @Test
+    public void onlyRootEvenTreesTest() {
+        //Создаем корневой узел
+        SimpleTreeNode node = new SimpleTreeNode(0, null);
+        //Создаем дерево с корневым узлом
+        SimpleTree tree = new SimpleTree(node);
+        Assert.assertThat(tree.EvenTrees().size(), is(0));
     }
 }
