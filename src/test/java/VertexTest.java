@@ -525,6 +525,7 @@ public class VertexTest {
         graph.AddEdge(1, 5);
         graph.AddEdge(4, 5);
         graph.AddEdge(4, 6);
-        Assert.assertNull(graph.DepthFirstSearch(0, 3));
+        ArrayList<Vertex> actual = graph.DepthFirstSearch(0, 3);
+        Assert.assertThat(actual.size(), is(0));
     }
 }

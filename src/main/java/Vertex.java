@@ -98,7 +98,7 @@ class SimpleGraph {
                 if (unHitNeighbors(neighbors) == null) {
                     stack.pop();
                     if (stack.size() == 0) {
-                        return null;
+                        return stackToReverseArray(stack);
                     } else {
                         stack.peek().Hit = true;
                         tekushaya = stack.pop();
@@ -128,9 +128,9 @@ class SimpleGraph {
         return result;
     }
 
-    public Vertex checkTargetVertex(ArrayList<Vertex> vs, int VTo) {
-        for (Vertex v : vs) {
-            if (v.Value == VTo) {
+    public Vertex checkTargetVertex(ArrayList<Vertex> arr, int target) {
+        for (Vertex v : arr) {
+            if (v.Value == target) {
                 return v;
             }
         }
