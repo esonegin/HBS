@@ -1,9 +1,9 @@
-
-import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.is;
 
@@ -423,4 +423,108 @@ public class VertexTest {
         Assert.assertThat(graph.m_adjacency[3][3], is(0));
     }
 
+    @Test
+    public void defaultDepthTest() {
+        SimpleGraph graph = new SimpleGraph(7);
+        graph.AddVertex(0);
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddVertex(3);
+        graph.AddVertex(4);
+        graph.AddVertex(5);
+        graph.AddVertex(6);
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(1, 3);
+        graph.AddEdge(1, 4);
+        graph.AddEdge(1, 5);
+        graph.AddEdge(2, 3);
+        graph.AddEdge(4, 5);
+        graph.AddEdge(4, 6);
+
+        ArrayList<Vertex> expected = new ArrayList<>();
+        ArrayList<Vertex> actual = graph.DepthFirstSearch(0, 6);
+        expected.add(graph.vertex[0]);
+        expected.add(graph.vertex[1]);
+        expected.add(graph.vertex[4]);
+        expected.add(graph.vertex[6]);
+        Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
+        Assert.assertThat(actual.get(1).Value, is(expected.get(1).Value));
+        Assert.assertThat(actual.get(2).Value, is(expected.get(2).Value));
+        Assert.assertThat(actual.get(3).Value, is(expected.get(3).Value));
+
+        ArrayList<Vertex> expected2 = new ArrayList<>();
+        ArrayList<Vertex> actual2 = graph.DepthFirstSearch(1, 6);
+        expected2.add(graph.vertex[1]);
+        expected2.add(graph.vertex[4]);
+        expected2.add(graph.vertex[6]);
+        Assert.assertThat(actual2.get(0).Value, is(expected2.get(0).Value));
+        Assert.assertThat(actual2.get(1).Value, is(expected2.get(1).Value));
+        Assert.assertThat(actual2.get(2).Value, is(expected2.get(2).Value));
+
+    }
+
+    @Test
+    public void betweenDepthTest() {
+        SimpleGraph graph = new SimpleGraph(7);
+        graph.AddVertex(0);
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddVertex(3);
+        graph.AddVertex(4);
+        graph.AddVertex(5);
+        graph.AddVertex(6);
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(1, 3);
+        graph.AddEdge(1, 4);
+        graph.AddEdge(1, 5);
+        graph.AddEdge(2, 3);
+        graph.AddEdge(4, 5);
+        graph.AddEdge(4, 6);
+
+        ArrayList<Vertex> expected = new ArrayList<>();
+        ArrayList<Vertex> actual = graph.DepthFirstSearch(3, 6);
+        expected.add(graph.vertex[3]);
+        expected.add(graph.vertex[1]);
+        expected.add(graph.vertex[4]);
+        expected.add(graph.vertex[6]);
+        Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
+        Assert.assertThat(actual.get(1).Value, is(expected.get(1).Value));
+        Assert.assertThat(actual.get(2).Value, is(expected.get(2).Value));
+        Assert.assertThat(actual.get(3).Value, is(expected.get(3).Value));
+    }
+
+    @Test
+    public void twoVertexDepthTest() {
+        SimpleGraph graph = new SimpleGraph(2);
+        graph.AddVertex(0);
+        graph.AddVertex(1);
+        graph.AddEdge(0, 1);
+        ArrayList<Vertex> expected = new ArrayList<>();
+        ArrayList<Vertex> actual = graph.DepthFirstSearch(0, 1);
+        expected.add(graph.vertex[0]);
+        expected.add(graph.vertex[1]);
+        Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
+        Assert.assertThat(actual.get(1).Value, is(expected.get(1).Value));
+    }
+
+    @Test
+    public void unrelatedVertexDepthTest() {
+        SimpleGraph graph = new SimpleGraph(7);
+        graph.AddVertex(0);
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddVertex(3);
+        graph.AddVertex(4);
+        graph.AddVertex(5);
+        graph.AddVertex(6);
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(1, 4);
+        graph.AddEdge(1, 5);
+        graph.AddEdge(4, 5);
+        graph.AddEdge(4, 6);
+        Assert.assertNull(graph.DepthFirstSearch(0, 3));
+    }
 }

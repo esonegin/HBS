@@ -2,9 +2,11 @@ import java.util.*;
 
 class Vertex {
     public int Value;
+    public boolean Hit;
 
     public Vertex(int val) {
         Value = val;
+        Hit = false;
     }
 }
 
@@ -27,7 +29,6 @@ class SimpleGraph {
                 break;
             }
         }
-
     }
 
     public void RemoveVertex(int v) {
@@ -45,7 +46,6 @@ class SimpleGraph {
             }
             max_vertex--;
         }
-
         int[][] result = new int[max_vertex][max_vertex];
         for (int i = 0; i < max_vertex; ++i) {
             System.arraycopy(m_adjacency[i], 0, result[i], 0, max_vertex);
@@ -75,5 +75,79 @@ class SimpleGraph {
         }
         m_adjacency[v1][v2] = 0;
         m_adjacency[v2][v1] = 0;
+    }
+
+    public ArrayList<Vertex> DepthFirstSearch(int VFrom, int VTo) {
+        Stack<Vertex> stack = new Stack<>();
+        for (Vertex v : vertex) {
+            v.Hit = false;
+        }
+        Vertex tekushaya = vertex[VFrom];
+        while (checkUnHitVertex()) {
+            tekushaya.Hit = true;
+            stack.push(tekushaya);
+            ArrayList<Vertex> neighbors = findAdjacentVertexs(tekushaya);
+            if (checkTargetVertex(neighbors, VTo) != null) {
+                stack.push(checkTargetVertex(neighbors, VTo));
+                return stackToReverseArray(stack);
+            } else if (checkTargetVertex(neighbors, VTo) == null) {
+                if (unHitNeighbors(neighbors) != null) {
+                    tekushaya = unHitNeighbors(neighbors);
+                    continue;
+                }
+                if (unHitNeighbors(neighbors) == null) {
+                    stack.pop();
+                    if (stack.size() == 0) {
+                        return null;
+                    } else {
+                        stack.peek().Hit = true;
+                        tekushaya = stack.pop();
+                    }
+                }
+            }
+        }
+        return stackToReverseArray(stack);
+    }
+
+    public Vertex unHitNeighbors(ArrayList<Vertex> neighbors) {
+        for (Vertex neighbor : neighbors) {
+            if (!neighbor.Hit) {
+                return neighbor;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Vertex> findAdjacentVertexs(Vertex ver) {
+        ArrayList<Vertex> result = new ArrayList<>();
+        for (int i = 0; i < m_adjacency[ver.Value].length; i++) {
+            if (m_adjacency[ver.Value][i] == 1) {
+                result.add(vertex[i]);
+            }
+        }
+        return result;
+    }
+
+    public Vertex checkTargetVertex(ArrayList<Vertex> vs, int VTo) {
+        for (Vertex v : vs) {
+            if (v.Value == VTo) {
+                return v;
+            }
+        }
+        return null;
+    }
+
+    public boolean checkUnHitVertex() {
+        for (Vertex v : vertex) {
+            if (!v.Hit) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Vertex> stackToReverseArray(Stack<Vertex> stack) {
+        Collections.reverse(stack.array);
+        return stack.array;
     }
 }

@@ -48,8 +48,6 @@ class SimpleTree<T> {
         for (int i = 0; i < result.size(); i++) {
             result.addAll(GetChildren(result.get(i)));
         }
-
-
         return result;
     }
 
