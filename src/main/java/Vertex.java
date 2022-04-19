@@ -147,7 +147,11 @@ class SimpleGraph {
     }
 
     public ArrayList<Vertex> stackToReverseArray(Stack<Vertex> stack) {
-        Collections.reverse(stack.array);
-        return stack.array;
+        ArrayList<Vertex> result = new ArrayList<>();
+        while (stack.size() != 0) {
+            result.add(stack.pop());
+        }
+        Collections.reverse(result);
+        return result;
     }
 }
