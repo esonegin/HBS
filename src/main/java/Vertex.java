@@ -1,4 +1,7 @@
 import java.util.*;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
 
 class Vertex {
     public int Value;
@@ -154,4 +157,65 @@ class SimpleGraph {
         Collections.reverse(result);
         return result;
     }
+
+    public ArrayList<Vertex> BreadthFirstSearch(int VFrom, int VTo) {
+        for (Vertex v : vertex) {
+            v.Hit = false;
+        }
+        Vertex tekushaya = vertex[VFrom];
+        Deque<Vertex> queue = new LinkedList<>();
+        ArrayList<Vertex> path = new ArrayList<>();
+        while (checkUnHitVertex()) {
+            tekushaya.Hit = true;
+            queue.add(tekushaya);
+            ArrayList<Vertex> neighbors = findAdjacentVertexs(tekushaya);
+            if (checkTargetVertex(neighbors, VTo) != null) {
+                queue.add(checkTargetVertex(neighbors, VTo));
+                return gluePathAndQueue(queue, path);
+            } else if (checkTargetVertex(neighbors, VTo) == null) {
+                if (unHitNeighbors(neighbors) != null) {
+                    tekushaya = unHitNeighbors(neighbors);
+                    continue;
+                }
+                if (queue.size() == 0) {
+                    return queueToReverseArray(queue);
+                } else {
+                    while (queue.size() != 0 && unHitNeighbors(findAdjacentVertexs(queue.peekLast())) == null) {
+                        queue.pollLast();
+                    }
+                    if (queue.size() == 0) {
+                        return queueToReverseArray(queue);
+                    }
+                    tekushaya = queue.peekLast();
+                    path = queueToReverseArray(queue);
+                    queue.clear();
+                    continue;
+                }
+            }
+            return queueToReverseArray(queue);
+        }
+        return queueToReverseArray(queue);
+    }
+
+    public ArrayList<Vertex> queueToReverseArray(Queue<Vertex> queue) {
+        ArrayList<Vertex> result = new ArrayList<>();
+        while (queue.size() != 0) {
+            result.add(((LinkedList<Vertex>) queue).pollFirst());
+        }
+        return result;
+    }
+
+    public ArrayList<Vertex> gluePathAndQueue(Deque<Vertex> queue, ArrayList<Vertex> path) {
+        ArrayList<Vertex> result = new ArrayList<>();
+        for (Vertex v : path) {
+            if (!queue.contains(v)) {
+                result.add(v);
+            }
+        }
+        while (queue.size() != 0) {
+            result.add(queue.poll());
+        }
+        return result;
+    }
 }
+
