@@ -162,42 +162,31 @@ class SimpleGraph {
         ArrayList<Vertex> path = new ArrayList<>();
         Vertex tekushaya = vertex[VFrom];
         tekushaya.Hit = true;
-        for (Vertex v : findAdjacentVertexs(tekushaya)) {
-            if (!v.Hit) {
-                queue.addLast(v);
-            }
-        }
-        tekushaya = queue.peekFirst();
         path.add(tekushaya);
+        for (Vertex v : findAdjacentVertexs(tekushaya)) {
+            queue.addLast(v);
+            v.Hit = true;
+        }
 
         while (queue.size() != 0) {
-
-            ArrayList<Vertex> neighbors = findAdjacentVertexs(tekushaya);
-            for (Vertex v : neighbors) {
-                if (!v.Hit && !queue.contains(v)) {
-                    queue.addLast(v);
-                    path.add(v);
-                    v.Hit = true;
-                }
-                if (v.Value == VTo) {
-                    return glueQueue(path, VFrom, VTo);
-                }
+            tekushaya = queue.poll();
+            if (unHitNeighbor(findAdjacentVertexs(tekushaya)) != null) {
+                path.add(tekushaya);
             }
-            tekushaya = queue.pollFirst();
-            tekushaya.Hit = true;
-            //path.add(tekushaya);
+            for (Vertex v : findAdjacentVertexs(tekushaya)) {
+                if (!v.Hit) {
+                    queue.addLast(v);
+                }
+                v.Hit = true;
+            }
+        }
+        if (checkUnHitVertex()) {
+            path.clear();
+            return path;
         }
 
-        return glueQueue(path, VFrom, VTo);
-    }
-
-
-    public ArrayList<Vertex> glueQueue(ArrayList<Vertex> path, int from, int to) {
-        ArrayList<Vertex> result = new ArrayList<>();
-        result.add(vertex[from]);
-        result.addAll(path);
-        result.add(vertex[to]);
-        return result;
+        path.add(vertex[VTo]);
+        return path;
     }
 }
 
