@@ -1,7 +1,6 @@
 import java.util.*;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 class Vertex {
     public int Value;
@@ -94,11 +93,11 @@ class SimpleGraph {
                 stack.push(checkTargetVertex(neighbors, VTo));
                 return stackToReverseArray(stack);
             } else if (checkTargetVertex(neighbors, VTo) == null) {
-                if (unHitNeighbors(neighbors) != null) {
-                    tekushaya = unHitNeighbors(neighbors);
+                if (unHitNeighbor(neighbors) != null) {
+                    tekushaya = unHitNeighbor(neighbors);
                     continue;
                 }
-                if (unHitNeighbors(neighbors) == null) {
+                if (unHitNeighbor(neighbors) == null) {
                     stack.pop();
                     if (stack.size() == 0) {
                         return stackToReverseArray(stack);
@@ -112,7 +111,7 @@ class SimpleGraph {
         return stackToReverseArray(stack);
     }
 
-    public Vertex unHitNeighbors(ArrayList<Vertex> neighbors) {
+    public Vertex unHitNeighbor(ArrayList<Vertex> neighbors) {
         for (Vertex neighbor : neighbors) {
             if (!neighbor.Hit) {
                 return neighbor;
@@ -159,63 +158,49 @@ class SimpleGraph {
     }
 
     public ArrayList<Vertex> BreadthFirstSearch(int VFrom, int VTo) {
-        for (Vertex v : vertex) {
-            v.Hit = false;
-        }
-        Vertex tekushaya = vertex[VFrom];
         Deque<Vertex> queue = new LinkedList<>();
         ArrayList<Vertex> path = new ArrayList<>();
-        while (checkUnHitVertex()) {
-            tekushaya.Hit = true;
-            queue.add(tekushaya);
+        Vertex tekushaya = vertex[VFrom];
+        tekushaya.Hit = true;
+        for (Vertex v : findAdjacentVertexs(tekushaya)) {
+            if (!v.Hit) {
+                queue.addLast(v);
+            }
+        }
+        tekushaya = queue.peekFirst();
+        path.add(tekushaya);
+
+        while (queue.size() != 0) {
+
             ArrayList<Vertex> neighbors = findAdjacentVertexs(tekushaya);
-            if (checkTargetVertex(neighbors, VTo) != null) {
-                queue.add(checkTargetVertex(neighbors, VTo));
-                return gluePathAndQueue(queue, path);
-            } else if (checkTargetVertex(neighbors, VTo) == null) {
-                if (unHitNeighbors(neighbors) != null) {
-                    tekushaya = unHitNeighbors(neighbors);
-                    continue;
+            for (Vertex v : neighbors) {
+                if (!v.Hit && !queue.contains(v)) {
+                    queue.addLast(v);
+                    path.add(v);
+                    v.Hit = true;
                 }
-                if (queue.size() == 0) {
-                    return queueToReverseArray(queue);
-                } else {
-                    while (queue.size() != 0 && unHitNeighbors(findAdjacentVertexs(queue.peekLast())) == null) {
-                        queue.pollLast();
-                    }
-                    if (queue.size() == 0) {
-                        return queueToReverseArray(queue);
-                    }
-                    tekushaya = queue.peekLast();
-                    path = queueToReverseArray(queue);
-                    queue.clear();
-                    continue;
+                if (v.Value == VTo) {
+                    return glueQueue(path, VFrom, VTo);
                 }
             }
-            return queueToReverseArray(queue);
+            tekushaya = queue.pollFirst();
+            tekushaya.Hit = true;
+            //path.add(tekushaya);
         }
-        return queueToReverseArray(queue);
+
+        return glueQueue(path, VFrom, VTo);
     }
 
-    public ArrayList<Vertex> queueToReverseArray(Queue<Vertex> queue) {
-        ArrayList<Vertex> result = new ArrayList<>();
-        while (queue.size() != 0) {
-            result.add(((LinkedList<Vertex>) queue).pollFirst());
-        }
-        return result;
-    }
 
-    public ArrayList<Vertex> gluePathAndQueue(Deque<Vertex> queue, ArrayList<Vertex> path) {
+    public ArrayList<Vertex> glueQueue(ArrayList<Vertex> path, int from, int to) {
         ArrayList<Vertex> result = new ArrayList<>();
-        for (Vertex v : path) {
-            if (!queue.contains(v)) {
-                result.add(v);
-            }
-        }
-        while (queue.size() != 0) {
-            result.add(queue.poll());
-        }
+        result.add(vertex[from]);
+        result.addAll(path);
+        result.add(vertex[to]);
         return result;
     }
 }
+
+
+
 
