@@ -721,6 +721,7 @@ public class VertexTest {
         graph.AddEdge(2, 3);
         graph.AddEdge(4, 5);
 
+
         ArrayList<Vertex> expected = new ArrayList<>();
         ArrayList<Vertex> actual = graph.BreadthFirstSearch(3, 5);
         expected.add(graph.vertex[3]);
@@ -733,30 +734,39 @@ public class VertexTest {
         Assert.assertThat(actual.get(3).Value, is(expected.get(3).Value));
     }
 
-    /*@Test
-    public void qTest() {
-        SimpleGraph graph = new SimpleGraph(5);
+    @Test
+    public void defaultQueueTest() {
+        SimpleGraph graph = new SimpleGraph(8);
         graph.AddVertex(0);
         graph.AddVertex(1);
         graph.AddVertex(2);
         graph.AddVertex(3);
         graph.AddVertex(4);
+        graph.AddVertex(5);
+        graph.AddVertex(6);
+        graph.AddVertex(7);
+
         graph.AddEdge(0, 1);
         graph.AddEdge(0, 2);
         graph.AddEdge(0, 3);
-        graph.AddEdge(1, 2);
-        graph.AddEdge(2, 4);
-        graph.AddEdge(4, 2);
+        graph.AddEdge(1, 3);
+        graph.AddEdge(1, 4);
+        graph.AddEdge(2, 3);
+        graph.AddEdge(3, 3);
+        graph.AddEdge(3, 4);
+        graph.AddEdge(4, 5);
+        graph.AddEdge(4, 7);
+        graph.AddEdge(5, 6);
+        graph.AddEdge(6, 7);
 
         ArrayList<Vertex> expected = new ArrayList<>();
         ArrayList<Vertex> actual = graph.BreadthFirstSearch(0, 4);
-        expected.add(graph.vertex[3]);
+        expected.add(graph.vertex[0]);
         expected.add(graph.vertex[1]);
         expected.add(graph.vertex[4]);
-        expected.add(graph.vertex[5]);
         Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
         Assert.assertThat(actual.get(1).Value, is(expected.get(1).Value));
         Assert.assertThat(actual.get(2).Value, is(expected.get(2).Value));
-        Assert.assertThat(actual.get(3).Value, is(expected.get(3).Value));
-    }*/
+
+    }
 }

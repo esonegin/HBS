@@ -184,8 +184,9 @@ class SimpleGraph {
             path.clear();
             return path;
         }
-
-        path.add(vertex[VTo]);
+        if (!path.contains(VTo)) {
+            path.add(vertex[VTo]);
+        }
         return path;
     }
 }
