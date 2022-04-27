@@ -164,14 +164,30 @@ class SimpleGraph {
         tekushaya.Hit = true;
         path.add(tekushaya);
         for (Vertex v : findAdjacentVertexs(tekushaya)) {
+            if (v == vertex[VTo]) {
+                path.add(v);
+                return path;
+            }
             queue.addLast(v);
             v.Hit = true;
         }
 
+        if (tekushaya == vertex[VTo]) {
+            path.add(tekushaya);
+            return path;
+        }
+
         while (queue.size() != 0) {
+            if (findAdjacentVertexs(tekushaya).contains(vertex[VTo])) {
+                return path;
+            }
             tekushaya = queue.poll();
             if (unHitNeighbor(findAdjacentVertexs(tekushaya)) != null) {
                 path.add(tekushaya);
+            }
+            if (findAdjacentVertexs(tekushaya).contains(vertex[VTo])) {
+                path.add(vertex[VTo]);
+                return path;
             }
             for (Vertex v : findAdjacentVertexs(tekushaya)) {
                 if (!v.Hit) {
@@ -179,6 +195,7 @@ class SimpleGraph {
                 }
                 v.Hit = true;
             }
+
         }
         if (checkUnHitVertex()) {
             path.clear();
@@ -190,7 +207,3 @@ class SimpleGraph {
         return path;
     }
 }
-
-
-
-
