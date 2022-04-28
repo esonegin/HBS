@@ -221,10 +221,9 @@ class SimpleGraph {
         ArrayList<Vertex> neighbors = findAdjacentVertexs(parrent);
         for (Vertex first : neighbors) {
             for (Vertex second : neighbors) {
-                if (IsEdge(first.Value, second.Value)) {
+                if (IsEdge(first.Value, second.Value) && first.Value != second.Value) {
                     return true;
                 }
-                first = second;
             }
         }
         return false;
