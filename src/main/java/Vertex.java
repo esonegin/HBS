@@ -206,4 +206,28 @@ class SimpleGraph {
         }
         return path;
     }
+
+    public ArrayList<Vertex> WeakVertices() {
+        ArrayList<Vertex> result = new ArrayList<>();
+        for (Vertex v : vertex) {
+            if (findAdjacentVertexs(v).size() == 0) {
+                result.add(v);
+            } else if (!checkNeighborsConnection(v)) {
+                result.add(v);
+            }
+        }
+        return result;
+    }
+
+    public boolean checkNeighborsConnection(Vertex parrent) {
+        ArrayList<Vertex> neighbors = findAdjacentVertexs(parrent);
+        Vertex first = neighbors.get(0);
+        for (Vertex second : neighbors) {
+            if (IsEdge(first.Value, second.Value)) {
+                return true;
+            }
+            first = second;
+        }
+        return false;
+    }
 }

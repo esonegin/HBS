@@ -494,7 +494,7 @@ public class VertexTest {
         Assert.assertThat(actual.get(3).Value, is(expected.get(3).Value));
     }
 
-   @Test
+    @Test
     public void twoVertexDepthTest() {
         SimpleGraph graph = new SimpleGraph(2);
         graph.AddVertex(0);
@@ -528,7 +528,7 @@ public class VertexTest {
         Assert.assertThat(actual.size(), is(0));
     }
 
-     @Test
+    @Test
     public void twoVertexQueueDepthTest() {
         SimpleGraph graph = new SimpleGraph(2);
         graph.AddVertex(0);
@@ -637,7 +637,6 @@ public class VertexTest {
         Assert.assertThat(actual.get(3).Value, is(expected.get(3).Value));
     }
 
-
     @Test
     public void Queue1To3WithoutEdgeTest() {
         SimpleGraph graph = new SimpleGraph(4);
@@ -662,6 +661,7 @@ public class VertexTest {
         Assert.assertThat(actual.get(2).Value, is(expected.get(2).Value));
         Assert.assertThat(actual.get(3).Value, is(expected.get(3).Value));
     }
+
     @Test
     public void Queue1To3WithEdgeTest() {
         SimpleGraph graph = new SimpleGraph(4);
@@ -800,6 +800,7 @@ public class VertexTest {
         Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
         Assert.assertThat(actual.get(1).Value, is(expected.get(0).Value));
     }
+
     @Test
     public void zeroToSevenQueueTest() {
         SimpleGraph graph = new SimpleGraph(8);
@@ -886,5 +887,154 @@ public class VertexTest {
         Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
         Assert.assertThat(actual.get(1).Value, is(expected.get(1).Value));
         Assert.assertThat(actual.get(2).Value, is(expected.get(2).Value));
+    }
+
+    @Test
+    public void defaultWeakVerticesTest() {
+        SimpleGraph graph = new SimpleGraph(9);
+        graph.AddVertex(0);
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddVertex(3);
+        graph.AddVertex(4);
+        graph.AddVertex(5);
+        graph.AddVertex(6);
+        graph.AddVertex(7);
+        graph.AddVertex(8);
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(0, 4);
+        graph.AddEdge(1, 2);
+        graph.AddEdge(1, 3);
+        graph.AddEdge(2, 3);
+        graph.AddEdge(4, 0);
+        graph.AddEdge(5, 2);
+        graph.AddEdge(5, 6);
+        graph.AddEdge(5, 7);
+        graph.AddEdge(7, 6);
+        graph.AddEdge(7, 8);
+        ArrayList<Vertex> expected = new ArrayList<>();
+        ArrayList<Vertex> actual = graph.WeakVertices();
+        expected.add(graph.vertex[4]);
+        expected.add(graph.vertex[8]);
+        Assert.assertThat(actual.size(), is(2));
+        Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
+        Assert.assertThat(actual.get(1).Value, is(expected.get(1).Value));
+
+    }
+
+    @Test
+    public void defaultWithoutWeakVerticesTest() {
+        SimpleGraph graph = new SimpleGraph(7);
+        graph.AddVertex(0);
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddVertex(3);
+        graph.AddVertex(4);
+        graph.AddVertex(5);
+        graph.AddVertex(6);
+
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(1, 2);
+        graph.AddEdge(1, 3);
+        graph.AddEdge(2, 3);
+        graph.AddEdge(4, 2);
+        graph.AddEdge(4, 5);
+        graph.AddEdge(4, 6);
+        graph.AddEdge(5, 6);
+
+        ArrayList<Vertex> actual = graph.WeakVertices();
+        Assert.assertThat(actual.size(), is(0));
+
+    }
+
+    @Test
+    public void oneVertexWeakVerticesTest() {
+        SimpleGraph graph = new SimpleGraph(4);
+        graph.AddVertex(0);
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddVertex(3);
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(1, 2);
+        graph.AddEdge(0, 3);
+        ArrayList<Vertex> expected = new ArrayList<>();
+        ArrayList<Vertex> actual = graph.WeakVertices();
+        expected.add(graph.vertex[3]);
+        Assert.assertThat(actual.size(), is(1));
+        Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
+    }
+
+    @Test
+    public void zeroVertexWithTriangleWeakTest() {
+        SimpleGraph graph = new SimpleGraph(3);
+        graph.AddVertex(0);
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(1, 2);
+
+        ArrayList<Vertex> expected = new ArrayList<>();
+        ArrayList<Vertex> actual = graph.WeakVertices();
+        Assert.assertThat(actual.size(), is(0));
+    }
+
+    @Test
+    public void twoVertexWeakTest() {
+        SimpleGraph graph = new SimpleGraph(2);
+        graph.AddVertex(0);
+        graph.AddVertex(1);
+
+        graph.AddEdge(0, 1);
+        ArrayList<Vertex> expected = new ArrayList<>();
+        expected.add(graph.vertex[0]);
+        expected.add(graph.vertex[1]);
+        ArrayList<Vertex> actual = graph.WeakVertices();
+        Assert.assertThat(actual.size(), is(2));
+        Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
+        Assert.assertThat(actual.get(1).Value, is(expected.get(1).Value));
+    }
+
+    @Test
+    public void overVertexWithoutEdgeWeakTest() {
+        SimpleGraph graph = new SimpleGraph(1000);
+        for (int i = 0; i < 1000; i++) {
+            graph.AddVertex(i);
+        }
+        ArrayList<Vertex> expected = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            expected.add(graph.vertex[i]);
+        }
+        ArrayList<Vertex> actual = graph.WeakVertices();
+        Assert.assertThat(actual.size(), is(1000));
+        for (int i = 0; i < 1000; i++) {
+            Assert.assertThat(actual.get(i).Value, is(expected.get(i).Value));
+        }
+    }
+
+    @Test
+    public void overVertexWithEdgeWeakTest() {
+        SimpleGraph graph = new SimpleGraph(1000);
+        for (int i = 0; i < 1000; i++) {
+            graph.AddVertex(i);
+        }
+
+        int i = 0;
+        for (int k = 1; k < 1000; k++) {
+            graph.AddEdge(i, k);
+            i++;
+        }
+        ArrayList<Vertex> expected = new ArrayList<>();
+        for (int j = 0; j < 1000; j++) {
+            expected.add(graph.vertex[j]);
+        }
+        ArrayList<Vertex> actual = graph.WeakVertices();
+        Assert.assertThat(actual.size(), is(1000));
+        for (int l = 0; l < 1000; l++) {
+            Assert.assertThat(actual.get(l).Value, is(expected.get(l).Value));
+        }
     }
 }
