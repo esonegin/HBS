@@ -210,9 +210,7 @@ class SimpleGraph {
     public ArrayList<Vertex> WeakVertices() {
         ArrayList<Vertex> result = new ArrayList<>();
         for (Vertex v : vertex) {
-            if (findAdjacentVertexs(v).size() == 0) {
-                result.add(v);
-            } else if (!checkNeighborsConnection(v)) {
+            if (findAdjacentVertexs(v).size() == 0 || !checkNeighborsConnection(v)) {
                 result.add(v);
             }
         }
