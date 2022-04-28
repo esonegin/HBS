@@ -219,12 +219,13 @@ class SimpleGraph {
 
     public boolean checkNeighborsConnection(Vertex parrent) {
         ArrayList<Vertex> neighbors = findAdjacentVertexs(parrent);
-        Vertex first = neighbors.get(0);
-        for (Vertex second : neighbors) {
-            if (IsEdge(first.Value, second.Value)) {
-                return true;
+        for (Vertex first : neighbors) {
+            for (Vertex second : neighbors) {
+                if (IsEdge(first.Value, second.Value)) {
+                    return true;
+                }
+                first = second;
             }
-            first = second;
         }
         return false;
     }

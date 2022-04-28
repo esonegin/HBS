@@ -1131,4 +1131,55 @@ public class VertexTest {
         Assert.assertThat(actual.get(1).Value, is(expected.get(1).Value));
 
     }
+
+    @Test
+    public void workOnBugTest() {
+        SimpleGraph g = new SimpleGraph(9);
+        g.AddVertex(0);
+        g.AddVertex(1);
+        g.AddVertex(2);
+        g.AddVertex(3);
+        g.AddVertex(4);
+        g.AddVertex(5);
+        g.AddVertex(6);
+        g.AddVertex(7);
+        g.AddVertex(8);
+
+        g.AddEdge(0, 6);
+        g.AddEdge(0, 7);
+        g.AddEdge(0, 8);
+        g.AddEdge(1, 2);
+        g.AddEdge(1, 3);
+        g.AddEdge(1, 4);
+        g.AddEdge(2, 1);
+        g.AddEdge(2, 4);
+        g.AddEdge(2, 5);
+        g.AddEdge(3, 1);
+        g.AddEdge(3, 4);
+        g.AddEdge(4, 1);
+        g.AddEdge(4, 2);
+        g.AddEdge(4, 3);
+        g.AddEdge(4, 6);
+        g.AddEdge(5, 2);
+        g.AddEdge(5, 6);
+        g.AddEdge(6, 0);
+        g.AddEdge(6, 4);
+        g.AddEdge(6, 5);
+        g.AddEdge(6, 8);
+        g.AddEdge(7, 0);
+        g.AddEdge(8, 0);
+        g.AddEdge(8, 6);
+
+        ArrayList<Vertex> expected = new ArrayList<>();
+        expected.add(g.vertex[5]);
+        expected.add(g.vertex[7]);
+
+        ArrayList<Vertex> actual = g.WeakVertices();
+        Assert.assertThat(actual.size(), is(2));
+        Assert.assertThat(actual.get(0).Value, is(expected.get(0).Value));
+        Assert.assertThat(actual.get(1).Value, is(expected.get(1).Value));
+
+    }
+
+
 }
