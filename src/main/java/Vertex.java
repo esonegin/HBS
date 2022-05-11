@@ -158,53 +158,53 @@ class SimpleGraph {
     }
 
     public ArrayList<Vertex> BreadthFirstSearch(int VFrom, int VTo) {
-        Deque<Vertex> dequeue = new LinkedList<>();
-        ArrayList<Vertex> path = new ArrayList<>();
+        Deque<Vertex> dequeueVertex = new LinkedList<>();
+        ArrayList<Vertex> currentPath = new ArrayList<>();
         Vertex currentVertex = vertex[VFrom];
         currentVertex.Hit = true;
-        path.add(currentVertex);
+        currentPath.add(currentVertex);
         for (Vertex v : findAdjacentVertexs(currentVertex)) {
             if (v == vertex[VTo]) {
-                path.add(v);
-                return path;
+                currentPath.add(v);
+                return currentPath;
             }
-            dequeue.addLast(v);
+            dequeueVertex.addLast(v);
             v.Hit = true;
         }
 
         if (currentVertex == vertex[VTo]) {
-            path.add(currentVertex);
-            return path;
+            currentPath.add(currentVertex);
+            return currentPath;
         }
 
-        while (dequeue.size() != 0) {
+        while (dequeueVertex.size() != 0) {
             if (findAdjacentVertexs(currentVertex).contains(vertex[VTo])) {
-                return path;
+                return currentPath;
             }
-            currentVertex = dequeue.poll();
+            currentVertex = dequeueVertex.poll();
             if (unHitNeighbor(findAdjacentVertexs(currentVertex)) != null) {
-                path.add(currentVertex);
+                currentPath.add(currentVertex);
             }
             if (findAdjacentVertexs(currentVertex).contains(vertex[VTo])) {
-                path.add(vertex[VTo]);
-                return path;
+                currentPath.add(vertex[VTo]);
+                return currentPath;
             }
             for (Vertex v : findAdjacentVertexs(currentVertex)) {
                 if (!v.Hit) {
-                    dequeue.addLast(v);
+                    dequeueVertex.addLast(v);
                 }
                 v.Hit = true;
             }
 
         }
         if (checkUnHitVertex()) {
-            path.clear();
-            return path;
+            currentPath.clear();
+            return currentPath;
         }
-        if (!path.contains(vertex[VTo])) {
-            path.add(vertex[VTo]);
+        if (!currentPath.contains(vertex[VTo])) {
+            currentPath.add(vertex[VTo]);
         }
-        return path;
+        return currentPath;
     }
 
     public ArrayList<Vertex> WeakVertices() {
