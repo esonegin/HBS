@@ -218,10 +218,10 @@ class SimpleGraph {
     }
 
     public boolean checkNeighborsConnection(Vertex parrent) {
-        ArrayList<Vertex> neighbors = findAdjacentVertexs(parrent);
-        for (Vertex first : neighbors) {
-            for (Vertex second : neighbors) {
-                if (IsEdge(first.Value, second.Value) && first.Value != second.Value) {
+        ArrayList<Vertex> neighborVertices = findAdjacentVertexs(parrent);
+        for (Vertex firstNeighbor : neighborVertices) {
+            for (Vertex secondNeighbor : neighborVertices) {
+                if (IsEdge(firstNeighbor.Value, secondNeighbor.Value) && firstNeighbor.Value != secondNeighbor.Value) {
                     return true;
                 }
             }
