@@ -13,13 +13,13 @@ public class SelectionSort {
 
     //Ищем линейно индекс минимального значения
     public static int linerIndexMinSearch(int[] array, int k) {
-        int result = array.length - 1;
+        int minimumValue = array.length - 1;
         for (int i = array.length - 1; i > k; i--) {
-            if (array[i - 1] < array[result]) {
-                result = i - 1;
+            if (array[i - 1] < array[minimumValue]) {
+                minimumValue = i - 1;
             }
         }
-        return result;
+        return minimumValue;
     }
 
     //Меняем найденый элемент с крайним левым и отсекаем его (если уже левое то только отсекаем)
