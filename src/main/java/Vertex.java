@@ -158,40 +158,40 @@ class SimpleGraph {
     }
 
     public ArrayList<Vertex> BreadthFirstSearch(int VFrom, int VTo) {
-        Deque<Vertex> queue = new LinkedList<>();
+        Deque<Vertex> dequeue = new LinkedList<>();
         ArrayList<Vertex> path = new ArrayList<>();
-        Vertex tekushaya = vertex[VFrom];
-        tekushaya.Hit = true;
-        path.add(tekushaya);
-        for (Vertex v : findAdjacentVertexs(tekushaya)) {
+        Vertex currentVertex = vertex[VFrom];
+        currentVertex.Hit = true;
+        path.add(currentVertex);
+        for (Vertex v : findAdjacentVertexs(currentVertex)) {
             if (v == vertex[VTo]) {
                 path.add(v);
                 return path;
             }
-            queue.addLast(v);
+            dequeue.addLast(v);
             v.Hit = true;
         }
 
-        if (tekushaya == vertex[VTo]) {
-            path.add(tekushaya);
+        if (currentVertex == vertex[VTo]) {
+            path.add(currentVertex);
             return path;
         }
 
-        while (queue.size() != 0) {
-            if (findAdjacentVertexs(tekushaya).contains(vertex[VTo])) {
+        while (dequeue.size() != 0) {
+            if (findAdjacentVertexs(currentVertex).contains(vertex[VTo])) {
                 return path;
             }
-            tekushaya = queue.poll();
-            if (unHitNeighbor(findAdjacentVertexs(tekushaya)) != null) {
-                path.add(tekushaya);
+            currentVertex = dequeue.poll();
+            if (unHitNeighbor(findAdjacentVertexs(currentVertex)) != null) {
+                path.add(currentVertex);
             }
-            if (findAdjacentVertexs(tekushaya).contains(vertex[VTo])) {
+            if (findAdjacentVertexs(currentVertex).contains(vertex[VTo])) {
                 path.add(vertex[VTo]);
                 return path;
             }
-            for (Vertex v : findAdjacentVertexs(tekushaya)) {
+            for (Vertex v : findAdjacentVertexs(currentVertex)) {
                 if (!v.Hit) {
-                    queue.addLast(v);
+                    dequeue.addLast(v);
                 }
                 v.Hit = true;
             }
