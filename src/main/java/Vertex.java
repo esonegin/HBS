@@ -24,10 +24,10 @@ class SimpleGraph {
     }
 
     public void AddVertex(int value) {
-        Vertex newvertex = new Vertex(value);
+        Vertex newVertex = new Vertex(value);
         for (int i = 0; i < vertex.length; i++) {
             if (vertex[i] == null) {
-                vertex[i] = newvertex;
+                vertex[i] = newVertex;
                 break;
             }
         }
