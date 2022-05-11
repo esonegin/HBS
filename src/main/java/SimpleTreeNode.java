@@ -19,8 +19,6 @@ class SimpleTree<T> {
         Root = root;
     }
 
-    public List<SimpleTreeNode<T>> allnodes = new ArrayList<>();
-
     public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild) {
         if (ParentNode == Root) {
             Root.Children.add(NewChild);
@@ -55,15 +53,15 @@ class SimpleTree<T> {
         return new ArrayList<>(parent.Children);
     }
 
-    public List<SimpleTreeNode<T>> FindNodesByValue(T val) {
+    public List<SimpleTreeNode<T>> FindNodesByValue(T value) {
         List<SimpleTreeNode<T>> allnodes = GetAllNodes();
-        List<SimpleTreeNode<T>> result = new ArrayList<>();
+        List<SimpleTreeNode<T>> nodeWithValue = new ArrayList<>();
         for (SimpleTreeNode<T> allnode : allnodes) {
-            if (allnode.NodeValue == val) {
-                result.add(allnode);
+            if (allnode.NodeValue == value) {
+                nodeWithValue.add(allnode);
             }
         }
-        return result;
+        return nodeWithValue;
     }
 
     public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent) {
@@ -82,14 +80,14 @@ class SimpleTree<T> {
     }
 
     public int LeafCount() {
-        int result = 0;
-        List<SimpleTreeNode<T>> allnodes = GetAllNodes();
-        for (SimpleTreeNode<T> allnode : allnodes) {
-            if (allnode.Children.size() == 0) {
-                result++;
+        int leafCount = 0;
+        List<SimpleTreeNode<T>> allNodes = GetAllNodes();
+        for (SimpleTreeNode<T> currentNode : allNodes) {
+            if (currentNode.Children.size() == 0) {
+                leafCount++;
             }
         }
-        return result;
+        return leafCount;
     }
 
     public ArrayList<T> EvenTrees() {
