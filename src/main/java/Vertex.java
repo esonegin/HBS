@@ -48,11 +48,12 @@ class SimpleGraph {
             }
             max_vertex--;
         }
-        int[][] result = new int[max_vertex][max_vertex];
+        //6.1, 6.3
+        int[][] matrixWithDeletedVertex = new int[max_vertex][max_vertex];
         for (int i = 0; i < max_vertex; ++i) {
-            System.arraycopy(m_adjacency[i], 0, result[i], 0, max_vertex);
+            System.arraycopy(m_adjacency[i], 0, matrixWithDeletedVertex[i], 0, max_vertex);
         }
-        m_adjacency = result;
+        m_adjacency = matrixWithDeletedVertex;
     }
 
 
@@ -121,13 +122,14 @@ class SimpleGraph {
     }
 
     public ArrayList<Vertex> findAdjacentVertexs(Vertex ver) {
-        ArrayList<Vertex> result = new ArrayList<>();
+        //6.1, 6.3
+        ArrayList<Vertex> listOfNeighbors = new ArrayList<>();
         for (int i = 0; i < m_adjacency[ver.Value].length; i++) {
             if (m_adjacency[ver.Value][i] == 1) {
-                result.add(vertex[i]);
+                listOfNeighbors.add(vertex[i]);
             }
         }
-        return result;
+        return listOfNeighbors;
     }
 
     public Vertex checkTargetVertex(ArrayList<Vertex> arr, int target) {
@@ -158,6 +160,7 @@ class SimpleGraph {
     }
 
     public ArrayList<Vertex> BreadthFirstSearch(int VFrom, int VTo) {
+        //6.2
         Deque<Vertex> dequeueVertex = new LinkedList<>();
         ArrayList<Vertex> currentPath = new ArrayList<>();
         Vertex currentVertex = vertex[VFrom];
@@ -218,6 +221,7 @@ class SimpleGraph {
     }
 
     public boolean checkNeighborsConnection(Vertex parrent) {
+        //6.3
         ArrayList<Vertex> neighborVertices = findAdjacentVertexs(parrent);
         for (Vertex firstNeighbor : neighborVertices) {
             for (Vertex secondNeighbor : neighborVertices) {
