@@ -1,42 +1,43 @@
 public class TreeOfLife {
     //v3
-    static tree derevo = new TreeOfLife.tree();
+    //6.4
+    static tree treeOfLife = new TreeOfLife.tree();
 
     static String[] TreeOfLife(int H, int W, int N, String[] tree) {
         //Кладем параметры в объект
-        derevo.setVisota(H);
-        derevo.setShirina(W);
-        derevo.setLet(N);
-        derevo.setTekusheeSostoyanie(tree);
-        derevo.setTekushiyGod(0);
+        treeOfLife.setVisota(H);
+        treeOfLife.setShirina(W);
+        treeOfLife.setLet(N);
+        treeOfLife.setTekusheeSostoyanie(tree);
+        treeOfLife.setTekushiyGod(0);
         //Заменяем символы на цифры
         zamenaSimvolovNaCifry();
 
         //Меняем текущее состояние пока не дойдем до заданного возраста
-        while (derevo.getTekushiyGod() <= N) {
-            if (derevo.getTekushiyGod() == 0) {
-                derevo.getTekusheeSostoyanie();
+        while (treeOfLife.getTekushiyGod() <= N) {
+            if (treeOfLife.getTekushiyGod() == 0) {
+                treeOfLife.getTekusheeSostoyanie();
                 //Если год "нечетный"
-            } else if (derevo.getTekushiyGod() % 2 == 0) {
+            } else if (treeOfLife.getTekushiyGod() % 2 == 0) {
                 //Прибавляем возраст веткам
-                derevo.setTekusheeSostoyanie(VozrastVetokPlus(derevo.getTekusheeSostoyanie()));
+                treeOfLife.setTekusheeSostoyanie(VozrastVetokPlus(treeOfLife.getTekusheeSostoyanie()));
                 //Удаляем старые ветки
-                derevo.setTekusheeSostoyanie(GibelVetok(PoluchenieMatrix(derevo.getTekusheeSostoyanie())));
+                treeOfLife.setTekusheeSostoyanie(GibelVetok(PoluchenieMatrix(treeOfLife.getTekusheeSostoyanie())));
 
-            } else if (derevo.getTekushiyGod() % 2 != 0) {
-                derevo.setTekusheeSostoyanie(VozrastVetokPlus(derevo.getTekusheeSostoyanie()));
+            } else if (treeOfLife.getTekushiyGod() % 2 != 0) {
+                treeOfLife.setTekusheeSostoyanie(VozrastVetokPlus(treeOfLife.getTekusheeSostoyanie()));
             }
 
             //Выводим текущий год
-            System.out.println(derevo.getTekushiyGod());
+            System.out.println(treeOfLife.getTekushiyGod());
             //Выводим финальную матрицу из цифр
             for (int i = 0; i < tree.length; i++) {
-                System.out.println(derevo.tekusheeSostoyanie[i]);
+                System.out.println(treeOfLife.tekusheeSostoyanie[i]);
             }
-            derevo.setTekushiyGod(derevo.getTekushiyGod() + 1);
+            treeOfLife.setTekushiyGod(treeOfLife.getTekushiyGod() + 1);
         }
 
-        return ZamenaCifrNaPlus(derevo.tekusheeSostoyanie);
+        return ZamenaCifrNaPlus(treeOfLife.tekusheeSostoyanie);
     }
 
     //
@@ -153,8 +154,8 @@ public class TreeOfLife {
             }
         }
 
-        for (int i = 0; i < derevo.getVisota(); ) {  //идём по строкам
-            for (int j = 0; j < derevo.getShirina(); j++) {//идём по столбцам
+        for (int i = 0; i < treeOfLife.getVisota(); ) {  //идём по строкам
+            for (int j = 0; j < treeOfLife.getShirina(); j++) {//идём по столбцам
                 if (result[i] == null) {
                     result[i] = String.valueOf(matrix[i][j]);
                 } else {

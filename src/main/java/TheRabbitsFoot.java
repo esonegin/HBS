@@ -2,28 +2,31 @@ import java.util.*;
 
 public class TheRabbitsFoot {
     //18.06.2
-    public static String TheRabbitsFoot(String s, boolean encode) {
+    //6.1, 6.2, 6.3, 6.4
+    public static String TheRabbitsFoot(String encryptionString, boolean encode) {
         if (encode == true) {
-            s = Zashifr(s, GetMatrix(s).length);
+            encryptionString = Zashifr(encryptionString, GetMatrix(encryptionString).length);
 
         } else {
-            s = sborka(s);
+            encryptionString = gluingString(encryptionString);
         }
-        return s;
+        return encryptionString;
     }
 
-    public static String sborka(String rashifr) {
-        String results;
-        String resultf = "";
-        for (
-                int i = 0; i < GetMatrix(rashifr).length; i++) {
-            results = Rashifrivka(rashifr, i);
-            resultf += results;
+    //6.1, 6.2, 6.3, 6.4
+    public static String gluingString(String decryptedString) {
+        //6.2, 6.4
+        String bufferChars;
+        //6.1, 6.4
+        String gluedString = "";
+        for (int i = 0; i < GetMatrix(decryptedString).length; i++) {
+            bufferChars = Decryption(decryptedString, i);
+            gluedString += bufferChars;
         }
-        return resultf;
+        return gluedString;
     }
 
-    public static String Rashifrivka(String rashifr, int element) {
+    public static String Decryption(String rashifr, int element) {
 
         String[][] Matrix = new String[GetMatrix(rashifr).length][GetMatrix(rashifr).length];
         String results;
