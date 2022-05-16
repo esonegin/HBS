@@ -1,6 +1,6 @@
 import java.util.*;
 
-class ShopOLAP {
+class   ShopOLAP {
 
     public static String[] ShopOLAP(int N, String[] items) {
         ArrayList<Element> resultlist = valueSortList(items);

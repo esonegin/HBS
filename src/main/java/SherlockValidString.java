@@ -5,7 +5,8 @@ import java.util.List;
 public class SherlockValidString {
     //v1
     static boolean SherlockValidString(String s) {
-        Boolean result = true;
+        //7.1 - result - isValidString
+        boolean isValidString = true;
         mainObject mainObject = new mainObject();
         ArrayList<Integer> kolvolist = podshetKolva(s);
         Collections.sort(kolvolist);
@@ -20,12 +21,12 @@ public class SherlockValidString {
                 || mainObject.getKolvolist().get(0) < mainObject.getKolvolist().get(1) - 1)
                 || mainObject.getKolvoraznih() == 2 && mainObject.getStroka().length() % 2 == 0
                 || mainObject.getKolvoraznih() > 2) {
-            result = false;
+            isValidString = false;
         }
         System.out.println(mainObject.getKolvolist());
         System.out.println(mainObject.getKolvoraznih());
 
-        return result;
+        return isValidString;
     }
 
     public static class mainObject {

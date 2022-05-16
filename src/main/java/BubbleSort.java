@@ -1,12 +1,14 @@
 public class BubbleSort {
 
     public static int[] bubbleSort(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length; j++) {
-                if (array[i] < array[j]) {
-                    int k = array[i];
-                    array[i] = array[j];
-                    array[j] = k;
+        //7.3 i, j - currentValueIndex, comparedValueIndex
+        for (int currentValueIndex = 0; currentValueIndex < array.length; currentValueIndex++) {
+            for (int comparedValueIndex = 0; comparedValueIndex < array.length; comparedValueIndex++) {
+                if (array[currentValueIndex] < array[comparedValueIndex]) {
+                    //7.4 k - bufferValue
+                    int bufferValue = array[currentValueIndex];
+                    array[currentValueIndex] = array[comparedValueIndex];
+                    array[comparedValueIndex] = bufferValue;
                 }
             }
 

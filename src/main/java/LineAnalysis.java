@@ -3,22 +3,23 @@
 public class LineAnalysis {
 
     public static boolean LineAnalysis(String line) {
-        boolean result = true;
+        //7.1 result - isValidLine
+        boolean isValidLine = true;
         char first = line.charAt(0);
         char posledniy = line.charAt(line.length() - 1);
         if (first != '*' || posledniy != '*') {
-            result = false;
+            isValidLine = false;
         } else {
             String[] myArray = line.split("\\*");
             for (int i = 2; i < myArray.length; i++) {
                 if (myArray[i].equals(myArray[1])) {
-                    result = true;
+                    isValidLine = true;
                 } else {
-                    result = false;
+                    isValidLine = false;
                     break;
                 }
             }
         }
-        return result;
+        return isValidLine;
     }
 }

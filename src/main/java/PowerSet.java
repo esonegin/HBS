@@ -20,20 +20,21 @@ public class PowerSet {
     }
 
     public void put(String value) {
-        boolean doublecheck = doubleCheck(value);
+        //7.1 - doublecheck - isDuplicate
+        boolean isDuplicate = duplicateCheck(value);
         for (int i = 0; i < slots.length; i++) {
-            if (slots[i] == null && doublecheck) {
+            if (slots[i] == null && isDuplicate) {
                 slots[i] = value;
                 break;
-            } else if (slots[slots.length - 1] != null && doublecheck && prevslot == -1) {
+            } else if (slots[slots.length - 1] != null && isDuplicate && prevslot == -1) {
                 slots[i] = value;
                 prevslot = i;
                 break;
-            } else if (slots[slots.length - 1] != null && doublecheck && prevslot != -1 && prevslot < slots.length - 1) {
+            } else if (slots[slots.length - 1] != null && isDuplicate && prevslot != -1 && prevslot < slots.length - 1) {
                 slots[prevslot + 1] = value;
                 prevslot++;
                 break;
-            } else if (slots[slots.length - 1] != null && doublecheck && prevslot != -1 && prevslot >= slots.length - 1) {
+            } else if (slots[slots.length - 1] != null && isDuplicate && prevslot != -1 && prevslot >= slots.length - 1) {
                 prevslot = 0;
                 slots[prevslot] = value;
                 break;
@@ -41,7 +42,7 @@ public class PowerSet {
         }
     }
 
-    public boolean doubleCheck(String value) {
+    public boolean duplicateCheck(String value) {
         for (String val : slots) {
             if (val != null && val.equals(value)) {
                 return false;
@@ -51,26 +52,29 @@ public class PowerSet {
     }
 
     public boolean get(String value) {
-        boolean result = false;
-        for (String val : slots) {
-            if (val != null && val.equals(value)) {
-                result = true;
+        //7.1 - result - valueInSlots
+        boolean valueInSlots = false;
+        //7.3 - val - i
+        for (String i : slots) {
+            if (i != null && i.equals(value)) {
+                valueInSlots = true;
                 break;
             }
         }
-        return result;
+        return valueInSlots;
     }
 
     public boolean remove(String value) {
-        boolean result = false;
+        //7.1 - result - isValueRemoved
+        boolean isValueRemoved = false;
         for (int i = 0; i < slots.length; i++) {
             if (slots[i] != null && slots[i].equals(value)) {
                 slots[i] = null;
-                result = true;
+                isValueRemoved = true;
                 break;
             }
         }
-        return result;
+        return isValueRemoved;
     }
 
     public PowerSet intersection(PowerSet set2) {

@@ -35,11 +35,12 @@ public class BloomFilter {
     }
 
     public boolean find(String str1) {
-        boolean result = false;
+        //7.2 result - found
+        boolean found = false;
         if (hash1(str1) == 1 && hash2(str1) == 1) {
-            result = true;
+            found = true;
         }
-        return result;
+        return found;
     }
 
     public boolean isValue(String str1) {
