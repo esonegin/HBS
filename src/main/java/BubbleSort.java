@@ -1,7 +1,7 @@
 public class BubbleSort {
 
     public static int[] bubbleSort(int[] array) {
-        //7.3 i, j - currentValueIndex, comparedValueIndex
+        //7.3, 7.4 i, j - currentValueIndex, comparedValueIndex
         for (int currentValueIndex = 0; currentValueIndex < array.length; currentValueIndex++) {
             for (int comparedValueIndex = 0; comparedValueIndex < array.length; comparedValueIndex++) {
                 if (array[currentValueIndex] < array[comparedValueIndex]) {
