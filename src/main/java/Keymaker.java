@@ -12,53 +12,54 @@ public class Keymaker {
     //v1
     public static String Keymaker(int k) {
         String result = "";
-        ArrayList<Integer> doors = new ArrayList<>();
+        //doors - defaultKeyList
+        ArrayList<Integer> defaultKeyList = new ArrayList<>();
         //Заполняем список дефолтными нулями
         for (int i = 0; i < k; i++) {
-            doors.add(0);
+            defaultKeyList.add(0);
+        }
+        firststep(defaultKeyList);
+        secondstep(defaultKeyList);
+        thirdstep(defaultKeyList);
+
+        for (int i = 4; i <= defaultKeyList.size(); i++) {
+            otherStep(defaultKeyList, i);
         }
 
-        firststep(doors);
-        secondstep(doors);
-        thirdstep(doors);
-
-        for (int i = 4; i <= doors.size(); i++) {
-            otherStep(doors, i);
+        for (int i = 0; i < defaultKeyList.size(); i++) {
+            result = result + defaultKeyList.get(i);
         }
-
-        for (int i = 0; i < doors.size(); i++) {
-            result = result + doors.get(i);
-        }
-
-        //System.out.println(result);
         return result;
     }
 
-    public static ArrayList<Integer> firststep(ArrayList<Integer> defaultlist) {
-        for (int i = 0; i < defaultlist.size(); i++) {
-            defaultlist.set(i, 1);
+    //result - allValuesOneList
+    public static ArrayList<Integer> firststep(ArrayList<Integer> allValuesOneList) {
+        for (int i = 0; i < allValuesOneList.size(); i++) {
+            allValuesOneList.set(i, 1);
         }
-        return defaultlist;
+        return allValuesOneList;
     }
 
-    public static ArrayList<Integer> secondstep(ArrayList<Integer> afterfirst) {
-        for (int i = 0; i < afterfirst.size(); i++) {
+    //afterfirst - allValuesOneList
+    public static ArrayList<Integer> secondstep(ArrayList<Integer> allEvenZeroList) {
+        for (int i = 0; i < allEvenZeroList.size(); i++) {
             if (i % 2 != 0) {
-                afterfirst.set(i, 0);
+                allEvenZeroList.set(i, 0);
             }
         }
-        return afterfirst;
+        return allEvenZeroList;
     }
 
-    public static ArrayList<Integer> thirdstep(ArrayList<Integer> aftersecond) {
-        for (int i = 2; i < aftersecond.size(); i += 3) {
-            if (aftersecond.get(i) == 0) {
-                aftersecond.set(i, 1);
-            } else if (aftersecond.get(i) == 1) {
-                aftersecond.set(i, 0);
+    //aftersecond - allEvenZeroList
+    public static ArrayList<Integer> thirdstep(ArrayList<Integer> replaceEveryThridList) {
+        for (int i = 2; i < replaceEveryThridList.size(); i += 3) {
+            if (replaceEveryThridList.get(i) == 0) {
+                replaceEveryThridList.set(i, 1);
+            } else if (replaceEveryThridList.get(i) == 1) {
+                replaceEveryThridList.set(i, 0);
             }
         }
-        return aftersecond;
+        return replaceEveryThridList;
     }
 
     public static ArrayList<Integer> otherStep(ArrayList<Integer> otherstep, int step) {

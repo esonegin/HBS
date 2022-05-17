@@ -3,58 +3,68 @@ import java.util.ArrayList;
 public class BigMinus {
 
     public static String BigMinus(String s1, String s2) {
-        String result = "";
+        //result - difference
+        String difference = "";
         ArrayList<Integer> resultlist = new ArrayList<Integer>();
-        Long pervoechislo = Long.valueOf(s1);
-        Long vtoroechislo = Long.valueOf(s2);
+        //pervoechislo, vtoroechislo - firstValue, secondValue
+        Long firstValue = Long.valueOf(s1);
+        Long secondValue = Long.valueOf(s2);
 
         //Первое число равно второму
-        if (pervoechislo.equals(vtoroechislo)){
-            result = "0";
+        if (firstValue.equals(secondValue)) {
+            difference = "0";
         }
         //Первое число больше второго
-        else if (pervoechislo > vtoroechislo) {
-            resultlist = vichitaniePosimvolnoPolozhitelno(s1, s2);
-        } else if (pervoechislo < vtoroechislo) {
-            resultlist = vichitaniePosimvolnoPolozhitelno(s2, s1);
+        else if (firstValue > secondValue) {
+            resultlist = subtractingShortFromLong(s1, s2);
+        } else if (firstValue < secondValue) {
+            resultlist = subtractingShortFromLong(s2, s1);
         }
 
         //Наполняем строку результат символами из списка
         for (int k = 0; k < resultlist.size(); k++) {
-            result += resultlist.get(k);
+            difference += resultlist.get(k);
 
         }
-        return result;
+        return difference;
     }
 
-    public static ArrayList<Integer> vichitaniePosimvolnoPolozhitelno(String s1, String s2) {
-        ArrayList<Integer> first = poluchaemSpisok(s1, s2, 1);
-        ArrayList<Integer> second = poluchaemSpisok(s1, s2, 2);
-        ArrayList<Integer> third = new ArrayList<Integer>();
+    public static ArrayList<Integer> subtractingShortFromLong(String longer, String shorter) {
+        //first - listСharsLongerNum
+        ArrayList<Integer> listСharsLongerNum = poluchaemSpisok(longer, shorter, 1);
+        //second - listСharsShorterNum
+        ArrayList<Integer> listСharsShorterNum = poluchaemSpisok(longer, shorter, 2);
+        //third - listCharsSubtrResult
+        ArrayList<Integer> listCharsSubtrResult = new ArrayList<Integer>();
         //Вычитаем посимвольно
-        for (int i = 0; i < first.size(); i++) {
+        for (int i = 0; i < listСharsLongerNum.size(); i++) {
             //Если символ из первого числа больше или равен символу из второго числа
-            if (first.get(first.size() - 1 - i) >= second.get(second.size() - 1 - i)) {
-                third.add(0, first.get(first.size() - 1 - i) - second.get(second.size() - 1 - i));
+            if (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i)
+                    >= listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i)) {
+                listCharsSubtrResult.add(0, listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i)
+                        - listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i));
                 continue;
             }
             //Если символ из первого числа меньше чем символ из второго числа и первое число "длиннее" чем второе
-            else if (first.get(first.size() - 1 - i) < second.get(second.size() - 1 - i) && s1.length() > s2.length()) {
-                third.add(0, (first.get(first.size() - 1 - i) + 10) - second.get(second.size() - 1 - i));
-                first.set(first.size() - 2 - i, first.get(first.size() - 2 - i) - 1);
+            else if (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i)
+                    < listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i)
+                    && longer.length() > shorter.length()) {
+                listCharsSubtrResult.add(0, (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) + 10)
+                        - listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i));
+                listСharsLongerNum.set(listСharsLongerNum.size() - 2 - i, listСharsLongerNum.get(listСharsLongerNum.size() - 2 - i) - 1);
                 continue;
             }
             //Если чила состоят из одной цифры
-            else if (first.size() == 1 && second.size() == 1) {
-                third.set(0, first.get(0) - second.get(0));
+            else if (listСharsLongerNum.size() == 1 && listСharsShorterNum.size() == 1) {
+                listCharsSubtrResult.set(0, listСharsLongerNum.get(0) - listСharsShorterNum.get(0));
                 continue;
             }
         }
         //Удаляем артефактный ноль
-        if (third.get(0) == 0 && third.size() > 1) {
-            third.remove(0);
+        if (listCharsSubtrResult.get(0) == 0 && listCharsSubtrResult.size() > 1) {
+            listCharsSubtrResult.remove(0);
         }
-        return third;
+        return listCharsSubtrResult;
     }
 
     public static ArrayList<Integer> poluchaemSpisok(String first, String second, int listnumber) {
