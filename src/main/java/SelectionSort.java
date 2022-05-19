@@ -4,7 +4,7 @@ public class SelectionSort {
 
     public static int[] selectionSort(int[] array) {
         for (int i = k; i < array.length; i++) {
-            changeAndOtsechenie(array, linerIndexMinSearch(array, k));
+            rotateAndCutLeftEl(array, getMinIndex(array, k));
         }
         //Обнуляем переменную для отсечения
         k = 0;
@@ -12,7 +12,8 @@ public class SelectionSort {
     }
 
     //Ищем линейно индекс минимального значения
-    public static int linerIndexMinSearch(int[] array, int k) {
+    //linerIndexMinSearch - getMinIndex
+    public static int getMinIndex(int[] array, int k) {
         int minimumValue = array.length - 1;
         for (int i = array.length - 1; i > k; i--) {
             if (array[i - 1] < array[minimumValue]) {
@@ -23,7 +24,8 @@ public class SelectionSort {
     }
 
     //Меняем найденый элемент с крайним левым и отсекаем его (если уже левое то только отсекаем)
-    public static int[] changeAndOtsechenie(int[] array, int indexmin) {
+    //changeAndOtsechenie - rotateAndCutLeftEl
+        public static int[] rotateAndCutLeftEl(int[] array, int indexmin) {
         int change = array[k];
         array[k] = array[indexmin];
         array[indexmin] = change;
