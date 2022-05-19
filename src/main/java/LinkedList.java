@@ -12,18 +12,15 @@ public class LinkedList {
     }
 
     public void addInTail(Node0 item) {
-        if (this.head == null)
-            this.head = item;
-        else
-            this.tail.next = item;
+        if (this.head == null) this.head = item;
+        else this.tail.next = item;
         this.tail = item;
     }
 
     public Node0 find(int value) {
         Node0 Node0 = this.head;
         while (Node0 != null) {
-            if (Node0.value == value)
-                return Node0;
+            if (Node0.value == value) return Node0;
             Node0 = Node0.next;
         }
         return null;
@@ -33,8 +30,7 @@ public class LinkedList {
         ArrayList<Node0> Node0s = new ArrayList<>();
         Node0 Node0 = this.head;
         while (Node0 != null) {
-            if (Node0.value == _value)
-                Node0s.add(Node0);
+            if (Node0.value == _value) Node0s.add(Node0);
             Node0 = Node0.next;
         }
         return Node0s;
@@ -107,34 +103,6 @@ public class LinkedList {
         } else if (_Node0After == null && head == null) {
             this.head = _Node0ToInsert;
             this.tail = _Node0ToInsert;
-        }
-    }
-}
-
-class Node01 {
-    public int value;
-    public Node01 next;
-
-    public Node01(int _value) {
-        value = _value;
-        next = null;
-    }
-
-    class LinkedListExtra {
-
-        public ArrayList<Integer> listsElSum(LinkedList list1, LinkedList list2) {
-            ArrayList<Integer> result = new ArrayList<>();
-            if (list1.count() == list2.count()) {
-                Node0 Node01 = list1.head;
-                Node0 Node02 = list2.head;
-                while (Node01 != null) {
-                    result.add(Node01.value + Node02.value);
-                    Node01 = Node01.next;
-                }
-            } else {
-                return null;
-            }
-            return result;
         }
     }
 }

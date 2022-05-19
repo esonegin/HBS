@@ -43,12 +43,12 @@ public class TheRabbitsFoot {
         //Запись символов элемента по индексу
         for (int i = 0; i < Matrix.length; i++) {
             //Берем подстроку из массива
-            String podstroka = arrayMessage[i];
-            if (element >= podstroka.length()) {
+            String podstr = arrayMessage[i];
+            if (element >= podstr.length()) {
                 break;
             } else {
                 //Кладем в результат символ подстроки по индексу
-                results = (podstroka.split("")[element]);
+                results = (podstr.split("")[element]);
                 resultf += results;
             }
         }

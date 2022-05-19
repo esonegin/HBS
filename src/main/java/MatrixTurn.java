@@ -16,11 +16,11 @@ public class MatrixTurn {
         String[][] ishodnaya = matrix.getVhodmatrix();
 
         //Помещаем перевернутую строку первого уровня в список
-        strokivsehlevels.add(PerestanovkaSimvolovVstroke(strokaIzMatrici(ishodnaya, T), T));
+        strokivsehlevels.add(PerestanovkaSimvolovVstroke(strIzMatrici(ishodnaya, T), T));
 
         //Помещаем перевернутые строки остальных уровней в список
         for (int i = 2; i <= matrix.getKolvoLevels(); i++) {
-            strokivsehlevels.add(PerestanovkaSimvolovVstroke(strokaIzMatrici(PoluchenieMatrixPoLevel(i), T), T));
+            strokivsehlevels.add(PerestanovkaSimvolovVstroke(strIzMatrici(PoluchenieMatrixPoLevel(i), T), T));
         }
 
         for (int j = 0; j < strokivsehlevels.size(); j++) {
@@ -125,7 +125,7 @@ public class MatrixTurn {
         return resultmatrix;
     }
 
-    public static String strokaIzMatrici(String[][] matrix, int T) {
+    public static String strIzMatrici(String[][] matrix, int T) {
         String gorizverh = "";
         String gorizniz = "";
         String vertikalleft = "";
@@ -176,21 +176,21 @@ public class MatrixTurn {
         return result;
     }
 
-    public static String PerestanovkaSimvolovVstroke(String stroka, int T) {
+    public static String PerestanovkaSimvolovVstroke(String str, int T) {
         String result = "";
 
         //Если длина строки == шагу, то возвращаем строку
-        if (T - stroka.length() == 0) {
-            result = stroka;
+        if (T - str.length() == 0) {
+            result = str;
         //Если длина строки больше шага
-        } else if (stroka.length() > T) {
-            String perenos = stroka.substring(stroka.length() - T);
-            result = perenos + stroka.substring(0, stroka.length() - T);
+        } else if (str.length() > T) {
+            String perenos = str.substring(str.length() - T);
+            result = perenos + str.substring(0, str.length() - T);
 
         //Если шаг больше длины строки
-        }else if (stroka.length() < T) {
-            String perenos = stroka.substring(stroka.length() - (T - (stroka.length() * (T / stroka.length()))));
-            result = perenos + stroka.substring(0, stroka.length() - (T - stroka.length() * (T / stroka.length())));
+        }else if (str.length() < T) {
+            String perenos = str.substring(str.length() - (T - (str.length() * (T / str.length()))));
+            result = perenos + str.substring(0, str.length() - (T - str.length() * (T / str.length())));
         }
         return result;
     }
@@ -201,8 +201,8 @@ public class MatrixTurn {
         String[] vhodarray;
         int tekushiyshag = 0;
         String[][] vhodmatrix;
-        String strokaIzMatrici;
-        String strokaLevel1;
+        String strIzMatrici;
+        String strLevel1;
         static int kolvolevels;
         String[][] finmatrix;
 
@@ -235,12 +235,12 @@ public class MatrixTurn {
             return vhodmatrix;
         }
 
-        public String getStrokaIzMatrici() {
-            return strokaIzMatrici;
+        public String getstrIzMatrici() {
+            return strIzMatrici;
         }
 
-        public String getStrokaLevel1() {
-            return strokaLevel1;
+        public String getstrLevel1() {
+            return strLevel1;
         }
 
         public void setFinmatrix(String[][] finmatrix) {
@@ -267,12 +267,12 @@ public class MatrixTurn {
             this.vhodmatrix = PoluchenieIznachalnoyMatrix(vhodmatrix);
         }
 
-        public void setStrokaIzMatrici(String strokaIzMatrici) {
-            this.strokaIzMatrici = strokaIzMatrici;
+        public void setstrIzMatrici(String strIzMatrici) {
+            this.strIzMatrici = strIzMatrici;
         }
 
-        public void setStrokaLevel1(String strokaLevel1) {
-            this.strokaLevel1 = strokaLevel1;
+        public void setstrLevel1(String strLevel1) {
+            this.strLevel1 = strLevel1;
         }
 
         public void setKolvoLevels() {

@@ -7,35 +7,36 @@ public class SherlockValidString {
     static boolean SherlockValidString(String s) {
         //7.1 - result - isValidString
         boolean isValidString = true;
-        mainObject mainObject = new mainObject();
-        ArrayList<Integer> kolvolist = podshetKolva(s);
+        ValidatedString ValidatedString = new ValidatedString();
+        ArrayList<Integer> kolvolist = getUniqueCount(s);
         Collections.sort(kolvolist);
 
-        mainObject.setStroka(s);
-        mainObject.setKolvolist(kolvolist);
-        mainObject.setKolvoraznih(kolvoRaznih(mainObject.getKolvolist()));
+        ValidatedString.setstr(s);
+        ValidatedString.setKolvolist(kolvolist);
+        ValidatedString.setKolvoraznih(getUniqueSize(ValidatedString.getKolvolist()));
 
 
-        if (mainObject.getKolvoraznih() == 2
-                && (mainObject.getKolvolist().get(0) > mainObject.getKolvolist().get(1) + 1
-                || mainObject.getKolvolist().get(0) < mainObject.getKolvolist().get(1) - 1)
-                || mainObject.getKolvoraznih() == 2 && mainObject.getStroka().length() % 2 == 0
-                || mainObject.getKolvoraznih() > 2) {
+        if (ValidatedString.getKolvoraznih() == 2
+                && (ValidatedString.getKolvolist().get(0) > ValidatedString.getKolvolist().get(1) + 1
+                || ValidatedString.getKolvolist().get(0) < ValidatedString.getKolvolist().get(1) - 1)
+                || ValidatedString.getKolvoraznih() == 2 && ValidatedString.getstr().length() % 2 == 0
+                || ValidatedString.getKolvoraznih() > 2) {
             isValidString = false;
         }
-        System.out.println(mainObject.getKolvolist());
-        System.out.println(mainObject.getKolvoraznih());
+        System.out.println(ValidatedString.getKolvolist());
+        System.out.println(ValidatedString.getKolvoraznih());
 
         return isValidString;
     }
 
-    public static class mainObject {
-        public String stroka;
+    //mainObject - ValidatedString
+    public static class ValidatedString {
+        public String str;
         public ArrayList<Integer> kolvolist;
         public int kolvoraznih;
 
-        public void setStroka(String stroka) {
-            this.stroka = stroka;
+        public void setstr(String str) {
+            this.str = str;
         }
 
         public void setKolvolist(ArrayList<Integer> kolvolist) {
@@ -46,8 +47,8 @@ public class SherlockValidString {
             this.kolvoraznih = kolvoraznih;
         }
 
-        public String getStroka() {
-            return stroka;
+        public String getstr() {
+            return str;
         }
 
         public ArrayList<Integer> getKolvolist() {
@@ -59,20 +60,19 @@ public class SherlockValidString {
         }
     }
 
-    public static int kolvoRaznih(ArrayList<Integer> kolvo) {
-        int result = 0;
+    //kolvoRaznih - getUniqueSize
+    public static int getUniqueSize(ArrayList<Integer> kolvo) {
         Set<Integer> set = new HashSet<>(kolvo);
         ArrayList<Integer> res = new ArrayList<>();
         kolvo.clear();
         kolvo.addAll(set);
         res.addAll(set);
-
         return res.size();
     }
 
-    public static ArrayList<Integer> podshetKolva(String s) {
+    //podshetKolva - getUniqueCount
+    public static ArrayList<Integer> getUniqueCount(String s) {
         List<String> result = sortList(s);
-        System.out.println(result);
         String sortresult = "";
         for (int i = 0; i < result.size(); i++) {
             sortresult = sortresult + result.get(i);

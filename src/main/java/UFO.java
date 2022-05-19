@@ -6,12 +6,12 @@ public class UFO {
     public static int[] UFO(int N, int[] data, boolean octal) {
         int[] result = new int[data.length];
         for (int i = 0; i < data.length; i++) {
-            result[i] = strokaPoNomeruIndexa(data, i, octal);
+            result[i] = strPoNomeruIndexa(data, i, octal);
         }
         return result;
     }
 
-    public static int strokaPoNomeruIndexa(int[] array, int index, boolean octal) {
+    public static int strPoNomeruIndexa(int[] array, int index, boolean octal) {
         int dlinnaelementa = String.valueOf(array[index]).length();
         int[] result = new int[dlinnaelementa];
         for (int i = 0; i < dlinnaelementa; i++) {

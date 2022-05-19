@@ -4,16 +4,16 @@ import java.util.*;
 public class BiggerGreater {
     //v4
     public static String BiggerGreater(String input) {
-        mainObject mainObject = new mainObject();
+        ValidatedString ValidatedString = new ValidatedString();
 
-        mainObject.setFirstWord(input);
-        mainObject.setAllVariants(allVariants(input));
-        mainObject.setNaimenshee(naimenshee(mainObject.getAllVariants()));
+        ValidatedString.setFirstWord(input);
+        ValidatedString.setAllVariants(allVariants(input));
+        ValidatedString.setNaimenshee(naimenshee(ValidatedString.getAllVariants()));
 
-        return mainObject.getNaimenshee();
+        return ValidatedString.getNaimenshee();
     }
 
-    public static class mainObject {
+    public static class ValidatedString {
         private static String firstword;
         ArrayList<String> allVariants = new ArrayList<String>();
         private String naimenshee;
@@ -49,7 +49,7 @@ public class BiggerGreater {
     public static String naimenshee(ArrayList<String> input) {
         String results = null;
         if (input.size() <= 1
-                || input.get(input.size() - 1).equals(mainObject.getFirstWord())) {
+                || input.get(input.size() - 1).equals(ValidatedString.getFirstWord())) {
             results = "";
         } else if (input.size() == 2) {
             results = input.get(input.size() - 1);
@@ -60,7 +60,7 @@ public class BiggerGreater {
     }
 
     public static int findKeyFirstWord(ArrayList<String> allVAriants) {
-        return (allVAriants.indexOf(mainObject.getFirstWord()));
+        return (allVAriants.indexOf(ValidatedString.getFirstWord()));
     }
 
     public static ArrayList<String> allVariants(String input) {
