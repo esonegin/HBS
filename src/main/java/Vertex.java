@@ -94,11 +94,11 @@ class SimpleGraph {
                 stack.push(checkTargetVertex(neighbors, VTo));
                 return stackToReverseArray(stack);
             } else if (checkTargetVertex(neighbors, VTo) == null) {
-                if (unHitNeighbor(neighbors) != null) {
-                    tekushaya = unHitNeighbor(neighbors);
+                if (getUnHitNeighbor(neighbors) != null) {
+                    tekushaya = getUnHitNeighbor(neighbors);
                     continue;
                 }
-                if (unHitNeighbor(neighbors) == null) {
+                if (getUnHitNeighbor(neighbors) == null) {
                     stack.pop();
                     if (stack.size() == 0) {
                         return stackToReverseArray(stack);
@@ -112,7 +112,8 @@ class SimpleGraph {
         return stackToReverseArray(stack);
     }
 
-    public Vertex unHitNeighbor(ArrayList<Vertex> neighbors) {
+    //unHitNeighbor - getUnHitNeighbor
+    public Vertex getUnHitNeighbor(ArrayList<Vertex> neighbors) {
         for (Vertex neighbor : neighbors) {
             if (!neighbor.Hit) {
                 return neighbor;

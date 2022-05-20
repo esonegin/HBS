@@ -18,13 +18,13 @@ public class BastShoe {
         }
 
         if (com == 1) {
-            command1(value);
+            addToString(value);
         } else if (com == 2) {
-            command2(value);
+            goBackStepHistory(value);
         } else if (com == 4) {
-            command4();
+            backOneStep();
         } else if (com == 5) {
-            command5();
+            aheadOnStep();
         }
 
         if (com == 1 || com == 2) {
@@ -38,9 +38,9 @@ public class BastShoe {
         } else if (com == 4) {
             if (str.history.size() == 1) {
                 result = str.getValue("");
-            }else if(str.getUndoCount() >= str.history.size() && str.history.size() == 2 && str.getNumberTekusheyStroki() < 0 && str.getPredOperation() == 4){
+            } else if (str.getUndoCount() >= str.history.size() && str.history.size() == 2 && str.getNumberTekusheyStroki() < 0 && str.getPredOperation() == 4) {
                 result = str.getValue(str.getHistoryValue(0));
-            }else if(str.getUndoCount() >= str.history.size() && str.history.size() == 2 && str.getNumberTekusheyStroki() < 0){
+            } else if (str.getUndoCount() >= str.history.size() && str.history.size() == 2 && str.getNumberTekusheyStroki() < 0) {
                 result = str.getValue("");
             } else if (str.getNumberTekusheyStroki() <= 0 && str.history.size() == 2) {
                 result = str.getValue(str.getHistoryValue(0));
@@ -76,16 +76,14 @@ public class BastShoe {
         return result;
     }
 
-    public static void command1(String value) {
-
+    //command1 - addToString
+    public static void addToString(String value) {
         if (str.getPredOperation() == 4) {
             str.clearHistory();
         }
-
         if (str.getPredOperation() == 5 && str.getNumberTekusheyStroki() < str.history.size() - 1 && str.getNumberTekusheyStroki() > -1) {
             str.clearHistoryRedo();
         }
-
         if (str.history.size() == 0) {
             str.setHistoryValue(value);
         } else if (str.getNumberTekusheyStroki() > -1 && str.getNumberTekusheyStroki() <= str.history.size() - 1) {
@@ -93,36 +91,31 @@ public class BastShoe {
         } else if (str.getNumberTekusheyStroki() > str.history.size() - 1) {
             str.setHistoryValue(str.getHistoryValue(str.getNumberTekusheyStroki() - 1) + value);
         }
-
         str.setNumberTekusheyStroki(str.history.size() - 1);
         str.setPredOperation(1);
     }
 
-    public static void command2(String value) {
+    //command2 - goBackStepHistory
+    public static void goBackStepHistory(String step) {
         if (str.getPredOperation() == 4) {
             str.clearHistory();
         }
-
         if (str.getNumberTekusheyStroki() < 0) {
             str.setHistoryValue("");
         } else if (str.history.size() > 1) {
             str.setHistoryValue(str.getHistoryValue(str.getNumberTekusheyStroki() - 1).
-                    substring(0, str.getHistoryValue(str.getNumberTekusheyStroki()).length() - Integer.parseInt(value)));
+                    substring(0, str.getHistoryValue(str.getNumberTekusheyStroki()).length() - Integer.parseInt(step)));
         } else if (str.history.size() == 1) {
             str.setHistoryValue(str.getHistoryValue(str.getNumberTekusheyStroki()).
-                    substring(0, str.getHistoryValue(str.getNumberTekusheyStroki()).length() - Integer.parseInt(value)));
+                    substring(0, str.getHistoryValue(str.getNumberTekusheyStroki()).length() - Integer.parseInt(step)));
         }
         str.setNumberTekusheyStroki(str.history.size() - 1);
         str.setPredOperation(2);
     }
 
     public static String command3(String value) {
-        String result = "";
-        int key = 0;
-        if (str.getNumberTekusheyStroki() >= 0) {
-            key = str.getNumberTekusheyStroki();
-        }
-
+        String result;
+        int key = Math.max(str.getNumberTekusheyStroki(), 0);
         if (Integer.parseInt(value) >= str.getHistoryValue(key).length()
                 || Integer.parseInt(value) < 0) {
             result = "";
@@ -134,7 +127,8 @@ public class BastShoe {
         return result;
     }
 
-    public static void command4() {
+    //command4 - backOneStep
+    public static void backOneStep() {
         if (str.getUndoCount() == 0 && str.history.size() > 1) {
             str.setNumberTekusheyStroki(str.getNumberTekusheyStroki() - 1);
 
@@ -151,7 +145,8 @@ public class BastShoe {
 
     }
 
-    public static void command5() {
+    //command5 - aheadOnStep
+    public static void aheadOnStep() {
 
         str.setNumberTekusheyStroki(str.getNumberTekusheyStroki() + 1);
         str.setRedoCount(str.getRedoCount() + 1);
@@ -163,7 +158,7 @@ public class BastShoe {
     public static class StringHistory {
         private int numberTekusheyStroki = 0;
         private int predOperation;
-        ArrayList<String> history = new ArrayList<String>();
+        ArrayList<String> history = new ArrayList<>();
         private int undoCount;
         private int redoCount;
 

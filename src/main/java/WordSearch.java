@@ -8,27 +8,26 @@ public class WordSearch {
     public static int[] WordSearch(int len, String s, String subs) {
         int[] result = new int[0];
         //Разбиваем строку по ширине переносом
-        String razbienie = Razbienie(s, len);
+        String splitstring = splittingWithLineFeed(s, len);
         //Создаем массив подстрок по признаку перехода на новую строку
-        String[] podstroki = razbienie.split("\\r?\\n");
+        String[] podstroki = splitstring.split("\\r?\\n");
         String[] splitArray = s.split(" ");
 
         if ((splitArray.length - 1) > 1) {
-            result = SearchInArrayWithManyProbel(podstroki, subs);
+            result = getContCountOneSpace(podstroki, subs);
         } else if (splitArray.length - 1 == 1) {
-            result = SearchInArrayWithOneProbel(podstroki, subs);
+            result = getContCountSeveralSpace(podstroki, subs);
         } else if (splitArray.length - 1 == 0) {
-            result = SearchInArrayWithoutProbel(podstroki, subs);
+            result = getContCountWithoutSpace(podstroki, subs);
         }
         return result;
     }
 
 
     //Считаем количество вхождений искомой строки в массив для строки с несколькими пробелами
-    public static int[] SearchInArrayWithOneProbel(String[] podstroki, String subs) {
+    //SearchInArrayWithOneProbel - getContCountOneSpace
+    public static int[] getContCountOneSpace(String[] podstroki, String subs) {
         int[] result = new int[podstroki.length];
-
-
         for (int i = 0; i < podstroki.length; i++) {
             if (podstroki[i].contains(" " + subs + " ")
                     || podstroki[i].contains(" " + subs + "\n")
@@ -43,7 +42,8 @@ public class WordSearch {
     }
 
     //Считаем количество вхождений искомой строки в массив для строки с несколькими пробелами
-    public static int[] SearchInArrayWithManyProbel(String[] podstroki, String subs) {
+    //SearchInArrayWithoutProbel - getContCountSeveralSpace
+    public static int[] getContCountSeveralSpace(String[] podstroki, String subs) {
         int[] result = new int[podstroki.length];
         for (int i = 0; i < podstroki.length; i++) {
             if (podstroki[i].contains(" " + subs + " ")
@@ -58,7 +58,8 @@ public class WordSearch {
     }
 
     //Считаем количество вхождений искомой строки в массив для строки без пробела
-    public static int[] SearchInArrayWithoutProbel(String[] podstroki, String subs) {
+    //SearchInArrayWithoutProbel - getContCountWithoutSpace
+    public static int[] getContCountWithoutSpace(String[] podstroki, String subs) {
         int[] result = new int[podstroki.length];
 
 
@@ -77,8 +78,9 @@ public class WordSearch {
 
 
     //Разбиваем строку по ширине
-    public static String Razbienie(String s, int len) {
-        Pattern p = Pattern.compile("\\s*(?:(\\w{10,})|(.{1," + len + "})(?!\\w))\\s*", Pattern.UNICODE_CHARACTER_CLASS);
+    //Razbienie - splittingWithLineFeed
+    public static String splittingWithLineFeed(String s, int len) {
+         Pattern p = Pattern.compile("\\s*(?:(\\w{10,})|(.{1," + len + "})(?!\\w))\\s*", Pattern.UNICODE_CHARACTER_CLASS);
         String first = (p.matcher(s).replaceAll(" " + "$1$2\n"));
 
         String second = (p.matcher(s).replaceAll("$1$2"));

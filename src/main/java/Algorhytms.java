@@ -2,12 +2,6 @@ import java.util.ArrayList;
 
 public class Algorhytms {
 
-    public static void main(String[] args) {
-        int[] arr = {15, 54, 10, 33, 2, 17, 1};
-        System.out.println(fastSort(arr));
-    }
-
-
     public static String fastSort(int[] arr) {
         ArrayList<Integer> menshe = new ArrayList<>();
         ArrayList<Integer> bolshe = new ArrayList<>();
