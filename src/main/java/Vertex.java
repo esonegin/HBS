@@ -186,7 +186,7 @@ class SimpleGraph {
                 return currentPath;
             }
             currentVertex = dequeueVertex.poll();
-            if (unHitNeighbor(findAdjacentVertexs(currentVertex)) != null) {
+            if (getUnHitNeighbor(findAdjacentVertexs(currentVertex)) != null) {
                 currentPath.add(currentVertex);
             }
             if (findAdjacentVertexs(currentVertex).contains(vertex[VTo])) {

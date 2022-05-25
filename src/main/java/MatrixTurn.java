@@ -33,21 +33,21 @@ public class MatrixTurn {
 
         //Вывод финальной матрицы
         for (int i = 0; i < M; i++) {  //идём по строкам
-            for (int j = 0; j < N; j++) {//идём по столбцам
+            for (int j = 0; j < N; j++) { //идём по столбцам
                 System.out.print(" " + matrix.getFinmatrix()[i][j] + " "); //вывод элемента
             }
-            System.out.println();//перенос строки ради визуального сохранения табличной формы
+            System.out.println(); //перенос строки ради визуального сохранения табличной формы
         }
         System.out.println("*****");
 
         for (int i = 0; i < M; i++) {  //идём по строкам
-            for (int j = 0; j < N; j++) {//идём по столбцам
+            for (int j = 0; j < N; j++) { //идём по столбцам
                 Matrix[i] = "";
             }
         }
 
         for (int i = 0; i < M; i++) {  //идём по строкам
-            for (int j = 0; j < N; j++) {//идём по столбцам
+            for (int j = 0; j < N; j++) { //идём по столбцам
                 Matrix[i] = Matrix[i] + matrix.getFinmatrix()[i][j];
             }
         }
@@ -67,7 +67,7 @@ public class MatrixTurn {
 
         //Наполняем финальную матрицу
         for (int i = 0; i < M; i++) {  //идём по строкам
-            for (int j = 0; j < N; j++) {//идём по столбцам
+            for (int j = 0; j < N; j++) { //идём по столбцам
                 if (level == 1) {
                     //Верхняя горизонталь
                     if (i == 0) {
@@ -141,27 +141,23 @@ public class MatrixTurn {
                 res.reverse();
                 result = String.valueOf(res);
             }
-        }
-        else if (matrix.length == 1 && T % 2 != 0) {
+        } else if (matrix.length == 1 && T % 2 != 0) {
             for (int i = 0; i < 1; i++) {  //идём по строкам
                 for (int j = 0; j < matrix[0].length; j++) {
                     result = result + matrix[i][j];
                 }
             }
-        }else {
+        } else {
             for (int i = 0; i < matrix.length; i++) {  //идём по строкам
                 for (int j = 0; j < matrix[0].length; j++) {//идём по столбцам
                     if (i == 0) {
                         gorizverh = gorizverh + matrix[i][j];
-                    }
-                    else if (i > 0 && i < matrix.length - 1 && j == 0) {
+                    } else if (i > 0 && i < matrix.length - 1 && j == 0) {
                         vertikalleft = vertikalleft + matrix[i][0];
-                    }
-                    else if (i > 0 && i < matrix.length - 1 && j == matrix[0].length - 1) {
+                    } else if (i > 0 && i < matrix.length - 1 && j == matrix[0].length - 1) {
                         System.out.println("d");
                         vertikalright = vertikalright + matrix[i][matrix[0].length - 1];
-                    }
-                    else if (i == matrix.length - 1) {
+                    } else if (i == matrix.length - 1) {
                         gorizniz = gorizniz + matrix[i][j];
                     }
                 }
@@ -182,13 +178,13 @@ public class MatrixTurn {
         //Если длина строки == шагу, то возвращаем строку
         if (T - str.length() == 0) {
             result = str;
-        //Если длина строки больше шага
+            //Если длина строки больше шага
         } else if (str.length() > T) {
             String perenos = str.substring(str.length() - T);
             result = perenos + str.substring(0, str.length() - T);
 
-        //Если шаг больше длины строки
-        }else if (str.length() < T) {
+            //Если шаг больше длины строки
+        } else if (str.length() < T) {
             String perenos = str.substring(str.length() - (T - (str.length() * (T / str.length()))));
             result = perenos + str.substring(0, str.length() - (T - str.length() * (T / str.length())));
         }

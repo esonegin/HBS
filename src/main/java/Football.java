@@ -6,6 +6,8 @@ import java.util.Collections;
 public class Football {
 
     static ArrayList<String> allfirstsort = new ArrayList<String>();
+    //Размер стандартного массива
+    static final int DEFAULTSIZE = 3;
 
     //v2
     static boolean Football(int F[], int N) {
@@ -13,17 +15,15 @@ public class Football {
         boolean result = false;
         String standartsortvar = standartSort(F);
         String defaultstring = "";
-        for (int i = 0; i < F.length; i++){
+        for (int i = 0; i < F.length; i++) {
             defaultstring = defaultstring + F[i];
         }
 
         if (F.length == 0 || F.length == 1) {
             result = true;
-        }
-        else if (defaultstring.equals(standartsortvar)){
+        } else if (defaultstring.equals(standartsortvar)) {
             result = false;
-        }
-        else{
+        } else {
             prmt(F, 0);
             result = sravnenieFirstVar(allfirstsort, standartsortvar);
         }
@@ -45,7 +45,7 @@ public class Football {
                     count++;
                 }
             }
-            if (count < 3) {
+            if (count < DEFAULTSIZE) {
                 result = true;
             }
         }

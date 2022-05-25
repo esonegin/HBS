@@ -21,13 +21,13 @@ public class PowerSetTest {
     @Test
     public void defaultPutCycleTest() {
         PowerSet powerset = new PowerSet();
-        for(int i = 0; i < powerset.size; i++){
+        for(int i = 0; i < powerset.MAXSETSIZE; i++){
             powerset.put("value:" + i);
         }
         powerset.put("value:" + 20000);
 
         Assert.assertThat(powerset.slots[0], is("value:20000"));
-        for(int i = 1; i < powerset.size; i++){
+        for(int i = 1; i < powerset.MAXSETSIZE; i++){
             Assert.assertThat(powerset.slots[i], is("value:" + i));
         }
     }
@@ -263,10 +263,10 @@ public class PowerSetTest {
         PowerSet powerset1 = new PowerSet();
         PowerSet powerset2 = new PowerSet();
 
-        for (int i = 0; i < powerset1.size; i++) {
+        for (int i = 0; i < powerset1.MAXSETSIZE; i++) {
             powerset1.put("value:" + i);
         }
-        for (int i = 0, k = 20000; i < powerset2.size; i++) {
+        for (int i = 0, k = 20000; i < powerset2.MAXSETSIZE; i++) {
             powerset2.put("value:" + k);
             k++;
         }
@@ -277,7 +277,7 @@ public class PowerSetTest {
         Assert.assertThat(powerset2.slots[19999], is("value:39999"));
 
         PowerSet powerset3 = powerset1.union(powerset2);
-        for (int i = 0, k = 20000; i < powerset3.size - 1; i++) {
+        for (int i = 0, k = 20000; i < powerset3.MAXSETSIZE - 1; i++) {
             Assert.assertThat(powerset3.get("value:" + k), is(true));
             k++;
         }
@@ -288,15 +288,15 @@ public class PowerSetTest {
         PowerSet powerset1 = new PowerSet();
         PowerSet powerset2 = new PowerSet();
 
-        for (int i = 0; i < powerset2.size; i++) {
+        for (int i = 0; i < powerset2.MAXSETSIZE; i++) {
             powerset2.put("value:" + i);
         }
 
         PowerSet powerset3 = powerset1.union(powerset2);
-        for (int i = 0; i < powerset2.size; i++) {
+        for (int i = 0; i < powerset2.MAXSETSIZE; i++) {
             Assert.assertThat(powerset3.get("value:" + i), is(true));
         }
-        for (int i = powerset2.size; i < powerset3.size - 1; i++) {
+        for (int i = powerset2.MAXSETSIZE; i < powerset3.MAXSETSIZE - 1; i++) {
             Assert.assertThat(powerset3.slots[i] == null, is(true));
         }
 
@@ -307,15 +307,15 @@ public class PowerSetTest {
         PowerSet powerset1 = new PowerSet();
         PowerSet powerset2 = new PowerSet();
 
-        for (int i = 0; i < powerset1.size; i++) {
+        for (int i = 0; i < powerset1.MAXSETSIZE; i++) {
             powerset1.put("value:" + i);
         }
 
         PowerSet powerset3 = powerset1.union(powerset2);
-        for (int i = 0; i < powerset2.size; i++) {
+        for (int i = 0; i < powerset2.MAXSETSIZE; i++) {
             Assert.assertThat(powerset3.get("value:" + i), is(true));
         }
-        for (int i = powerset2.size; i < powerset3.size - 1; i++) {
+        for (int i = powerset2.MAXSETSIZE; i < powerset3.MAXSETSIZE - 1; i++) {
             Assert.assertThat(powerset3.slots[i] == null, is(true));
         }
     }
@@ -438,21 +438,21 @@ public class PowerSetTest {
         PowerSet powerset1 = new PowerSet();
         PowerSet powerset2 = new PowerSet();
 
-        for (int i = 0; i < powerset1.size; i++) {
+        for (int i = 0; i < powerset1.MAXSETSIZE; i++) {
             powerset1.put("value:" + i);
         }
-        for (int i = 20000; i < powerset2.size * 2; i++) {
+        for (int i = 20000; i < powerset2.MAXSETSIZE * 2; i++) {
             powerset2.put("value:" + i);
         }
 
         PowerSet powerset3 = powerset1.difference(powerset2);
         PowerSet powerset4 = powerset2.difference(powerset1);
 
-        for (int i = 0; i < powerset3.size - 1; i++) {
+        for (int i = 0; i < powerset3.MAXSETSIZE - 1; i++) {
             Assert.assertThat(powerset3.get("value:" + i), is(true));
         }
 
-        for (int i = 0, k = 20000; i < powerset4.size - 1; i++) {
+        for (int i = 0, k = 20000; i < powerset4.MAXSETSIZE - 1; i++) {
             Assert.assertThat(powerset4.get("value:" + k), is(true));
             k++;
         }

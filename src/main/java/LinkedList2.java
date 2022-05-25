@@ -56,7 +56,7 @@ public class LinkedList2 {
         }
         //Если спиcок не пустой
         while (Node0 != null) {
-            if(head.next.next == null && head.value == _value){
+            if (head.next.next == null && head.value == _value) {
                 head.value = Node0.next.value;
                 Node0.next.prev = null;
                 Node0.next = Node0.next.next;
@@ -108,7 +108,7 @@ public class LinkedList2 {
             _Node0ToInsert.next = find(_Node0After.value).next;
             _Node0ToInsert.prev = find(_Node0After.value);
             find(_Node0After.value).next = _Node0ToInsert;
-            if(find(_Node0After.value).next.next != null) {
+            if (find(_Node0After.value).next.next != null) {
                 find(_Node0After.value).next.next.prev = _Node0ToInsert;
             }
             if (tail.next != null) {

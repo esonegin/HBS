@@ -3,7 +3,8 @@ import java.util.*;
 class Heap {
     public int[] HeapArray;
     int size;
-
+    //Вынес индес показфывающий отсутствие свободного индекса в константу
+    final int MISSFREEINDEX = -2;
     public Heap() {
         HeapArray = null;
     }
@@ -20,7 +21,7 @@ class Heap {
     }
 
     public boolean Add(int key) {
-        int freeindex = -2;
+        int freeindex = MISSFREEINDEX;
         if (HeapArray.length < size) {
             freeindex = HeapArray.length;
             int[] result = new int[HeapArray.length + 1];
@@ -34,7 +35,7 @@ class Heap {
                 }
             }
         }
-        if (freeindex == -2) {
+        if (freeindex == MISSFREEINDEX) {
             return false;
         }
         if (freeindex == 0) {

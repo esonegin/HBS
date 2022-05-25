@@ -1,5 +1,5 @@
-
 import java.util.*;
+
 //v1
 class BSTNode {
     public int NodeKey; // ключ узла
@@ -52,13 +52,16 @@ class BalancedBST {
     }
 
     int getLevelUtil(BSTNode node, int data, int level) {
-        if (node == null)
+        if (node == null) {
             return 0;
-        if (node.NodeKey == data)
+        }
+        if (node.NodeKey == data) {
             return level;
+        }
         int downlevel = getLevelUtil(node.LeftChild, data, level + 1);
-        if (downlevel != 0)
+        if (downlevel != 0) {
             return downlevel;
+        }
         downlevel = getLevelUtil(node.RightChild, data, level + 1);
 
         return downlevel;
@@ -81,9 +84,7 @@ class BalancedBST {
         }
         lh = height(root_node.LeftChild);
         rh = height(root_node.RightChild);
-        if ((lh - rh) * -1 <= 1
-                && IsBalanced(root_node.LeftChild)
-                && IsBalanced(root_node.RightChild)) {
+        if ((lh - rh) * -1 <= 1 && IsBalanced(root_node.LeftChild) && IsBalanced(root_node.RightChild)) {
             return true;
         }
         return false;

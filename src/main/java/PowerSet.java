@@ -1,17 +1,17 @@
 public class PowerSet {
-    public int size;
+    //Вынес максимальный размер set в константу
+    final int MAXSETSIZE = 20000;
     public String[] slots;
     public int prevslot;
 
     public PowerSet() {
-        size = 20000;
-        slots = new String[size];
+        slots = new String[MAXSETSIZE];
         prevslot = -1;
     }
 
     public int size() {
         int result = 0;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < MAXSETSIZE; i++) {
             if (slots[i] != null) {
                 result++;
             }
@@ -79,16 +79,16 @@ public class PowerSet {
 
     public PowerSet intersection(PowerSet set2) {
         PowerSet result = new PowerSet();
-        if (set2.size >= slots.length) {
+        if (set2.MAXSETSIZE >= slots.length) {
             for (String val : slots) {
-                for (int j = 0; j < set2.size; j++) {
+                for (int j = 0; j < MAXSETSIZE; j++) {
                     if (val != null && val.equals(set2.slots[j])) {
                         result.put(val);
                     }
                 }
             }
         } else {
-            for (int i = 0; i < set2.size; i++) {
+            for (int i = 0; i < MAXSETSIZE; i++) {
                 for (String val : slots) {
                     if (set2.slots[i] != null && set2.slots[i].equals(val)) {
                         result.put(set2.slots[i]);
@@ -106,7 +106,7 @@ public class PowerSet {
                 result.put(val);
             }
         }
-        for (int i = 0; i < set2.size; i++) {
+        for (int i = 0; i < MAXSETSIZE; i++) {
             if (set2.slots[i] != null) {
                 result.put(set2.slots[i]);
             }
@@ -127,7 +127,7 @@ public class PowerSet {
 
     public boolean isSubset(PowerSet set2) {
         int j = 0;
-        for (int i = 0; i < set2.size; i++) {
+        for (int i = 0; i < set2.MAXSETSIZE; i++) {
             if (set2.get(slots[i])) {
                 j++;
             }

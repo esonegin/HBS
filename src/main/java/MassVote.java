@@ -4,13 +4,16 @@ import java.math.RoundingMode;
 
 public class MassVote {
 
+    //Вынес граничное значение для выиграша в константу
+    static final int BORDEROFVICTORY = 50;
+
     public static String MassVote(int N, int[] Votes) {
         String result = "";
         if (kolvomax(Votes) > 1) {
             result = "no winner";
-        } else if (procentkandidata(Votes, indexmax(Votes)) > 50) {
+        } else if (procentkandidata(Votes, indexmax(Votes)) > BORDEROFVICTORY) {
             result = "majority winner " + (indexmax(Votes) + 1);
-        } else if (procentkandidata(Votes, indexmax(Votes)) <= 50) {
+        } else if (procentkandidata(Votes, indexmax(Votes)) <= BORDEROFVICTORY) {
             result = "minority winner " + (indexmax(Votes) + 1);
         }
         return result;

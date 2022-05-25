@@ -21,7 +21,7 @@ public class AlgorithmsDataStructures2Test {
     @Test
     public void defaultAddTest() {
         int[] array = {12, 8, 4, 6, 2, 14, 10};
-        int[] result = AlgorithmsDataStructures2.GenerateBBSTArray(array);
+        int[] result = AlgorithmsDataStructures2.generateBBSTArray(array);
 
 
         Assert.assertThat(result[0], is(8));

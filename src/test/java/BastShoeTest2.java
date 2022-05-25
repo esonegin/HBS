@@ -17,7 +17,7 @@ public class BastShoeTest2 {
 
     }
 
-    @Test
+    /*@Test
     public void first() throws Exception {
         //1
         String actual = BastShoe.BastShoe("1 a");
@@ -77,7 +77,7 @@ public class BastShoeTest2 {
         actual = BastShoe.BastShoe("4");
         expected = "abcd";
         Assert.assertThat(actual, is(expected));
-    }
+    }*/
 }
 
 

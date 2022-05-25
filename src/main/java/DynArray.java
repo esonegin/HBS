@@ -5,12 +5,14 @@ public class DynArray<T> {
     public T[] array; //указатель на блок памяти нужной ёмкости
     public int count; //текущее количество элементов в массиве
     public int capacity; //текущая ёмкость буфера (исходно 16 единиц)
+    //Вынес магическое число в дефолтное значение
+    final int DEFAULTCAPACITY = 16;
     Class clazz;
 
     public DynArray(Class clz) {
         clazz = clz; // нужен для безопасного приведения типов
         count = 0;
-        makeArray(16);
+        makeArray(DEFAULTCAPACITY);
     }
 
     public void makeArray(int new_capacity) {
@@ -35,7 +37,7 @@ public class DynArray<T> {
         if (capacity == 0) {
             capacity = new_capacity;
             //Если размер буфера при делится на 16, то увеличивеам буфер на 2
-        } else if (count + 1 % 16 == 0) {
+        } else if (count + 1 % DEFAULTCAPACITY == 0) {
             capacity = (capacity * 2);
         }
     }
@@ -100,13 +102,13 @@ public class DynArray<T> {
             throw new IndexOutOfBoundsException("Данный индекс вне массива");
         }
         //Если заполняемость буфера меньше 50% и размер буфера после уменьшения больше либо равен 16
-        if (count - 1 < capacity / 2 && capacity / 2 >= 16) {
+        if (count - 1 < capacity / 2 && capacity / 2 >= DEFAULTCAPACITY) {
             makeArray((int) (capacity / 1.5));
             for (int i = index; i < count; i++)
                 array[i] = array[i + 1];
             //Если заполняемость буфера меньше 50% и размер буфера после уменьшения меньше 16 - устанавливаем минимум - 16
-        } else if (count - 1 < capacity / 2 && capacity / 2 < 16) {
-            makeArray(16);
+        } else if (count - 1 < capacity / 2 && capacity / 2 < DEFAULTCAPACITY) {
+            makeArray(DEFAULTCAPACITY);
             for (int i = index; i < count - 1; i++) {
                 array[i] = array[i + 1];
             }

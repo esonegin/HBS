@@ -2,7 +2,7 @@ import java.util.*;
 
 public class AlgorithmsDataStructures2 {
 
-    public static int[] GenerateBBSTArray(int[] a) {
+    public static int[] generateBBSTArray(int[] a) {
         Arrays.sort(a);
 
         BinaryTree tree = new BinaryTree();
@@ -11,7 +11,7 @@ public class AlgorithmsDataStructures2 {
         ArrayList<Node> allnodes = new ArrayList<>();
         allnodes.add(root);
         for (int i = 0; i < allnodes.size(); i++) {
-            allnodes.addAll(GetChildren(allnodes.get(i)));
+            allnodes.addAll(getChildren(allnodes.get(i)));
         }
         int[] res = new int[allnodes.size()];
         for (int i = 0; i < allnodes.size(); i++) {
@@ -21,7 +21,7 @@ public class AlgorithmsDataStructures2 {
         return res;
     }
 
-    public static List<Node> GetChildren(Node parent) {
+    public static List<Node> getChildren(Node parent) {
 
         List<Node> rootchildren = new ArrayList<>();
         if (parent.left != null) {

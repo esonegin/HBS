@@ -17,7 +17,7 @@ public class MaximumDiscountTest {
 
     @Test
     public void defoltnieZnacheniya() throws Exception {
-        int actual = MaximumDiscount.MaximumDiscount(7, new int[]{250, 400, 150, 100, 200, 350, 300});
+        int actual = MaximumDiscount.MaximumDiscount(7, new int[]{3, 400, 150, 100, 200, 350, 300});
         int expected = 450;
         Assert.assertThat(actual, is(expected));
     }

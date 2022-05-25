@@ -1,8 +1,10 @@
-import java.util.*;
+
 
 public class TheRabbitsFoot {
     //18.06.2
     //6.1, 6.2, 6.3, 6.4
+    //Вынес максимальное количество столбцов в константу
+    static final int MAXCOLUMNCOUNT = 5;
     public static String TheRabbitsFoot(String encryptionString, boolean encode) {
         if (encode == true) {
             encryptionString = Zashifr(encryptionString, GetMatrix(encryptionString).length);
@@ -68,7 +70,7 @@ public class TheRabbitsFoot {
     public static String GetString(String string, int stolbec) {
 
         String result = "";
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < MAXCOLUMNCOUNT; i++)
             if (GetArrayPoNomeruStolbcaZashifrovka(string, stolbec)[i] != null) {
                 result += GetArrayPoNomeruStolbcaZashifrovka(string, stolbec)[i];
 

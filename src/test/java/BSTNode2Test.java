@@ -60,7 +60,5 @@ public class BSTNode2Test {
         Assert.assertThat(tree.Root.LeftChild.RightChild.Level, is(2));
         Assert.assertThat(tree.Root.RightChild.LeftChild.Level, is(2));
         Assert.assertThat(tree.Root.RightChild.RightChild.Level, is(2));
-
-
     }
 }

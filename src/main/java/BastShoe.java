@@ -4,9 +4,15 @@ import java.util.*;
 
 public class BastShoe {
     //v17
-    static StringHistory str = new StringHistory();
+    //Вынес магические числа в константы, код стал нагляднее
+    static final int ADD = 1;
+    static final int BACK = 2;
+    static final int DELETE = 3;
+    static final int BACKTO = 4;
+    static final int FORWARDTO = 5;
+    private static StringHistory str = new StringHistory(); ;
 
-    public static String BastShoe(String command) {
+    public static String executingCommandOnString(String command) {
         int com;
         String value = "";
         String result = "";
@@ -17,17 +23,17 @@ public class BastShoe {
             com = Integer.parseInt(command);
         }
 
-        if (com == 1) {
+        if (com == ADD) {
             addToString(value);
-        } else if (com == 2) {
+        } else if (com == BACK) {
             goBackStepHistory(value);
-        } else if (com == 4) {
+        } else if (com == BACKTO) {
             backOneStep();
-        } else if (com == 5) {
+        } else if (com == FORWARDTO) {
             aheadOnStep();
         }
 
-        if (com == 1 || com == 2) {
+        if (com == ADD || com == BACK) {
             if (str.getNumberTekusheyStroki() == 0) {
                 result = str.getValue(str.getHistoryValue(str.history.size() - 1));
             } else {
@@ -35,7 +41,7 @@ public class BastShoe {
             }
 
 
-        } else if (com == 4) {
+        } else if (com == BACKTO) {
             if (str.history.size() == 1) {
                 result = str.getValue("");
             } else if (str.getUndoCount() >= str.history.size() && str.history.size() == 2 && str.getNumberTekusheyStroki() < 0 && str.getPredOperation() == 4) {
@@ -59,7 +65,7 @@ public class BastShoe {
                 result = str.getValue(str.getHistoryValue(str.getNumberTekusheyStroki()));
             }
 
-        } else if (com == 5) {
+        } else if (com == FORWARDTO) {
             if (str.getNumberTekusheyStroki() < 0) {
                 result = str.getValue("");
             } else if (str.getNumberTekusheyStroki() + 1 >= str.history.size()) {
@@ -68,7 +74,7 @@ public class BastShoe {
                 result = str.getValue(str.getHistoryValue(str.getNumberTekusheyStroki()));
             }
 
-        } else if (com == 3) {
+        } else if (com == DELETE) {
             result = command3(value);
         }
 
@@ -78,10 +84,10 @@ public class BastShoe {
 
     //command1 - addToString
     public static void addToString(String value) {
-        if (str.getPredOperation() == 4) {
+        if (str.getPredOperation() == BACKTO) {
             str.clearHistory();
         }
-        if (str.getPredOperation() == 5 && str.getNumberTekusheyStroki() < str.history.size() - 1 && str.getNumberTekusheyStroki() > -1) {
+        if (str.getPredOperation() == FORWARDTO && str.getNumberTekusheyStroki() < str.history.size() - 1 && str.getNumberTekusheyStroki() > -1) {
             str.clearHistoryRedo();
         }
         if (str.history.size() == 0) {
@@ -97,7 +103,7 @@ public class BastShoe {
 
     //command2 - goBackStepHistory
     public static void goBackStepHistory(String step) {
-        if (str.getPredOperation() == 4) {
+        if (str.getPredOperation() == BACKTO) {
             str.clearHistory();
         }
         if (str.getNumberTekusheyStroki() < 0) {
@@ -123,7 +129,7 @@ public class BastShoe {
             result = str.getHistoryValue(key).substring(Integer.parseInt(value), Integer.parseInt(value) + 1);
         }
 
-        str.setPredOperation(3);
+        str.setPredOperation(DELETE);
         return result;
     }
 
@@ -140,7 +146,7 @@ public class BastShoe {
             str.setNumberTekusheyStroki(str.getNumberTekusheyStroki());
         }
         str.setUndoCount(str.getUndoCount() + 1);
-        str.setPredOperation(4);
+        str.setPredOperation(BACKTO);
         str.setRedoCount(0);
 
     }
@@ -150,7 +156,7 @@ public class BastShoe {
 
         str.setNumberTekusheyStroki(str.getNumberTekusheyStroki() + 1);
         str.setRedoCount(str.getRedoCount() + 1);
-        str.setPredOperation(5);
+        str.setPredOperation(FORWARDTO);
         str.setUndoCount(0);
     }
 
