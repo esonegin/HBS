@@ -1,30 +1,27 @@
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 
 public class MassVote {
 
     //Вынес граничное значение для выиграша в константу
     static final int BORDEROFVICTORY = 50;
+    static final double ONEHUNDREDPERCENT = 100.00;
 
-    public static String MassVote(int N, int[] Votes) {
+    public static String MassVote(int N, int[] allvotes) {
         String result = "";
-        if (kolvomax(Votes) > 1) {
+        if (kolvomax(allvotes) > 1) {
             result = "no winner";
-        } else if (procentkandidata(Votes, indexmax(Votes)) > BORDEROFVICTORY) {
-            result = "majority winner " + (indexmax(Votes) + 1);
-        } else if (procentkandidata(Votes, indexmax(Votes)) <= BORDEROFVICTORY) {
-            result = "minority winner " + (indexmax(Votes) + 1);
+        } else if (candidatePercentage(allvotes, indexmax(allvotes)) > BORDEROFVICTORY) {
+            result = "majority winner " + (indexmax(allvotes) + 1);
+        } else if (candidatePercentage(allvotes, indexmax(allvotes)) <= BORDEROFVICTORY) {
+            result = "minority winner " + (indexmax(allvotes) + 1);
         }
         return result;
     }
 
-    public static int kolvomax(int[] Votes) {
+    public static int kolvomax(int[] allvotes) {
         int kolvomax = 0;
-        for (
-                int i = 0;
-                i < Votes.length; i++) {
-            if (Votes[i] == maximum(Votes)) {
+        for (int i = 0; i < allvotes.length; i++) {
+            if (allvotes[i] == maximum(allvotes)) {
                 kolvomax++;
             }
         }
@@ -32,13 +29,13 @@ public class MassVote {
     }
 
 
-    public static int maximum(int[] Votes) {
-        int max = Votes[0];
-
-        for (int i = 0; i < Votes.length; i++)
-            if (max < Votes[i]) {
-                max = Votes[i];
+    public static int maximum(int[] allvotes) {
+        int max = allvotes[0];
+        for (int allvote : allvotes) {
+            if (max < allvote) {
+                max = allvote;
             }
+        }
         return max;
     }
 
@@ -46,30 +43,32 @@ public class MassVote {
     public static int indexmax(int[] Votes) {
         int max = Votes[0];
         int indexmax = 0;
-        for (int i = 0; i < Votes.length; i++)
+        for (int i = 0; i < Votes.length; i++) {
             if (max < Votes[i]) {
                 max = Votes[i];
                 indexmax = i;
             }
+        }
         return indexmax;
     }
 
-    public static double procentkandidata(int[] Votes, int nomer) {
-        double kolvogolosov = Votes[nomer];
-        double odinprocent = stoprocentov(Votes) / 100.00;
+    //Переимановал метод из кириллического procentkandidata - candidatePercentage
+    public static double candidatePercentage(int[] votes, int nomer) {
+        //Сделал количество голосов вместо double - int
+        int kolvogolosov = votes[nomer];
+        double odinprocent = numberOfThoseWhoVoted(votes) / ONEHUNDREDPERCENT;
         double result = kolvogolosov / odinprocent;
-        BigDecimal resultf = new BigDecimal(result);
-        resultf = resultf.setScale(2, RoundingMode.DOWN);
-        return resultf.doubleValue();
+        //Убрал излишнее преобрзование BigDecimal
+        return result;
 
     }
 
-
-    public static int stoprocentov(int[] Votes) {
-        int stoprocentov = 0;
-        for (int i = 0; i < Votes.length; i++) {
-            stoprocentov = stoprocentov + Votes[i];
+    //Переимановал метод из кириллического stoprocentov - numberOfThoseWhoVoted
+    public static int numberOfThoseWhoVoted(int[] votes) {
+        int allvotes = 0;
+        for (int i = 0; i < votes.length; i++) {
+            allvotes = allvotes + votes[i];
         }
-        return stoprocentov;
+        return allvotes;
     }
 }

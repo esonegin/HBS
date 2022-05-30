@@ -110,8 +110,6 @@ public class TheRabbitsFoot {
     //Возвращаем матрицу подходящего размера
     public static int[][] GetMatrix(String str) {
         Double verhnyayagr = Math.sqrt(ReplacerLength(str));
-        String result = String.format("%.2f", verhnyayagr);
-
         String verhgran = String.valueOf(verhnyayagr);
         String[] subStr;
         String delimeter = "\\.";
