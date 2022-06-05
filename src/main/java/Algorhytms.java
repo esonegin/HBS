@@ -1,8 +1,13 @@
 import java.util.ArrayList;
 
 public class Algorhytms {
+    private static int[] arr;
 
-    public static String fastSort(int[] arr) {
+    public Algorhytms(int[] a) {
+        this.arr = a;
+    }
+
+    public static String fastSort() {
         ArrayList<Integer> menshe = new ArrayList<>();
         ArrayList<Integer> bolshe = new ArrayList<>();
         int oporniy = arr[1];
@@ -48,6 +53,3 @@ public class Algorhytms {
     }
 
 }
-
-
-

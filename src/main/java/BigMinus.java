@@ -1,14 +1,22 @@
 import java.util.ArrayList;
 
 public class BigMinus {
+    static String firstvalue;
+    static String secondvalue;
 
-    public static String BigMinus(String s1, String s2) {
+    //Убрал объявление переменных в конструктор
+    public BigMinus(String first, String second) {
+        this.firstvalue = first;
+        this.secondvalue = second;
+    }
+
+    public static String getDifference() {
         //result - difference
         String difference = "";
         ArrayList<Integer> resultlist = new ArrayList<Integer>();
         //pervoechislo, vtoroechislo - firstValue, secondValue
-        Long firstValue = Long.valueOf(s1);
-        Long secondValue = Long.valueOf(s2);
+        Long firstValue = Long.valueOf(firstvalue);
+        Long secondValue = Long.valueOf(secondvalue);
 
         //Первое число равно второму
         if (firstValue.equals(secondValue)) {
@@ -16,9 +24,9 @@ public class BigMinus {
         }
         //Первое число больше второго
         else if (firstValue > secondValue) {
-            resultlist = subtractingShortFromLong(s1, s2);
+            resultlist = subtractingShortFromLong(firstvalue, secondvalue);
         } else if (firstValue < secondValue) {
-            resultlist = subtractingShortFromLong(s2, s1);
+            resultlist = subtractingShortFromLong(secondvalue, firstvalue);
         }
 
         //Наполняем строку результат символами из списка

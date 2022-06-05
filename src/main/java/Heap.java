@@ -3,19 +3,24 @@ import java.util.*;
 class Heap {
     public int[] HeapArray;
     int size;
+    int[] inarray;
     //Вынес индес показфывающий отсутствие свободного индекса в константу
     final int MISSFREEINDEX = -2;
-    public Heap() {
+
+    //Убрал объявление переменных в конструктор
+    public Heap(int s, int[] arr) {
         HeapArray = null;
+        this.size = s;
+        this.inarray = arr;
     }
 
-    public void MakeHeap(int[] a, int depth) {
-        size = a.length;
-        int tree_size = a.length;
+    public void MakeHeap() {
+        size = inarray.length;
+        int tree_size = inarray.length;
         HeapArray = new int[tree_size];
         Arrays.fill(HeapArray, -1);
-        for (int i = 0; i < HeapArray.length && i < a.length; i++) {
-            Add(a[i]);
+        for (int i = 0; i < HeapArray.length && i < inarray.length; i++) {
+            Add(inarray[i]);
         }
         DeleteNegativeValue();
     }

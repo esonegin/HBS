@@ -2,15 +2,23 @@ import java.util.*;
 
 class aBST {
     public Integer Tree[];
+    static int depth;
+    int tree_size;
 
+    //Убрал инициализацию переменных в конструктор
     public aBST(int depth) {
-        int tree_size = 1;
+        this.depth = depth;
+        this.tree_size = setTreeSize();
+        this.Tree = new Integer[tree_size];
+    }
+
+    //Убрал определение размера дерева в отдельный метод
+    public int setTreeSize() {
+        int size = 1;
         for (int i = 1; i <= depth + 1; i++) {
-            tree_size = tree_size * 2;
+            size = size * 2;
         }
-        tree_size = tree_size - 1;
-        Tree = new Integer[tree_size];
-        for (int i = 0; i < tree_size; i++) Tree[i] = null;
+        return size - 1;
     }
 
     public Integer FindKeyIndex(int key) {
@@ -23,26 +31,26 @@ class aBST {
             if (Tree[teknode] == key) {
                 break;
             }
-            if(key < Tree[teknode] && Tree[2 * teknode + 1] == null){
+            if (key < Tree[teknode] && Tree[2 * teknode + 1] == null) {
                 teknode = 2 * teknode + 1;
                 break;
             }
-            if(key < Tree[teknode] && Tree[2 * teknode + 1] != null){
+            if (key < Tree[teknode] && Tree[2 * teknode + 1] != null) {
                 teknode = 2 * teknode + 1;
                 continue;
             }
-            if(key < Tree[teknode] && Tree[2 * teknode + 1] != 0 && key < Tree[2 * teknode + 1]){
+            if (key < Tree[teknode] && Tree[2 * teknode + 1] != 0 && key < Tree[2 * teknode + 1]) {
                 teknode = Tree[2 * teknode + 1];
             }
-            if(key > Tree[teknode] && Tree[2 * teknode + 2] == null){
+            if (key > Tree[teknode] && Tree[2 * teknode + 2] == null) {
                 teknode = 2 * teknode + 2;
                 break;
             }
-            if(key > Tree[teknode] && Tree[2 * teknode + 2] != null){
+            if (key > Tree[teknode] && Tree[2 * teknode + 2] != null) {
                 teknode = 2 * teknode + 2;
                 continue;
             }
-            if(key > Tree[teknode] && Tree[2 * teknode + 2] != 0 && key > Tree[2 * teknode + 2]){
+            if (key > Tree[teknode] && Tree[2 * teknode + 2] != 0 && key > Tree[2 * teknode + 2]) {
                 Tree[2 * teknode + 2] = key;
             }
         }

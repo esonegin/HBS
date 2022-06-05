@@ -23,7 +23,8 @@ public class AlgorhytmsTest {
     @Test
     public void one() throws Exception {
         //1
-        String actual = Algorhytms.fastSort(new int[]{15, 54, 10, 33, 2, 17, 1});
+        Algorhytms algorhytms = new Algorhytms(new int[]{15, 54, 10, 33, 2, 17, 1});
+        String actual = algorhytms.fastSort();
         String expected = "1 2 10 15 17 33 54";
         Assert.assertThat(actual, is(expected));
     }

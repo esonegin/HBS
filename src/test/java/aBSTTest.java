@@ -1,4 +1,3 @@
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -251,12 +250,11 @@ public class aBSTTest {
         Assert.assertThat(tree.FindKeyIndex(14), is(6));
 
 
-
-        for(int i = 0; i < 1000; i++){
+        for (int i = 0; i < 1000; i++) {
             Assert.assertThat(tree.FindKeyIndex(1) == null, is(true));
         }
         Assert.assertThat(tree.AddKey(1), is(-1));
-        for(int i = 0; i < 1000; i++){
+        for (int i = 0; i < 1000; i++) {
             Assert.assertThat(tree.AddKey(1), is(-1));
         }
     }
@@ -296,13 +294,13 @@ public class aBSTTest {
         Assert.assertThat(tree.AddKey(75), is(2));
         Assert.assertThat(tree.FindKeyIndex(75), is(2));
 
-        for(int i = 0; i < 1000; i++){
+        for (int i = 0; i < 1000; i++) {
             Assert.assertThat(tree.FindKeyIndex(37), is(-4));
         }
-        for(int i = 0; i < 1000; i++){
+        for (int i = 0; i < 1000; i++) {
             Assert.assertThat(tree.AddKey(37), is(4));
         }
-        for(int i = 0; i < 1000; i++){
+        for (int i = 0; i < 1000; i++) {
             Assert.assertThat(tree.FindKeyIndex(37), is(4));
         }
 
@@ -315,6 +313,7 @@ public class aBSTTest {
         Assert.assertThat(tree.Tree[6] == null, is(true));
 
     }
+
     @Test
     public void error2Test() {
         aBST tree = new aBST(3);

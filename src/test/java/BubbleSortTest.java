@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.is;
 
 public class BubbleSortTest {
@@ -19,32 +20,42 @@ public class BubbleSortTest {
 
     @Test
     public void defTest() {
-        Assert.assertThat(BubbleSort.bubbleSort(new int[]{10, 1, 8, 7, 6, 3, 4, 3, 2, 9}),
-                is(new int[]{1, 2, 3 ,3, 4, 6, 7, 8, 9, 10}));
+        BubbleSort array = new BubbleSort(new int[]{10, 1, 8, 7, 6, 3, 4, 3, 2, 9});
+        Assert.assertThat(array.bubbleSort(),
+                is(new int[]{1, 2, 3, 3, 4, 6, 7, 8, 9, 10}));
     }
+
     @Test
     public void allZeroTest() {
-        Assert.assertThat(BubbleSort.bubbleSort(new int[]{0, 0, 0, 0, 0}),
+        BubbleSort array = new BubbleSort(new int[]{0, 0, 0, 0, 0});
+        Assert.assertThat(array.bubbleSort(),
                 is(new int[]{0, 0, 0, 0, 0}));
     }
+
     @Test
     public void pogrLeft() {
-        Assert.assertThat(BubbleSort.bubbleSort(new int[]{1, 0, 0, 0, 0}),
+        BubbleSort array = new BubbleSort(new int[]{1, 0, 0, 0, 0});
+        Assert.assertThat(array.bubbleSort(),
                 is(new int[]{0, 0, 0, 0, 1}));
     }
+
     @Test
     public void pogrRight() {
-        Assert.assertThat(BubbleSort.bubbleSort(new int[]{0, 0, 0, 0, 1}),
+        BubbleSort array = new BubbleSort(new int[]{0, 0, 0, 0, 1});
+        Assert.assertThat(array.bubbleSort(),
                 is(new int[]{0, 0, 0, 0, 1}));
+
     }
+
     @Test
     public void tischaTest() {
         int[] tis = new int[100];
-        for(int i = 0; i < tis.length; i++){
+        for (int i = 0; i < tis.length; i++) {
             tis[i] = i + 1;
         }
         tis[99] = 0;
-        Assert.assertThat(BubbleSort.bubbleSort(tis),
+        BubbleSort array = new BubbleSort(tis);
+        Assert.assertThat(array.bubbleSort(),
                 is(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                         11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                         21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
@@ -56,19 +67,26 @@ public class BubbleSortTest {
                         81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
                         91, 92, 93, 94, 95, 96, 97, 98, 99}));
     }
+
     @Test
     public void zeroTest() {
-        Assert.assertThat(BubbleSort.bubbleSort(new int[]{0}),
+        BubbleSort array = new BubbleSort(new int[]{0});
+        Assert.assertThat(array.bubbleSort(),
                 is(new int[]{0}));
     }
+
     @Test
     public void dvaOdinakTest() {
-        Assert.assertThat(BubbleSort.bubbleSort(new int[]{2, 2}),
+        BubbleSort array = new BubbleSort(new int[]{2, 2});
+        Assert.assertThat(array.bubbleSort(),
                 is(new int[]{2, 2}));
+
     }
+
     @Test
     public void dvaRaznTest() {
-        Assert.assertThat(BubbleSort.bubbleSort(new int[]{3, 2}),
+        BubbleSort array = new BubbleSort(new int[]{3, 2});
+        Assert.assertThat(array.bubbleSort(),
                 is(new int[]{2, 3}));
     }
 

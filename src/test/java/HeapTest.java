@@ -20,11 +20,8 @@ public class HeapTest {
 
     @Test
     public void defaultAddTest() {
-
-        int[] array = {12, 8, 4, 6, 2, 14, 10};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 3);
-
+        Heap heap = new Heap(3, new int[]{12, 8, 4, 6, 2, 14, 10});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray.length, is(7));
         Assert.assertThat(heap.HeapArray[0], is(14));
         Assert.assertThat(heap.HeapArray[1], is(8));
@@ -38,9 +35,8 @@ public class HeapTest {
 
     @Test
     public void default3DepthAddTest() {
-        int[] array = {12, 8, 4, 6, 2, 14, 10, 11};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 4);
+        Heap heap = new Heap(4, new int[]{12, 8, 4, 6, 2, 14, 10, 11});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray.length, is(8));
         Assert.assertThat(heap.HeapArray[0], is(14));
         Assert.assertThat(heap.HeapArray[1], is(11));
@@ -57,9 +53,8 @@ public class HeapTest {
 
     @Test
     public void everyStepUpAddTest() {
-        int[] array = {1, 2, 3, 4, 5, 6, 7};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 3);
+        Heap heap = new Heap(3, new int[]{1, 2, 3, 4, 5, 6, 7});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray[0], is(7));
         Assert.assertThat(heap.HeapArray[1], is(4));
         Assert.assertThat(heap.HeapArray[2], is(6));
@@ -71,10 +66,8 @@ public class HeapTest {
 
     @Test
     public void getMaxEveryStepTest() {
-        int[] array = {1, 2, 3, 4, 5, 6, 7};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 3);
-
+        Heap heap = new Heap(3, new int[]{1, 2, 3, 4, 5, 6, 7});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray.length, is(7));
         Assert.assertThat(heap.HeapArray[0], is(7));
         Assert.assertThat(heap.HeapArray[1], is(4));
@@ -95,9 +88,8 @@ public class HeapTest {
 
     @Test
     public void getMaxEveryStepReverseTest() {
-        int[] array = {7, 6, 5, 4, 3, 2, 1};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 3);
+        Heap heap = new Heap(3, new int[]{7, 6, 5, 4, 3, 2, 1});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray[0], is(7));
         Assert.assertThat(heap.HeapArray[1], is(6));
         Assert.assertThat(heap.HeapArray[2], is(5));
@@ -116,9 +108,8 @@ public class HeapTest {
 
     @Test
     public void getDifDefaultTest() {
-        int[] array = {1, 1, 1, 1, 1, 1, 1};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 3);
+        Heap heap = new Heap(3, new int[]{1, 1, 1, 1, 1, 1, 1});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray.length, is(7));
         Assert.assertThat(heap.HeapArray[0], is(1));
         Assert.assertThat(heap.HeapArray[1], is(1));
@@ -137,9 +128,8 @@ public class HeapTest {
 
     @Test
     public void getMaxOverDepthStepTest() {
-        int[] array = {1, 1, 1, 1, 1, 1, 1};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 2);
+        Heap heap = new Heap(2, new int[]{1, 1, 1, 1, 1, 1, 1});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray.length, is(7));
         Assert.assertThat(heap.HeapArray[0], is(1));
         Assert.assertThat(heap.HeapArray[1], is(1));
@@ -160,10 +150,8 @@ public class HeapTest {
 
     @Test
     public void det() {
-
-        int[] array = {1, 2, 3, 4};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 2);
+        Heap heap = new Heap(2, new int[]{1, 2, 3, 4});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray.length, is(4));
         Assert.assertThat(heap.HeapArray[0], is(4));
         Assert.assertThat(heap.HeapArray[1], is(3));
@@ -180,10 +168,8 @@ public class HeapTest {
 
     @Test
     public void editError() {
-
-        int[] array = {110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 3);
+        Heap heap = new Heap(3, new int[]{110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray.length, is(15));
         Assert.assertThat(heap.HeapArray[0], is(110));
         Assert.assertThat(heap.HeapArray[1], is(90));
@@ -223,9 +209,8 @@ public class HeapTest {
 
     @Test
     public void addAfterGetMaxAllAndReverseTest() {
-        int[] array = {7, 6, 5, 4, 3, 2, 1};
-        Heap heap = new Heap();
-        heap.MakeHeap(array, 3);
+        Heap heap = new Heap(3, new int[]{7, 6, 5, 4, 3, 2, 1});
+        heap.MakeHeap();
         Assert.assertThat(heap.HeapArray[0], is(7));
         Assert.assertThat(heap.HeapArray[1], is(6));
         Assert.assertThat(heap.HeapArray[2], is(5));
@@ -304,7 +289,5 @@ public class HeapTest {
         Assert.assertThat(heap.HeapArray[3], is(1));
         Assert.assertThat(heap.HeapArray[4], is(3));
         Assert.assertThat(heap.HeapArray.length, is(5));
-
-
     }
 }

@@ -1,8 +1,13 @@
 
-
 public class LineAnalysis {
+    static String line;
 
-    public static boolean LineAnalysis(String line) {
+    //Убрал объявление переменных в конструктор
+    public LineAnalysis(String inline) {
+        this.line = inline;
+    }
+
+    public static boolean getAnalyze() {
         //7.1 result - isValidLine
         boolean isValidLine = true;
         char first = line.charAt(0);

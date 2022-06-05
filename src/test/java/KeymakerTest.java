@@ -20,73 +20,70 @@ public class KeymakerTest {
     @Test
     public void one() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(1);
-        String expected = "1";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(1);
+        Assert.assertThat(keymaker.getKey(), is("1"));
     }
+
     @Test
     public void two() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(2);
-        String expected = "10";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(2);
+        Assert.assertThat(keymaker.getKey(), is("10"));
     }
+
     @Test
     public void three() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(3);
-        String expected = "100";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(3);
+        Assert.assertThat(keymaker.getKey(), is("100"));
     }
+
     @Test
     public void four() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(4);
-        String expected = "1001";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(4);
+        Assert.assertThat(keymaker.getKey(), is("1001"));
     }
 
     @Test
     public void five() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(5);
-        String expected = "10010";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(5);
+        Assert.assertThat(keymaker.getKey(), is("10010"));
     }
+
     @Test
     public void six() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(6);
-        String expected = "100100";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(6);
+        Assert.assertThat(keymaker.getKey(), is("100100"));
     }
+
     @Test
     public void seven() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(7);
-        String expected = "1001000";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(7);
+        Assert.assertThat(keymaker.getKey(), is("1001000"));
     }
+
     @Test
     public void eight() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(8);
-        String expected = "10010000";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(8);
+        Assert.assertThat(keymaker.getKey(), is("10010000"));
     }
+
     @Test
     public void nine() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(9);
-        String expected = "100100001";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(9);
+        Assert.assertThat(keymaker.getKey(), is("100100001"));
     }
 
     @Test
     public void ten() throws Exception {
         //1
-        String actual = Keymaker.Keymaker(10);
-        String expected = "1001000010";
-        Assert.assertThat(actual, is(expected));
+        Keymaker keymaker = new Keymaker(10);
+        Assert.assertThat(keymaker.getKey(), is("1001000010"));
     }
 }

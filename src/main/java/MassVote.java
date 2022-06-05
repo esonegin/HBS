@@ -5,8 +5,16 @@ public class MassVote {
     //Вынес граничное значение для выиграша в константу
     static final int BORDEROFVICTORY = 50;
     static final double ONEHUNDREDPERCENT = 100.00;
+    static int candidatescount;
+    static int[] allvotes;
 
-    public static String MassVote(int N, int[] allvotes) {
+    //Убрал объявление переменных в конструктор
+    public MassVote(int count, int[] votes) {
+        this.candidatescount = count;
+        this.allvotes = votes;
+    }
+
+    public static String checkWinner() {
         String result = "";
         if (kolvomax(allvotes) > 1) {
             result = "no winner";
@@ -40,12 +48,12 @@ public class MassVote {
     }
 
 
-    public static int indexmax(int[] Votes) {
-        int max = Votes[0];
+    public static int indexmax(int[] votes) {
+        int max = votes[0];
         int indexmax = 0;
-        for (int i = 0; i < Votes.length; i++) {
-            if (max < Votes[i]) {
-                max = Votes[i];
+        for (int i = 0; i < votes.length; i++) {
+            if (max < votes[i]) {
+                max = votes[i];
                 indexmax = i;
             }
         }
@@ -54,20 +62,17 @@ public class MassVote {
 
     //Переимановал метод из кириллического procentkandidata - candidatePercentage
     public static double candidatePercentage(int[] votes, int nomer) {
-        //Сделал количество голосов вместо double - int
-        int kolvogolosov = votes[nomer];
-        double odinprocent = numberOfThoseWhoVoted(votes) / ONEHUNDREDPERCENT;
-        double result = kolvogolosov / odinprocent;
-        //Убрал излишнее преобрзование BigDecimal
-        return result;
+        //Удалил лишние переменные
+        return votes[nomer] / (numberOfThoseWhoVoted(votes) / ONEHUNDREDPERCENT);
 
     }
 
-    //Переимановал метод из кириллического stoprocentov - numberOfThoseWhoVoted
+    //Переименовал метод из кириллического stoprocentov - numberOfThoseWhoVoted
     public static int numberOfThoseWhoVoted(int[] votes) {
         int allvotes = 0;
-        for (int i = 0; i < votes.length; i++) {
-            allvotes = allvotes + votes[i];
+        //Упростил цикл убрав счетчик
+        for (int vote : votes) {
+            allvotes = allvotes + vote;
         }
         return allvotes;
     }

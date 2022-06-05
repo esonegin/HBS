@@ -17,85 +17,67 @@ public class LineAnalysisTest {
 
     @Test
     public void defoltnieZnacheniyaFirst() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("*..*..*..*..*..*..*");
-        boolean expected = true;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis("*..*..*..*..*..*..*");
+        Assert.assertThat(analysis.getAnalyze(), is(true));
     }
 
     @Test
     public void defoltnieZnacheniyaSecond() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("*");
-        boolean expected = true;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis("*");
+        Assert.assertThat(analysis.getAnalyze(), is(true));
     }
 
     @Test
     public void defoltnieZnacheniyaThird() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("***");
-        boolean expected = true;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis("***");
+        Assert.assertThat(analysis.getAnalyze(), is(true));
     }
 
     @Test
     public void defoltnieZnacheniyaFourth() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("*.......*.......*");
-        boolean expected = true;
-        Assert.assertThat(actual, is(expected));
-    }
-
-    @Test
-    public void defoltnieZnacheniyaFifth() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("*.......*.......*");
-        boolean expected = true;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis("*.......*.......*");
+        Assert.assertThat(analysis.getAnalyze(), is(true));
     }
 
     @Test
     public void defoltnieZnacheniyaSixth() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("**");
-        boolean expected = true;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis("**");
+        Assert.assertThat(analysis.getAnalyze(), is(true));
     }
 
     @Test
     public void defoltnieZnacheniyaSevnth() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("*.*");
-        boolean expected = true;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis("*.*");
+        Assert.assertThat(analysis.getAnalyze(), is(true));
     }
 
     @Test
     public void defoltniOshbkaFirst() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("*..*...*..*..*..*..*");
-        boolean expected = false;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis("*..*...*..*..*..*..*");
+        Assert.assertThat(analysis.getAnalyze(), is(false));
     }
 
     @Test
     public void defoltniOshbkaSecond() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("*..*..*..*..*..**..*");
-        boolean expected = false;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis("*..*..*..*..*..**..*");
+        Assert.assertThat(analysis.getAnalyze(), is(false));
     }
 
     @Test
     public void perviyNeZvezdaDva() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis(".*");
-        boolean expected = false;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis(".*");
+        Assert.assertThat(analysis.getAnalyze(), is(false));
     }
 
     @Test
     public void posledniyNeZvezdaDva() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis("*.");
-        boolean expected = false;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis("*.");
+        Assert.assertThat(analysis.getAnalyze(), is(false));
     }
 
     @Test
     public void posledniyAndPerviyNeZvezdaTri() throws Exception {
-        boolean actual = LineAnalysis.LineAnalysis(".*.");
-        boolean expected = false;
-        Assert.assertThat(actual, is(expected));
+        LineAnalysis analysis = new LineAnalysis(".*.");
+        Assert.assertThat(analysis.getAnalyze(), is(false));
     }
 }

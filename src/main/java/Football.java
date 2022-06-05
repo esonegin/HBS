@@ -5,9 +5,12 @@ import java.util.Collections;
 
 public class Football {
 
-    static ArrayList<String> allfirstsort = new ArrayList<String>();
-    //Размер стандартного массива
+    static ArrayList<String> allfirstsort = new ArrayList<String>();//Размер стандартного массива
     static final int DEFAULTSIZE = 3;
+    public Football(){
+
+    }
+
 
     //v2
     static boolean Football(int F[], int N) {

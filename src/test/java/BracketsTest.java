@@ -21,7 +21,7 @@ public class BracketsTest {
 
     @Test
     public <T> void balanceCheck() throws Exception {
-        Brackets brackets = new Brackets();
+        Brackets brackets = new Brackets(")");
         Assert.assertThat(brackets.balanceCheck(")"), is(false));
         Assert.assertThat(brackets.balanceCheck("("), is(false));
         Assert.assertThat(brackets.balanceCheck(")("), is(false));
@@ -34,5 +34,4 @@ public class BracketsTest {
         Assert.assertThat(brackets.balanceCheck("))(("), is(false));
         Assert.assertThat(brackets.balanceCheck("((())"), is(false));
     }
-
 }

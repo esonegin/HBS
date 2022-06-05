@@ -2,14 +2,19 @@ import java.util.ArrayList;
 
 
 public class Keymaker {
+    static int size;
 
-    //v1
-    public static String Keymaker(int k) {
+    //Избавился от лишних переменных и убрал инициализацию в конструктор
+    public Keymaker(int s) {
+        this.size = s;
+    }
+
+    public static String getKey() {
         String result = "";
         //doors - defaultKeyList
         ArrayList<Integer> defaultKeyList = new ArrayList<>();
         //Заполняем список дефолтными нулями
-        for (int i = 0; i < k; i++) {
+        for (int i = 0; i < size; i++) {
             defaultKeyList.add(0);
         }
         changeAllToOne(defaultKeyList);

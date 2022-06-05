@@ -4,15 +4,22 @@ import java.util.*;
 
 public class BastShoe {
     //v17
-    //Вынес магические числа в константы, код стал нагляднее
+    static StringHistory str;
     static final int ADD = 1;
     static final int BACK = 2;
     static final int DELETE = 3;
     static final int BACKTO = 4;
     static final int FORWARDTO = 5;
-    private static StringHistory str = new StringHistory(); ;
 
-    public static String executingCommandOnString(String command) {
+    //Убрал объяление строки в конструктор
+    public BastShoe() {
+        this.str = new StringHistory();
+    }
+
+    //Вынес магические числа в константы, код стал нагляднее
+
+
+    public static String commandExecuter(String command) {
         int com;
         String value = "";
         String result = "";
@@ -75,7 +82,7 @@ public class BastShoe {
             }
 
         } else if (com == DELETE) {
-            result = command3(value);
+            result = deleteValue(value);
         }
 
         System.out.println(result);
@@ -119,7 +126,7 @@ public class BastShoe {
         str.setPredOperation(2);
     }
 
-    public static String command3(String value) {
+    public static String deleteValue(String value) {
         String result;
         int key = Math.max(str.getNumberTekusheyStroki(), 0);
         if (Integer.parseInt(value) >= str.getHistoryValue(key).length()
