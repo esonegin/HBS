@@ -1,6 +1,8 @@
 public class BloomFilter {
-    public int filter_len;
-    public byte[] bitArray;
+    //public -> private
+    private int filter_len;
+    //public -> private
+    private byte[] bitArray;
 
     public BloomFilter(int f_len) {
         filter_len = f_len;

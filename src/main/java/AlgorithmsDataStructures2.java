@@ -35,12 +35,41 @@ public class AlgorithmsDataStructures2 {
 
     static class Node {
 
-        int data;
-        Node left, right;
+        //default - private
+        private int data;
+        //default - private
+        private Node left;
+        //default - private
+        private Node right;
 
         Node(int d) {
             data = d;
-            left = right = null;
+            left = null;
+            right = null;
+        }
+
+        public int getData() {
+            return data;
+        }
+
+        public void setData(int d) {
+            this.data = d;
+        }
+
+        public Node getLeft() {
+            return left;
+        }
+
+        public void setLeft(Node l) {
+            this.left = l;
+        }
+
+        public Node getRight() {
+            return right;
+        }
+
+        public void setRight(Node r) {
+            this.right = r;
         }
     }
 

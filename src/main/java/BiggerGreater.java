@@ -3,47 +3,39 @@ import java.util.*;
 
 public class BiggerGreater {
     //v4
-    public static String BiggerGreater(String input) {
-        ValidatedString ValidatedString = new ValidatedString();
-
-        ValidatedString.setFirstWord(input);
-        ValidatedString.setAllVariants(allVariants(input));
-        ValidatedString.setNaimenshee(naimenshee(ValidatedString.getAllVariants()));
-
-        return ValidatedString.getNaimenshee();
+    public static String biggerGreater(String input) {
+        ValidatedString validatedString = new ValidatedString(input);
+        return validatedString.getNaimenshee();
     }
 
     public static class ValidatedString {
         private static String firstword;
-        ArrayList<String> allVariants = new ArrayList<String>();
-        private String naimenshee;
+        //default - private
+        private static ArrayList<String> allVariants = new ArrayList<>();
+        private static String naimenshee;
 
-        public static String getFirstWord() {
+        //Избавился от public метода setFirstWord, переделав инициализацию с помощью конструктора
+        //Избавился от лишнего метода убрав инициализацию в конструктор
+        public ValidatedString(String str) {
+            this.firstword = str;
+            this.allVariants = allVariants(str);
+            this.naimenshee = naimenshee(getAllVariants());
+        }
+
+        static String getFirstWord() {
             return firstword;
         }
 
-        public void setFirstWord(String firstword) {
-            this.firstword = firstword;
-        }
-
-        public ArrayList<String> getAllVariants() {
+        //public -> static
+        static ArrayList<String> getAllVariants() {
             return allVariants;
         }
 
-        public void setAllVariants(ArrayList<String> allVariants) {
-            this.allVariants = allVariants;
-        }
-
-        public String getNaimenshee() {
+        //public -> static
+        static String getNaimenshee() {
             return naimenshee;
         }
-
-        public void setNaimenshee(String naimenshee) {
-            this.naimenshee = naimenshee;
-        }
-
     }
-
 
     //Наименьшее из всех лексикографически больших слов
     public static String naimenshee(ArrayList<String> input) {

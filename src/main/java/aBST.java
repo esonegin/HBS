@@ -1,19 +1,19 @@
-import java.util.*;
 
 class aBST {
-    public Integer Tree[];
-    static int depth;
-    int tree_size;
+    //public - private
+    private Integer[] tree;
+    //public - private
+    private int depth;
 
     //Убрал инициализацию переменных в конструктор
-    public aBST(int depth) {
-        this.depth = depth;
-        this.tree_size = setTreeSize();
-        this.Tree = new Integer[tree_size];
+    //public - default
+    aBST(int initdepth) {
+        this.depth = initdepth;
+        this.tree = new Integer[settreeSize()];
     }
 
     //Убрал определение размера дерева в отдельный метод
-    public int setTreeSize() {
+    public int settreeSize() {
         int size = 1;
         for (int i = 1; i <= depth + 1; i++) {
             size = size * 2;
@@ -21,69 +21,85 @@ class aBST {
         return size - 1;
     }
 
-    public Integer FindKeyIndex(int key) {
+    public Integer findKeyIndex(int key) {
 
         int teknode = 0;
-        if (Tree[0] == null) {
+        if (tree[0] == null) {
             return 0;
         }
-        while (Tree[teknode] != null && 2 * teknode + 1 < Tree.length) {
-            if (Tree[teknode] == key) {
+        while (tree[teknode] != null && 2 * teknode + 1 < tree.length) {
+            if (tree[teknode] == key) {
                 break;
             }
-            if (key < Tree[teknode] && Tree[2 * teknode + 1] == null) {
+            if (key < tree[teknode] && tree[2 * teknode + 1] == null) {
                 teknode = 2 * teknode + 1;
                 break;
             }
-            if (key < Tree[teknode] && Tree[2 * teknode + 1] != null) {
+            if (key < tree[teknode] && tree[2 * teknode + 1] != null) {
                 teknode = 2 * teknode + 1;
                 continue;
             }
-            if (key < Tree[teknode] && Tree[2 * teknode + 1] != 0 && key < Tree[2 * teknode + 1]) {
-                teknode = Tree[2 * teknode + 1];
+            if (key < tree[teknode] && tree[2 * teknode + 1] != 0 && key < tree[2 * teknode + 1]) {
+                teknode = tree[2 * teknode + 1];
             }
-            if (key > Tree[teknode] && Tree[2 * teknode + 2] == null) {
+            if (key > tree[teknode] && tree[2 * teknode + 2] == null) {
                 teknode = 2 * teknode + 2;
                 break;
             }
-            if (key > Tree[teknode] && Tree[2 * teknode + 2] != null) {
+            if (key > tree[teknode] && tree[2 * teknode + 2] != null) {
                 teknode = 2 * teknode + 2;
                 continue;
             }
-            if (key > Tree[teknode] && Tree[2 * teknode + 2] != 0 && key > Tree[2 * teknode + 2]) {
-                Tree[2 * teknode + 2] = key;
+            if (key > tree[teknode] && tree[2 * teknode + 2] != 0 && key > tree[2 * teknode + 2]) {
+                tree[2 * teknode + 2] = key;
             }
         }
-        if (Tree[teknode] == null) {
+        if (tree[teknode] == null) {
             return -teknode;
         }
-        if (Tree[teknode] != null && Tree[teknode] != key) {
+        if (tree[teknode] != null && tree[teknode] != key) {
             return null;
         }
         return teknode;
     }
 
-    public int AddKey(int key) {
-        Integer predfind = FindKeyIndex(key);
+    public int addKey(int key) {
+        Integer predfind = findKeyIndex(key);
 
         if (predfind == null) {
             return -1;
         }
-        if (predfind == 0 && Tree[0] == null) {
-            Tree[0] = key;
+        if (predfind == 0 && tree[0] == null) {
+            tree[0] = key;
             return 0;
         }
         if (predfind < 0) {
-            Tree[predfind * (-1)] = key;
+            tree[predfind * (-1)] = key;
             return predfind * (-1);
         }
-        if (Tree[predfind] != null && Tree[predfind] != key) {
+        if (tree[predfind] != null && tree[predfind] != key) {
             return -1;
         }
-        if (Tree[predfind] != null && Tree[predfind] == key) {
+        if (tree[predfind] != null && tree[predfind] == key) {
             return predfind;
         }
-        Tree[predfind] = key;
+        tree[predfind] = key;
         return predfind;
+    }
+
+    public Integer[] getTree() {
+        return tree;
+    }
+
+    public void setTree(Integer[] tr) {
+        tree = tr;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int d) {
+        this.depth = d;
     }
 }

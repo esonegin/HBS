@@ -20,7 +20,7 @@ public class BiggerGreaterTest {
     @Test
     public void firstRus() throws Exception {
         //1
-        String actual = BiggerGreater.BiggerGreater("ая");
+        String actual = BiggerGreater.biggerGreater("ая");
         String expected = "яа";
         Assert.assertThat(actual, is(expected));
     }
@@ -28,7 +28,7 @@ public class BiggerGreaterTest {
     @Test
     public void firstEng() throws Exception {
         //1
-        String actual = BiggerGreater.BiggerGreater("za");
+        String actual = BiggerGreater.biggerGreater("za");
         String expected = "";
         Assert.assertThat(actual, is(expected));
     }
@@ -36,7 +36,7 @@ public class BiggerGreaterTest {
     @Test
     public void firstEng2() throws Exception {
         //1
-        String actual = BiggerGreater.BiggerGreater("az");
+        String actual = BiggerGreater.biggerGreater("az");
         String expected = "za";
         Assert.assertThat(actual, is(expected));
     }
@@ -44,7 +44,7 @@ public class BiggerGreaterTest {
     @Test
     public void firstEng3() throws Exception {
         //1
-        String actual = BiggerGreater.BiggerGreater("cibk");
+        String actual = BiggerGreater.biggerGreater("cibk");
         String expected = "cikb";
         Assert.assertThat(actual, is(expected));
     }
@@ -52,28 +52,28 @@ public class BiggerGreaterTest {
     @Test
     public void second() throws Exception {
         //1
-        String actual = BiggerGreater.BiggerGreater("fff");
+        String actual = BiggerGreater.biggerGreater("fff");
         String expected = "";
         Assert.assertThat(actual, is(expected));
     }
     @Test
     public void third() throws Exception {
         //1
-        String actual = BiggerGreater.BiggerGreater("нклм");
+        String actual = BiggerGreater.biggerGreater("нклм");
         String expected = "нкмл";
         Assert.assertThat(actual, is(expected));
     }
     @Test
     public void fourth() throws Exception {
         //1
-        String actual = BiggerGreater.BiggerGreater("вибк");
+        String actual = BiggerGreater.biggerGreater("вибк");
         String expected = "викб";
         Assert.assertThat(actual, is(expected));
     }
     @Test
     public void fifth() throws Exception {
         //1
-        String actual = BiggerGreater.BiggerGreater("вкиб");
+        String actual = BiggerGreater.biggerGreater("вкиб");
         String expected = "ибвк";
         Assert.assertThat(actual, is(expected));
     }
@@ -81,7 +81,7 @@ public class BiggerGreaterTest {
     @Test
     public void eng() throws Exception {
         //1
-        String actual = BiggerGreater.BiggerGreater("ab");
+        String actual = BiggerGreater.biggerGreater("ab");
         String expected = "ba";
         Assert.assertThat(actual, is(expected));
     }

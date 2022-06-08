@@ -1,10 +1,9 @@
-
-
 import java.util.*;
 
 public class BastShoe {
     //v17
-    static StringHistory str;
+    //default - private
+    private static StringHistory str;
     static final int ADD = 1;
     static final int BACK = 2;
     static final int DELETE = 3;
@@ -51,13 +50,16 @@ public class BastShoe {
         } else if (com == BACKTO) {
             if (str.history.size() == 1) {
                 result = str.getValue("");
-            } else if (str.getUndoCount() >= str.history.size() && str.history.size() == 2 && str.getNumberTekusheyStroki() < 0 && str.getPredOperation() == 4) {
+            } else if (str.getUndoCount() >= str.history.size() && str.history.size()
+                    == 2 && str.getNumberTekusheyStroki() < 0 && str.getPredOperation() == 4) {
                 result = str.getValue(str.getHistoryValue(0));
-            } else if (str.getUndoCount() >= str.history.size() && str.history.size() == 2 && str.getNumberTekusheyStroki() < 0) {
+            } else if (str.getUndoCount() >= str.history.size() && str.history.size()
+                    == 2 && str.getNumberTekusheyStroki() < 0) {
                 result = str.getValue("");
             } else if (str.getNumberTekusheyStroki() <= 0 && str.history.size() == 2) {
                 result = str.getValue(str.getHistoryValue(0));
-            } else if (str.getNumberTekusheyStroki() < 0 && str.history.size() == 2 && str.getUndoCount() >= str.history.size()) {
+            } else if (str.getNumberTekusheyStroki() < 0 && str.history.size() == 2
+                    && str.getUndoCount() >= str.history.size()) {
                 result = str.getValue("");
             } else if (str.getNumberTekusheyStroki() < 0 && str.history.size() > 2) {
                 result = str.getValue(str.getHistoryValue(0));
@@ -94,7 +96,8 @@ public class BastShoe {
         if (str.getPredOperation() == BACKTO) {
             str.clearHistory();
         }
-        if (str.getPredOperation() == FORWARDTO && str.getNumberTekusheyStroki() < str.history.size() - 1 && str.getNumberTekusheyStroki() > -1) {
+        if (str.getPredOperation() == FORWARDTO && str.getNumberTekusheyStroki() < str.history.size() - 1
+                && str.getNumberTekusheyStroki() > -1) {
             str.clearHistoryRedo();
         }
         if (str.history.size() == 0) {
@@ -116,11 +119,10 @@ public class BastShoe {
         if (str.getNumberTekusheyStroki() < 0) {
             str.setHistoryValue("");
         } else if (str.history.size() > 1) {
-            str.setHistoryValue(str.getHistoryValue(str.getNumberTekusheyStroki() - 1).
-                    substring(0, str.getHistoryValue(str.getNumberTekusheyStroki()).length() - Integer.parseInt(step)));
+            str.setHistoryValue(str.getHistoryValue(str.getNumberTekusheyStroki() - 1).substring
+                    (0, str.getHistoryValue(str.getNumberTekusheyStroki()).length() - Integer.parseInt(step)));
         } else if (str.history.size() == 1) {
-            str.setHistoryValue(str.getHistoryValue(str.getNumberTekusheyStroki()).
-                    substring(0, str.getHistoryValue(str.getNumberTekusheyStroki()).length() - Integer.parseInt(step)));
+            str.setHistoryValue(str.getHistoryValue(str.getNumberTekusheyStroki()).substring(0, str.getHistoryValue(str.getNumberTekusheyStroki()).length() - Integer.parseInt(step)));
         }
         str.setNumberTekusheyStroki(str.history.size() - 1);
         str.setPredOperation(2);
@@ -129,8 +131,7 @@ public class BastShoe {
     public static String deleteValue(String value) {
         String result;
         int key = Math.max(str.getNumberTekusheyStroki(), 0);
-        if (Integer.parseInt(value) >= str.getHistoryValue(key).length()
-                || Integer.parseInt(value) < 0) {
+        if (Integer.parseInt(value) >= str.getHistoryValue(key).length() || Integer.parseInt(value) < 0) {
             result = "";
         } else {
             result = str.getHistoryValue(key).substring(Integer.parseInt(value), Integer.parseInt(value) + 1);
@@ -171,13 +172,14 @@ public class BastShoe {
     public static class StringHistory {
         private int numberTekusheyStroki = 0;
         private int predOperation;
-        ArrayList<String> history = new ArrayList<>();
+        final ArrayList<String> history = new ArrayList<>();
         private int undoCount;
         private int redoCount;
 
-        public String getValue(String value) {
+        static String getValue(String value) {
             return value;
         }
+
 
         public String getHistoryValue(int key) {
             return history.get(key);
