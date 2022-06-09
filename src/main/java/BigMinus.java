@@ -1,18 +1,22 @@
 import java.util.ArrayList;
 
 public class BigMinus {
-    static String firstvalue;
-    static String secondvalue;
+    private static String firstvalue;
+    private static String secondvalue;
+    static String difference;
 
     //Убрал объявление переменных в конструктор
     public BigMinus(String first, String second) {
         this.firstvalue = first;
         this.secondvalue = second;
+        //Вынес переменную difference из метода в static класса сделав его void связывание
+        //во время выполнения стало более наглядным
+        getDifference();
     }
 
-    public static String getDifference() {
+    public static void getDifference() {
         //result - difference
-        String difference = "";
+        //String difference = "";
         ArrayList<Integer> resultlist = new ArrayList<Integer>();
         //pervoechislo, vtoroechislo - firstValue, secondValue
         Long firstValue = Long.valueOf(firstvalue);
@@ -21,6 +25,7 @@ public class BigMinus {
         //Первое число равно второму
         if (firstValue.equals(secondValue)) {
             difference = "0";
+            return;
         }
         //Первое число больше второго
         else if (firstValue > secondValue) {
@@ -30,11 +35,12 @@ public class BigMinus {
         }
 
         //Наполняем строку результат символами из списка
-        for (int k = 0; k < resultlist.size(); k++) {
+        difference = String.valueOf(resultlist.get(0));
+        for (int k = 1; k < resultlist.size(); k++) {
             difference += resultlist.get(k);
 
         }
-        return difference;
+        //return difference;
     }
 
     public static ArrayList<Integer> subtractingShortFromLong(String longer, String shorter) {
@@ -47,18 +53,13 @@ public class BigMinus {
         //Вычитаем посимвольно
         for (int i = 0; i < listСharsLongerNum.size(); i++) {
             //Если символ из первого числа больше или равен символу из второго числа
-            if (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i)
-                    >= listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i)) {
-                listCharsSubtrResult.add(0, listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i)
-                        - listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i));
+            if (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) >= listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i)) {
+                listCharsSubtrResult.add(0, listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) - listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i));
                 continue;
             }
             //Если символ из первого числа меньше чем символ из второго числа и первое число "длиннее" чем второе
-            else if (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i)
-                    < listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i)
-                    && longer.length() > shorter.length()) {
-                listCharsSubtrResult.add(0, (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) + 10)
-                        - listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i));
+            else if (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) < listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i) && longer.length() > shorter.length()) {
+                listCharsSubtrResult.add(0, (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) + 10) - listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i));
                 listСharsLongerNum.set(listСharsLongerNum.size() - 2 - i, listСharsLongerNum.get(listСharsLongerNum.size() - 2 - i) - 1);
                 continue;
             }

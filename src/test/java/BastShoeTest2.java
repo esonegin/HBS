@@ -17,67 +17,67 @@ public class BastShoeTest2 {
 
     }
 
-    /*@Test
+    @Test
     public void first() throws Exception {
         //1
-        String actual = BastShoe.BastShoe("1 a");
+        BastShoe bast = new BastShoe();
+        String actual = bast.commandExecuter("1 a");
         String expected = "a";
         Assert.assertThat(actual, is(expected));
 
         for (int i = 0; i < 10; i++) {
-            BastShoe.BastShoe("4");
+            bast.commandExecuter("4");
         }
         for (int i = 0; i < 9; i++) {
-            BastShoe.BastShoe("5");
+            bast.commandExecuter("5");
         }
-        actual = BastShoe.BastShoe("5");
+        actual = bast.commandExecuter("5");
         expected = "a";
         Assert.assertThat(actual, is(expected));
 
-        actual = BastShoe.BastShoe("1 b");
+        actual = bast.commandExecuter("1 b");
         expected = "ab";
         Assert.assertThat(actual, is(expected));
 
-        actual = BastShoe.BastShoe("1 c");
+        actual = bast.commandExecuter("1 c");
         expected = "abc";
         Assert.assertThat(actual, is(expected));
 
-        actual = BastShoe.BastShoe("1 d");
+        actual = bast.commandExecuter("1 d");
         expected = "abcd";
         Assert.assertThat(actual, is(expected));
 
-        actual = BastShoe.BastShoe("1 e");
+        actual = bast.commandExecuter("1 e");
         expected = "abcde";
         Assert.assertThat(actual, is(expected));
 
-        actual =  BastShoe.BastShoe("4"); // abcd ?
+        actual = bast.commandExecuter("4"); // abcd ?
         expected = "abcd";
         Assert.assertThat(actual, is(expected));
 
-        actual = BastShoe.BastShoe("1 e");
+        actual = bast.commandExecuter("1 e");
         expected = "abcde";
         Assert.assertThat(actual, is(expected));
 
-        actual = BastShoe.BastShoe("1 f");
+        actual = bast.commandExecuter("1 f");
         expected = "abcdef";
         Assert.assertThat(actual, is(expected));
 
-        actual = BastShoe.BastShoe("1 g");
+        actual = bast.commandExecuter("1 g");
         expected = "abcdefg";
         Assert.assertThat(actual, is(expected));
 
-        actual = BastShoe.BastShoe("1 h");
+        actual = bast.commandExecuter("1 h");
         expected = "abcdefgh";
         Assert.assertThat(actual, is(expected));
 
         for (int i = 0; i < 99; i++) {
-            BastShoe.BastShoe("4");
+            bast.commandExecuter("4");
         }
-
-        actual = BastShoe.BastShoe("4");
+        actual = bast.commandExecuter("4");
         expected = "abcd";
         Assert.assertThat(actual, is(expected));
-    }*/
+    }
 }
 
 

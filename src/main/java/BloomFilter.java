@@ -1,11 +1,11 @@
 public class BloomFilter {
     //public -> private
-    private int filter_len;
+    //private int filter_len;
     //public -> private
     private byte[] bitArray;
 
     public BloomFilter(int f_len) {
-        filter_len = f_len;
+        //filter_len = f_len;
         // создаём битовый массив длиной f_len ...
         bitArray = new byte[f_len];
     }

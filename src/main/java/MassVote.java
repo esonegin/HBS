@@ -3,6 +3,7 @@
 public class MassVote {
 
     //Вынес граничное значение для выиграша в константу
+    //Значение связывается во время компиляции, поскольку значение половины всегда 50%
     static final int BORDEROFVICTORY = 50;
     static final double ONEHUNDREDPERCENT = 100.00;
     static int candidatescount;

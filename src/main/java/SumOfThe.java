@@ -2,16 +2,21 @@ import java.util.Arrays;
 
 public class SumOfThe {
 
-    public static int SumOfThe(int N, int[] data) {
+    private static int[] listofnumbers;
 
+    //Вынес инициализацию списка в конструктор
+    public SumOfThe(int[] data) {
+        this.listofnumbers = data;
+    }
+
+    public static int getSum() {
         int result;
-        if (data.length > 2 || (data.length == 2 && data[0] != 0 && data[1] != 0)) {
-            result = getIndexElEqualsSum(data);
+        if (listofnumbers.length > 2 || (listofnumbers.length == 2 && listofnumbers[0] != 0 && listofnumbers[1] != 0)) {
+            result = getIndexElEqualsSum(listofnumbers);
+        } else {
+            result = getElFromTwoWithNull(listofnumbers);
         }
-        else{
-            result = getElFromTwoWithNull(data);
-        }
-            return result;
+        return result;
     }
 
     //SummTwoWithNull - getElFromTwoWithNull

@@ -1,6 +1,3 @@
-
-
-
 public class UFO {
 
     public static int[] UFO(int N, int[] data, boolean octal) {
