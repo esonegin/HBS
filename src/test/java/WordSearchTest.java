@@ -1,34 +1,44 @@
 import org.junit.*;
+
 import java.util.Arrays;
+import java.util.TreeSet;
 
 
 public class WordSearchTest {
 
     @BeforeClass
-    public static void globalSetUp() { }
+    public static void globalSetUp() {
+    }
 
     @Before
-    public void setUp() { }
+    public void setUp() {
+    }
 
     @Test
     public void whenWordSearchIntWithoutProbel() throws Exception {
-        int[] actual = WordSearch.WordSearch(3, "12345", "123");
-        int[] expected = {1,0};
-        Assert.assertTrue(Arrays.equals(actual, expected));
+        Stack actual = WordSearch.WordSearch(3, "12345", "123");
+        Assert.assertEquals(actual.pop(), 0);
+        Assert.assertEquals(actual.pop(), 0);
+        Assert.assertEquals(actual.pop(), 1);
     }
 
     @Test
     public void whenWordSearchIntWithOneProbel() throws Exception {
-        int[] actual = WordSearch.WordSearch(3, "123 45", "123");
-        int[] expected = {1, 0};
-        Assert.assertTrue(Arrays.equals(actual, expected));
+        Stack actual = WordSearch.WordSearch(3, "123 45", "123");
+        Assert.assertEquals(actual.pop(), 0);
+        Assert.assertEquals(actual.pop(), 0);
     }
 
     @Test
     public void whenWordSearchStringWithManyProbel() throws Exception {
-        int[] actual = WordSearch.WordSearch(12, "1) строка разбивается на набор строк через выравнивание по заданной ширине.", "строк");
-        int[] expected = {0,0,0,1,0,0,0};
-        Assert.assertTrue(Arrays.equals(actual, expected));
+        Stack actual = WordSearch.WordSearch(12, "1) строка разбивается на набор строк через выравнивание по заданной ширине.", "строк");
+        Assert.assertEquals(actual.pop(), 0);
+        Assert.assertEquals(actual.pop(), 0);
+        Assert.assertEquals(actual.pop(), 0);
+        Assert.assertEquals(actual.pop(), 0);
+        Assert.assertEquals(actual.pop(), 1);
+        Assert.assertEquals(actual.pop(), 0);
+        Assert.assertEquals(actual.pop(), 0);
+        Assert.assertEquals(actual.pop(), 0);
     }
-
 }

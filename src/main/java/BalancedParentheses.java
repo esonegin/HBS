@@ -17,9 +17,8 @@ public class BalancedParentheses {
 
     //Передаем список
     public static void addParent(ArrayList<String> list, int leftRem, int rightRem, char[] str, int count) {
-        if (leftRem < 0 || rightRem < leftRem) {
-            return;
-        }
+        if (leftRem < 0 || rightRem < leftRem) return;
+
         if (leftRem == 0 && rightRem == 0) {
             String s = String.copyValueOf(str);
             list.add(s);

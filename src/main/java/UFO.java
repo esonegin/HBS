@@ -1,9 +1,12 @@
+import java.util.TreeSet;
+
 public class UFO {
 
-    public static int[] UFO(int N, int[] data, boolean octal) {
-        int[] result = new int[data.length];
+    public static TreeSet UFO(int N, int[] data, boolean octal) {
+        //Заменил массив на TreeSet
+        TreeSet result = new TreeSet();
         for (int i = 0; i < data.length; i++) {
-            result[i] = strPoNomeruIndexa(data, i, octal);
+            result.add(strPoNomeruIndexa(data, i, octal));
         }
         return result;
     }
