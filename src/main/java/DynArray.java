@@ -16,7 +16,6 @@ public class DynArray<T> {
     }
 
     public void makeArray(int new_capacity) {
-        //Если массив = null, то создаем ноаый
         if (array == null) {
             array = (T[]) Array.newInstance(this.clazz, new_capacity);
             //В противном случае создаем новый массив с новой длинной и копируем в него старый

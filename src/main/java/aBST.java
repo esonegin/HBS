@@ -22,7 +22,6 @@ class aBST {
     }
 
     public Integer findKeyIndex(int key) {
-
         int teknode = 0;
         if (tree[0] == null) {
             return 0;

@@ -1,23 +1,29 @@
-public class PostFix {
+public class PostFix<T> {
+    Stack<T> symbols;
 
-    public <T> Integer postfixCheck(Stack<T> stack1) {
+    public PostFix(Stack<T> s) {
+        this.symbols = s;
+    }
+
+
+    public <T> Integer postfixCheck() {
         Stack<Integer> stack2 = new Stack<>();
-        while (stack1.size() > 0) {
-            if (stack1.peek() instanceof Integer) {
-                stack2.push((Integer) stack1.pop());
-            } else if (stack1.peek() == "+") {
+        while (symbols.size() > 0) {
+            if (symbols.peek() instanceof Integer) {
+                stack2.push((Integer) symbols.pop());
+            } else if (symbols.peek() == "+") {
                 stack2.push(stack2.pop() + stack2.pop());
-                stack1.pop();
-            } else if (stack1.peek() == "-") {
+                symbols.pop();
+            } else if (symbols.peek() == "-") {
                 stack2.push(stack2.pop() - stack2.pop());
-                stack1.pop();
-            } else if (stack1.peek() == "*") {
+                symbols.pop();
+            } else if (symbols.peek() == "*") {
                 stack2.push(stack2.pop() * stack2.pop());
-                stack1.pop();
-            } else if (stack1.peek() == "/") {
+                symbols.pop();
+            } else if (symbols.peek() == "/") {
                 stack2.push(stack2.pop() / stack2.pop());
-                stack1.pop();
-            } else if (stack1.peek() == "=") {
+                symbols.pop();
+            } else if (symbols.peek() == "=") {
                 break;
             }
         }

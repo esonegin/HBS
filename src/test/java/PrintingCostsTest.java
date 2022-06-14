@@ -17,36 +17,31 @@ public class PrintingCostsTest {
 
     @Test
     public void simvolyIzInstrukcii() throws Exception {
-        int actual = PrintingCosts.PrintingCosts("X ^}1=");
-        int expected = 76;
-        Assert.assertThat(actual, is(expected));
+        PrintingCosts pr = new PrintingCosts("X ^}1=");
+        Assert.assertEquals(pr.calculatingPrintingCosts(), 76);
     }
 
     @Test
     public void simvolyNeIzInstrukcii() throws Exception {
-        int actual = PrintingCosts.PrintingCosts("йЦук");
-        int expected = 92;
-        Assert.assertThat(actual, is(expected));
+        PrintingCosts pr = new PrintingCosts("йЦук");
+        Assert.assertEquals(pr.calculatingPrintingCosts(), 92);
     }
 
     @Test
     public void simvolyIziNeIzInstrukcii() throws Exception {
-        int actual = PrintingCosts.PrintingCosts("йЦX");
-        int expected = 64;
-        Assert.assertThat(actual, is(expected));
+        PrintingCosts pr = new PrintingCosts("йЦX");
+        Assert.assertEquals(pr.calculatingPrintingCosts(), 64);
     }
 
     @Test
     public void probeli() throws Exception {
-        int actual = PrintingCosts.PrintingCosts("   ");
-        int expected = 0;
-        Assert.assertThat(actual, is(expected));
+        PrintingCosts pr = new PrintingCosts("   ");
+        Assert.assertEquals(pr.calculatingPrintingCosts(), 0);
     }
 
     @Test
     public void empty() throws Exception {
-        int actual = PrintingCosts.PrintingCosts("");
-        int expected = 0;
-        Assert.assertThat(actual, is(expected));
+        PrintingCosts pr = new PrintingCosts("");
+        Assert.assertEquals(pr.calculatingPrintingCosts(), 0);
     }
 }

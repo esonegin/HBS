@@ -2,7 +2,6 @@
 import java.util.*;
 
 public class BiggerGreater {
-    //v4
     public static String biggerGreater(String input) {
         ValidatedString validatedString = new ValidatedString(input);
         return validatedString.getNaimenshee();
@@ -12,14 +11,14 @@ public class BiggerGreater {
         private static String firstword;
         //default - private
         private static ArrayList<String> allVariants = new ArrayList<>();
-        private static String naimenshee;
+        private static String smallestLexLargeWords;
 
         //Избавился от public метода setFirstWord, переделав инициализацию с помощью конструктора
         //Избавился от лишнего метода убрав инициализацию в конструктор
         public ValidatedString(String str) {
             this.firstword = str;
             this.allVariants = allVariants(str);
-            this.naimenshee = naimenshee(getAllVariants());
+            this.smallestLexLargeWords = getSmallestLexLargeWords(getAllVariants());
         }
 
         static String getFirstWord() {
@@ -33,12 +32,12 @@ public class BiggerGreater {
 
         //public -> static
         static String getNaimenshee() {
-            return naimenshee;
+            return smallestLexLargeWords;
         }
     }
 
-    //Наименьшее из всех лексикографически больших слов
-    public static String naimenshee(ArrayList<String> input) {
+    //Поиск наименьшего из всех лексикографически больших слов
+    public static String getSmallestLexLargeWords(ArrayList<String> input) {
         String results = null;
         if (input.size() <= 1
                 || input.get(input.size() - 1).equals(ValidatedString.getFirstWord())) {
@@ -60,7 +59,6 @@ public class BiggerGreater {
         ArrayList<java.lang.String> allVariants = new ArrayList<>();
         int count = fuctorial(arr.length);
         int max = arr.length - 1;
-        //System.out.println("Вариантов " + count);
         int shift = max;
         java.lang.String t;
         while (count > 0) {
@@ -75,7 +73,6 @@ public class BiggerGreater {
                 shift--;
             }
         }
-
         Set<String> set = new HashSet<>(allVariants);
         ArrayList<String> result = new ArrayList<>();
         allVariants.clear();
@@ -88,7 +85,6 @@ public class BiggerGreater {
     static int fuctorial(int n) {
         return (n > 0) ? n * fuctorial(n - 1) : 1;
     }
-
     static String add(String[] arr) {
         String result = "";
         for (int i = 0; i < arr.length; i++) {

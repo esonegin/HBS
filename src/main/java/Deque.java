@@ -9,7 +9,6 @@ public class Deque<T> {
     }
 
     public void addFront(T item) {
-        //Создаем второй список
         deque.add(item);
     }
 
@@ -24,14 +23,14 @@ public class Deque<T> {
 
 
     public T removeFront() {
-        if(deque.size() == 0){
+        if (deque.size() == 0) {
             return null;
         }
         return deque.remove(deque.size() - 1);
     }
 
     public T removeTail() {
-        if(deque.size() == 0){
+        if (deque.size() == 0) {
             return null;
         }
         return deque.remove(0);

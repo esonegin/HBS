@@ -2,33 +2,37 @@ import java.util.HashMap;
 
 public class PrintingCosts {
 
+    static String line;
+    static final int DEFAULTCOST = 23;
 
-    public static int PrintingCosts(String Line) {
-        return podshet(Line);
+    public PrintingCosts(String l) {
+        this.line = l;
     }
 
-    public static int podshet(String Line) {
+    //Получает стоимость печати входящей строки
+    public static int calculatingPrintingCosts() {
         int result = 0;
-        String[] symbols = Line.split("");
+        String[] symbols = line.split("");
         for (int i = 0; i < symbols.length; i++) {
-            if (Instrukcia().containsKey(symbols[i])) {
-                result = result + PoluchenieNomera(symbols[i]);
-            }
-            else if (symbols[i] == "") {
+            if (instruction().containsKey(symbols[i])) {
+                result = result + getSymbolCost(symbols[i]);
+            } else if (symbols[i] == "") {
                 result = result + 0;
             }
-            else if(!(Instrukcia().containsKey(symbols[i]))){
-                result = result + 23;
+            //Если символа нет в инструкции - считаем значение по умолчанию 23
+            else if (!(instruction().containsKey(symbols[i]))) {
+                result = result + DEFAULTCOST;
             }
         }
         return result;
     }
 
-    public static int PoluchenieNomera(String symbol) {
-        return (int) Instrukcia().get(symbol);
+    //Получает стоимость символа из инструкции
+    public static int getSymbolCost(String symbol) {
+        return (int) instruction().get(symbol);
     }
 
-    public static HashMap Instrukcia() {
+    public static HashMap instruction() {
         HashMap<String, Integer> instrukcia = new HashMap<>();
         instrukcia.put(" ", 0);
         instrukcia.put("&", 24);

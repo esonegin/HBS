@@ -1,19 +1,15 @@
 import java.util.*;
 
 public class Queue<T> {
-
     ArrayList<T> array;
 
-    public Queue()
-    {
-        // инициализация внутреннего хранилища очереди
+    //Реализация очереди на основе ArrayList
+    public Queue() {
         array = new ArrayList<>();
     }
 
-
-    public void enqueue(Object item)
-    {
-        // вставка в хвост
+    //Вставляет значение в хвост смещая уже имеющиеся
+    public void enqueue(Object item) {
         if (array.size() == 0) {
             array.add((T) item);
         } else {
@@ -26,8 +22,8 @@ public class Queue<T> {
         }
     }
 
-    public T dequeue()
-    {
+    //Удаляет значение из головы
+    public T dequeue() {
         T result;
         if (array.size() > 0) {
             result = array.get(array.size() - 1);
@@ -38,9 +34,7 @@ public class Queue<T> {
         return result;
     }
 
-    public int size()
-    {
-        // размер очереди
+    public int size() {
         return array.size();
     }
 

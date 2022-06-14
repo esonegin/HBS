@@ -3,69 +3,66 @@ import java.util.ArrayList;
 public class BigMinus {
     private static String firstvalue;
     private static String secondvalue;
-    static String difference;
+    private static String difference;
 
-    //Убрал объявление переменных в конструктор
     public BigMinus(String first, String second) {
         this.firstvalue = first;
         this.secondvalue = second;
-        //Вынес переменную difference из метода в static класса сделав его void связывание
-        //во время выполнения стало более наглядным
-        getDifference();
+        generateDifference();
     }
 
-    public static void getDifference() {
-        //result - difference
-        //String difference = "";
-        ArrayList<Integer> resultlist = new ArrayList<Integer>();
-        //pervoechislo, vtoroechislo - firstValue, secondValue
+    public static void generateDifference() {
+        ArrayList<Integer> dif = getDifferenceCharList();
+        formingStringOfChar(dif);
+    }
+
+    public static ArrayList<Integer> getDifferenceCharList() {
         Long firstValue = Long.valueOf(firstvalue);
         Long secondValue = Long.valueOf(secondvalue);
-
-        //Первое число равно второму
+        ArrayList<Integer> resultlist = new ArrayList<Integer>();
         if (firstValue.equals(secondValue)) {
             difference = "0";
-            return;
-        }
-        //Первое число больше второго
-        else if (firstValue > secondValue) {
+            resultlist.add(0);
+            return resultlist;
+        } else if (firstValue > secondValue) {
             resultlist = subtractingShortFromLong(firstvalue, secondvalue);
         } else if (firstValue < secondValue) {
             resultlist = subtractingShortFromLong(secondvalue, firstvalue);
         }
+        return resultlist;
+    }
 
-        //Наполняем строку результат символами из списка
+
+    public static void formingStringOfChar(ArrayList<Integer> resultlist) {
         difference = String.valueOf(resultlist.get(0));
         for (int k = 1; k < resultlist.size(); k++) {
             difference += resultlist.get(k);
-
         }
-        //return difference;
     }
 
     public static ArrayList<Integer> subtractingShortFromLong(String longer, String shorter) {
         //first - listСharsLongerNum
-        ArrayList<Integer> listСharsLongerNum = poluchaemSpisok(longer, shorter, 1);
+        ArrayList<Integer> listcharslonger = getList(longer, shorter, 1);
         //second - listСharsShorterNum
-        ArrayList<Integer> listСharsShorterNum = poluchaemSpisok(longer, shorter, 2);
+        ArrayList<Integer> listcharsshorter = getList(longer, shorter, 2);
         //third - listCharsSubtrResult
         ArrayList<Integer> listCharsSubtrResult = new ArrayList<Integer>();
         //Вычитаем посимвольно
-        for (int i = 0; i < listСharsLongerNum.size(); i++) {
+        for (int i = 0; i < listcharslonger.size(); i++) {
             //Если символ из первого числа больше или равен символу из второго числа
-            if (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) >= listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i)) {
-                listCharsSubtrResult.add(0, listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) - listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i));
+            if (listcharslonger.get(listcharslonger.size() - 1 - i) >= listcharsshorter.get(listcharsshorter.size() - 1 - i)) {
+                listCharsSubtrResult.add(0, listcharslonger.get(listcharslonger.size() - 1 - i) - listcharsshorter.get(listcharsshorter.size() - 1 - i));
                 continue;
             }
             //Если символ из первого числа меньше чем символ из второго числа и первое число "длиннее" чем второе
-            else if (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) < listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i) && longer.length() > shorter.length()) {
-                listCharsSubtrResult.add(0, (listСharsLongerNum.get(listСharsLongerNum.size() - 1 - i) + 10) - listСharsShorterNum.get(listСharsShorterNum.size() - 1 - i));
-                listСharsLongerNum.set(listСharsLongerNum.size() - 2 - i, listСharsLongerNum.get(listСharsLongerNum.size() - 2 - i) - 1);
+            else if (listcharslonger.get(listcharslonger.size() - 1 - i) < listcharsshorter.get(listcharsshorter.size() - 1 - i) && longer.length() > shorter.length()) {
+                listCharsSubtrResult.add(0, (listcharslonger.get(listcharslonger.size() - 1 - i) + 10) - listcharsshorter.get(listcharsshorter.size() - 1 - i));
+                listcharslonger.set(listcharslonger.size() - 2 - i, listcharslonger.get(listcharslonger.size() - 2 - i) - 1);
                 continue;
             }
             //Если чила состоят из одной цифры
-            else if (listСharsLongerNum.size() == 1 && listСharsShorterNum.size() == 1) {
-                listCharsSubtrResult.set(0, listСharsLongerNum.get(0) - listСharsShorterNum.get(0));
+            else if (listcharslonger.size() == 1 && listcharsshorter.size() == 1) {
+                listCharsSubtrResult.set(0, listcharslonger.get(0) - listcharsshorter.get(0));
                 continue;
             }
         }
@@ -76,12 +73,10 @@ public class BigMinus {
         return listCharsSubtrResult;
     }
 
-    public static ArrayList<Integer> poluchaemSpisok(String first, String second, int listnumber) {
+    public static ArrayList<Integer> getList(String first, String second, int listnumber) {
         ArrayList<Integer> result = new ArrayList<Integer>();
         String[] firstarray = first.split("");
         String[] secondarray = second.split("");
-
-        //Создаем списки из строк
         ArrayList<Integer> firstlist = new ArrayList<Integer>();
         for (int i = 0; i < firstarray.length; i++) {
             firstlist.add(Integer.parseInt(firstarray[i]));
@@ -90,7 +85,6 @@ public class BigMinus {
         for (int i = 0; i < secondarray.length; i++) {
             secondlist.add(Integer.parseInt(secondarray[i]));
         }
-
         //Добавляем нули в начало короткого списка
         if (secondlist.size() > firstlist.size()) {
             for (int i = 0; i < secondlist.size() - firstlist.size(); i++) {
@@ -107,5 +101,13 @@ public class BigMinus {
             result = secondlist;
         }
         return result;
+    }
+
+    public static String getDifference() {
+        return difference;
+    }
+
+    public static void setDifference(String dif) {
+        BigMinus.difference = dif;
     }
 }

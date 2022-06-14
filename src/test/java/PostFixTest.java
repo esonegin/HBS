@@ -17,21 +17,21 @@ public class PostFixTest {
 
     }
 
-    /*@Test
-    public <T> void postfix3()  {
-        PostFix postfix = new PostFix();
+   /* @Test
+    public <T> void postfix3() {
         Stack<T> arrayList1 = new Stack<>();
-        arrayList1.push((T) "=");
-        arrayList1.push((T) "*");
+        arrayList1.push("=");
+        arrayList1.push("*");
         arrayList1.push(3);
         arrayList1.push("+");
         arrayList1.push(2);
         arrayList1.push(1);
-        Assert.assertThat(postfix.postfixCheck(arrayList1), is(9));
+        PostFix postfix = new PostFix(arrayList1);
+        Assert.assertThat(postfix.postfixCheck(), is(9));
     }
+
     @Test
     public <T> void postfix2() {
-        PostFix postfix = new PostFix();
         Stack<T> arrayList1 = new Stack<>();
         arrayList1.push("=");
         arrayList1.push("+");
@@ -41,11 +41,12 @@ public class PostFixTest {
         arrayList1.push("+");
         arrayList1.push(2);
         arrayList1.push(8);
-        Assert.assertThat(postfix.postfixCheck(arrayList1), is(59));
+        PostFix postfix = new PostFix(arrayList1);
+        Assert.assertThat(postfix.postfixCheck(), is(59));
     }
+
     @Test
-    public <T> void postfixUmnDel()  {
-        PostFix postfix = new PostFix();
+    public <T> void postfixUmnDel() {
         Stack<T> arrayList1 = new Stack<>();
         arrayList1.push("=");
         arrayList1.push("+");
@@ -55,11 +56,12 @@ public class PostFixTest {
         arrayList1.push("/");
         arrayList1.push(8);
         arrayList1.push(2);
-        Assert.assertThat(postfix.postfixCheck(arrayList1), is(11));
+        PostFix postfix = new PostFix(arrayList1);
+        Assert.assertThat(postfix.postfixCheck(), is(11));
     }
+
     @Test
     public <T> void postNescChisel() {
-        PostFix postfix = new PostFix();
         Stack<T> arrayList1 = new Stack<>();
         arrayList1.push("=");
         arrayList1.push("+");
@@ -71,6 +73,7 @@ public class PostFixTest {
         arrayList1.push(8);
         arrayList1.push(2);
         arrayList1.push(2);
-        Assert.assertThat(postfix.postfixCheck(arrayList1), is(5));
+        PostFix postfix = new PostFix(arrayList1);
+        Assert.assertThat(postfix.postfixCheck(), is(5));
     }*/
 }

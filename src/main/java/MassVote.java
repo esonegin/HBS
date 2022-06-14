@@ -17,28 +17,27 @@ public class MassVote {
 
     public static String checkWinner() {
         String result = "";
-        if (kolvomax(allvotes) > 1) {
+        if (getNumberOfWinners() > 1) {
             result = "no winner";
-        } else if (candidatePercentage(allvotes, indexmax(allvotes)) > BORDEROFVICTORY) {
-            result = "majority winner " + (indexmax(allvotes) + 1);
-        } else if (candidatePercentage(allvotes, indexmax(allvotes)) <= BORDEROFVICTORY) {
-            result = "minority winner " + (indexmax(allvotes) + 1);
+        } else if (candidatePercentage(allvotes, getWinnersNumber(allvotes)) > BORDEROFVICTORY) {
+            result = "majority winner " + (getWinnersNumber(allvotes) + 1);
+        } else if (candidatePercentage(allvotes, getWinnersNumber(allvotes)) <= BORDEROFVICTORY) {
+            result = "minority winner " + (getWinnersNumber(allvotes) + 1);
         }
         return result;
     }
 
-    public static int kolvomax(int[] allvotes) {
+    public static int getNumberOfWinners() {
         int kolvomax = 0;
         for (int i = 0; i < allvotes.length; i++) {
-            if (allvotes[i] == maximum(allvotes)) {
+            if (allvotes[i] == getMaximumVotes()) {
                 kolvomax++;
             }
         }
         return kolvomax;
     }
 
-
-    public static int maximum(int[] allvotes) {
+    public static int getMaximumVotes() {
         int max = allvotes[0];
         for (int allvote : allvotes) {
             if (max < allvote) {
@@ -48,8 +47,7 @@ public class MassVote {
         return max;
     }
 
-
-    public static int indexmax(int[] votes) {
+    public static int getWinnersNumber(int[] votes) {
         int max = votes[0];
         int indexmax = 0;
         for (int i = 0; i < votes.length; i++) {
@@ -61,11 +59,9 @@ public class MassVote {
         return indexmax;
     }
 
-    //Переимановал метод из кириллического procentkandidata - candidatePercentage
+    //Получаем процент голосов за кандидата
     public static double candidatePercentage(int[] votes, int nomer) {
-        //Удалил лишние переменные
         return votes[nomer] / (numberOfThoseWhoVoted(votes) / ONEHUNDREDPERCENT);
-
     }
 
     //Переименовал метод из кириллического stoprocentov - numberOfThoseWhoVoted

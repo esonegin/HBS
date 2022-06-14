@@ -13,7 +13,6 @@ public class Keymaker {
         String result = "";
         //doors - defaultKeyList
         ArrayList<Integer> defaultKeyList = new ArrayList<>();
-        //Заполняем список дефолтными нулями
         for (int i = 0; i < size; i++) {
             defaultKeyList.add(0);
         }

@@ -62,4 +62,10 @@ public class MassVoteTest {
         MassVote mass = new MassVote(3, new int[]{23, 50, 27});
         Assert.assertThat(mass.checkWinner(), is("minority winner 2"));
     }
+
+    @Test
+    public void threeCandidate70Procentov() throws Exception {
+        MassVote mass = new MassVote(3, new int[]{23, 7, 70});
+        Assert.assertThat(mass.checkWinner(), is("majority winner 3"));
+    }
 }
