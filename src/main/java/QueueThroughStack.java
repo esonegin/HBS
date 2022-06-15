@@ -4,10 +4,10 @@ public class QueueThroughStack<T> {
     Stack<T> stack1;
     Stack<T> stack2;
 
+    //Реализация очередеи с помощью стека
     public QueueThroughStack() {
         // инициализация внутреннего хранилища очереди
         stack1 = new Stack<T>();
-
     }
 
     //Добавление элемента в очередь

@@ -1,5 +1,6 @@
 import java.util.*;
 
+//Реализация простого дерева через класс родитель и список потомков
 public class SimpleTreeNode<T> {
     public T NodeValue;
     public SimpleTreeNode<T> Parent;

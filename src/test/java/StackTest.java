@@ -24,7 +24,7 @@ public class StackTest {
         //1
         Stack<T> arrayList = new Stack<>();
         arrayList.push((T) "1");
-        arrayList.push(2);
+        arrayList.push( 2);
         arrayList.push(3.14);
         Assert.assertThat(arrayList.size(), is(3));
         Assert.assertThat(arrayList.pop(), is(3.14));

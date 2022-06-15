@@ -12,6 +12,7 @@ class Vertex {
     }
 }
 
+//Реализация простого графа с помощью массива вершин и двумерного массива рёбер
 class SimpleGraph {
     Vertex[] vertex;
     int[][] m_adjacency;

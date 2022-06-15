@@ -1,21 +1,23 @@
 
-
 public class TheRabbitsFoot {
     //18.06.2
     //6.1, 6.2, 6.3, 6.4
     //Вынес максимальное количество столбцов в константу
     static final int MAXCOLUMNCOUNT = 5;
-    public static String TheRabbitsFoot(String encryptionString, boolean encode) {
-        if (encode == true) {
-            encryptionString = Zashifr(encryptionString, GetMatrix(encryptionString).length);
 
+    public static String TheRabbitsFoot(String encryptionString, boolean encode) {
+        if (encode) {
+            //Если encode = true, то зашифровываем строку
+            encryptionString = Zashifr(encryptionString, GetMatrix(encryptionString).length);
         } else {
+            //Если encode = false, то расшифровываем строку
             encryptionString = gluingString(encryptionString);
         }
         return encryptionString;
     }
 
     //6.1, 6.2, 6.3, 6.4
+    //Склеиваем строку
     public static String gluingString(String decryptedString) {
         //6.2, 6.4
         String bufferChars;
@@ -28,20 +30,13 @@ public class TheRabbitsFoot {
         return gluedString;
     }
 
+    //Расшифорвываем строку
     public static String Decryption(String rashifr, int element) {
-
         String[][] Matrix = new String[GetMatrix(rashifr).length][GetMatrix(rashifr).length];
         String results;
         String resultf = "";
-
         //Массив подстрок разбитых по пробелу
         String[] arrayMessage = rashifr.split(" ");
-
-        //Вывод массива
-        for (int i = 0; i < arrayMessage.length; i++) {
-            //System.out.print(arrayMessage[i] + "\n");
-        }
-
         //Запись символов элемента по индексу
         for (int i = 0; i < Matrix.length; i++) {
             //Берем подстроку из массива
@@ -57,6 +52,7 @@ public class TheRabbitsFoot {
         return resultf;
     }
 
+    //Формируем строку из столбцов
     public static String Zashifr(String test, int dlinna) {
         String result = "";
         for (int i = 0; i < dlinna; i++) {
@@ -68,7 +64,6 @@ public class TheRabbitsFoot {
 
     //Получаем строки из первых символов столбцов
     public static String GetString(String string, int stolbec) {
-
         String result = "";
         for (int i = 0; i < MAXCOLUMNCOUNT; i++)
             if (GetArrayPoNomeruStolbcaZashifrovka(string, stolbec)[i] != null) {

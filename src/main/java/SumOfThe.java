@@ -4,6 +4,7 @@ public class SumOfThe {
 
     private static int[] listofnumbers;
 
+    //Выясняем есть ли в массиве число равное сумме остальных чисел
     //Вынес инициализацию списка в конструктор
     public SumOfThe(int[] data) {
         this.listofnumbers = data;
@@ -21,14 +22,10 @@ public class SumOfThe {
 
     //SummTwoWithNull - getElFromTwoWithNull
     public static int getElFromTwoWithNull(int[] data) {
-        int result = 0;
         if (data[0] != 0) {
-            result = data[0];
-        } else {
-            result = data[1];
+            return data[0];
         }
-
-        return result;
+        return data[1];
     }
 
     //SravnenieElementaSSummoy - getIndexElEqualsSum
@@ -54,9 +51,9 @@ public class SumOfThe {
         //Считаем сумму элементов массива
         //sum - sumRemaining
         int sumRemaining = 0;
-        for (int i = 0; i < dataCopy.length; i++)
-            sumRemaining += dataCopy[i];
-
+        for (int j : dataCopy) {
+            sumRemaining += j;
+        }
         if (data[elindex] == sumRemaining) {
             isEqualSumRemaining = true;
         }

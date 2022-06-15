@@ -23,7 +23,7 @@ public class SelectionSort {
         return minimumValue;
     }
 
-    //Меняем найденый элемент с крайним левым и отсекаем его (если уже левое то только отсекаем)
+    //Меняем найденый элемент с крайним левым и отсекаем его (если в крайней левой позиции то только отсекаем)
     //changeAndOtsechenie - rotateAndCutLeftEl
         public static int[] rotateAndCutLeftEl(int[] array, int indexmin) {
         int change = array[k];

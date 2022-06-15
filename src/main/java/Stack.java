@@ -6,7 +6,7 @@ public class Stack<T> {
     ArrayList<T> array;
 
     public Stack() {
-        array = new ArrayList<>();
+        this.array = new ArrayList<T>();
     }
 
     public int size() {
@@ -24,6 +24,7 @@ public class Stack<T> {
         return result;
     }
 
+    //TODO - разобраться с дженериками, в настоящий момент получаю ошикбу при попытке использования int
     public void push(T val) {
         if (array.size() == 0) {
             array.add(val);

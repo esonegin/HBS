@@ -57,4 +57,10 @@ public class SumOfTheTest {
         SumOfThe sumofthe = new SumOfThe(new int[]{2, 4, 2});
         Assert.assertThat(sumofthe.getSum(), is(4));
     }
+
+    @Test
+    public void all() throws Exception {
+        SumOfThe sumofthe = new SumOfThe(new int[]{2, 2, 2});
+        Assert.assertThat(sumofthe.getSum(), is(0));
+    }
 }

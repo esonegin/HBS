@@ -1,14 +1,22 @@
 import java.util.*;
 
-class   ShopOLAP {
+class ShopOLAP {
+    int itemcount;
+    static String[] items;
 
-    public static String[] ShopOLAP(int N, String[] items) {
+    ShopOLAP(int n, String[] i) {
+        this.itemcount = n;
+        this.items = i;
+    }
+
+    //Получаем список уникальных item отсортированный по убыванию
+    public static String[] getSortedNonrepeating() {
         ArrayList<Element> resultlist = valueSortList(items);
         ArrayList<Element> dubllist = getDublList(resultlist);
         String[] resultarray = new String[resultlist.size()];
         if (dubllist.size() != 0) {
             ArrayList<Element> getSortDublList = getSortDublList(dubllist);
-            ArrayList<String> getSortStringDubllist = new ArrayList<String>();
+            ArrayList<String> getSortStringDubllist = new ArrayList<>();
             for (int i = 0; i < getSortDublList.size(); i++) {
                 getSortStringDubllist.add(String.valueOf(getSortDublList.get(i).key));
             }
@@ -26,14 +34,17 @@ class   ShopOLAP {
         return resultarray;
     }
 
-    public static ArrayList<Element> getSortWithDublsList(ArrayList<Element> withoutdubllist, ArrayList<Element> getSortDublList) {
+    public static ArrayList<Element> getSortWithDublsList(ArrayList<Element> withoutdubllist,
+                                                          ArrayList<Element> getSortDublList) {
         ArrayList<Element> sortwithdublslist = new ArrayList<>();
 
-        for (int i = 0; i < withoutdubllist.size(); i++)
+        for (int i = 0; i < withoutdubllist.size(); i++) {
             if (withoutdubllist.get(i).value > getSortDublList.get(0).value) {
                 sortwithdublslist.add(withoutdubllist.get(i));
-            } else break;
-
+            } else {
+                break;
+            }
+        }
         for (int i = 0; i < getSortDublList.size(); i++) {
             sortwithdublslist.add(getSortDublList.get(i));
         }
@@ -78,16 +89,13 @@ class   ShopOLAP {
     public static ArrayList<Element> getSortDublList(ArrayList<Element> list) {
         ArrayList<Element> sortdubls = new ArrayList<Element>();
         ArrayList<String> stringdubls = new ArrayList<String>();
-        for(int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             stringdubls.add(list.get(i).key);
         }
-
         Collections.sort(stringdubls);
-
-        for (int i = 0; i < stringdubls.size(); i++){
+        for (int i = 0; i < stringdubls.size(); i++) {
             sortdubls.add(new Element(stringdubls.get(i), list.get(i).value));
         }
-
         return sortdubls;
     }
 

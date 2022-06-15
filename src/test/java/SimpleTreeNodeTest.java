@@ -21,12 +21,10 @@ public class    SimpleTreeNodeTest {
     }
 
 
-    /*@Test
+    @Test
     public void defaultAddNodeTest() {
-        //Создаем корневой узел
         SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
-        //Создаем дерево с корневым узлом
-        SimpleTree<Integer> tree = new SimpleTree<Integer>(node);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
 
         Assert.assertThat(tree.Root.NodeValue, is(1));
         Assert.assertThat(tree.Root.Parent == null, is(true));
@@ -73,11 +71,10 @@ public class    SimpleTreeNodeTest {
         Assert.assertThat(((SimpleTreeNode) (tree.Root.Children.get(1)).Children.get(1)).NodeValue, is(7));
     }
 
-    @Test
+   @Test
     public void defaultDelNodeTest() {
-
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        SimpleTree tree = new SimpleTree(node);
+       SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+       SimpleTree<Integer> tree = new SimpleTree<>(node);
 
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.Root));
@@ -86,11 +83,11 @@ public class    SimpleTreeNodeTest {
         tree.AddChild(tree.Root.Children.get(0), new SimpleTreeNode(6, tree.Root.Children.get(0)));
         tree.AddChild(tree.Root.Children.get(1), new SimpleTreeNode(7, tree.Root.Children.get(1)));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(8, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild((tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(8, ((tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(10, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild((tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(10, ((tree.Root.Children.get(0)).Children.get(0))));
 
         //Удаляем НЕ лист
         tree.DeleteNode(tree.Root.Children.get(0));
@@ -103,7 +100,7 @@ public class    SimpleTreeNodeTest {
         Assert.assertThat(((SimpleTreeNode) (tree.Root.Children.get(1)).Children.get(1)).NodeValue, is(10));
 
         //Удаляем лист
-        tree.DeleteNode((SimpleTreeNode) ((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0));
+        tree.DeleteNode((SimpleTreeNode) ( tree.Root.Children.get(0)).Children.get(0));
         Assert.assertThat((tree.Root.Children.get(0)).NodeValue, is(3));
         Assert.assertThat((tree.Root.Children.get(1)).NodeValue, is(4));
         Assert.assertThat((tree.Root.Children.get(2)).NodeValue, is(6));
@@ -111,10 +108,11 @@ public class    SimpleTreeNodeTest {
         Assert.assertThat((tree.Root.Children.get(0)).Children.size(), is(1));
     }
 
+    
     @Test
     public void defaultGetAllNodesTest() {
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
 
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.Root));
@@ -123,13 +121,13 @@ public class    SimpleTreeNodeTest {
         tree.AddChild(tree.Root.Children.get(0), new SimpleTreeNode(6, tree.Root.Children.get(0)));
         tree.AddChild(tree.Root.Children.get(1), new SimpleTreeNode(7, tree.Root.Children.get(1)));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(8, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild((tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(8, ((tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(10, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(10, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        List<SimpleTreeNode> allnode = tree.GetAllNodes();
+        List<SimpleTreeNode<Integer>> allnode = tree.GetAllNodes();
         Assert.assertThat(allnode.get(0).NodeValue, is(1));
         Assert.assertThat(allnode.get(1).NodeValue, is(2));
         Assert.assertThat(allnode.get(2).NodeValue, is(3));
@@ -144,8 +142,8 @@ public class    SimpleTreeNodeTest {
 
     @Test
     public void defaultFindNodesByValueTest() {
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
 
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.Root));
@@ -154,13 +152,13 @@ public class    SimpleTreeNodeTest {
         tree.AddChild(tree.Root.Children.get(0), new SimpleTreeNode(6, tree.Root.Children.get(0)));
         tree.AddChild(tree.Root.Children.get(1), new SimpleTreeNode(7, tree.Root.Children.get(1)));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(8, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(8, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(3, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(3, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        List<SimpleTreeNode> findnode = tree.FindNodesByValue(3);
+        List<SimpleTreeNode<Integer>> findnode = tree.FindNodesByValue(3);
         Assert.assertThat(findnode.size(), is(2));
         Assert.assertThat(findnode.get(0).NodeValue, is(3));
         Assert.assertThat(findnode.get(0).Parent.NodeValue, is(1));
@@ -173,8 +171,8 @@ public class    SimpleTreeNodeTest {
 
     @Test
     public void defaultMoveNodeTest() {
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
 
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.Root));
@@ -183,37 +181,37 @@ public class    SimpleTreeNodeTest {
         tree.AddChild(tree.Root.Children.get(0), new SimpleTreeNode(6, tree.Root.Children.get(0)));
         tree.AddChild(tree.Root.Children.get(1), new SimpleTreeNode(7, tree.Root.Children.get(1)));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(8, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(8, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(10, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(10, (( tree.Root.Children.get(0)).Children.get(0))));
 
         tree.MoveNode(tree.Root.Children.get(0), tree.Root.Children.get(1));
         Assert.assertThat(tree.Root.Children.size(), is(1));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.size(), is(3));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.size(), is(3));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).NodeValue, is(5));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).NodeValue, is(7));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(2).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).NodeValue, is(5));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).NodeValue, is(7));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(2).NodeValue, is(2));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(2).Children.size(), is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(2).Children.size(), is(2));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(2).Children.get(0).NodeValue, is(4));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(2).Children.get(1).NodeValue, is(6));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(2).Children.get(0).Children.get(0).NodeValue, is(8));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(2).Children.get(0).Children.get(1).NodeValue, is(10));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(2).Children.get(0).NodeValue, is(4));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(2).Children.get(1).NodeValue, is(6));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(2).Children.get(0).Children.get(0).NodeValue, is(8));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(2).Children.get(0).Children.get(1).NodeValue, is(10));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(2).Children.get(1).NodeValue, is(6));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(2).Children.get(1).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(2).Children.get(1).NodeValue, is(6));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(2).Children.get(1).Children.size(), is(0));
     }
 
     @Test
     public void defaultCountTest() {
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
 
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.Root));
@@ -222,19 +220,19 @@ public class    SimpleTreeNodeTest {
         tree.AddChild(tree.Root.Children.get(0), new SimpleTreeNode(6, tree.Root.Children.get(0)));
         tree.AddChild(tree.Root.Children.get(1), new SimpleTreeNode(7, tree.Root.Children.get(1)));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(8, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(8, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(10, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(10, (( tree.Root.Children.get(0)).Children.get(0))));
 
         Assert.assertThat(tree.Count(), is(9));
     }
 
     @Test
     public void defaultLeafCountTest() {
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
 
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.Root));
@@ -243,19 +241,19 @@ public class    SimpleTreeNodeTest {
         tree.AddChild(tree.Root.Children.get(0), new SimpleTreeNode(6, tree.Root.Children.get(0)));
         tree.AddChild(tree.Root.Children.get(1), new SimpleTreeNode(7, tree.Root.Children.get(1)));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(8, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(8, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(10, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(10, (( tree.Root.Children.get(0)).Children.get(0))));
 
         Assert.assertThat(tree.LeafCount(), is(5));
     }
 
     @Test
     public void onLeafMoveNodeTest() {
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
 
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.Root));
@@ -264,37 +262,37 @@ public class    SimpleTreeNodeTest {
         tree.AddChild(tree.Root.Children.get(0), new SimpleTreeNode(6, tree.Root.Children.get(0)));
         tree.AddChild(tree.Root.Children.get(1), new SimpleTreeNode(7, tree.Root.Children.get(1)));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(8, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(8, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(10, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(10, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.MoveNode(tree.Root.Children.get(0), (SimpleTreeNode) ((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0));
+        tree.MoveNode(tree.Root.Children.get(0), (SimpleTreeNode) ( tree.Root.Children.get(1)).Children.get(0));
 
         Assert.assertThat(tree.Root.Children.size(), is(1));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.size(), is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.size(), is(2));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).NodeValue, is(5));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).NodeValue, is(7));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).NodeValue, is(5));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).NodeValue, is(7));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.size(), is(1));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.size(), is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.size(), is(1));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.size(), is(2));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.get(0).NodeValue, is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).NodeValue, is(4));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(1).NodeValue, is(6));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).Children.get(0).NodeValue, is(8));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).Children.get(1).NodeValue, is(10));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).Children.get(0).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).Children.get(1).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.get(0).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).NodeValue, is(4));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(1).NodeValue, is(6));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).Children.get(0).NodeValue, is(8));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).Children.get(1).NodeValue, is(10));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).Children.get(0).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.get(0).Children.get(0).Children.get(1).Children.size(), is(0));
     }
 
     @Test
     public void onRootMoveNodeTest() {
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
 
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.Root));
@@ -303,70 +301,70 @@ public class    SimpleTreeNodeTest {
         tree.AddChild(tree.Root.Children.get(0), new SimpleTreeNode(6, tree.Root.Children.get(0)));
         tree.AddChild(tree.Root.Children.get(1), new SimpleTreeNode(7, tree.Root.Children.get(1)));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(8, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(8, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.AddChild(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0),
-                new SimpleTreeNode(10, (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0))));
+        tree.AddChild(( tree.Root.Children.get(0)).Children.get(0),
+                new SimpleTreeNode(10, (( tree.Root.Children.get(0)).Children.get(0))));
 
-        tree.MoveNode(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0), ((SimpleTreeNode<?>) tree.Root));
+        tree.MoveNode(( tree.Root.Children.get(0)).Children.get(0), ( tree.Root));
 
 
         Assert.assertThat(tree.Root.Children.size(), is(3));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.size(), is(1));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).NodeValue, is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).NodeValue, is(6));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.size(), is(1));
+        Assert.assertThat(( tree.Root.Children.get(0)).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).NodeValue, is(6));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.size(), is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).NodeValue, is(3));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0).NodeValue, is(5));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(1).NodeValue, is(7));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.size(), is(2));
+        Assert.assertThat(( tree.Root.Children.get(1)).NodeValue, is(3));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.get(0).NodeValue, is(5));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.get(1).NodeValue, is(7));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(2)).Children.size(), is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(2)).NodeValue, is(4));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(2)).Children.get(0).NodeValue, is(8));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(2)).Children.get(1).NodeValue, is(10));
+        Assert.assertThat(( tree.Root.Children.get(2)).Children.size(), is(2));
+        Assert.assertThat(( tree.Root.Children.get(2)).NodeValue, is(4));
+        Assert.assertThat(( tree.Root.Children.get(2)).Children.get(0).NodeValue, is(8));
+        Assert.assertThat(( tree.Root.Children.get(2)).Children.get(1).NodeValue, is(10));
 
-        tree.MoveNode(((SimpleTreeNode<?>) tree.Root.Children.get(2)), ((SimpleTreeNode<?>) tree.Root.Children.get(0)));
+        tree.MoveNode(( tree.Root.Children.get(2)), ( tree.Root.Children.get(0)));
 
         Assert.assertThat(tree.Root.Children.size(), is(2));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.size(), is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).NodeValue, is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).NodeValue, is(6));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).NodeValue, is(4));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.size(), is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).NodeValue, is(6));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).NodeValue, is(4));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.size(), is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.get(0).NodeValue, is(8));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.get(0).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.get(1).NodeValue, is(10));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.get(1).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.size(), is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.get(0).NodeValue, is(8));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.get(0).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.get(1).NodeValue, is(10));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.get(1).Children.size(), is(0));
 
         //10 - 5
-        tree.MoveNode((((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.get(1)),
-                (((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0)));
+        tree.MoveNode((( tree.Root.Children.get(0)).Children.get(1).Children.get(1)),
+                (( tree.Root.Children.get(1)).Children.get(0)));
 
         Assert.assertThat(tree.Root.Children.size(), is(2));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.size(), is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).NodeValue, is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).NodeValue, is(6));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).NodeValue, is(4));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.size(), is(1));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.get(0).NodeValue, is(8));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(1).Children.get(0).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.size(), is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).NodeValue, is(6));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).NodeValue, is(4));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.size(), is(1));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.get(0).NodeValue, is(8));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(1).Children.get(0).Children.size(), is(0));
 
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.size(), is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0).NodeValue, is(5));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(1).NodeValue, is(7));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(1).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0).Children.size(), is(1));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0).Children.get(0).NodeValue, is(10));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.size(), is(2));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.get(0).NodeValue, is(5));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.get(1).NodeValue, is(7));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.get(1).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.get(0).Children.size(), is(1));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.get(0).Children.get(0).NodeValue, is(10));
 
-        List<SimpleTreeNode> allnode = tree.GetAllNodes();
+        List<SimpleTreeNode<Integer>> allnode = tree.GetAllNodes();
         Assert.assertThat(allnode.size(), is(9));
         Assert.assertThat(allnode.get(0).NodeValue, is(1));
         Assert.assertThat(allnode.get(1).NodeValue, is(2));
@@ -382,45 +380,44 @@ public class    SimpleTreeNodeTest {
 
     @Test
     public void odinakovieTest() {
-
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.Root));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.Root));
 
-        tree.MoveNode(((SimpleTreeNode<?>) tree.Root.Children.get(0)), ((SimpleTreeNode<?>) tree.Root.Children.get(2)));
+        tree.MoveNode(( tree.Root.Children.get(0)), ( tree.Root.Children.get(2)));
 
         Assert.assertThat(tree.Root.Children.size(), is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.size(), is(1));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).NodeValue, is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).NodeValue, is(3));
-        Assert.assertThat((((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0)).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.size(), is(1));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.get(0).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(1)).NodeValue, is(3));
+        Assert.assertThat((( tree.Root.Children.get(1)).Children.get(0)).NodeValue, is(2));
 
-        tree.MoveNode((((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.get(0)), ((SimpleTreeNode<?>) tree.Root));
+        tree.MoveNode((( tree.Root.Children.get(1)).Children.get(0)), ( tree.Root));
         Assert.assertThat((tree.Root.Children.size()), is(3));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(2)).Children.size(), is(0));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).NodeValue, is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).NodeValue, is(3));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(2)).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(1)).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(2)).Children.size(), is(0));
+        Assert.assertThat(( tree.Root.Children.get(0)).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(1)).NodeValue, is(3));
+        Assert.assertThat(( tree.Root.Children.get(2)).NodeValue, is(2));
 
-        tree.MoveNode(((SimpleTreeNode<?>) tree.Root.Children.get(2)), ((SimpleTreeNode<?>) tree.Root.Children.get(0)));
+        tree.MoveNode(( tree.Root.Children.get(2)), ( tree.Root.Children.get(0)));
         Assert.assertThat((tree.Root.Children.size()), is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).NodeValue, is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).NodeValue, is(3));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(0)).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(1)).NodeValue, is(3));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).NodeValue, is(2));
 
-        *//*tree.MoveNode(((SimpleTreeNode<?>) tree.Root.Children.get(0)), (((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0)));
+        tree.MoveNode(( tree.Root.Children.get(0)), (( tree.Root.Children.get(0)).Children.get(0)));
         Assert.assertThat((tree.Root.Children.size()), is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).NodeValue, is(2));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(1)).NodeValue, is(3));
-        Assert.assertThat(((SimpleTreeNode<?>) tree.Root.Children.get(0)).Children.get(0).NodeValue, is(2));*//*
+        Assert.assertThat(( tree.Root.Children.get(0)).NodeValue, is(2));
+        Assert.assertThat(( tree.Root.Children.get(1)).NodeValue, is(3));
+        Assert.assertThat(( tree.Root.Children.get(0)).Children.get(0).NodeValue, is(2));
 
-        List<SimpleTreeNode> allnode = tree.GetAllNodes();
+        List<SimpleTreeNode<Integer>> allnode = tree.GetAllNodes();
         Assert.assertThat(allnode.get(0).NodeValue, is(1));
         Assert.assertThat(allnode.get(1).NodeValue, is(2));
         Assert.assertThat(allnode.get(2).NodeValue, is(3));
@@ -431,8 +428,8 @@ public class    SimpleTreeNodeTest {
 
     @Test
     public void errorTest() {
-        SimpleTreeNode<Integer> root = new SimpleTreeNode<Integer>(0, null);
-        SimpleTree<Integer> tree = new SimpleTree<Integer>(root);
+        SimpleTreeNode<Integer> root = new SimpleTreeNode<>(0, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(root);
 
         SimpleTreeNode<Integer> n1 = new SimpleTreeNode<Integer>(1, root);
         tree.AddChild(root, n1);
@@ -485,10 +482,9 @@ public class    SimpleTreeNodeTest {
 
     @Test
     public void defaultEvenTreesTest() {
-        //Создаем корневой узел
-        SimpleTreeNode node = new SimpleTreeNode(1, null);
-        //Создаем дерево с корневым узлом
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
+
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.FindNodesByValue(1).get(0)));
         tree.AddChild(tree.Root, new SimpleTreeNode(3, tree.FindNodesByValue(1).get(0)));
         tree.AddChild(tree.Root, new SimpleTreeNode(6, tree.FindNodesByValue(1).get(0)));
@@ -516,11 +512,8 @@ public class    SimpleTreeNodeTest {
 
     @Test
     public void nullEvenTreesTest() {
-
-        //Создаем корневой узел
         SimpleTreeNode<Integer> node = new SimpleTreeNode<>(0, null);
-        //Создаем дерево с корневым узлом
-        SimpleTree<Integer> tree = new SimpleTree<Integer>(node);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
         tree.AddChild(tree.Root, new SimpleTreeNode<Integer>(1, tree.FindNodesByValue(0).get(0)));
         tree.AddChild(tree.Root, new SimpleTreeNode<Integer>(2, tree.FindNodesByValue(0).get(0)));
         //Добавляем первое значение к ветви 1
@@ -547,11 +540,8 @@ public class    SimpleTreeNodeTest {
 
     @Test
     public void rootInEvenTreesTest() {
-
-        //Создаем корневой узел
-        SimpleTreeNode node = new SimpleTreeNode(0, null);
-        //Создаем дерево с корневым узлом
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(0, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
         tree.AddChild(tree.Root, new SimpleTreeNode(1, tree.FindNodesByValue(0).get(0)));
         tree.AddChild(tree.Root, new SimpleTreeNode(2, tree.FindNodesByValue(0).get(0)));
         //Добавляем первое значение к ветви 1
@@ -570,10 +560,8 @@ public class    SimpleTreeNodeTest {
 
     @Test
     public void oneEdgeInEvenTreesTest() {
-        //Создаем корневой узел
-        SimpleTreeNode node = new SimpleTreeNode(0, null);
-        //Создаем дерево с корневым узлом
-        SimpleTree tree = new SimpleTree(node);
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(0, null);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
         tree.AddChild(tree.Root, new SimpleTreeNode(1, tree.FindNodesByValue(0).get(0)));
         //Добавляем первое значение к ветви 1
         tree.AddChild(tree.FindNodesByValue(1).get(0), new SimpleTreeNode(2, tree.FindNodesByValue(1).get(0)));
@@ -585,10 +573,8 @@ public class    SimpleTreeNodeTest {
 
     @Test
     public void onlyRootEvenTreesTest() {
-        //Создаем корневой узел
         SimpleTreeNode<Integer> node = new SimpleTreeNode<>(0, null);
-        //Создаем дерево с корневым узлом
-        SimpleTree<Integer> tree = new SimpleTree<Integer>(node);
+        SimpleTree<Integer> tree = new SimpleTree<>(node);
         Assert.assertThat(tree.EvenTrees().size(), is(0));
-    }*/
+    }
 }
