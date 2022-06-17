@@ -1,6 +1,6 @@
 import java.lang.reflect.Array;
 
-//v6
+
 public class DynArray<T> {
     public T[] array; //указатель на блок памяти нужной ёмкости
     public int count; //текущее количество элементов в массиве
@@ -29,7 +29,7 @@ public class DynArray<T> {
             T[] myArray = (T[]) new Integer[new_capacity];
             System.arraycopy(array, 0, myArray, 0, new_capacity - 1);
             array = (T[]) Array.newInstance(this.clazz, new_capacity);
-            array = (T[]) myArray.clone();
+            array = myArray.clone();
             capacity = new_capacity;
         }
         //Если размер буфера = 0, присваиваем ему нвоое значение
@@ -60,17 +60,13 @@ public class DynArray<T> {
 
     //добавление нового элемента в конец массива
     public void append(T itm) {
-        //Если количество элементов меньше размера буфера, то добавляем по индексу количества
         if (count < capacity) {
             array[count] = itm;
             count += 1;
-            //В противном случае создаем новый массив с увеличенным на 16 размером буфера
-            // и копируем в него старый массив
         } else {
             makeArray(capacity * 2);
             array[count] = itm;
             count += 1;
-
         }
 
     }
@@ -114,7 +110,6 @@ public class DynArray<T> {
             //Если удаляется последнее значение, то устанавливаем его в null
         } else if (index == count - 1) {
             array[index] = null;
-            //
         } else {
             for (int i = index; i < count; i++)
                 if (i + 1 < count) {

@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class BastShoe {
-    //v17
+
     //default - private
     private static StringHistory str;
     static final int ADD = 1;

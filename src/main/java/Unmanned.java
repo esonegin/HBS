@@ -1,7 +1,7 @@
 class Unmanned {
     public static int Unmanned(int L, int N, int[][] track) {
         int time = 0;
-        Svetofors[] svetofors = arraySvetofors(track);
+        Svetofors[] svetofors = createArraySvetofors(track);
         //Если светофорров нет, то время = расстоянию
         if (track.length == 0) {
             time = L;
@@ -19,8 +19,6 @@ class Unmanned {
                     if (nomer + 1 < svetofors.length) {
                         nomer++;
                     }
-                    //continue;
-
                 } else if (rasstoyanie != svetofors[nomer].mesto) {
                     time++;
                     rasstoyanie++;
@@ -91,8 +89,7 @@ class Unmanned {
 
     }
 
-    //Создаем массив объектов светофоров
-    public static Svetofors[] arraySvetofors(int[][] opisanie) {
+    public static Svetofors[] createArraySvetofors(int[][] opisanie) {
         Svetofors[] svetofors = new Svetofors[opisanie.length];
         for (int i = 0; i < opisanie.length; i++) {
             svetofors[i] = new Svetofors(opisanie[i][0], opisanie[i][1], opisanie[i][2]);

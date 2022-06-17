@@ -13,10 +13,6 @@ public class HashTable {
     }
 
     public int hashFun(String value) {
-        // всегда возвращает корректный индекс слота
-
-        //Каждый вызов должны прибавлять к предыдущему слоту шаг,
-        // если после прибавления > slots.length то увеливаем шаг
         int result = prevslot;
         if (prevslot == 0 && slots[0] == null) {
             result = 0;
